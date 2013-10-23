@@ -9,6 +9,17 @@
 
 namespace ccss {
 
+SegmentedObject::SegmentedObject(LineObjRLE ini) {
+	upperLeft.x = 9999;
+	downRight.x = 0;
+	upperLeft.y = 9999;
+	downRight.y = 0;
+	size = 0;
+	color = ini.color;
+	addLineObjRLE(ini);
+
+}
+
 void SegmentedObject::addLineObjRLE(LineObjRLE aux) {
 	obj.push_back(aux);
 
@@ -70,6 +81,14 @@ unsigned int SegmentedObject::getBBSize() {
 cv::Point2d SegmentedObject::getCentroid() {
 	return cv::Point((upperLeft.x + downRight.x) / 2,
 			(upperLeft.y + downRight.y) / 2);
+}
+
+bool sortFunction(LineObjRLE a, LineObjRLE b) {
+	return a.i < b.i || (a.i == b.i && a.je < b.js) ? true : false;
+}
+
+void SegmentedObject::sortObj() {
+	std::sort(obj.begin(), obj.end(), sortFunction);
 }
 
 } /* namespace ccss */

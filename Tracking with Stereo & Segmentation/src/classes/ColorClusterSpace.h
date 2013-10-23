@@ -34,9 +34,9 @@ class ColorClusterSpace {
 	uint8_t AClass[8];
 	uint8_t BClass[8];
 	uint8_t CClass[8];
-	c3i clusters[8];
 public:
-	ColorClusterSpace(int,uint8_t*, uint8_t*, uint8_t*, c3i *);
+	c3i clusters[8];
+	ColorClusterSpace(int, uint8_t*, uint8_t*, uint8_t*, c3i *);
 
 	int whichColor(c3i); // Return between 0 and 255
 };

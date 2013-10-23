@@ -25,10 +25,6 @@ struct LineObjRLE {
 	int iObj;
 };
 
-bool sortFunction(LineObjRLE a, LineObjRLE b) {
-	return a.i < b.i || (a.i == b.i && a.je < b.js) ? true : false;
-}
-
 class SegmentedObject {
 	std::vector<LineObjRLE> obj;
 
@@ -37,7 +33,7 @@ class SegmentedObject {
 	uint size;
 
 public:
-	SegmentedObject();
+	SegmentedObject(LineObjRLE ini);
 
 	void addLineObjRLE(LineObjRLE);
 	void addRLEFamily(SegmentedObject&);
@@ -51,9 +47,7 @@ public:
 	unsigned int getBBSize();
 	cv::Point2d getCentroid();
 
-	void sortObj() {
-		std::sort(obj.begin(), obj.end(), sortFunction);
-	}
+	void sortObj();
 };
 
 } /* namespace ccss */
