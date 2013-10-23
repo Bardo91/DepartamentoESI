@@ -1,3 +1,13 @@
+/Tracking with Stereo & Segmentation/Debug/src/subdir.mk
+/Tracking with Stereo & Segmentation/Debug/makefile
+/Tracking with Stereo & Segmentation/Debug/sources.mk
+/Tracking with Stereo & Segmentation/Debug/src/classes/ColorClusterSpace.d
+/Tracking with Stereo & Segmentation/Debug/src/classes/SegmentedObject.d
+/Tracking with Stereo & Segmentation/Debug/src/classes/subdir.mk
+/Tracking with Stereo & Segmentation/Debug/src/functions/imageFunctions.d
+/Tracking with Stereo & Segmentation/Debug/src/functions/subdir.mk
+/Tracking with Stereo & Segmentation/Debug/src/main.d
+/Tracking with Stereo & Segmentation/Debug/objects.mk
 # Compiled Object files
 *.slo
 *.lo
