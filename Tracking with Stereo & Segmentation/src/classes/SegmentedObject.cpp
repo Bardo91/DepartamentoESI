@@ -7,6 +7,6 @@
 
 #include <SegmentedObject.h>
 
-namespace std {
+namespace ccss {
 
 } /* namespace std */
