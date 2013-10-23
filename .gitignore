@@ -1,3 +1,15 @@
+/Tracking with Stereo & Segmentation/Release/makefile
+/Tracking with Stereo & Segmentation/Release/objects.mk
+/Tracking with Stereo & Segmentation/Release/sources.mk
+/Tracking with Stereo & Segmentation/Release/src/classes/ColorClusterSpace.d
+/Tracking with Stereo & Segmentation/Release/src/classes/SegmentedObject.d
+/Tracking with Stereo & Segmentation/Release/src/classes/subdir.mk
+/Tracking with Stereo & Segmentation/Release/src/functions/SegmentateImage.d
+/Tracking with Stereo & Segmentation/Release/src/functions/subdir.mk
+/Tracking with Stereo & Segmentation/Release/src/main.d
+/Tracking with Stereo & Segmentation/Release/src/resources/ColorSpaceHSV8.d
+/Tracking with Stereo & Segmentation/Release/src/resources/subdir.mk
+/Tracking with Stereo & Segmentation/Release/src/subdir.mk
 /Tracking with Stereo & Segmentation/Debug/src/subdir.mk
 /Tracking with Stereo & Segmentation/Debug/makefile
 /Tracking with Stereo & Segmentation/Debug/sources.mk

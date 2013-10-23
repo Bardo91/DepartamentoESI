@@ -10,6 +10,7 @@
  */
 
 #include <math.h>
+#include <stdint.h>
 
 #ifndef COLORCLUSTERSPACE_H_
 #define COLORCLUSTERSPACE_H_
@@ -23,7 +24,6 @@
 
 namespace ccss {
 
-typedef unsigned char uchar;
 typedef unsigned int uint;
 
 typedef struct color3int {
@@ -31,12 +31,12 @@ typedef struct color3int {
 } c3i;
 
 class ColorClusterSpace {
-	uchar AClass[8];
-	uchar BClass[8];
-	uchar CClass[8];
+	uint8_t AClass[8];
+	uint8_t BClass[8];
+	uint8_t CClass[8];
 	c3i clusters[8];
 public:
-	ColorClusterSpace(uchar*, uchar*, uchar*, c3i *);
+	ColorClusterSpace(int,uint8_t*, uint8_t*, uint8_t*, c3i *);
 
 	int whichColor(c3i); // Return between 0 and 255
 };
