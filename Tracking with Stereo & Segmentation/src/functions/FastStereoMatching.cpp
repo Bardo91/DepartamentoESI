@@ -13,7 +13,7 @@
 #include <opencv/cv.hpp>
 
 #include <SegmentedObject.h>
-#include <StereoVisionEKF.cpp>
+#include <>
 
 namespace ccss {
 

@@ -9,30 +9,33 @@
 #define EXTENDEDKALMANFILTER_H_
 
 #include <opencv/cv.hpp>
+#include <opencv/highgui.h>
 
 namespace sysctrl {
 
 class ExtendedKalmanFilter {
 	cv::Mat Xfk, Xak, P, Jf, Jh, Q, K, R, Zk;
 
-	void init(cv::Mat, cv::Mat, cv::Vec); // Initialize the algorithm
+	void init(const cv::Mat&, const cv::Mat&, const cv::Vec&); // Initialize the algorithm
 
-	void updateJf(cv::Mat);
-	void updateJh(cv::Mat);
-
-	void forecastStep(double);
+	void forecastStep();
 	void filterStep();
 
-	void systemStateFunctionUpdate();
+	virtual void updateJf() =0;
+	virtual void updateJh() =0;
+
+	virtual void fromSystemState2ObservationState(cv::Mat&) =0;
 
 public:
-	ExtendedKalmanFilter(); //Constructor
-	ExtendedKalmanFilter();
+	ExtendedKalmanFilter(const cv::Mat&, const cv::Mat&, const cv::Vec&); //Constructor
+	virtual ~ExtendedKalmanFilter() =0;
 
 	void EKFStep(); // Execute a EKF step
-	void getStateVector(); // Get the current state vector
+	void getStateVector(const cv::Mat&); // Get the current state vector
 
 };
+
+// Inline functions.
 
 } /* namespace sysctrl */
 
