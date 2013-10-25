@@ -30,7 +30,7 @@ class SegmentedObject {
 
 	cv::Point2d upperLeft, downRight; // Border pixels
 	int color;
-	uint size;
+	unsigned int size;
 
 public:
 	SegmentedObject(LineObjRLE ini);
@@ -38,14 +38,14 @@ public:
 	void addLineObjRLE(LineObjRLE);
 	void addRLEFamily(SegmentedObject&);
 
-	int getLines();
-	LineObjRLE getRLEObj(int);
-	cv::Point2d getUpperLeft();
-	cv::Point2d getDownRight();
-	unsigned int getColor();
-	unsigned int getSize();
-	unsigned int getBBSize();
-	cv::Point2d getCentroid();
+	int getLines() const;
+	LineObjRLE getRLEObj(int) const;
+	cv::Point2d getUpperLeft() const;
+	cv::Point2d getDownRight() const;
+	unsigned int getColor() const;
+	unsigned int getSize() const;
+	unsigned int getBBSize() const;
+	cv::Point2d getCentroid() const;
 
 	void sortObj();
 };

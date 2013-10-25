@@ -50,35 +50,35 @@ void SegmentedObject::addRLEFamily(SegmentedObject& family) {
 	}
 }
 
-int SegmentedObject::getLines() {
+int SegmentedObject::getLines() const {
 	return obj.size();
 }
 
-LineObjRLE SegmentedObject::getRLEObj(int k) {
+LineObjRLE SegmentedObject::getRLEObj(int k) const {
 	return obj[k];
 }
 
-cv::Point2d SegmentedObject::getUpperLeft() {
+cv::Point2d SegmentedObject::getUpperLeft() const {
 	return upperLeft;
 }
 
-cv::Point2d SegmentedObject::getDownRight() {
+cv::Point2d SegmentedObject::getDownRight() const {
 	return downRight;
 }
 
-unsigned int SegmentedObject::getColor() {
+unsigned int SegmentedObject::getColor() const {
 	return color;
 }
 
-unsigned int SegmentedObject::getSize() {
+unsigned int SegmentedObject::getSize() const {
 	return size;
 }
 
-unsigned int SegmentedObject::getBBSize() {
+unsigned int SegmentedObject::getBBSize() const {
 	return (downRight.x - upperLeft.x) * (downRight.y - upperLeft.y);
 }
 
-cv::Point2d SegmentedObject::getCentroid() {
+cv::Point2d SegmentedObject::getCentroid() const {
 	return cv::Point((upperLeft.x + downRight.x) / 2,
 			(upperLeft.y + downRight.y) / 2);
 }

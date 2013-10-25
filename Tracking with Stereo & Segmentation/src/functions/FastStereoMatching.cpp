@@ -10,10 +10,16 @@
  *
  */
 
-#include <opencv/cv.hpp>
+#include <opencv/cv.h>
+#include <opencv/highgui.h>
 
 #include <SegmentedObject.h>
-#include <>
+#include <StereoVisionEKF.h>
+
+using namespace sysctrl;
+using namespace sysctrl::visionctrl;
+using namespace std;
+using namespace cv;
 
 namespace ccss {
 
@@ -25,18 +31,12 @@ typedef struct matchingLR {
 	bool updated;
 } LR;
 
-}
-
-using namespace ccss;
-using namespace std;
-using namespace cv;
-
 // Functions
 
-void objectMatching(std::vector<SegmentedObject> objsL,
-		std::vector<SegmentedObject> objsR, LR * matching, camera cam1,
-		camera cam2, StereoVisionEKF EKFs[sizeof(uchar) * 8],
-		unsigned int threshold) {
+void objectMatching(const vector<SegmentedObject>& objsL,
+		const vector<SegmentedObject>& objsR, LR * matching, const camera& cam1,
+		const camera& cam2, const StereoVisionEKF& EKFs[8],
+		const unsigned int& threshold) {
 
 	for (unsigned int i = 0; i < objsL.size(); i++) {
 		int ci = 0, cj = 0;
@@ -58,7 +58,7 @@ void objectMatching(std::vector<SegmentedObject> objsL,
 
 						Mat currentState;
 						EKFs[objsL.at(i).getColor()].getStateVector(
-								&currentState);
+								currentState);
 
 						double Z = currentState.ptr<double>(1)[0];
 
@@ -69,11 +69,11 @@ void objectMatching(std::vector<SegmentedObject> objsL,
 						double YimC2 = objsR.at(j).getCentroid().y;
 
 						Mat Pc1 = (Mat_<double>(3, 1)
-								<< XimC1 * Z / cam1.focalLenght, YimC1 * Z
-								/ cam2.focalLenght, Z);
+								<< XimC1 * Z / cam1.alphaX, YimC1 * Z
+								/ cam2.alphaX, Z);
 						Mat Pc2 = (Mat_<double>(3, 1)
-								<< XimC2 * Z / cam1.focalLenght, YimC2 * Z
-								/ cam2.focalLenght, Z);
+								<< XimC2 * Z / cam1.alphaX, YimC2 * Z
+								/ cam2.alphaX, Z);
 
 						Mat C1 =
 								(Mat_<double>(3, 1) << cam1.pos[0], cam1.pos[1], cam1.pos[2]);
@@ -112,3 +112,5 @@ void objectMatching(std::vector<SegmentedObject> objsL,
 		}
 	}
 }
+}
+

@@ -31,7 +31,7 @@ public:
 	virtual ~ExtendedKalmanFilter() =0;
 
 	void EKFStep(); // Execute a EKF step
-	void getStateVector(const cv::Mat&); // Get the current state vector
+	void getStateVector(const cv::Mat&) const; // Get the current state vector
 
 };
 
