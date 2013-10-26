@@ -27,6 +27,9 @@ public:
 	ImageAcquisitor(std::string, std::string, int, int); // Get image from path.
 	ImageAcquisitor(int, int, int); // Get image from Device
 
+	~ImageAcquisitor();
+
+
 	void changeInputMethod(int);
 	void changeInputMethod(std::string, std::string);
 	int changeResolution(int, int);

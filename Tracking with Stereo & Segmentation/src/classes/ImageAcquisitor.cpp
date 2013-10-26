@@ -44,6 +44,10 @@ ImageAcquisitor::ImageAcquisitor(int device, int width, int height) {
 	}
 }
 
+ImageAcquisitor::~ImageAcquisitor() {
+	device.release();
+}
+
 void ImageAcquisitor::changeInputMethod(int device) {
 	inputMethod = 0;
 	this->device = VideoCapture(device);

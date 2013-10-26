@@ -43,7 +43,7 @@ void ExtendedKalmanFilter::EKFStep() {
 
 }
 
-void ExtendedKalmanFilter::getStateVector(const Mat& state) const {
+void ExtendedKalmanFilter::getStateVector(Mat& state) const {
 	Xak.copyTo(state);
 }
 
