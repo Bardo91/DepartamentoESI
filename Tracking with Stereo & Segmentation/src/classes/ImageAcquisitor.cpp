@@ -93,7 +93,7 @@ bool ImageAcquisitor::canCapture() {
 	return !flagInputError;
 }
 
-int ImageAcquisitor::updateFrame(int currentImage) {
+int ImageAcquisitor::updateFrame(int currentImage = 0) {
 	if (inputMethod) {
 		char buffer[imageNameFormat.size() + 4]; // +4 suposing that number of input images ar less than 99.999
 		sprintf(buffer, imageNameFormat.c_str(), currentImage);
@@ -103,7 +103,7 @@ int ImageAcquisitor::updateFrame(int currentImage) {
 		frame = imread(ss.str(), CV_LOAD_IMAGE_COLOR);
 
 	} else {
-		frame << device;
+		device >> frame;
 	}
 
 	return frame.empty() ? -1 : 0;
@@ -114,6 +114,10 @@ int ImageAcquisitor::getFrame(Mat& frame) {
 	frame = Mat(this->frame);
 
 	return frame.empty() ? -1 : 0;
+}
+
+int ImageAcquisitor::getInputMethod() const {
+	return inputMethod;
 }
 
 }

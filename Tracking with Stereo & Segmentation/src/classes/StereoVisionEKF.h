@@ -8,8 +8,10 @@
 #ifndef STEREOVISIONEKF_H_
 #define STEREOVISIONEKF_H_
 
-#include <opencv/cv.hpp>
+#include <opencv/cv.h>
 #include <opencv/highgui.h>
+
+#include <ExtendedKalmanFilter.h>
 
 namespace sysctrl {
 
@@ -41,14 +43,14 @@ class StereoVisionEKF: public ExtendedKalmanFilter {
 
 	double incT;
 
-	void updateJf() =0;
-	void updateJh() =0;
+	void updateJf();
+	void updateJh();
 
 	void fromSystemState2ObservationState(cv::Mat& h_Zk);
 
 public:
 	StereoVisionEKF(const visionctrl::camera&, const visionctrl::camera&,
-			const cv::Mat&, const cv::Mat&, const cv::Vec&);
+			const cv::Mat&, const cv::Mat&, const cv::Mat&);
 	~StereoVisionEKF();
 
 	void updateincT(const double&);

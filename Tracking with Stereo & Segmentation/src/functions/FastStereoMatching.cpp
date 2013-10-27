@@ -35,7 +35,7 @@ typedef struct matchingLR {
 
 void objectMatching(const vector<SegmentedObject>& objsL,
 		const vector<SegmentedObject>& objsR, LR * matching, const camera& cam1,
-		const camera& cam2, const StereoVisionEKF& EKFs[8],
+		const camera& cam2, const StereoVisionEKF EKFs[8],
 		const unsigned int& threshold) {
 
 	for (unsigned int i = 0; i < objsL.size(); i++) {

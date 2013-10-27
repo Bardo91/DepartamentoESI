@@ -8,6 +8,9 @@
 #ifndef IMAGEACQUISITOR_H_
 #define IMAGEACQUISITOR_H_
 
+#include <opencv/cv.h>
+#include <opencv/highgui.h>
+
 namespace ccss {
 
 class ImageAcquisitor {
@@ -29,7 +32,6 @@ public:
 
 	~ImageAcquisitor();
 
-
 	void changeInputMethod(int);
 	void changeInputMethod(std::string, std::string);
 	int changeResolution(int, int);
@@ -40,6 +42,7 @@ public:
 
 	int updateFrame(int);
 	int getFrame(cv::Mat&);
+	int getInputMethod() const;
 
 };
 

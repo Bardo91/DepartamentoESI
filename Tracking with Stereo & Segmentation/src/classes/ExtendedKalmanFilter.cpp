@@ -11,7 +11,7 @@ using namespace cv;
 
 namespace sysctrl {
 
-void ExtendedKalmanFilter::init(const Mat& Q, const Mat& R, const cv::Vec& Xi) {
+void ExtendedKalmanFilter::init(const Mat& Q, const Mat& R, const cv::Mat& Xi) {
 	this->Q = Q;
 	this->R = R;
 	this->Xak = Xi;
@@ -34,7 +34,7 @@ void ExtendedKalmanFilter::filterStep() {
 }
 
 ExtendedKalmanFilter::ExtendedKalmanFilter(const cv::Mat& Q, const cv::Mat& R,
-		const cv::Vec& Xi) {
+		const cv::Mat& Xi) {
 	init(Q, R, Xi);
 }
 void ExtendedKalmanFilter::EKFStep() {
