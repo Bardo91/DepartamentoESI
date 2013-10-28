@@ -93,7 +93,7 @@ bool ImageAcquisitor::canCapture() {
 	return !flagInputError;
 }
 
-int ImageAcquisitor::updateFrame(int currentImage = 0) {
+int ImageAcquisitor::updateFrame(int currentImage) {
 	if (inputMethod) {
 		char buffer[imageNameFormat.size() + 4]; // +4 suposing that number of input images ar less than 99.999
 		sprintf(buffer, imageNameFormat.c_str(), currentImage);

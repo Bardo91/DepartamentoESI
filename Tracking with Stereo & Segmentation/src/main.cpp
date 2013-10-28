@@ -11,9 +11,12 @@
 #include <ColorClusterSpace.h>
 #include <SegmentedObject.h>
 #include <StereoVisionEKF.h>
+#include <ViconDataAcquisitor.h>
 
-#include <FastStereoMatching.cpp>
-#include <CameraDataEKF.cpp>
+#include <FastStereoMatching.h>
+#include <CameraDataEKF.h>
+#include <SegmentateImage.h>
+#include <ColorSpaceHSV8.h>
 
 using namespace cv;
 using namespace std;
@@ -77,7 +80,7 @@ int main(int argc, char** argv) {
 	vector<SegmentedObject> objs2;
 
 	// OutputFile
-	ofstream outFile[sizeof(uchar) * 8];
+	ofstream outFile[8];
 	for (unsigned int i = 0; i < sizeof(uchar) * 8; i++) {
 		String pathName;
 		pathName = "outputs/outputFile";
@@ -102,7 +105,7 @@ int main(int argc, char** argv) {
 	visionctrl::camera cam1 = { { 0, 0, 0 }, R1, false, alphaX };
 	visionctrl::camera cam2 = { { 0, 0.16, 0 }, R2, true, alphaX };
 
-	Vec3f x0(0, 0, 0);
+	Mat x0 = (Mat_<double>(3, 1) << 0, 0, 0);
 
 	StereoVisionEKF EKFs[sizeof(uchar) * 8] = { StereoVisionEKF(cam1, cam2,
 			matQ, matR, x0), StereoVisionEKF(cam1, cam2, matQ, matR, x0),

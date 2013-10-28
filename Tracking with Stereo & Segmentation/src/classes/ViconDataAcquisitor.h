@@ -12,6 +12,9 @@
 #include <iostream>
 #include <fstream>
 
+#include <StereoVisionEKF.h>
+#include <opencv/cv.h>
+
 namespace ccss {
 
 class ViconDataAcquisitor {

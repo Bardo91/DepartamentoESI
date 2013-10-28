@@ -33,10 +33,18 @@ void ExtendedKalmanFilter::filterStep() {
 	Xak = Xfk + K * (Zk - h_Zk);
 }
 
+ExtendedKalmanFilter::ExtendedKalmanFilter() {
+
+}
 ExtendedKalmanFilter::ExtendedKalmanFilter(const cv::Mat& Q, const cv::Mat& R,
 		const cv::Mat& Xi) {
 	init(Q, R, Xi);
 }
+
+ExtendedKalmanFilter::~ExtendedKalmanFilter() {
+
+}
+
 void ExtendedKalmanFilter::EKFStep() {
 	forecastStep();
 	filterStep();

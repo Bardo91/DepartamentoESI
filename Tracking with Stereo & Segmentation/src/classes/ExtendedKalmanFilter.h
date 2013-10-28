@@ -28,8 +28,8 @@ protected:
 	virtual void fromSystemState2ObservationState(cv::Mat&) =0;
 
 public:
-	ExtendedKalmanFilter(const cv::Mat&, const cv::Mat&,
-			const cv::Mat&); //Constructor
+	ExtendedKalmanFilter();
+	ExtendedKalmanFilter(const cv::Mat&, const cv::Mat&, const cv::Mat&); //Constructor
 	virtual ~ExtendedKalmanFilter() =0;
 
 	void EKFStep(); // Execute a EKF step

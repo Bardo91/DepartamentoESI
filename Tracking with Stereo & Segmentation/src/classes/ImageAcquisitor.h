@@ -32,7 +32,7 @@ public:
 
 	~ImageAcquisitor();
 
-	void changeInputMethod(int);
+	void changeInputMethod(int currentFrame = 0);
 	void changeInputMethod(std::string, std::string);
 	int changeResolution(int, int);
 	void changePathName(std::string);
@@ -40,7 +40,7 @@ public:
 
 	bool canCapture();
 
-	int updateFrame(int);
+	int updateFrame(int currentImage = 0);
 	int getFrame(cv::Mat&);
 	int getInputMethod() const;
 

@@ -14,7 +14,6 @@
 
 #ifndef COLORCLUSTERSPACE_H_
 #define COLORCLUSTERSPACE_H_
-#endif
 
 #define LOG2 0.3010299957
 
@@ -36,9 +35,11 @@ class ColorClusterSpace {
 	uint8_t CClass[8];
 public:
 	c3i clusters[8];
-	ColorClusterSpace(int, uint8_t*, uint8_t*, uint8_t*, c3i *);
+	ColorClusterSpace();
+	ColorClusterSpace(int, uint8_t*, uint8_t*, uint8_t*, const c3i *);
 
 	int whichColor(c3i); // Return between 0 and 255
 };
 
 } /* namespace ccs  is an abreviature of Color Cluster Space Segmentation*/
+#endif

@@ -10,11 +10,7 @@
  *
  */
 
-#include <opencv/cv.h>
-#include <opencv/highgui.h>
-
-#include <SegmentedObject.h>
-#include <StereoVisionEKF.h>
+#include <FastStereoMatching.h>
 
 using namespace sysctrl;
 using namespace sysctrl::visionctrl;
@@ -22,14 +18,6 @@ using namespace std;
 using namespace cv;
 
 namespace ccss {
-
-typedef struct matchingLR {
-	int iL, iR;
-	cv::Point2d pixL, pixR;
-	double energyFun;
-	int color;
-	bool updated;
-} LR;
 
 // Functions
 

@@ -5,15 +5,11 @@
  *      Author: pablo
  */
 
-#include <opencv/cv.h>
-#include <string>
-
-#include <SegmentedObject.h>
-#include <ColorClusterSpace.h>
+#include <SegmentateImage.h>
 
 using namespace cv;
 using namespace ccss;
-
+namespace ccss {
 void segmentateImage(Mat& frame1, Mat& frame2, ColorClusterSpace& CS,
 		vector<SegmentedObject>& objs1, vector<vector<LineObjRLE> >& aRLE1,
 		vector<SegmentedObject>& objs2, vector<vector<LineObjRLE> >& aRLE2) {
@@ -242,4 +238,6 @@ void segmentateImage(Mat& frame1, Mat& frame2, ColorClusterSpace& CS,
 			}
 		}
 	}
+}
+
 }

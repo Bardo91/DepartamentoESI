@@ -7,8 +7,6 @@
 
 #include <ViconDataAcquisitor.h>
 
-#include <string>
-#include <opencv/cv.hpp>
 
 using namespace std;
 using namespace cv;

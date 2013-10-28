@@ -9,9 +9,13 @@
 
 namespace ccss {
 
+ColorClusterSpace::ColorClusterSpace() {
+
+}
+
 ColorClusterSpace::ColorClusterSpace(int n, uint8_t* AClass, uint8_t* BClass,
-		uint8_t* CClass, c3i* colors) {
-	for (uint i = 0; i < n; i++) {
+		uint8_t* CClass, const c3i* colors) {
+	for (int i = 0; i < n; i++) {
 		this->AClass[i] = AClass[i];
 		this->BClass[i] = BClass[i];
 		this->CClass[i] = CClass[i];

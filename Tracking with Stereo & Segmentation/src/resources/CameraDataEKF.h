@@ -1,9 +1,12 @@
 /*
- * CameraDataEKF.cpp
+ * CameraDataEKF.h
  *
- *  Created on: Oct 26, 2013
+ *  Created on: Oct 28, 2013
  *      Author: pablo
  */
+
+#ifndef CAMERADATAEKF_H_
+#define CAMERADATAEKF_H_
 
 #include <opencv/cv.h>
 #include <StereoVisionEKF.h>
@@ -28,3 +31,5 @@ const double gammaSkew = 0.0;
 // Principal point (Ideally in the center of the image, in term of 1).
 const double u0 = 268.591572 / 480.0;
 const double v0 = 324.159142 / 640.0;
+
+#endif /* CAMERADATAEKF_H_ */
