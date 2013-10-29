@@ -59,7 +59,9 @@ int main(int argc, char** argv) {
 	ImageAcquisitor imgAc1(dev1, width, height);
 	ImageAcquisitor imgAc2(dev2, width, height);
 
-	cout << imgAc1.getInputMethod() << endl;
+	//ImageAcquisitor imgAc1("/home/pablo/Desktop/Estimation/P1_640x480/Images", "img%d_cam1.jpg",640,480);
+	//ImageAcquisitor imgAc2("/home/pablo/Desktop/Estimation/P1_640x480/Images", "img%d_cam2.jpg",640,480);
+
 	waitKey();
 
 	int MaskH, MaskS, MaskV;
@@ -103,10 +105,13 @@ int main(int argc, char** argv) {
 	Mat R2 = (Mat_<double>(3, 3) << 1, 0, 0, 0, 1, 0, 0, 0, 1);
 	R2 = R2.inv();
 
-	visionctrl::camera cam1 = { { 0, 0, 0 }, R1, false, alphaX };
-	visionctrl::camera cam2 = { { 0, 0.16, 0 }, R2, true, alphaX };
+	visionctrl::camera cam1(0, 0, 0, R1, alphaX, alphaY, gammaSkew, u0, v0,
+			distortionMat, projectionMat); //= { { 0, 0, 0 }, R1, false, alphaX };
+	visionctrl::camera cam2(0, 0, 0, R1, alphaX, alphaY, gammaSkew, u0, v0,
+			distortionMat, projectionMat);
+	//= { { 0, -0.16, 0 }, R2, true, alphaX };
 
-	Mat x0 = (Mat_<double>(3, 1) << 0, 0, 0);
+	Mat x0 = (Mat_<double>(3, 1) << 1, 1, 1);
 
 	StereoVisionEKF EKFs[sizeof(uchar) * 8] = { StereoVisionEKF(cam1, cam2,
 			matQ, matR, x0), StereoVisionEKF(cam1, cam2, matQ, matR, x0),
@@ -115,8 +120,6 @@ int main(int argc, char** argv) {
 					matR, x0), StereoVisionEKF(cam1, cam2, matQ, matR, x0),
 			StereoVisionEKF(cam1, cam2, matQ, matR, x0), StereoVisionEKF(cam1,
 					cam2, matQ, matR, x0) };
-
-	waitKey();
 
 	// Time for EKF
 	struct timespec timeEKFs[sizeof(uchar) * 8];
@@ -173,6 +176,42 @@ int main(int argc, char** argv) {
 		cout << "Nº objsL : " << objs1.size() << endl;
 		cout << "Nº objsR : " << objs2.size() << endl;
 
+		matching[0].updated = false;
+		for (unsigned int i = 0; i < sizeof(uchar) * 8; i++) {
+			// EKF triangulation.
+			if (matching[i].updated) {
+				Mat Zk =
+						(Mat_<double>(4, 1) << matching[i].pixL.x, matching[i].pixL.y, matching[i].pixR.x, matching[i].pixR.y);
+
+				struct timespec auxTime;
+				clock_gettime(CLOCK_REALTIME, &auxTime);
+				double diff = diffTime(auxTime, timeEKFs[matching[i].color]);
+
+				/*cout << "DIFERENCIA DE TIEMPO: " << diff << endl;
+				 cout << "Zk: {" << matching[i].pixL.x << ", "
+				 << matching[i].pixL.y << ", " << matching[i].pixR.x
+				 << ", " << matching[i].pixR.y << "} " << endl;*/
+
+				EKFs[matching[i].color].updateZk(Zk);
+				EKFs[matching[i].color].updateCameras(cam1, cam2);
+				EKFs[matching[i].color].updateincT(diff);
+				EKFs[matching[i].color].EKFStep();
+
+				timeEKFs[matching[i].color] = auxTime;
+
+				Mat Xak;
+				EKFs[matching[i].color].getStateVector(Xak);
+				matching[i].updated = FALSE;
+
+				double refTime = diffTime(auxTime, refTime0);
+				cout << "Time: " << refTime << endl << "State: " << Xak << endl;
+
+				outFile[matching[i].color] << refTime << " "
+						<< Xak.ptr<double>(0)[0] << " " << Xak.ptr<double>(1)[0]
+						<< " " << Xak.ptr<double>(2)[0] << endl;
+			}
+		}
+
 		imageHSV2BGR(frame1);
 		imageHSV2BGR(frame2);
 
@@ -187,7 +226,12 @@ int main(int argc, char** argv) {
 
 		objs1.clear();
 		objs2.clear();
+		// Calculate increment of time
+		clock_gettime(CLOCK_REALTIME, &t2);
+		double diff = diffTime(t2, t1);
+		cout << "FINISHED IN " << diff << endl;
 
+		cout << "-------------------------------------\n";
 	}
 }
 

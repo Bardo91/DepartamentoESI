@@ -32,4 +32,10 @@ const double gammaSkew = 0.0;
 const double u0 = 268.591572 / 480.0;
 const double v0 = 324.159142 / 640.0;
 
+const Mat distortionMat =
+		(Mat_<double>(5, 1) << 0.123201, -0.049532, 0.030087, -0.020951, 0.000000);
+
+const Mat projectionMat =
+		(Mat_<double>(3, 4) << 852.964478, 0.000000, 262.131568, 0.000000, 0.000000, 846.645447, 329.710386, 0.000000, 0.000000, 0.000000, 1.000000, 0.000000);
+
 #endif /* CAMERADATAEKF_H_ */

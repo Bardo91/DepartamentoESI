@@ -34,6 +34,25 @@ struct camera {
 	cv::Mat distortionMat;
 	cv::Mat projectionMat;
 
+	camera() {
+	}
+
+	camera(double x, double y, double z, const cv::Mat& _ori, double _alphaX,
+			double _alphaY, double _gammaSkew, double _u0, double _v0,
+			const cv::Mat& _disMat, const cv::Mat& _projMat) {
+		pos[0] = x;
+		pos[1] = y;
+		pos[2] = z;
+		ori = _ori;
+		alphaX = _alphaX;
+		alphaY = _alphaY;
+		gammaSkew = _gammaSkew;
+		u0 = _u0;
+		v0 = _v0;
+		distortionMat = _disMat;
+		projectionMat = _projMat;
+	}
+
 };
 }
 
@@ -43,16 +62,17 @@ class StereoVisionEKF: public ExtendedKalmanFilter {
 
 	double incT;
 
-	void updateJf();
-	void updateJh();
+	virtual void updateJf();
+	virtual void updateJh();
 
-	void fromSystemState2ObservationState(cv::Mat& h_Zk);
+	virtual void fromSystemState2ObservationState(cv::Mat& h_Zk);
 
 public:
 	StereoVisionEKF(const visionctrl::camera&, const visionctrl::camera&,
 			const cv::Mat&, const cv::Mat&, const cv::Mat&);
 	~StereoVisionEKF();
 
+	void updateZk(const cv::Mat&);
 	void updateincT(const double&);
 	void updateCameras(const visionctrl::camera&, const visionctrl::camera&);
 };
