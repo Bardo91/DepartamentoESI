@@ -31,6 +31,8 @@ ImageAcquisitor::ImageAcquisitor(int device, int width, int height) {
 
 	flagInputError = false;
 
+	changeResolution(width, height);
+
 	try {
 		this->device.open(1);
 	} catch (Exception e) { //Catching errors.
@@ -50,6 +52,9 @@ ImageAcquisitor::~ImageAcquisitor() {
 
 void ImageAcquisitor::changeInputMethod(int device) {
 	inputMethod = 0;
+	if (this->device.isOpened())
+		this->device.release();
+
 	this->device = VideoCapture(device);
 	this->device.open(1);
 

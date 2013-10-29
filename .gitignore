@@ -1,3 +1,14 @@
+/Tracking with Stereo & Segmentation/Debug/src/functions/outputFuns.d
+/Tracking with Stereo & Segmentation/Release/src/functions/outputFuns.d
+/Tracking with Stereo & Segmentation/Debug/Tracking with Stereo & Segmentation
+/Tracking with Stereo & Segmentation/Debug/src/classes/ExtendedKalmanFilter.d
+/Tracking with Stereo & Segmentation/Debug/src/classes/ImageAcquisitor.d
+/Tracking with Stereo & Segmentation/Debug/src/classes/StereoVisionEKF.d
+/Tracking with Stereo & Segmentation/Debug/src/classes/ViconDataAcquisitor.d
+/Tracking with Stereo & Segmentation/Debug/src/functions/FastStereoMatching.d
+/Tracking with Stereo & Segmentation/Debug/src/functions/SegmentateImage.d
+/Tracking with Stereo & Segmentation/Debug/src/resources/ColorSpaceHSV8.d
+/Tracking with Stereo & Segmentation/Debug/src/resources/subdir.mk
 /Tracking with Stereo & Segmentation/Release/src/classes/StereoVisionEKF.d
 /Tracking with Stereo & Segmentation/Release/src/classes/ViconDataAcquisitor.d
 /Tracking with Stereo & Segmentation/Release/Tracking with Stereo & Segmentation

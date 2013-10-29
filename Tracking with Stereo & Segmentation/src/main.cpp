@@ -18,6 +18,8 @@
 #include <SegmentateImage.h>
 #include <ColorSpaceHSV8.h>
 
+#include <outputFuns.h>
+
 using namespace cv;
 using namespace std;
 using namespace sysctrl;
@@ -43,9 +45,6 @@ double diffTime(struct timespec t2, struct timespec t1) {
 }
 
 int main(int argc, char** argv) {
-	//namedWindow("Viewer", CV_WINDOW_AUTOSIZE);
-	//namedWindow("Ori", CV_WINDOW_AUTOSIZE);
-
 	if (argc < 7) {
 		printf("Invalid input arguments\n");
 		return -1;
@@ -60,12 +59,16 @@ int main(int argc, char** argv) {
 	ImageAcquisitor imgAc1(dev1, width, height);
 	ImageAcquisitor imgAc2(dev2, width, height);
 
+	cout << imgAc1.getInputMethod() << endl;
+	waitKey();
+
 	int MaskH, MaskS, MaskV;
 	MaskH = MaskS = MaskV = bin2dec("11111111");
 	MaskH = bin2dec(argv[6]);
 
-	ColorClusterSpace CS;
-	CreateHSVCS_8c(MaskH, MaskS, MaskV, CS);
+	ColorClusterSpace CS = *CreateHSVCS_8c(MaskH, MaskS, MaskV);
+
+	waitKey();
 
 	namedWindow("Frames", CV_WINDOW_FREERATIO);
 
@@ -156,8 +159,8 @@ int main(int argc, char** argv) {
 		medianBlur(frame2, frame2, 5);
 		medianBlur(frame2, frame2, 5);
 
-		cv::cvtColor(frame1, frame2, cv::COLOR_BGR2HSV);
-		cv::cvtColor(frame1, frame2, cv::COLOR_BGR2HSV);
+		imageBGR2HSV(frame1);
+		imageBGR2HSV(frame2);
 
 		segmentateImage(frame1, frame2, CS, objs1, aRLE1, objs2, aRLE2);
 
@@ -167,10 +170,25 @@ int main(int argc, char** argv) {
 
 		LR matching[sizeof(uchar) * 8];
 
-		objectMatching(objs1, objs2, matching, cam1, cam2, EKFs, sizeThreshold);
+		//objectMatching(objs1, objs2, matching, cam1, cam2, EKFs, sizeThreshold);
 
 		cout << "Nº objsL : " << objs1.size() << endl;
 		cout << "Nº objsR : " << objs2.size() << endl;
+
+		imageHSV2BGR(frame1);
+		imageHSV2BGR(frame2);
+
+		highlighObjs(objs1, ori1, sizeThreshold);
+		highlighObjs(objs2, ori2, sizeThreshold);
+
+		hconcat(frame1, frame2, frame1);
+		hconcat(ori1, ori2, ori1);
+		vconcat(ori1, frame1, ori1);
+
+		imshow("Frames", ori1);
+
+		objs1.clear();
+		objs2.clear();
 
 	}
 }

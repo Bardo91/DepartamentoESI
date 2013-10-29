@@ -28,7 +28,6 @@ protected:
 	virtual void fromSystemState2ObservationState(cv::Mat&) =0;
 
 public:
-	ExtendedKalmanFilter();
 	ExtendedKalmanFilter(const cv::Mat&, const cv::Mat&, const cv::Mat&); //Constructor
 	virtual ~ExtendedKalmanFilter() =0;
 

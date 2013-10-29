@@ -30,15 +30,16 @@ typedef struct color3int {
 } c3i;
 
 class ColorClusterSpace {
-	uint8_t AClass[8];
-	uint8_t BClass[8];
-	uint8_t CClass[8];
+	uint8_t *AClass;
+	uint8_t *BClass;
+	uint8_t *CClass;
 public:
-	c3i clusters[8];
-	ColorClusterSpace();
-	ColorClusterSpace(int, uint8_t*, uint8_t*, uint8_t*, const c3i *);
+	int size;
+	c3i *clusters;
+	ColorClusterSpace(int, uint8_t *, uint8_t *, uint8_t *, const c3i *);
+	~ColorClusterSpace();
 
-	int whichColor(c3i); // Return between 0 and 255
+	int whichColor(c3i&); // Return between 0 and 255
 };
 
 } /* namespace ccs  is an abreviature of Color Cluster Space Segmentation*/

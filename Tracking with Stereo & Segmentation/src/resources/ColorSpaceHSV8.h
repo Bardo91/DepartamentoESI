@@ -13,6 +13,8 @@
 
 #include <math.h>
 #include <ColorClusterSpace.h>
+#include <opencv/cv.h>
+#include <opencv/highgui.h>
 
 namespace ccss {
 
@@ -49,7 +51,10 @@ const std::string VClassStr8[36] = { "00000001", "00000001", "00000001",
 		"11111110", "11111110", "11111110" };
 
 int bin2dec(std::string bin);
-void CreateHSVCS_8c(int MaskH, int MaskS, int MaskV, ColorClusterSpace& CS);
+ColorClusterSpace *CreateHSVCS_8c(int, int, int);
+
+void imageBGR2HSV(cv::Mat& img);
+void imageHSV2BGR(cv::Mat& img);
 
 }
 

@@ -6,6 +6,9 @@
  */
 
 #include <SegmentateImage.h>
+#include <opencv/highgui.h>
+
+#include <ColorSpaceHSV8.h>
 
 using namespace cv;
 using namespace ccss;
@@ -27,20 +30,38 @@ void segmentateImage(Mat& frame1, Mat& frame2, ColorClusterSpace& CS,
 		for (int j = 0; j < frame1.cols; j++) {
 			// Proximate the color to a cluster
 			//First Camera ---------------------------------------------------------------
-			color1 = CS.whichColor(
-					c3i( { ptr1[n * j], ptr1[n * j + 1], ptr1[n * j + 2] }));
+			c3i auxCol1;
+			auxCol1.a = ptr1[n * j];
+			auxCol1.b = ptr1[n * j + 1];
+			auxCol1.c = ptr1[n * j + 2];
+			color1 = CS.whichColor(auxCol1);
+
 			// RLE encoding
 			if (j == 0) {
 				colorRLE1 = color1;
 				js1 = 0;
 			} else {
 				if (j == frame1.cols - 1) {
-					LineObjRLE aux = { i, js1, j, j - js1, colorRLE1,
-					NULL, -1 };
+					LineObjRLE aux;
+					aux.i = i;
+					aux.js = js1;
+					aux.je = j;
+					aux.size = j - js1;
+					aux.color = colorRLE1;
+					aux.parent = NULL;
+					aux.iObj = -1;
+
 					temp1.push_back(aux);
 				} else if (color1 != colorRLE1) {
-					LineObjRLE aux = { i, js1, j - 1, j - js1, colorRLE1,
-					NULL, -1 };
+					LineObjRLE aux;
+					aux.i = i;
+					aux.js = js1;
+					aux.je = j;
+					aux.size = j - js1;
+					aux.color = colorRLE1;
+					aux.parent = NULL;
+					aux.iObj = -1;
+
 					temp1.push_back(aux);
 					colorRLE1 = color1;
 					js1 = j;
@@ -48,48 +69,55 @@ void segmentateImage(Mat& frame1, Mat& frame2, ColorClusterSpace& CS,
 			}
 
 			// Change the color (Possible improve assigning directly the BGR color instead of using imageHSV2BGR)
-			if (color1 != -1) {
-				ptr1[n * j] = CS.clusters[color1].a;
-				ptr1[n * j + 1] = CS.clusters[color1].b;
-				ptr1[n * j + 2] = CS.clusters[color1].c;
-			} else {
-				ptr1[n * j] = CS.clusters[0].a;
-				ptr1[n * j + 1] = CS.clusters[0].b;
-				ptr1[n * j + 2] = CS.clusters[0].c;
-			}
+
+			ptr1[n * j] = CS.clusters[color1].a;
+			ptr1[n * j + 1] = CS.clusters[color1].b;
+			ptr1[n * j + 2] = CS.clusters[color1].c;
 
 			// Second Camera ---------------------------------------------------------------
 
-			color2 = CS.whichColor(
-					c3i( { ptr2[n * j], ptr2[n * j + 1], ptr2[n * j + 2] }));
+			c3i auxCol2;
+			auxCol2.a = ptr2[n * j];
+			auxCol2.b = ptr2[n * j + 1];
+			auxCol2.c = ptr2[n * j + 2];
+			color2 = CS.whichColor(auxCol2);
 
 			if (j == 0) {
 				colorRLE2 = color2;
 				js2 = 0;
 			} else {
 				if (j == frame2.cols - 1) {
-					LineObjRLE aux = { i, js2, j, j - js2, colorRLE2,
-					NULL, -1 };
+					LineObjRLE aux;
+					aux.i = i;
+					aux.js = js2;
+					aux.je = j;
+					aux.size = j - js2;
+					aux.color = colorRLE2;
+					aux.parent = NULL;
+					aux.iObj = -1;
 					temp2.push_back(aux);
 				} else if (color2 != colorRLE2) {
-					LineObjRLE aux = { i, js2, j - 1, j - js2, colorRLE2,
-					NULL, -1 };
+					LineObjRLE aux;
+					aux.i = i;
+					aux.js = js2;
+					aux.je = j;
+					aux.size = j - js2;
+					aux.color = colorRLE2;
+					aux.parent = NULL;
+					aux.iObj = -1;
+
 					temp2.push_back(aux);
 					colorRLE2 = color2;
 					js2 = j;
 				}
 			}
 
-			if (color2 != -1) {
-				ptr2[n * j] = CS.clusters[color2].a;
-				ptr2[n * j + 1] = CS.clusters[color2].b;
-				ptr2[n * j + 2] = CS.clusters[color2].c;
-			} else {
-				ptr2[n * j] = CS.clusters[0].a;
-				ptr2[n * j + 1] = CS.clusters[0].b;
-				ptr2[n * j + 2] = CS.clusters[0].c;
-			}
+			ptr2[n * j] = CS.clusters[color2].a;
+			ptr2[n * j + 1] = CS.clusters[color2].b;
+			ptr2[n * j + 2] = CS.clusters[color2].c;
+
 		}
+
 		aRLE1.push_back(temp1);
 		aRLE2.push_back(temp2);
 

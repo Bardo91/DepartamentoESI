@@ -122,7 +122,8 @@ void StereoVisionEKF::fromSystemState2ObservationState(Mat& h_Zk) {
 }
 
 StereoVisionEKF::StereoVisionEKF(const camera& camera1, const camera& camera2,
-		const Mat& Q, const Mat& R, const cv::Mat& Xi) {
+		const Mat& Q, const Mat& R, const cv::Mat& Xi) :
+		ExtendedKalmanFilter(Q, R, Xi) {
 	Xfk.create(6, 1, CV_64F);
 	Xak.create(6, 1, CV_64F);
 	P.create(6, 6, CV_64F);
@@ -131,7 +132,6 @@ StereoVisionEKF::StereoVisionEKF(const camera& camera1, const camera& camera2,
 	K.create(6, 4, CV_64F);
 	Zk.create(4, 1, CV_64F);
 	incT = 0;
-	init(Q, R, Xi);
 }
 
 StereoVisionEKF::~StereoVisionEKF() {

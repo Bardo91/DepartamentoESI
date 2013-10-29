@@ -5,7 +5,7 @@
  *      Author: pablo
  */
 
-#include  <ColorSpaceHSV8.h>
+#include <ColorSpaceHSV8.h>
 
 namespace ccss {
 
@@ -21,7 +21,7 @@ int bin2dec(std::string bin) {
 	return dec;
 }
 
-void CreateHSVCS_8c(int MaskH, int MaskS, int MaskV, ColorClusterSpace& CS) {
+ColorClusterSpace *CreateHSVCS_8c(int MaskH, int MaskS, int MaskV) {
 
 	uint8_t HClass[36];
 	uint8_t SClass[36];
@@ -33,8 +33,14 @@ void CreateHSVCS_8c(int MaskH, int MaskS, int MaskV, ColorClusterSpace& CS) {
 		VClass[i] = bin2dec(VClassStr8[i]) & MaskV;
 	}
 
-	CS = *(new ColorClusterSpace(36, HClass, SClass, VClass, colorsHSV8));
+	return new ColorClusterSpace(36, HClass, SClass, VClass, colorsHSV8);
 
+}
+void imageBGR2HSV(cv::Mat& img) {
+	cv::cvtColor(img, img, cv::COLOR_BGR2HSV);
+}
+void imageHSV2BGR(cv::Mat& img) {
+	cv::cvtColor(img, img, cv::COLOR_HSV2BGR);
 }
 
 }
