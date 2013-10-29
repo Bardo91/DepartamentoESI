@@ -46,7 +46,17 @@ int ColorClusterSpace::whichColor(c3i& color) { // If Opencv gives YCrCb values 
 
 	int res = AClass[i] & BClass[j] & CClass[k]; //Supposing that colors are not over-layed there's only one possible solution and log2(x) returns an integer /
 
-	return res;
+	int aux = 0;
+
+	if (!res)
+		return aux;
+
+	while (!(res & 0x01)) {
+		res = res >> 1;
+		aux += 1;
+	}
+
+	return aux;
 }
 
 }/* namespace ccs  is an abreviature of Color Cluster Space Segmentation*/

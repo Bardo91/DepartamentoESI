@@ -68,8 +68,6 @@ int main(int argc, char** argv) {
 
 	ColorClusterSpace CS = *CreateHSVCS_8c(MaskH, MaskS, MaskV);
 
-	waitKey();
-
 	namedWindow("Frames", CV_WINDOW_FREERATIO);
 
 	setMouseCallback("Frames", onMouse, 0); // Callback for properly closing the app.
@@ -170,7 +168,7 @@ int main(int argc, char** argv) {
 
 		LR matching[sizeof(uchar) * 8];
 
-		//objectMatching(objs1, objs2, matching, cam1, cam2, EKFs, sizeThreshold);
+		objectMatching(objs1, objs2, matching, cam1, cam2, EKFs, sizeThreshold);
 
 		cout << "Nº objsL : " << objs1.size() << endl;
 		cout << "Nº objsR : " << objs2.size() << endl;
