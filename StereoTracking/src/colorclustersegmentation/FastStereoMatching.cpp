@@ -85,10 +85,10 @@ void objectMatching(const vector<SegmentedObject>& objsL,
 			}
 			if (flagFound) {
 				LR auxLR(ci, cj,
-						Point(objsL.at(ci).getCentroid().x,
-								objsL.at(ci).getCentroid().y),
-						Point(objsR.at(cj).getCentroid().x,
-								objsR.at(cj).getCentroid().y), energy,
+						{ objsL.at(ci).getCentroid().x,
+								objsL.at(ci).getCentroid().y },
+						{ objsR.at(cj).getCentroid().x,
+								objsR.at(cj).getCentroid().y }, energy,
 						objsL.at(ci).getColor(), TRUE);
 
 				matching[objsL.at(ci).getColor()] = auxLR;
