@@ -54,15 +54,12 @@ int ViconDataAcquisitor::getNextViconData(camera& cam1, camera& cam2,
 	cam1.pos = (Mat_<double>(3, 1) << atof(splittedString.at(7).c_str()), atof(
 			splittedString.at(8).c_str()), atof(splittedString.at(9).c_str()));
 
-	Mat R1 =
+	cam1.ori =
 			(Mat_<double>(3, 3) << cos(b) * cos(c), -cos(b) * sin(c), sin(b), cos(
 					a) * sin(c) + cos(c) * sin(a) * sin(b), cos(a) * cos(c)
 					- sin(a) * sin(b) * sin(c), -cos(b) * sin(a), sin(a)
 					* sin(c) - cos(a) * cos(c) * sin(b), cos(c) * sin(a)
 					+ cos(a) * sin(b) * sin(c), cos(a) * cos(b));
-	R1 = R1.inv();
-
-	cam1.ori = R1;
 
 	cam2.pos =
 			(Mat_<double>(3, 1) << atof(splittedString.at(13).c_str()), atof(
@@ -73,15 +70,12 @@ int ViconDataAcquisitor::getNextViconData(camera& cam1, camera& cam2,
 	b = atof(splittedString.at(17).c_str());
 	c = atof(splittedString.at(18).c_str()); // alpha, beta, gamma.
 
-	Mat R2 =
+	cam2.ori =
 			(Mat_<double>(3, 3) << cos(b) * cos(c), -cos(b) * sin(c), sin(b), cos(
 					a) * sin(c) + cos(c) * sin(a) * sin(b), cos(a) * cos(c)
 					- sin(a) * sin(b) * sin(c), -cos(b) * sin(a), sin(a)
 					* sin(c) - cos(a) * cos(c) * sin(b), cos(c) * sin(a)
 					+ cos(a) * sin(b) * sin(c), cos(a) * cos(b));
-	R2 = R2.inv();
-
-	cam2.ori = R2;
 
 	return 0;
 }
