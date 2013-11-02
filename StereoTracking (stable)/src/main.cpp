@@ -53,9 +53,9 @@ int main(int argc, char** argv) {
 	//InputDataManager idManager(dev1, dev2, width, height);
 
 	InputDataManager idManager(
-			"/home/pablo/Desktop/Estimation/P1_640x480/Images/",
-			"img%d_cam1.jpg", "img%d_cam2.jpg", width, height,
-			"/home/pablo/Desktop/Estimation/P1_640x480/ViconData2.txt");
+	 "/home/pablo/Desktop/Estimation/P1_640x480/Images/",
+	 "img%d_cam1.jpg", "img%d_cam2.jpg", width, height,
+	 "/home/pablo/Desktop/Estimation/P1_640x480/ViconData2.txt");
 
 	namedWindow("Frames", CV_WINDOW_FREERATIO);
 

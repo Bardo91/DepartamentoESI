@@ -11,6 +11,25 @@ using namespace std;
 using namespace cv;
 
 namespace sysctrl {
+
+#define PI 3.14159265359
+
+void obtainRotationMatrix(const double& a, const double& b, const double& c,
+		Mat& R) {
+
+	Mat Rx = (Mat_<double>(3, 3) << 1, 0, 0, 0, cos(a), -sin(a), 0, sin(a), cos(
+			a));
+
+	Mat Ry = (Mat_<double>(3, 3) << cos(b), 0, sin(b), 0, 1, 0, -sin(b), 0, cos(
+			b));
+
+	Mat Rz =
+			(Mat_<double>(3, 3) << cos(c), -sin(c), 0, sin(c), cos(c), 0, 0, 0, 1);
+
+	R = Rx * Ry * Rz;
+
+}
+
 void ViconDataAcquisitor::changePath(string dataPathName) {
 	this->dataPathName = dataPathName;
 	init();
@@ -23,7 +42,7 @@ void ViconDataAcquisitor::init() {
 
 int ViconDataAcquisitor::getNextViconData(camera& cam1, camera& cam2,
 		double& incT) {
-	// Reading vicon values
+// Reading vicon values
 	string line;
 	int colCounter = 0;
 	int init = 0;
@@ -43,10 +62,10 @@ int ViconDataAcquisitor::getNextViconData(camera& cam1, camera& cam2,
 	} else
 		return -1; // File isn't opened.
 
-	// assigning values
+// assigning values
 	incT = atof(splittedString.at(0).c_str());
 
-	// Update Cameras
+// Update Cameras
 	double a = atof(splittedString.at(10).c_str()), b = atof(
 			splittedString.at(11).c_str()), c = atof(
 			splittedString.at(12).c_str()); // alpha, beta, gamma.
@@ -54,12 +73,12 @@ int ViconDataAcquisitor::getNextViconData(camera& cam1, camera& cam2,
 	cam1.pos = (Mat_<double>(3, 1) << atof(splittedString.at(7).c_str()), atof(
 			splittedString.at(8).c_str()), atof(splittedString.at(9).c_str()));
 
-	cam1.ori =
-			(Mat_<double>(3, 3) << cos(b) * cos(c), -cos(b) * sin(c), sin(b), cos(
-					a) * sin(c) + cos(c) * sin(a) * sin(b), cos(a) * cos(c)
-					- sin(a) * sin(b) * sin(c), -cos(b) * sin(a), sin(a)
-					* sin(c) - cos(a) * cos(c) * sin(b), cos(c) * sin(a)
-					+ cos(a) * sin(b) * sin(c), cos(a) * cos(b));
+	Mat RE1, RE2, TR;
+	obtainRotationMatrix(-PI / 2, 0, PI / 2, TR);
+
+	obtainRotationMatrix(a, b, c, RE1);
+
+	cam1.ori = TR * RE1;
 
 	cam2.pos =
 			(Mat_<double>(3, 1) << atof(splittedString.at(13).c_str()), atof(
@@ -70,12 +89,9 @@ int ViconDataAcquisitor::getNextViconData(camera& cam1, camera& cam2,
 	b = atof(splittedString.at(17).c_str());
 	c = atof(splittedString.at(18).c_str()); // alpha, beta, gamma.
 
-	cam2.ori =
-			(Mat_<double>(3, 3) << cos(b) * cos(c), -cos(b) * sin(c), sin(b), cos(
-					a) * sin(c) + cos(c) * sin(a) * sin(b), cos(a) * cos(c)
-					- sin(a) * sin(b) * sin(c), -cos(b) * sin(a), sin(a)
-					* sin(c) - cos(a) * cos(c) * sin(b), cos(c) * sin(a)
-					+ cos(a) * sin(b) * sin(c), cos(a) * cos(b));
+	obtainRotationMatrix(a, b, c, RE2);
+
+	cam2.ori = TR * RE2;
 
 	return 0;
 }
