@@ -1,3 +1,40 @@
+/StereoTracking/Debug/makefile
+/StereoTracking/Debug/objects.mk
+/StereoTracking/Debug/sources.mk
+/StereoTracking/Debug/src/acquisition/ImageAcquisitor.d
+/StereoTracking/Debug/src/acquisition/subdir.mk
+/StereoTracking/Debug/src/colorclustersegmentation/ColorClusterSpace.d
+/StereoTracking/Debug/src/colorclustersegmentation/ColorSpaceHSV8.d
+/StereoTracking/Debug/src/colorclustersegmentation/FastStereoMatching.d
+/StereoTracking/Debug/src/colorclustersegmentation/SegmentateImage.d
+/StereoTracking/Debug/src/colorclustersegmentation/SegmentedObject.d
+/StereoTracking/Debug/src/colorclustersegmentation/subdir.mk
+/StereoTracking/Debug/src/kalmanfilter/StereoVisionEKF.d
+/StereoTracking/Debug/src/kalmanfilter/ViconDataAcquisitor.d
+/StereoTracking/Debug/src/kalmanfilter/subdir.mk
+/StereoTracking/Debug/src/main.d
+/StereoTracking/Debug/src/output/outputFuns.d
+/StereoTracking/Debug/src/output/subdir.mk
+/StereoTracking/Debug/src/subdir.mk
+/StereoTracking/Release/StereoTracking
+/StereoTracking/Release/makefile
+/StereoTracking/Release/objects.mk
+/StereoTracking/Release/sources.mk
+/StereoTracking/Release/src/acquisition/ImageAcquisitor.d
+/StereoTracking/Release/src/acquisition/subdir.mk
+/StereoTracking/Release/src/colorclustersegmentation/ColorClusterSpace.d
+/StereoTracking/Release/src/colorclustersegmentation/ColorSpaceHSV8.d
+/StereoTracking/Release/src/colorclustersegmentation/FastStereoMatching.d
+/StereoTracking/Release/src/colorclustersegmentation/SegmentateImage.d
+/StereoTracking/Release/src/colorclustersegmentation/SegmentedObject.d
+/StereoTracking/Release/src/colorclustersegmentation/subdir.mk
+/StereoTracking/Release/src/kalmanfilter/StereoVisionEKF.d
+/StereoTracking/Release/src/kalmanfilter/ViconDataAcquisitor.d
+/StereoTracking/Release/src/kalmanfilter/subdir.mk
+/StereoTracking/Release/src/main.d
+/StereoTracking/Release/src/output/outputFuns.d
+/StereoTracking/Release/src/output/subdir.mk
+/StereoTracking/Release/src/subdir.mk
 /Tracking with Stereo & Segmentation/Debug/src/functions/outputFuns.d
 /Tracking with Stereo & Segmentation/Release/src/functions/outputFuns.d
 /Tracking with Stereo & Segmentation/Debug/Tracking with Stereo & Segmentation
