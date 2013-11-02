@@ -28,17 +28,18 @@ using namespace std;
 using namespace sysctrl;
 
 bool exitFlag = true;
+int switchButtonValue = 0;
+bool changeMethodDone = true;
 
 static void onMouse(int event, int x, int y, int, void*) {
 	if (event == EVENT_LBUTTONDOWN)
 		exitFlag = false;
 
 }
-
+void switch_callback(int position) {
+	changeMethodDone = false;
+}
 int main(int argc, char** argv) {
-	//namedWindow("Viewer", CV_WINDOW_AUTOSIZE);
-	//namedWindow("Ori", CV_WINDOW_AUTOSIZE);
-
 	if (argc < 7) {
 		printf("Invalid input arguments\n");
 		return -1;
@@ -50,14 +51,14 @@ int main(int argc, char** argv) {
 	sscanf(argv[4], "%d", &height);
 	sscanf(argv[5], "%d", &sizeThreshold);
 
-	//InputDataManager idManager(dev1, dev2, width, height);
-
-	InputDataManager idManager(
-	 "/home/pablo/Desktop/Estimation/P1_640x480/Images/",
-	 "img%d_cam1.jpg", "img%d_cam2.jpg", width, height,
-	 "/home/pablo/Desktop/Estimation/P1_640x480/ViconData2.txt");
+	InputDataManager idManager(dev1, dev2, width, height);
 
 	namedWindow("Frames", CV_WINDOW_FREERATIO);
+
+	///  CREATE SWITCH
+	cvCreateTrackbar("Switch", "Frames", &switchButtonValue, 1,
+			switch_callback);
+	///
 
 	setMouseCallback("Frames", onMouse, 0); // Callback for properly closing the app.
 
@@ -113,7 +114,31 @@ int main(int argc, char** argv) {
 	Mat frame1, frame2, ori1, ori2;
 	// loop
 	while (waitKey(1) && exitFlag) {
-		waitKey(5);
+		// MIRAR SI HEMOS CAMBIADO EL SWITCH
+		if (!changeMethodDone) {
+			if (switchButtonValue) {
+				idManager.changeMethod(
+						"/home/pablo/Desktop/Estimation/P1_640x480/Images/",
+						"img%d_cam1.jpg", "img%d_cam2.jpg", width, height,
+						"/home/pablo/Desktop/Estimation/P1_640x480/ViconData2.txt");
+				changeMethodDone = true;
+				CS = *CreateHSVCS_8c(bin2dec("11111111"), bin2dec("11111111"),
+						bin2dec("00010000"));
+				sizeThreshold = 20;
+			} else {
+				idManager.changeMethod(dev1, dev2, width, height);
+				changeMethodDone = true;
+				CS = *CreateHSVCS_8c(bin2dec("11111111"), bin2dec("11111111"),
+						bin2dec("10000000"));
+				sizeThreshold = 500;
+			}
+			clock_gettime(CLOCK_REALTIME, &refTime0);
+			for (unsigned int i = 0; i < sizeof(uchar) * 8; i++) {
+				clock_gettime(CLOCK_REALTIME, &timeEKFs[i]);
+			}
+		}
+		//-------------------------------------
+
 		clock_gettime(CLOCK_REALTIME, &t1);
 
 		aRLE1.reserve(50000); // Need to be optimised

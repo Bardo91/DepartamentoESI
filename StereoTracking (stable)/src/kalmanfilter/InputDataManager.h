@@ -38,6 +38,11 @@ public:
 	void updateCurrentFrame();
 
 	int getInputMethod();
+
+	void changeMethod(std::string, std::string, std::string, int, int,
+			std::string);
+
+	void changeMethod(int, int, int, int);
 };
 
 } /* namespace sysctrl */

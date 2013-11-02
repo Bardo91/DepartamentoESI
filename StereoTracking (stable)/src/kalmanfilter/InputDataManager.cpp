@@ -72,4 +72,26 @@ int InputDataManager::getInputMethod() {
 	return inputMethod;
 }
 
+void InputDataManager::changeMethod(string pathName, string imageNameFormat1,
+		string imageNameFormat2, int width, int height, string dataPathName_) {
+
+	imagAc1 = ImageAcquisitor(pathName, imageNameFormat1, width, height);
+	imagAc2 = ImageAcquisitor(pathName, imageNameFormat2, width, height);
+	inputMethod = imagAc1.getInputMethod();
+
+	vicon.changePath(dataPathName_);
+
+	currentFrame = 0;
+
+}
+
+void InputDataManager::changeMethod(int dev1, int dev2, int width, int height) {
+	imagAc1 = ImageAcquisitor(dev1, width, height);
+	imagAc2 = ImageAcquisitor(dev2, width, height);
+	inputMethod = imagAc1.getInputMethod();
+
+	currentFrame = 0;
+
+}
+
 } /* namespace sysctrl */
