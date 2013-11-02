@@ -1,3 +1,17 @@
+/SingleCameraGroundTracking/Debug/src/acquisition/ImageAcquisitor.d
+/SingleCameraGroundTracking/Debug/src/acquisition/subdir.mk
+/SingleCameraGroundTracking/Debug/src/colorclustersegmentation/ColorClusterSpace.d
+/SingleCameraGroundTracking/Debug/src/colorclustersegmentation/ColorSpaceHSV8.d
+/SingleCameraGroundTracking/Debug/src/colorclustersegmentation/FastStereoMatching.d
+/SingleCameraGroundTracking/Debug/src/colorclustersegmentation/SegmentateImage.d
+/SingleCameraGroundTracking/Debug/src/colorclustersegmentation/SegmentedObject.d
+/SingleCameraGroundTracking/Debug/src/colorclustersegmentation/subdir.mk
+/SingleCameraGroundTracking/Debug/src/kalmanfilter/InputDataManager.d
+/SingleCameraGroundTracking/Debug/src/kalmanfilter/StereoVisionEKF.d
+/SingleCameraGroundTracking/Debug/src/kalmanfilter/ViconDataAcquisitor.d
+/SingleCameraGroundTracking/Debug/src/kalmanfilter/subdir.mk
+/SingleCameraGroundTracking/Debug/src/output/outputFuns.d
+/SingleCameraGroundTracking/Debug/src/output/subdir.mk
 /SingleCameraGroundTracking/Debug/SingleCameraGroundTracking
 /SingleCameraGroundTracking/Debug/makefile
 /SingleCameraGroundTracking/Debug/objects.mk
