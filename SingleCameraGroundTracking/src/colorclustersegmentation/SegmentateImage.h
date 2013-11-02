@@ -16,11 +16,9 @@
 
 namespace ccss {
 
-void segmentateImage(cv::Mat& frame1, cv::Mat& frame2, ColorClusterSpace& CS,
+void segmentateImage(cv::Mat& frame1, ColorClusterSpace& CS,
 		std::vector<SegmentedObject>& objs1,
-		std::vector<std::vector<LineObjRLE> >& aRLE1,
-		std::vector<SegmentedObject>& objs2,
-		std::vector<std::vector<LineObjRLE> >& aRLE2);
+		std::vector<std::vector<LineObjRLE> >& aRLE1);
 
 }
 

@@ -40,8 +40,7 @@ void ViconDataAcquisitor::init() {
 	viconFile.open(dataPathName.c_str());
 }
 
-int ViconDataAcquisitor::getNextViconData(camera& cam1, camera& cam2,
-		double& incT) {
+int ViconDataAcquisitor::getNextViconData(camera& cam1, double& incT) {
 // Reading vicon values
 	string line;
 	int colCounter = 0;
@@ -73,25 +72,12 @@ int ViconDataAcquisitor::getNextViconData(camera& cam1, camera& cam2,
 	cam1.pos = (Mat_<double>(3, 1) << atof(splittedString.at(7).c_str()), atof(
 			splittedString.at(8).c_str()), atof(splittedString.at(9).c_str()));
 
-	Mat RE1, RE2, TR;
+	Mat RE1, TR;
 	obtainRotationMatrix(-PI / 2, 0, PI / 2, TR);
 
 	obtainRotationMatrix(a, b, c, RE1);
 
 	cam1.ori = TR * RE1;
-
-	cam2.pos =
-			(Mat_<double>(3, 1) << atof(splittedString.at(13).c_str()), atof(
-					splittedString.at(14).c_str()), atof(
-					splittedString.at(15).c_str()));
-
-	a = atof(splittedString.at(16).c_str());
-	b = atof(splittedString.at(17).c_str());
-	c = atof(splittedString.at(18).c_str()); // alpha, beta, gamma.
-
-	obtainRotationMatrix(a, b, c, RE2);
-
-	cam2.ori = TR * RE2;
 
 	return 0;
 }

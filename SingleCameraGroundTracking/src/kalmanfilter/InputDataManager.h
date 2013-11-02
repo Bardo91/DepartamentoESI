@@ -24,25 +24,23 @@ class InputDataManager {
 	int currentFrame;
 
 public:
-	InputDataManager(std::string, std::string, std::string, int, int,
-			std::string);
-	InputDataManager(int, int, int, int);
+	InputDataManager(std::string, std::string, int, int, std::string);
+	InputDataManager(int, int, int);
 
 	void updateFrame();
 
-	void getFrames(cv::Mat&, cv::Mat&);
+	void getFrame(cv::Mat&);
 
 	void changeViconPath(std::string);
-	void getNextCamPos(sysctrl::camera&, sysctrl::camera&, double&);
+	void getNextCamPos(sysctrl::camera&, double&);
 
 	void updateCurrentFrame();
 
 	int getInputMethod();
 
-	void changeMethod(std::string, std::string, std::string, int, int,
-			std::string);
+	void changeMethod(std::string, std::string, int, int, std::string);
 
-	void changeMethod(int, int, int, int);
+	void changeMethod(int, int, int);
 };
 
 } /* namespace sysctrl */

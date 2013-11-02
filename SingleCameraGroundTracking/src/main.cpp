@@ -40,18 +40,17 @@ void switch_callback(int position) {
 	changeMethodDone = false;
 }
 int main(int argc, char** argv) {
-	if (argc < 7) {
+	if (argc < 6) {
 		printf("Invalid input arguments\n");
 		return -1;
 	}
-	unsigned int dev1 = 0, dev2 = 1, width = 0, height = 0, sizeThreshold = 0; // Width and height of the capture and minimun obj size
+	unsigned int dev1 = 0, width = 0, height = 0, sizeThreshold = 0; // Width and height of the capture and minimun obj size
 	sscanf(argv[1], "%d", &dev1);
-	sscanf(argv[2], "%d", &dev2);
-	sscanf(argv[3], "%d", &width);
-	sscanf(argv[4], "%d", &height);
-	sscanf(argv[5], "%d", &sizeThreshold);
+	sscanf(argv[2], "%d", &width);
+	sscanf(argv[3], "%d", &height);
+	sscanf(argv[4], "%d", &sizeThreshold);
 
-	InputDataManager idManager(dev1, dev2, width, height);
+	InputDataManager idManager(dev1, width, height);
 
 	namedWindow("Frames", CV_WINDOW_FREERATIO);
 
@@ -73,15 +72,13 @@ int main(int argc, char** argv) {
 		outFile[i].open(pathName.c_str());
 	}
 	ColorClusterSpace CS = *CreateHSVCS_8c(bin2dec("11111111"),
-			bin2dec("11111111"), bin2dec(argv[6]));
+			bin2dec("11111111"), bin2dec(argv[5]));
 
 	// Vector to organize RLEs
 	static vector<vector<struct LineObjRLE> > aRLE1;
-	static vector<vector<struct LineObjRLE> > aRLE2;
 
 	// Vector of objects in the image.
 	vector<SegmentedObject> objs1;
-	vector<SegmentedObject> objs2;
 
 	// Preparando los filtros de Kalman
 	Mat x0 = (Mat_<double>(6, 1) << 2, 2, 2, 0, 0, 0);
@@ -94,8 +91,6 @@ int main(int argc, char** argv) {
 			StereoVisionEKF(matQ, matR, x0) };
 
 	camera cam1(alphaX, alphaY, gammaSkew, u0, v0, distortionMat,
-			projectionMat);
-	camera cam2(alphaX, alphaY, gammaSkew, u0, v0, distortionMat,
 			projectionMat);
 
 	// Time for EKF
@@ -111,7 +106,7 @@ int main(int argc, char** argv) {
 
 	clock_gettime(CLOCK_REALTIME, &refTime0);
 
-	Mat frame1, frame2, ori1, ori2;
+	Mat frame1, ori1;
 	// loop
 	while (waitKey(1) && exitFlag) {
 		// MIRAR SI HEMOS CAMBIADO EL SWITCH
@@ -119,14 +114,14 @@ int main(int argc, char** argv) {
 			if (switchButtonValue) {
 				idManager.changeMethod(
 						"/home/pablo/Desktop/Estimation/P1_640x480/Images/",
-						"img%d_cam1.jpg", "img%d_cam2.jpg", width, height,
+						"img%d_cam1.jpg", width, height,
 						"/home/pablo/Desktop/Estimation/P1_640x480/ViconData2.txt");
 				changeMethodDone = true;
 				CS = *CreateHSVCS_8c(bin2dec("11111111"), bin2dec("11111111"),
 						bin2dec("00010000"));
 				sizeThreshold = 20;
 			} else {
-				idManager.changeMethod(dev1, dev2, width, height);
+				idManager.changeMethod(dev1, width, height);
 				changeMethodDone = true;
 				CS = *CreateHSVCS_8c(bin2dec("11111111"), bin2dec("11111111"),
 						bin2dec("10000000"));
@@ -142,46 +137,34 @@ int main(int argc, char** argv) {
 		clock_gettime(CLOCK_REALTIME, &t1);
 
 		aRLE1.reserve(50000); // Need to be optimised
-		aRLE2.reserve(50000); // Need to be optimised
 		objs1.reserve(5000);
-		objs2.reserve(5000);
 
 		idManager.updateFrame();
-		idManager.getFrames(frame1, frame2);
+		idManager.getFrame(frame1);
 
 		frame1.copyTo(ori1);
-		frame2.copyTo(ori2);
 
 		medianBlur(frame1, frame1, 5);
 		medianBlur(frame1, frame1, 5);
-		medianBlur(frame2, frame2, 5);
-		medianBlur(frame2, frame2, 5);
 
 		imageBGR2HSV(frame1);
-		imageBGR2HSV(frame2);
 
-		segmentateImage(frame1, frame2, CS, objs1, aRLE1, objs2, aRLE2);
+		segmentateImage(frame1, CS, objs1, aRLE1);
 
 		// Free memory
 		aRLE1.clear();
-		aRLE2.clear();
 
 		// Update camera positions
 		double incT;
 
-		idManager.getNextCamPos(cam1, cam2, incT);
-
-		// Matching
-		LR match[8];
-
-		objectMatching(objs1, objs2, match, cam1, cam2, EKFs, sizeThreshold);
+		idManager.getNextCamPos(cam1, incT);
 
 		// EKFs
 		for (unsigned int i = 0; i < sizeof(uchar) * 8; i++) {
 			// EKF triangulation.
 			if (match[i].updated) {
 				Mat Zk =
-						(Mat_<double>(4, 1) << match[i].pixL.x, match[i].pixL.y, match[i].pixR.x, match[i].pixR.y);
+						(Mat_<double>(4, 1) << match[i].pixL.x, match[i].pixL.y);
 
 				timespec auxTime;
 				clock_gettime(CLOCK_REALTIME, &auxTime);
@@ -198,8 +181,7 @@ int main(int argc, char** argv) {
 						<< ", " << match[i].pixR.x << ", " << match[i].pixR.y
 						<< "} " << endl;
 
-				EKFs[match[i].color].updateCameraPos(cam1.pos, cam2.pos,
-						cam1.ori, cam2.ori);
+				EKFs[match[i].color].updateCameraPos(cam1.pos, cam1.ori);
 				EKFs[match[i].color].updateIncT(diff);
 				EKFs[match[i].color].stepEKF(Zk);
 
@@ -227,26 +209,18 @@ int main(int argc, char** argv) {
 		// Since here everything is for & about displaying information not real algorithm, so it's not included
 		// in the time counter.
 		imageHSV2BGR(frame1);
-		imageHSV2BGR(frame2);
 
 		highlighObjs(objs1, ori1, sizeThreshold);
-		highlighObjs(objs2, ori2, sizeThreshold);
 
-		hconcat(frame1, frame2, frame1);
-		hconcat(ori1, ori2, ori1);
-		vconcat(ori1, frame1, ori1);
-
-		imshow("Frames", ori1);
+		hconcat(frame1, ori1, frame1);
+		imshow("Frames", frame1);
 
 		objs1.clear();
-		objs2.clear();
 
 		idManager.updateCurrentFrame();
 	}
 
 	aRLE1.clear();
-	aRLE2.clear();
 	objs1.clear();
-	objs2.clear();
 
 }

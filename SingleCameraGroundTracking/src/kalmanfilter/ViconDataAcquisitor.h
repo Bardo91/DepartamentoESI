@@ -23,7 +23,7 @@ public:
 
 	void changePath(std::string);
 	void init();
-	int getNextViconData(sysctrl::camera&, sysctrl::camera&, double&);
+	int getNextViconData(sysctrl::camera&, double&);
 };
 
 } /* namespace sysctrl */

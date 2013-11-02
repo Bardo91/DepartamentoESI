@@ -57,8 +57,7 @@ public:
 	StereoVisionEKF(const cv::Mat&, const cv::Mat&, const cv::Mat&);
 	~StereoVisionEKF();
 
-	void updateCameraPos(const cv::Mat&, const cv::Mat&, const cv::Mat&,
-			const cv::Mat&);
+	void updateCameraPos(const cv::Mat&, const cv::Mat&);
 	void updateIncT(const double&);
 
 	void updateJf();
