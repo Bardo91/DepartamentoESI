@@ -48,8 +48,16 @@ int main(int argc, char** argv) {
 	sscanf(argv[4], "%d", &height);
 	sscanf(argv[5], "%d", &sizeThreshold);
 
-	ImageAcquisitor imagAc1(dev1, width, height);
-	ImageAcquisitor imagAc2(dev2, width, height);
+	// Getting images
+	///// From devices
+	/*	ImageAcquisitor imagAc1(dev1, width, height);
+	 ImageAcquisitor imagAc2(dev2, width, height);
+	 */
+	///// From images
+	ImageAcquisitor imagAc1("/home/pablo/Desktop/Estimation/P1_640x480/Images/",
+			"img%d_cam1.jpg", 320, 240);
+	ImageAcquisitor imagAc2("/home/pablo/Desktop/Estimation/P1_640x480/Images/",
+			"img%d_cam2.jpg", 320, 240);
 
 	namedWindow("Frames", CV_WINDOW_FREERATIO);
 
@@ -70,7 +78,7 @@ int main(int argc, char** argv) {
 	ViconDataAcquisitor vicon;
 	if (imagAc1.getInputMethod()) {
 		vicon.changePath(
-				"/home/pablo/Desktop/Estimation/P4_640x480/Images/ViconData2.txt");
+				"/home/pablo/Desktop/Estimation/P1_640x480/ViconData2.txt");
 	}
 
 	ColorClusterSpace CS = *CreateHSVCS_8c(bin2dec("11111111"),
@@ -114,6 +122,9 @@ int main(int argc, char** argv) {
 
 	Mat frame1, frame2, ori1, ori2;
 	// loop
+
+	int currentframe = 0;
+
 	while (waitKey(1) && exitFlag) {
 		waitKey(5);
 		clock_gettime(CLOCK_REALTIME, &t1);
@@ -123,8 +134,8 @@ int main(int argc, char** argv) {
 		objs1.reserve(5000);
 		objs2.reserve(5000);
 
-		imagAc1.updateFrame();
-		imagAc2.updateFrame(12);
+		imagAc1.updateFrame(currentframe);
+		imagAc2.updateFrame(currentframe);
 
 		imagAc1.getFrame(frame1);
 
@@ -148,11 +159,18 @@ int main(int argc, char** argv) {
 		aRLE2.clear();
 
 		// Update camera positions
-		cam1.pos = (Mat_<double>(3, 1) << 0, 0, 0);
-		cam2.pos = (Mat_<double>(3, 1) << 0, -0.16, 0);
+		/*cam1.pos = (Mat_<double>(3, 1) << 0, 0, 0);
+		 cam2.pos = (Mat_<double>(3, 1) << 0, -0.16, 0);
 
-		cam1.ori = (Mat_<double>(3, 3) << 1, 0, 0, 0, 1, 0, 0, 0, 1);
-		cam2.ori = (Mat_<double>(3, 3) << 1, 0, 0, 0, 1, 0, 0, 0, 1);
+		 cam1.ori = (Mat_<double>(3, 3) << 1, 0, 0, 0, 1, 0, 0, 0, 1);
+		 cam2.ori = (Mat_<double>(3, 3) << 1, 0, 0, 0, 1, 0, 0, 0, 1);*/
+
+		// Data from vicon
+		double incT = -1;
+		vicon.getNextViconData(cam1, cam2, incT);
+
+		cout << "C1 = " << cam1.pos << endl;
+		cout << "C2 = " << cam2.pos << endl;
 
 		// Matching
 		LR match[8];
@@ -169,6 +187,9 @@ int main(int argc, char** argv) {
 				timespec auxTime;
 				clock_gettime(CLOCK_REALTIME, &auxTime);
 				double diff = diffTime(auxTime, timeEKFs[match[i].color]);
+
+				if (incT != -1)
+					diff = incT;
 
 				timeEKFs[match[i].color] = auxTime;
 
@@ -219,6 +240,10 @@ int main(int argc, char** argv) {
 
 		objs1.clear();
 		objs2.clear();
+
+		currentframe += 1;
+
+		waitKey();
 	}
 
 	aRLE1.clear();

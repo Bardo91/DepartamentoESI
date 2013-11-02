@@ -62,7 +62,7 @@ void StereoVisionEKF::updateIncT(const double& incT_) {
 
 void StereoVisionEKF::updateJf() {
 	Jf =
-			(Mat_<double>(6, 6) << 1, 0, 0, incT, 0, 0, 0, 1, 0, 0, incT, 0, 0, 0, 1, 0, 0, incT, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0);
+			(Mat_<double>(6, 6) << 1, 0, 0, incT, 0, 0, 0, 1, 0, 0, incT, 0, 0, 0, 1, 0, 0, incT, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1);
 }
 void StereoVisionEKF::updateJh_and_hZk() {
 	double * R1 = (double*) cam1.ori.data;
@@ -128,15 +128,15 @@ void StereoVisionEKF::forecastStep() {
 	updateJf();
 
 	Xfk = Jf * Xak;
-
+	P = Jf * P * Jf.t() + Q;
 }
 
 void StereoVisionEKF::filterStep(const Mat& Zk) {
 	updateJh_and_hZk();
 
-	K = P * Jh.t() * (Jh * P * Jh.t() + R);
+	K = P * Jh.t() * (Jh * P * Jh.t() + R).inv();
 
-	P = (Mat::eye(6, 6, CV_64F) + K * Jh);
+	P = (Mat::eye(6, 6, CV_64F) - K * Jh) * P;
 
 	Xak = Xfk + K * (Zk - h_Zk);
 

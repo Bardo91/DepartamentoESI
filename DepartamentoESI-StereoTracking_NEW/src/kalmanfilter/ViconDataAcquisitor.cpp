@@ -11,8 +11,9 @@ using namespace std;
 using namespace cv;
 
 namespace sysctrl {
-void ViconDataAcquisitor::changePath(string dataPathName) {
-	this->dataPathName = dataPathName;
+void ViconDataAcquisitor::changePath(string dataPathName_) {
+	dataPathName = dataPathName_;
+	init();
 }
 
 void ViconDataAcquisitor::init() {
@@ -20,7 +21,7 @@ void ViconDataAcquisitor::init() {
 }
 
 int ViconDataAcquisitor::getNextViconData(camera& cam1, camera& cam2,
-		int& incT) {
+		double& incT) {
 	// Reading vicon values
 	string line;
 	int colCounter = 0;
