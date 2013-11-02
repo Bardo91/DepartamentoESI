@@ -19,10 +19,10 @@ namespace sysctrl {
 class ViconDataAcquisitor {
 	std::string dataPathName;
 	std::ifstream viconFile;
-	void init();
 public:
 
 	void changePath(std::string);
+	void init();
 	int getNextViconData(sysctrl::camera&, sysctrl::camera&, double&);
 };
 

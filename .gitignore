@@ -1,3 +1,43 @@
+/StereoTracking (stable)/Debug/StereoTracking
+/StereoTracking (stable)/Debug/makefile
+/StereoTracking (stable)/Debug/objects.mk
+/StereoTracking (stable)/Debug/sources.mk
+/StereoTracking (stable)/Debug/src/acquisition/ImageAcquisitor.d
+/StereoTracking (stable)/Debug/src/acquisition/subdir.mk
+/StereoTracking (stable)/Debug/src/colorclustersegmentation/ColorClusterSpace.d
+/StereoTracking (stable)/Debug/src/colorclustersegmentation/ColorSpaceHSV8.d
+/StereoTracking (stable)/Debug/src/colorclustersegmentation/FastStereoMatching.d
+/StereoTracking (stable)/Debug/src/colorclustersegmentation/SegmentateImage.d
+/StereoTracking (stable)/Debug/src/colorclustersegmentation/SegmentedObject.d
+/StereoTracking (stable)/Debug/src/colorclustersegmentation/subdir.mk
+/StereoTracking (stable)/Debug/src/kalmanfilter/InputDataManager.d
+/StereoTracking (stable)/Debug/src/kalmanfilter/StereoVisionEKF.d
+/StereoTracking (stable)/Debug/src/kalmanfilter/ViconDataAcquisitor.d
+/StereoTracking (stable)/Debug/src/kalmanfilter/subdir.mk
+/StereoTracking (stable)/Debug/src/main.d
+/StereoTracking (stable)/Debug/src/output/outputFuns.d
+/StereoTracking (stable)/Debug/src/output/subdir.mk
+/StereoTracking (stable)/Debug/src/subdir.mk
+/StereoTracking (stable)/Release/StereoTracking
+/StereoTracking (stable)/Release/makefile
+/StereoTracking (stable)/Release/objects.mk
+/StereoTracking (stable)/Release/sources.mk
+/StereoTracking (stable)/Release/src/acquisition/ImageAcquisitor.d
+/StereoTracking (stable)/Release/src/acquisition/subdir.mk
+/StereoTracking (stable)/Release/src/colorclustersegmentation/ColorClusterSpace.d
+/StereoTracking (stable)/Release/src/colorclustersegmentation/ColorSpaceHSV8.d
+/StereoTracking (stable)/Release/src/colorclustersegmentation/FastStereoMatching.d
+/StereoTracking (stable)/Release/src/colorclustersegmentation/SegmentateImage.d
+/StereoTracking (stable)/Release/src/colorclustersegmentation/SegmentedObject.d
+/StereoTracking (stable)/Release/src/colorclustersegmentation/subdir.mk
+/StereoTracking (stable)/Release/src/kalmanfilter/InputDataManager.d
+/StereoTracking (stable)/Release/src/kalmanfilter/StereoVisionEKF.d
+/StereoTracking (stable)/Release/src/kalmanfilter/ViconDataAcquisitor.d
+/StereoTracking (stable)/Release/src/kalmanfilter/subdir.mk
+/StereoTracking (stable)/Release/src/main.d
+/StereoTracking (stable)/Release/src/output/outputFuns.d
+/StereoTracking (stable)/Release/src/output/subdir.mk
+/StereoTracking (stable)/Release/src/subdir.mk
 /DepartamentoESI-StereoTracking_NEW/Debug/StereoTracking
 /DepartamentoESI-StereoTracking_NEW/Debug/makefile
 /DepartamentoESI-StereoTracking_NEW/Debug/objects.mk

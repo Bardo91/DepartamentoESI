@@ -11,9 +11,10 @@ using namespace std;
 using namespace cv;
 
 namespace sysctrl {
-void ViconDataAcquisitor::changePath(string dataPathName_) {
-	dataPathName = dataPathName_;
+void ViconDataAcquisitor::changePath(string dataPathName) {
+	this->dataPathName = dataPathName;
 	init();
+
 }
 
 void ViconDataAcquisitor::init() {

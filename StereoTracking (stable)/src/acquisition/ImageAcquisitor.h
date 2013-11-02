@@ -27,6 +27,7 @@ class ImageAcquisitor {
 	cv::Mat frame;
 public:
 
+	ImageAcquisitor();
 	ImageAcquisitor(std::string, std::string, int, int); // Get image from path.
 	ImageAcquisitor(int, int, int); // Get image from Device
 
@@ -40,7 +41,7 @@ public:
 
 	bool canCapture();
 
-	int updateFrame(int currentImage=0);
+	int updateFrame(int currentImage = 0);
 	int getFrame(cv::Mat&);
 	int getInputMethod() const;
 

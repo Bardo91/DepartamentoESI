@@ -12,6 +12,11 @@ using namespace cv;
 
 namespace ccss {
 
+ImageAcquisitor::ImageAcquisitor() {
+	width = height = inputMethod = -1;
+	flagInputError = false;
+}
+
 ImageAcquisitor::ImageAcquisitor(string pathName, std::string imageNameFormat,
 		int width, int height) {
 	inputMethod = 1;
