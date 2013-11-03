@@ -1,3 +1,56 @@
+/SingleCameraGroundTracking/Debug/src/acquisition/ImageAcquisitor.d
+/SingleCameraGroundTracking/Debug/src/acquisition/subdir.mk
+/SingleCameraGroundTracking/Debug/src/colorclustersegmentation/ColorClusterSpace.d
+/SingleCameraGroundTracking/Debug/src/colorclustersegmentation/ColorSpaceHSV8.d
+/SingleCameraGroundTracking/Debug/src/colorclustersegmentation/SegmentateImage.d
+/SingleCameraGroundTracking/Debug/src/colorclustersegmentation/SegmentedObject.d
+/SingleCameraGroundTracking/Debug/src/colorclustersegmentation/subdir.mk
+/SingleCameraGroundTracking/Debug/src/kalmanfilter/InputDataManager.d
+/SingleCameraGroundTracking/Debug/src/kalmanfilter/StereoVisionEKF.d
+/SingleCameraGroundTracking/Debug/src/kalmanfilter/ViconDataAcquisitor.d
+/SingleCameraGroundTracking/Debug/src/kalmanfilter/subdir.mk
+/SingleCameraGroundTracking/Debug/src/output/outputFuns.d
+/SingleCameraGroundTracking/Debug/src/output/subdir.mk
+/StereoTracking/StereoTracking (stable)/Debug/StereoTracking
+/StereoTracking/StereoTracking (stable)/Debug/makefile
+/StereoTracking/StereoTracking (stable)/Debug/objects.mk
+/StereoTracking/StereoTracking (stable)/Debug/sources.mk
+/StereoTracking/StereoTracking (stable)/Debug/src/acquisition/ImageAcquisitor.d
+/StereoTracking/StereoTracking (stable)/Debug/src/acquisition/subdir.mk
+/StereoTracking/StereoTracking (stable)/Debug/src/colorclustersegmentation/ColorClusterSpace.d
+/StereoTracking/StereoTracking (stable)/Debug/src/colorclustersegmentation/ColorSpaceHSV8.d
+/StereoTracking/StereoTracking (stable)/Debug/src/colorclustersegmentation/FastStereoMatching.d
+/StereoTracking/StereoTracking (stable)/Debug/src/colorclustersegmentation/SegmentateImage.d
+/StereoTracking/StereoTracking (stable)/Debug/src/colorclustersegmentation/SegmentedObject.d
+/StereoTracking/StereoTracking (stable)/Debug/src/colorclustersegmentation/subdir.mk
+/StereoTracking/StereoTracking (stable)/Debug/src/kalmanfilter/InputDataManager.d
+/StereoTracking/StereoTracking (stable)/Debug/src/kalmanfilter/StereoVisionEKF.d
+/StereoTracking/StereoTracking (stable)/Debug/src/kalmanfilter/ViconDataAcquisitor.d
+/StereoTracking/StereoTracking (stable)/Debug/src/kalmanfilter/subdir.mk
+/StereoTracking/StereoTracking (stable)/Debug/src/main.d
+/StereoTracking/StereoTracking (stable)/Debug/src/output/outputFuns.d
+/StereoTracking/StereoTracking (stable)/Debug/src/output/subdir.mk
+/StereoTracking/StereoTracking (stable)/Debug/src/subdir.mk
+/StereoTracking/StereoTracking (stable)/Release/StereoTracking
+/StereoTracking/StereoTracking (stable)/Release/makefile
+/StereoTracking/StereoTracking (stable)/Release/objects.mk
+/StereoTracking/StereoTracking (stable)/Release/sources.mk
+/StereoTracking/StereoTracking (stable)/Release/src/acquisition/ImageAcquisitor.d
+/StereoTracking/StereoTracking (stable)/Release/src/acquisition/subdir.mk
+/StereoTracking/StereoTracking (stable)/Release/src/colorclustersegmentation/ColorClusterSpace.d
+/StereoTracking/StereoTracking (stable)/Release/src/colorclustersegmentation/ColorSpaceHSV8.d
+/StereoTracking/StereoTracking (stable)/Release/src/colorclustersegmentation/FastStereoMatching.d
+/StereoTracking/StereoTracking (stable)/Release/src/colorclustersegmentation/SegmentateImage.d
+/StereoTracking/StereoTracking (stable)/Release/src/colorclustersegmentation/SegmentedObject.d
+/StereoTracking/StereoTracking (stable)/Release/src/colorclustersegmentation/subdir.mk
+/StereoTracking/StereoTracking (stable)/Release/src/kalmanfilter/InputDataManager.d
+/StereoTracking/StereoTracking (stable)/Release/src/kalmanfilter/StereoVisionEKF.d
+/StereoTracking/StereoTracking (stable)/Release/src/kalmanfilter/ViconDataAcquisitor.d
+/StereoTracking/StereoTracking (stable)/Release/src/kalmanfilter/subdir.mk
+/StereoTracking/StereoTracking (stable)/Release/src/main.d
+/StereoTracking/StereoTracking (stable)/Release/src/output/outputFuns.d
+/StereoTracking/StereoTracking (stable)/Release/src/output/subdir.mk
+/StereoTracking/StereoTracking (stable)/Release/src/subdir.mk
 /SingleCameraGroundTracking/Debug/SingleCameraGroundTracking
 /SingleCameraGroundTracking/Debug/makefile
 /SingleCameraGroundTracking/Debug/objects.mk
