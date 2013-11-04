@@ -14,6 +14,11 @@ using namespace cv;
 
 namespace sysctrl {
 
+InputDataManager::InputDataManager() {
+	inputMethod = 0;
+	currentFrame = 0;
+}
+
 InputDataManager::InputDataManager(string pathName, string imageNameFormat1,
 		string imageNameFormat2, int width, int height, string dataPathName_) {
 

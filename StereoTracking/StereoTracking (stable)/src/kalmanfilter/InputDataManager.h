@@ -24,6 +24,7 @@ class InputDataManager {
 	int currentFrame;
 
 public:
+	InputDataManager();
 	InputDataManager(std::string, std::string, std::string, int, int,
 			std::string);
 	InputDataManager(int, int, int, int);

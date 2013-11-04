@@ -29,7 +29,7 @@ using namespace sysctrl;
 
 bool exitFlag = true;
 int switchButtonValue = 0;
-bool changeMethodDone = true;
+bool changeMethodDone = false;
 
 static void onMouse(int event, int x, int y, int, void*) {
 	if (event == EVENT_LBUTTONDOWN)
@@ -50,8 +50,6 @@ int main(int argc, char** argv) {
 	sscanf(argv[3], "%d", &width);
 	sscanf(argv[4], "%d", &height);
 	sscanf(argv[5], "%d", &sizeThreshold);
-
-	InputDataManager idManager(dev1, dev2, width, height);
 
 	namedWindow("Frames", CV_WINDOW_FREERATIO);
 
@@ -112,6 +110,8 @@ int main(int argc, char** argv) {
 	clock_gettime(CLOCK_REALTIME, &refTime0);
 
 	Mat frame1, frame2, ori1, ori2;
+	InputDataManager idManager;
+	waitKey();
 	// loop
 	while (waitKey(1) && exitFlag) {
 		// MIRAR SI HEMOS CAMBIADO EL SWITCH
