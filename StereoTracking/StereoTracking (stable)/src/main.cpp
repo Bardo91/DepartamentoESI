@@ -51,13 +51,11 @@ int main(int argc, char** argv) {
 	sscanf(argv[4], "%d", &height);
 	sscanf(argv[5], "%d", &sizeThreshold);
 
-	namedWindow("Frames", CV_WINDOW_FREERATIO);
-
 	///  CREATE SWITCH
 	cvCreateTrackbar("Switch", "Frames", &switchButtonValue, 1,
 			switch_callback);
 	///
-
+	namedWindow("Frames", CV_WINDOW_FREERATIO);
 	setMouseCallback("Frames", onMouse, 0); // Callback for properly closing the app.
 
 	// OutputFile

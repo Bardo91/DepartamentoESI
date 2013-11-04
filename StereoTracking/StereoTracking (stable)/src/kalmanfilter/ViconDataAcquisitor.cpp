@@ -73,12 +73,11 @@ int ViconDataAcquisitor::getNextViconData(camera& cam1, camera& cam2,
 	cam1.pos = (Mat_<double>(3, 1) << atof(splittedString.at(7).c_str()), atof(
 			splittedString.at(8).c_str()), atof(splittedString.at(9).c_str()));
 
-	Mat RE1, RE2, TR;
-	obtainRotationMatrix(-PI / 2, 0, PI / 2, TR);
+	Mat RE1, RE2;
 
 	obtainRotationMatrix(a, b, c, RE1);
 
-	cam1.ori = TR * RE1;
+	cam1.ori = RE1;
 
 	cam2.pos =
 			(Mat_<double>(3, 1) << atof(splittedString.at(13).c_str()), atof(
@@ -91,7 +90,7 @@ int ViconDataAcquisitor::getNextViconData(camera& cam1, camera& cam2,
 
 	obtainRotationMatrix(a, b, c, RE2);
 
-	cam2.ori = TR * RE2;
+	cam2.ori = RE2;
 
 	return 0;
 }
