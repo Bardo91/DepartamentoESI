@@ -1,3 +1,14 @@
+/VisualTrackingUI/Release/VisualTrackingUI
+/VisualTrackingUI/Release/makefile
+/VisualTrackingUI/Release/objects.mk
+/VisualTrackingUI/Release/sources.mk
+/VisualTrackingUI/Release/src/BoxAlgorithm.d
+/VisualTrackingUI/Release/src/BoxIO.d
+/VisualTrackingUI/Release/src/BoxImgAcq.d
+/VisualTrackingUI/Release/src/BoxTitle.d
+/VisualTrackingUI/Release/src/MainWindow.d
+/VisualTrackingUI/Release/src/VisualTrackingUI-GTK.d
+/VisualTrackingUI/Release/src/subdir.mk
 <<<<<<< HEAD
 /StereoTracking/StereoTracking (stable)/Release/core
 =======
