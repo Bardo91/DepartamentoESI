@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\acquisition">
+      <UniqueIdentifier>{9e49fec4-3a0d-44c0-9b33-5f4108b6936f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\colorclustersegmentation">
+      <UniqueIdentifier>{3a496ffd-7091-4113-ac20-5f4442fa981d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\kalmanfilter">
+      <UniqueIdentifier>{b3720ff3-46e5-4b1e-8065-d790c5439385}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\output">
+      <UniqueIdentifier>{dd0a99c8-ea1e-48cb-84d5-114b0a451ed6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\timefuns">
+      <UniqueIdentifier>{b1498b29-a500-4788-987c-b4c6f6a7bf9d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\matching">
+      <UniqueIdentifier>{963d3068-2bd4-401d-90b7-84ca0b199a12}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="acquisition\ImageAcquisitor.cpp">
+      <Filter>Source Files\acquisition</Filter>
+    </ClCompile>
+    <ClCompile Include="colorclustersegmentation\ColorClusterSpace.cpp">
+      <Filter>Source Files\colorclustersegmentation</Filter>
+    </ClCompile>
+    <ClCompile Include="colorclustersegmentation\ColorSpaceHSV8.cpp">
+      <Filter>Source Files\colorclustersegmentation</Filter>
+    </ClCompile>
+    <ClCompile Include="colorclustersegmentation\SegmentateImage.cpp">
+      <Filter>Source Files\colorclustersegmentation</Filter>
+    </ClCompile>
+    <ClCompile Include="colorclustersegmentation\SegmentedObject.cpp">
+      <Filter>Source Files\colorclustersegmentation</Filter>
+    </ClCompile>
+    <ClCompile Include="kalmanfilter\InputDataManager.cpp">
+      <Filter>Source Files\kalmanfilter</Filter>
+    </ClCompile>
+    <ClCompile Include="kalmanfilter\StereoVisionEKF.cpp">
+      <Filter>Source Files\kalmanfilter</Filter>
+    </ClCompile>
+    <ClCompile Include="kalmanfilter\ViconDataAcquisitor.cpp">
+      <Filter>Source Files\kalmanfilter</Filter>
+    </ClCompile>
+    <ClCompile Include="output\outputFuns.cpp">
+      <Filter>Source Files\output</Filter>
+    </ClCompile>
+    <ClCompile Include="timefuns\time.cpp">
+      <Filter>Source Files\timefuns</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="acquisition\ImageAcquisitor.h">
+      <Filter>Source Files\acquisition</Filter>
+    </ClInclude>
+    <ClInclude Include="colorclustersegmentation\ColorClusterSpace.h">
+      <Filter>Source Files\colorclustersegmentation</Filter>
+    </ClInclude>
+    <ClInclude Include="colorclustersegmentation\ColorSpaceHSV8.h">
+      <Filter>Source Files\colorclustersegmentation</Filter>
+    </ClInclude>
+    <ClInclude Include="colorclustersegmentation\SegmentateImage.h">
+      <Filter>Source Files\colorclustersegmentation</Filter>
+    </ClInclude>
+    <ClInclude Include="colorclustersegmentation\SegmentedObject.h">
+      <Filter>Source Files\colorclustersegmentation</Filter>
+    </ClInclude>
+    <ClInclude Include="kalmanfilter\CameraDataEKF.h">
+      <Filter>Source Files\kalmanfilter</Filter>
+    </ClInclude>
+    <ClInclude Include="kalmanfilter\InputDataManager.h">
+      <Filter>Source Files\kalmanfilter</Filter>
+    </ClInclude>
+    <ClInclude Include="kalmanfilter\StereoVisionEKF.h">
+      <Filter>Source Files\kalmanfilter</Filter>
+    </ClInclude>
+    <ClInclude Include="kalmanfilter\ViconDataAcquisitor.h">
+      <Filter>Source Files\kalmanfilter</Filter>
+    </ClInclude>
+    <ClInclude Include="output\outputFuns.h">
+      <Filter>Source Files\output</Filter>
+    </ClInclude>
+    <ClInclude Include="timefuns\time.h">
+      <Filter>Source Files\timefuns</Filter>
+    </ClInclude>
+    <ClInclude Include="timefuns\timeSrc.h">
+      <Filter>Source Files\timefuns</Filter>
+    </ClInclude>
+    <ClInclude Include="robuststereomatching\RobustStereoMatching.h">
+      <Filter>Source Files\matching</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
