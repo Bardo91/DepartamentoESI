@@ -44,9 +44,9 @@ ColorClusterSpace::~ColorClusterSpace() {
 }
 
 int ColorClusterSpace::whichColor(c3i& color) { // If Opencv gives YCrCb values between 0 and 255
-	int i = 0, j = floor(color.b / 255.0 * (size - 1)), k = floor(color.c / 255.0 * (size - 1));
+	int i = 0, j = int(floor(color.b / 255.0 * (size - 1))), k = int(floor(color.c / 255.0 * (size - 1)));
 
-	i = floor(color.a / (COLOR_SPACE == 0 ? 180.0 : 255.0) * (size - 1));
+	i = int(floor(color.a / (COLOR_SPACE == 0 ? 180.0 : 255.0) * (size - 1)));
 
 	int res = AClass[i] & BClass[j] & CClass[k]; //Supposing that colors are not over-layed there's only one possible solution and log2(x) returns an integer /
 

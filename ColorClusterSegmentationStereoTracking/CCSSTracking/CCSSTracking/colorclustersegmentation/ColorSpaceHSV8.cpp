@@ -20,7 +20,7 @@ int bin2dec(std::string bin) {
 	exp = len - 1;
 
 	for (i = 0; i < len; i++, exp--)
-		dec += cstr[i] == '1' ? pow(2, exp) : 0;
+		dec += cstr[i] == '1' ? int(pow(2, exp)) : 0;
 	return dec;
 }
 
