@@ -60,6 +60,9 @@
     <ClCompile Include="output\outputFuns.cpp">
       <Filter>Source Files\output</Filter>
     </ClCompile>
+    <ClCompile Include="colorclustersegmentation\ObjectMatching.cpp">
+      <Filter>Source Files\colorclustersegmentation</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="acquisition\ImageAcquisitor.h">
@@ -94,6 +97,9 @@
     </ClInclude>
     <ClInclude Include="output\outputFuns.h">
       <Filter>Source Files\output</Filter>
+    </ClInclude>
+    <ClInclude Include="colorclustersegmentation\ObjectMatching.h">
+      <Filter>Source Files\colorclustersegmentation</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
