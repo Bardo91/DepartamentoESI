@@ -75,12 +75,12 @@ unsigned int SegmentedObject::getSize() const {
 }
 
 unsigned int SegmentedObject::getBBSize() const {
-	return (downRight.x - upperLeft.x) * (downRight.y - upperLeft.y);
+	return int((downRight.x - upperLeft.x) * (downRight.y - upperLeft.y));
 }
 
 cv::Point2d SegmentedObject::getCentroid() const {
-	return cv::Point((upperLeft.x + downRight.x) / 2,
-			(upperLeft.y + downRight.y) / 2);
+	return cv::Point(int((upperLeft.x + downRight.x) / 2),
+			int((upperLeft.y + downRight.y) / 2));
 }
 
 bool sortFunction(LineObjRLE a, LineObjRLE b) {

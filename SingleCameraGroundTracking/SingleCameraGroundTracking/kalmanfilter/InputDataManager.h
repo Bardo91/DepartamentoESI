@@ -8,8 +8,8 @@
 #ifndef INPUTDATAMANAGER_H_
 #define INPUTDATAMANAGER_H_
 
-#include <ImageAcquisitor.h>
-#include <ViconDataAcquisitor.h>
+#include <acquisition/ImageAcquisitor.h>
+#include <kalmanfilter/ViconDataAcquisitor.h>
 
 namespace sysctrl {
 

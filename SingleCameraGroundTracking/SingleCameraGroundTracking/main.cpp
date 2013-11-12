@@ -5,13 +5,17 @@
  *      Author: pablo
  */
 
+#ifndef _CRT_SECURE_NO_WARNINGS
+#define _CRT_SECURE_NO_WARNINGS
+#endif
+
 #include "acquisition/ImageAcquisitor.h"
 #include "colorclustersegmentation/ColorClusterSpace.h"
 #include "colorclustersegmentation/ColorSpaceHSV8.h"
 #include "colorclustersegmentation/SegmentateImage.h"
 #include "colorclustersegmentation/SegmentedObject.h"
-#include "colorclustersegmentation/FastStereoMatching.h"
-#include "timefuns/TimeFunctions.hpp"
+#include "colorclustersegmentation/ObjectMatching.h"
+#include "timefuns/time.h"
 #include "output/outputFuns.h"
 #include "kalmanfilter/StereoVisionEKF.h"
 #include "kalmanfilter/CameraDataEKF.h"
@@ -92,19 +96,29 @@ int main(int argc, char** argv) {
 
 	camera cam1(alphaX, alphaY, gammaSkew, u0, v0, distortionMat,
 			projectionMat);
-
+	
 	// Time for EKF
-	struct timespec timeEKFs[sizeof(uchar) * 8];
+	
+	STime::init();
 
-	for (unsigned int i = 0; i < sizeof(uchar) * 8; i++) {
-		clock_gettime(CLOCK_REALTIME, &timeEKFs[i]);
-	}
+	STime *gTimer = STime::get();
 
+	TReal *timers = new TReal[8];
 	// Ref temp.
-	timespec refTime0;
-	timespec t1, t2;
+	TReal refTime0;
+	TReal t1, t2;
 
-	clock_gettime(CLOCK_REALTIME, &refTime0);
+	// Update timer.
+	gTimer->update();
+
+	// Get time for reference
+	refTime0 = gTimer->frameTime();
+
+	// Time reference for EKF filter
+	for (unsigned int i = 0; i < sizeof(uchar) * 8; i++) {
+		gTimer->update();
+		timers[i] = gTimer->frameTime();
+	}
 
 	Mat frame1, ori1;
 	// loop
@@ -127,14 +141,19 @@ int main(int argc, char** argv) {
 						bin2dec("10000000"));
 				sizeThreshold = 500;
 			}
-			clock_gettime(CLOCK_REALTIME, &refTime0);
+			// Get time for reference
+			refTime0 = gTimer->frameTime();
+
+			// Time reference for EKF filter
 			for (unsigned int i = 0; i < sizeof(uchar) * 8; i++) {
-				clock_gettime(CLOCK_REALTIME, &timeEKFs[i]);
+				gTimer->update();
+				timers[i] = gTimer->frameTime();
 			}
 		}
 		//-------------------------------------
 
-		clock_gettime(CLOCK_REALTIME, &t1);
+		gTimer->update();
+		t1 = gTimer->frameTime();
 
 		aRLE1.reserve(50000); // Need to be optimised
 		objs1.reserve(5000);
@@ -162,36 +181,41 @@ int main(int argc, char** argv) {
 		// EKFs
 		for (unsigned int i = 0; i < sizeof(uchar) * 8; i++) {
 			// EKF triangulation.
-			if (match[i].updated) {
-				Mat Zk =
-						(Mat_<double>(4, 1) << match[i].pixL.x, match[i].pixL.y);
+			trackedObject match1, match2;
+			stereoMatching.getCurrentObjects(match1, match2, i);
 
-				timespec auxTime;
-				clock_gettime(CLOCK_REALTIME, &auxTime);
-				double diff = diffTime(auxTime, timeEKFs[match[i].color]);
+			if (match1.flagUpdate && match2.flagUpdate) {
+				Mat Zk =
+					(Mat_<double>(4, 1) <<match1.mPos.x, match1.mPos.y, match2.mPos.x, match2.mPos.y);
+
+				TReal auxTime;
+				gTimer->update();
+				auxTime = gTimer->frameTime();
+				double diff = timers[i]-refTime0;
 
 				if (incT == -1) {
 					incT = diff;
 				}
 
-				timeEKFs[match[i].color] = auxTime;
+				timers[i] = auxTime;
 
 				cout << "DIFERENCIA DE TIEMPO: " << diff << endl;
-				cout << "Zk: {" << match[i].pixL.x << ", " << match[i].pixL.y
-						<< ", " << match[i].pixR.x << ", " << match[i].pixR.y
+				cout << "Zk: {" << match1.mPos.x << ", " << match1.mPos.y
+						<< ", " << match2.mPos.x << ", " << match2.mPos.x
 						<< "} " << endl;
 
-				EKFs[match[i].color].updateCameraPos(cam1.pos, cam1.ori);
-				EKFs[match[i].color].updateIncT(diff);
-				EKFs[match[i].color].stepEKF(Zk);
+				EKFs[i].updateCameraPos(cam1.pos, cam1.ori);
+				EKFs[i].updateIncT(diff);
+				EKFs[i].stepEKF(Zk);
 
-				timeEKFs[match[i].color] = auxTime;
+				timeEKFs[i] = auxTime;
 
 				Mat Xak;
-				EKFs[match[i].color].getStateVector(Xak);
+				EKFs[i].getStateVector(Xak);
 				match[i].updated = FALSE;
 
-				double refTime = diffTime(auxTime, refTime0);
+				double refTime = auxTime - refTime0;
+
 
 				cout << "Time: " << refTime << endl << "State: " << Xak << endl;
 
@@ -202,8 +226,9 @@ int main(int argc, char** argv) {
 			}
 		}
 
-		clock_gettime(CLOCK_REALTIME, &t2);
-		double diff = diffTime(t2, t1);
+		gTimer->update();
+		t2 = gTimer->frameTime();
+		double diff = t2-t1;
 		cout << "FINISHED IN " << diff << endl;
 
 		// Since here everything is for & about displaying information not real algorithm, so it's not included

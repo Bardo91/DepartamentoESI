@@ -63,6 +63,9 @@
     <ClCompile Include="colorclustersegmentation\ObjectMatching.cpp">
       <Filter>Source Files\colorclustersegmentation</Filter>
     </ClCompile>
+    <ClCompile Include="timefuns\time.cpp">
+      <Filter>Source Files\timefuns</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="acquisition\ImageAcquisitor.h">
@@ -92,14 +95,17 @@
     <ClInclude Include="kalmanfilter\ViconDataAcquisitor.h">
       <Filter>Source Files\kalmanfilter</Filter>
     </ClInclude>
-    <ClInclude Include="timefuns\TimeFunctions.hpp">
-      <Filter>Source Files\timefuns</Filter>
-    </ClInclude>
     <ClInclude Include="output\outputFuns.h">
       <Filter>Source Files\output</Filter>
     </ClInclude>
     <ClInclude Include="colorclustersegmentation\ObjectMatching.h">
       <Filter>Source Files\colorclustersegmentation</Filter>
+    </ClInclude>
+    <ClInclude Include="timefuns\time.h">
+      <Filter>Source Files\timefuns</Filter>
+    </ClInclude>
+    <ClInclude Include="timefuns\timeSrc.h">
+      <Filter>Source Files\timefuns</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

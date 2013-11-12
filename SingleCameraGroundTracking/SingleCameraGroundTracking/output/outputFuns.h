@@ -8,7 +8,7 @@
 #ifndef OUTPUTFUNS_H_
 #define OUTPUTFUNS_H_
 
-#include <SegmentedObject.h>
+#include <colorclustersegmentation/SegmentedObject.h>
 #include <vector>
 #include <opencv/cv.h>
 

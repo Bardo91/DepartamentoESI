@@ -105,7 +105,8 @@ bool ImageAcquisitor::canCapture() {
 
 int ImageAcquisitor::updateFrame(int currentImage) {
 	if (inputMethod) {
-		char buffer[imageNameFormat.size() + 4]; // +4 suposing that number of input images ar less than 99.999
+		int bufferSize = imageNameFormat.size() + 4;
+		char *buffer = new char[bufferSize]; // +4 suposing that number of input images ar less than 99.999
 		sprintf(buffer, imageNameFormat.c_str(), currentImage);
 		stringstream ss;
 		ss << pathName << buffer;
@@ -114,6 +115,8 @@ int ImageAcquisitor::updateFrame(int currentImage) {
 
 		if (frame.cols != height && frame.cols != 0)
 			resize(frame, frame, Size(width, height));
+
+		delete buffer;
 
 	} else {
 		device >> frame;

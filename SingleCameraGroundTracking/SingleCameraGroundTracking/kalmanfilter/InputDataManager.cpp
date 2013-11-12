@@ -5,7 +5,7 @@
  *      Author: pablo
  */
 
-#include <InputDataManager.h>
+#include <kalmanfilter/InputDataManager.h>
 
 using namespace std;
 using namespace sysctrl;
