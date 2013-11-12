@@ -66,6 +66,9 @@
     <ClCompile Include="timefuns\time.cpp">
       <Filter>Source Files\timefuns</Filter>
     </ClCompile>
+    <ClCompile Include="colorclustersegmentation\ObjectMatching.cpp">
+      <Filter>Source Files\colorclustersegmentation</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="acquisition\ImageAcquisitor.h">
@@ -106,6 +109,9 @@
     </ClInclude>
     <ClInclude Include="robuststereomatching\RobustStereoMatching.h">
       <Filter>Source Files\matching</Filter>
+    </ClInclude>
+    <ClInclude Include="colorclustersegmentation\ObjectMatching.h">
+      <Filter>Source Files\colorclustersegmentation</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

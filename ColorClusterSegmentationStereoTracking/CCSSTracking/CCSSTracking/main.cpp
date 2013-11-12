@@ -1,16 +1,22 @@
-/*
- * main.cpp
- *
- *  Created on: Oct 31, 2013
- *      Author: pablo
- */
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//	Color Cluster Segmentation Stereo Tracking
+//
+//		Author: Pablo Ramón Soria
+//		Date: 2013/10/31
+//
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// main
+
+#ifndef _CRT_SECURE_NO_WARNINGS
+#define _CRT_SECURE_NO_WARNINGS // 666 TODO: clear definition and solve warnings
+#endif
 
 #include "acquisition/ImageAcquisitor.h"
 #include "colorclustersegmentation/ColorClusterSpace.h"
 #include "colorclustersegmentation/ColorSpaceHSV8.h"
 #include "colorclustersegmentation/SegmentateImage.h"
 #include "colorclustersegmentation/SegmentedObject.h"
-#include "colorclustersegmentation/FastStereoMatching.h"
+#include "colorclustersegmentation/ObjectMatching.h"
 #include "timefuns/time.h"
 #include "output/outputFuns.h"
 #include "kalmanfilter/StereoVisionEKF.h"
@@ -80,6 +86,10 @@ int main(int argc, char** argv) {
 	vector<SegmentedObject> objs1;
 	vector<SegmentedObject> objs2;
 
+	// Preparing ObjectMatching.
+	StereoObjectMatching stereoMatching;
+
+
 	// Preparando los filtros de Kalman
 	Mat x0 = (Mat_<double>(6, 1) << 2, 2, 2, 0, 0, 0);
 
@@ -111,7 +121,7 @@ int main(int argc, char** argv) {
 	gTimer->update();
 
 	// Get time for reference
-	refTime0 = gTimer->frameTime;
+	refTime0 = gTimer->frameTime();
 
 	// Time reference for EKF filter
 	for (unsigned int i = 0; i < sizeof(uchar) * 8; i++) {
@@ -143,7 +153,7 @@ int main(int argc, char** argv) {
 				sizeThreshold = 500;
 			}
 			// Get time for reference
-			refTime0 = gTimer->frameTime;
+			refTime0 = gTimer->frameTime();
 
 			// Time reference for EKF filter
 			for (unsigned int i = 0; i < sizeof(uchar) * 8; i++) {
@@ -187,53 +197,54 @@ int main(int argc, char** argv) {
 
 		idManager.getNextCamPos(cam1, cam2, incT);
 
-		// Matching
-		LR match[8];
-
-		objectMatching(objs1, objs2, match, cam1, cam2, EKFs, sizeThreshold);
+		// Update Matching object
+		stereoMatching.compareAndUpdate(objs1,objs2);
 
 		// EKFs
 		for (unsigned int i = 0; i < sizeof(uchar) * 8; i++) {
 			// EKF triangulation.
-			if (match[i].updated) {
+			trackedObject match1, match2;
+			stereoMatching.getCurrentObjects(match1, match2, i);
+
+			if (match1.flagUpdate && match2.flagUpdate) {
 				Mat Zk =
-						(Mat_<double>(4, 1) << match[i].pixL.x, match[i].pixL.y, match[i].pixR.x, match[i].pixR.y);
+					(Mat_<double>(4, 1) <<match1.mPos.x, match1.mPos.y, match2.mPos.x, match2.mPos.y);
 
 				TReal auxTime;
 				gTimer->update();
 				auxTime = gTimer->frameTime();
-				double diff = timers[match[i].color]-refTime0;
+				double diff = timers[i]-refTime0;
 
 				if (incT == -1) {
 					incT = diff;
 				}
 
-				timers[match[i].color] = auxTime;
+				timers[i] = auxTime;
 
 				cout << "DIFERENCIA DE TIEMPO: " << diff << endl;
-				cout << "Zk: {" << match[i].pixL.x << ", " << match[i].pixL.y
-						<< ", " << match[i].pixR.x << ", " << match[i].pixR.y
+				cout << "Zk: {" << match1.mPos.x << ", " << match1.mPos.y
+						<< ", " << match2.mPos.x << ", " << match2.mPos.x
 						<< "} " << endl;
 
-				EKFs[match[i].color].updateCameraPos(cam1.pos, cam2.pos,
+				EKFs[i].updateCameraPos(cam1.pos, cam2.pos,
 						cam1.ori, cam2.ori);
-				EKFs[match[i].color].updateIncT(diff);
-				EKFs[match[i].color].stepEKF(Zk);
+				EKFs[i].updateIncT(diff);
+				EKFs[i].stepEKF(Zk);
 
 				Mat Xak;
-				EKFs[match[i].color].getStateVector(Xak);
-				match[i].updated = FALSE;
+				EKFs[i].getStateVector(Xak);
 
 				double refTime = auxTime - refTime0;
 
 				cout << "Time: " << refTime << endl << "State: " << Xak << endl;
 
-				outFile[match[i].color] << refTime << " "
+				outFile[i] << refTime << " "
 						<< Xak.ptr<double>(0)[0] << " " << Xak.ptr<double>(1)[0]
 						<< " " << Xak.ptr<double>(2)[0] << endl;
 
 			}
 		}
+		stereoMatching.setFlags(false);
 
 		gTimer->update();
 		t2 = gTimer->frameTime();
