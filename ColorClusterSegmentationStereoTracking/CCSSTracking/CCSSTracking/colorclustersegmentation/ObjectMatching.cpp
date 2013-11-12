@@ -13,12 +13,28 @@
 using namespace ccss;
 using namespace cv;
 
+double ccss::energyDistance(cv::Point2d obj1, cv::Point2d obj2){
+		return sqrt(pow((obj1.x + obj2.x)/2, 2) + pow((obj1.y + obj2.y)/2,2));
+	}
+
+trackedObject::trackedObject(){
+	mPos = Point(0, 0);
+	mSize = 0;
+	flagUpdate = false;
+}
+
+trackedObject::trackedObject(cv::Point2d _pos, double _size){
+			mPos = _pos;
+			mSize = _size;
+			flagUpdate = false;
+}
+
 ObjectMatching::ObjectMatching(){
 	mCurrentObjs = new trackedObject[8]; // Reserve memory for every object according to color
 	for (unsigned i = 0; i < 8 ; i++){
 		mCurrentObjs[i].mSize = 1;
 		mCurrentObjs[i].mPos = Point(1,1);
-	}
+}
 
 	mVelocity = 0.5; // 0.0 to 1.0 param that define the velocity of the matching algorithm
 

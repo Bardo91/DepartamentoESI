@@ -28,9 +28,6 @@
     <Filter Include="Source Files\timefuns">
       <UniqueIdentifier>{b1498b29-a500-4788-987c-b4c6f6a7bf9d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\matching">
-      <UniqueIdentifier>{963d3068-2bd4-401d-90b7-84ca0b199a12}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -106,9 +103,6 @@
     </ClInclude>
     <ClInclude Include="timefuns\timeSrc.h">
       <Filter>Source Files\timefuns</Filter>
-    </ClInclude>
-    <ClInclude Include="robuststereomatching\RobustStereoMatching.h">
-      <Filter>Source Files\matching</Filter>
     </ClInclude>
     <ClInclude Include="colorclustersegmentation\ObjectMatching.h">
       <Filter>Source Files\colorclustersegmentation</Filter>

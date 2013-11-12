@@ -11,14 +11,12 @@
 #define OBJECTMATCHING_H_
 
 #include "SegmentedObject.h"
-
+#include <opencv/cv.h>
 #include <vector>
 
 namespace ccss {
 
-	double energyDistance(cv::Point2d obj1, cv::Point2d obj2){
-		return sqrt(pow((obj1.x + obj2.x)/2, 2) + pow((obj1.y + obj2.y)/2,2));
-	}
+	double energyDistance(cv::Point2d obj1, cv::Point2d obj2);
 	
 	struct trackedObject{
 		cv::Point2d mPos;
@@ -26,11 +24,7 @@ namespace ccss {
 		bool flagUpdate;
 
 		trackedObject();
-		trackedObject(cv::Point2d _pos, double _size){
-			mPos = _pos;
-			mSize = _size;
-			flagUpdate = false;
-		}
+		trackedObject(cv::Point2d _pos, double _size);
 	};
 
 	class ObjectMatching{
