@@ -166,7 +166,6 @@ int main(int argc, char** argv) {
 		gTimer->update();
 		t1 = gTimer->frameTime();
 
-
 		aRLE1.reserve(50000); // Need to be optimised
 		aRLE2.reserve(50000); // Need to be optimised
 		objs1.reserve(5000);
@@ -187,6 +186,9 @@ int main(int argc, char** argv) {
 		imageBGR2HSV(frame2);
 
 		segmentateImage(frame1, frame2, CS, objs1, aRLE1, objs2, aRLE2);
+
+		//imshow("blurred", frame1);
+
 
 		// Free memory
 		aRLE1.clear();

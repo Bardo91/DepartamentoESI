@@ -12,7 +12,7 @@
 
 namespace sysctrl
 {
-		typedef float TReal;
+		typedef double TReal;
 
         class STime
         {
@@ -42,10 +42,10 @@ namespace sysctrl
 
                 // Internal use.
 		#if defined(_linux) || defined (ANDROID)
-            int        mLastTime;
+            unsigned double mLastTime;
 		#endif
 		#if defined (WIN32)
-		    unsigned mLastTime;
+			unsigned double mLastTime;
 		#endif
         };
 
