@@ -21,74 +21,75 @@
 
 namespace sysctrl
 {
-        //------------------------------------------------------------------------------------------------------------------
-        // Static data definitions
-        STime* STime::sTime = 0;
 
-        //------------------------------------------------------------------------------------------------------------------
-        // Method implementations
+    //------------------------------------------------------------------------------------------------------------------
+    // Static data definitions
+    STime* STime::sTime = 0;
 
-        //------------------------------------------------------------------------------------------------------------------
-        void STime::init()
-        {
-                assert(0 == sTime);
-                sTime = new STime();
-        }
+    //------------------------------------------------------------------------------------------------------------------
+    // Method implementations
 
-        //------------------------------------------------------------------------------------------------------------------
-        void STime::end()
-        {
-                assert(0 != sTime);
-                delete sTime;
-                sTime = 0;
-        }
+    //------------------------------------------------------------------------------------------------------------------
+    void STime::init()
+    {
+            assert(0 == sTime);
+            sTime = new STime();
+    }
 
-        //------------------------------------------------------------------------------------------------------------------
-        void STime::update()
-        {
-        #if defined (_linux) || defined (ANDROID)
-                // Get current time
-                timeval currentTime;
-                gettimeofday(&currentTime, 0);
-                int usecTime = currentTime.tv_usec;
-                mFrameTime = TReal((usecTime - mLastTime)/ 1000000.0);        // Known conversion from double. There wont be loss of
-                                                                                                                                // information because tv_usec isn't that precise.
-                if(mFrameTime < 0.f)
-                {
-                        mFrameTime += 1.f;
-                }
-                mLastTime = usecTime;
-        #elif defined (WIN32)
-                // Get current time
-                LARGE_INTEGER largeTicks;
-                QueryPerformanceCounter(&largeTicks);
-                unsigned currTime = largeTicks.LowPart;
-                // Convert time difference to seconds
-                LARGE_INTEGER frequency;
-                QueryPerformanceFrequency(&frequency);
-                mFrameTime =  (TReal(currTime-mLastTime)/TReal(frequency.LowPart));
-                // --- Force minimun frame rate, so that time wont stall while debugging
-                mFrameTime = mFrameTime < 0.1f? mFrameTime : 0.1f;
-                // Replace last time
-                mLastTime = currTime;
-        #endif 
-        }
+    //------------------------------------------------------------------------------------------------------------------
+    void STime::end()
+    {
+            assert(0 != sTime);
+            delete sTime;
+            sTime = 0;
+    }
 
-        //------------------------------------------------------------------------------------------------------------------
-        STime::STime():
-                mFrameTime(0.f)
-        {
-        #if defined (_linux) || defined (ANDROID)
-                // Get current time
-                timeval currentTime;
-                gettimeofday(&currentTime, 0);
-                mLastTime = currentTime.tv_usec;
-        #elif defined (WIN32)
-                // Get initial time
-                LARGE_INTEGER largeTicks;
-                QueryPerformanceCounter(&largeTicks);
-                mLastTime = largeTicks.LowPart;
-        #endif
-        }
+    //------------------------------------------------------------------------------------------------------------------
+    void STime::update()
+    {
+    #if defined (_linux) || defined (ANDROID)
+            // Get current time
+            timeval currentTime;
+            gettimeofday(&currentTime, 0);
+            int usecTime = currentTime.tv_usec;
+            mFrameTime = TReal((usecTime - mLastTime)/ 1000000.0);        // Known conversion from double. There wont be loss of
+                                                                                                                            // information because tv_usec isn't that precise.
+            if(mFrameTime < 0.f)
+            {
+                    mFrameTime += 1.f;
+            }
+            mLastTime = usecTime;
+    #elif defined (WIN32)
+            // Get current time
+            LARGE_INTEGER largeTicks;
+            QueryPerformanceCounter(&largeTicks);
+            unsigned currTime = largeTicks.LowPart;
+            // Convert time difference to seconds
+            LARGE_INTEGER frequency;
+            QueryPerformanceFrequency(&frequency);
+            mFrameTime =  (TReal(currTime-mLastTime)/TReal(frequency.LowPart));
+            // --- Force minimun frame rate, so that time wont stall while debugging
+            mFrameTime = mFrameTime < 0.1f? mFrameTime : 0.1f;
+            // Replace last time
+            mLastTime = currTime;
+    #endif 
+    }
+
+    //------------------------------------------------------------------------------------------------------------------
+    STime::STime():
+            mFrameTime(0.f)
+    {
+    #if defined (_linux) || defined (ANDROID)
+            // Get current time
+            timeval currentTime;
+            gettimeofday(&currentTime, 0);
+            mLastTime = currentTime.tv_usec;
+    #elif defined (WIN32)
+            // Get initial time
+            LARGE_INTEGER largeTicks;
+            QueryPerformanceCounter(&largeTicks);
+            mLastTime = largeTicks.LowPart;
+    #endif
+    }
 
 }        // namespace sysctrl
