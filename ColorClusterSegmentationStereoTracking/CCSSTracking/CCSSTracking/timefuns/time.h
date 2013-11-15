@@ -12,54 +12,57 @@
 
 namespace sysctrl
 {
-		typedef double TReal;
+	#if defined(_linux) || defined(ANDROID) || defined (WIN32)
+		typedef float TReal;
+	#endif // _linux || ANDROID || WIN32
 
-        class STime
-        {
-                /// \brief this system provides time meassures to game. time is considered constant along a whole frame.
-        public:
-                // --- Singleton life cycle ---
-                static void init();
-                static STime* get();        ///< Returns the singleton instance
-                static void end();
 
-        public:
-                // --- System management ---
-                void update();        ///< Update time system
+    class STime
+    {
+            /// \brief this system provides time meassures to game. time is considered constant along a whole frame.
+    public:
+            // --- Singleton life cycle ---
+            static void init();
+            static STime* get();        ///< Returns the singleton instance
+            static void end();
 
-                // --- Public interface ---
-                TReal frameTime();
+    public:
+            // --- System management ---
+            void update();        ///< Update time system
 
-        private:
-                STime();
+            // --- Public interface ---
+            TReal frameTime();
 
-        private:
-                // Singleton instance
-                static STime* sTime;
+    private:
+            STime();
 
-                // last frame duration.
-                TReal mFrameTime;
+    private:
+            // Singleton instance
+            static STime* sTime;
 
-                // Internal use.
-		#if defined(_linux) || defined (ANDROID)
-            unsigned double mLastTime;
-		#endif
-		#if defined (WIN32)
-			unsigned double mLastTime;
-		#endif
-        };
+            // last frame duration.
+            TReal mFrameTime;
 
-        //------------------------------------------------------------------------------------------------------------------
-        inline TReal STime::frameTime()
-        {
-            return mFrameTime;
-        }
+            // Internal use.
+	#if defined(_linux) || defined (ANDROID)
+        int mLastTime;
+	#endif
+	#if defined (WIN32)
+		unsigned mLastTime;
+	#endif
+    };
 
-        //------------------------------------------------------------------------------------------------------------------
-        inline STime * STime::get()
-        {
-            return sTime;
-        }
+    //------------------------------------------------------------------------------------------------------------------
+    inline TReal STime::frameTime()
+    {
+        return mFrameTime;
+    }
+
+    //------------------------------------------------------------------------------------------------------------------
+    inline STime * STime::get()
+    {
+        return sTime;
+    }
 
 }        // namespace sysctrl
 
