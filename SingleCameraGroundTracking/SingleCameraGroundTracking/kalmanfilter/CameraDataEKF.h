@@ -9,7 +9,7 @@
 #define CAMERADATAEKF_H_
 
 #include <opencv/cv.h>
-#include "StereoVisionEKF.h"
+#include "GroundTrackingEKF.h"
 
 using namespace cv;
 using namespace std;

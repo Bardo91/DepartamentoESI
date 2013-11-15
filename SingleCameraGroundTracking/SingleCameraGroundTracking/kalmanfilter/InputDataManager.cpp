@@ -1,9 +1,9 @@
-/*
- * InputDataManager.cpp
- *
- *  Created on: Nov 2, 2013
- *      Author: pablo
- */
+////////////////////////////////////////////////////////////////////////////////
+//	Single Camera Ground Tracking - Extended Kalman Filter
+//		Author: Pablo Ramón Soria
+//		Date: 2013/11/02
+////////////////////////////////////////////////////////////////////////////////
+// Input data manager
 
 #include <kalmanfilter/InputDataManager.h>
 

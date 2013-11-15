@@ -12,7 +12,7 @@
 #include <iostream>
 #include <fstream>
 
-#include "StereoVisionEKF.h"
+#include "GroundTrackingEKF.h"
 
 namespace sysctrl {
 

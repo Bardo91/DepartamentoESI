@@ -17,7 +17,7 @@
 #include "colorclustersegmentation/ObjectMatching.h"
 #include "timefuns/time.h"
 #include "output/outputFuns.h"
-#include "kalmanfilter/StereoVisionEKF.h"
+#include "kalmanfilter/GroundTrackingEKF.h"
 #include "kalmanfilter/CameraDataEKF.h"
 #include "kalmanfilter/ViconDataAcquisitor.h"
 
@@ -88,15 +88,19 @@ int main(int argc, char** argv) {
 	Mat x0 = (Mat_<double>(6, 1) << 2, 2, 2, 0, 0, 0);
 
 	// Extended Kalman filter applicated to Stereo Vision variables
-	StereoVisionEKF EKFs[8] = { StereoVisionEKF(matQ, matR, x0),
-			StereoVisionEKF(matQ, matR, x0), StereoVisionEKF(matQ, matR, x0),
-			StereoVisionEKF(matQ, matR, x0), StereoVisionEKF(matQ, matR, x0),
-			StereoVisionEKF(matQ, matR, x0), StereoVisionEKF(matQ, matR, x0),
-			StereoVisionEKF(matQ, matR, x0) };
+	GroundTrackingEKF EKFs[8] = { GroundTrackingEKF(matQ, matR, x0),
+			GroundTrackingEKF(matQ, matR, x0), GroundTrackingEKF(matQ, matR, x0),
+			GroundTrackingEKF(matQ, matR, x0), GroundTrackingEKF(matQ, matR, x0),
+			GroundTrackingEKF(matQ, matR, x0), GroundTrackingEKF(matQ, matR, x0),
+			GroundTrackingEKF(matQ, matR, x0) };
 
 	camera cam1(alphaX, alphaY, gammaSkew, u0, v0, distortionMat,
 			projectionMat);
 	
+	// ObjectMatching ---> Searcher of current tracked objects (8 colors)
+
+	ObjectMatching objectMatching;
+
 	// Time for EKF
 	
 	STime::init();
@@ -181,12 +185,12 @@ int main(int argc, char** argv) {
 		// EKFs
 		for (unsigned int i = 0; i < sizeof(uchar) * 8; i++) {
 			// EKF triangulation.
-			trackedObject match1, match2;
-			stereoMatching.getCurrentObjects(match1, match2, i);
+			trackedObject match;
+			objectMatching.getCurrentObject(match,i);
 
-			if (match1.flagUpdate && match2.flagUpdate) {
+			if (match.flagUpdate) {
 				Mat Zk =
-					(Mat_<double>(4, 1) <<match1.mPos.x, match1.mPos.y, match2.mPos.x, match2.mPos.y);
+					(Mat_<double>(4, 1) <<match.mPos.x, match.mPos.y);  // Zk = [x', y'] <-- variables de estado observado es el centroide del objeto en la imagen
 
 				TReal auxTime;
 				gTimer->update();
@@ -200,15 +204,14 @@ int main(int argc, char** argv) {
 				timers[i] = auxTime;
 
 				cout << "DIFERENCIA DE TIEMPO: " << diff << endl;
-				cout << "Zk: {" << match1.mPos.x << ", " << match1.mPos.y
-						<< ", " << match2.mPos.x << ", " << match2.mPos.x
+				cout << "Zk: {" << match.mPos.x << ", " << match.mPos.y
 						<< "} " << endl;
 
 				EKFs[i].updateCameraPos(cam1.pos, cam1.ori);
 				EKFs[i].updateIncT(diff);
 				EKFs[i].stepEKF(Zk);
 
-				timeEKFs[i] = auxTime;
+				timers[i] = auxTime;
 
 				Mat Xak;
 				EKFs[i].getStateVector(Xak);

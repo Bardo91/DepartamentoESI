@@ -51,9 +51,6 @@
     <ClCompile Include="kalmanfilter\InputDataManager.cpp">
       <Filter>Source Files\kalmanfilter</Filter>
     </ClCompile>
-    <ClCompile Include="kalmanfilter\StereoVisionEKF.cpp">
-      <Filter>Source Files\kalmanfilter</Filter>
-    </ClCompile>
     <ClCompile Include="kalmanfilter\ViconDataAcquisitor.cpp">
       <Filter>Source Files\kalmanfilter</Filter>
     </ClCompile>
@@ -89,9 +86,6 @@
     <ClInclude Include="kalmanfilter\InputDataManager.h">
       <Filter>Source Files\kalmanfilter</Filter>
     </ClInclude>
-    <ClInclude Include="kalmanfilter\StereoVisionEKF.h">
-      <Filter>Source Files\kalmanfilter</Filter>
-    </ClInclude>
     <ClInclude Include="kalmanfilter\ViconDataAcquisitor.h">
       <Filter>Source Files\kalmanfilter</Filter>
     </ClInclude>
@@ -106,6 +100,9 @@
     </ClInclude>
     <ClInclude Include="timefuns\timeSrc.h">
       <Filter>Source Files\timefuns</Filter>
+    </ClInclude>
+    <ClInclude Include="kalmanfilter\GroundTrackingEKF.h">
+      <Filter>Source Files\kalmanfilter</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
