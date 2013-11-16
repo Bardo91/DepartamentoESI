@@ -55,7 +55,6 @@ class StereoVisionEKF {
 
 public:
 	StereoVisionEKF(const cv::Mat&, const cv::Mat&, const cv::Mat&);
-	~StereoVisionEKF();
 
 	void updateCameraPos(const cv::Mat&, const cv::Mat&, const cv::Mat&,
 			const cv::Mat&);

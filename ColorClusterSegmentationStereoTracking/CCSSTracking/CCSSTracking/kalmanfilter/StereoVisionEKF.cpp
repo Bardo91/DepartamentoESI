@@ -35,17 +35,6 @@ StereoVisionEKF::StereoVisionEKF(const Mat& Q_, const Mat& R_, const Mat& x0_) {
 	//The rest of variables needn't to be initialized
 }
 
-StereoVisionEKF::~StereoVisionEKF() {
-	Q.deallocate();
-	R.deallocate();
-	Xfk.deallocate();
-	Xak.deallocate();
-	P.deallocate();
-	K.deallocate();
-	Jf.deallocate();
-	Jh.deallocate();
-}
-
 void StereoVisionEKF::updateCameraPos(const cv::Mat& C1, const cv::Mat& C2,
 		const cv::Mat& ori1, const cv::Mat& ori2) {
 

@@ -1,9 +1,9 @@
-/*
- * main.cpp
- *
- *  Created on: Oct 31, 2013
- *      Author: pablo
- */
+////////////////////////////////////////////////////////////////////////////////
+//	Single Camera Ground Tracking - Extended Kalman Filter
+//		Author: Pablo Ramón Soria
+//		Date: 2013/10/31
+////////////////////////////////////////////////////////////////////////////////
+// main
 
 #ifndef _CRT_SECURE_NO_WARNINGS
 #define _CRT_SECURE_NO_WARNINGS
@@ -79,10 +79,10 @@ int main(int argc, char** argv) {
 			bin2dec("11111111"), bin2dec(argv[5]));
 
 	// Vector to organize RLEs
-	static vector<vector<struct LineObjRLE> > aRLE1;
+	static vector<vector<struct LineObjRLE> > aRLE;
 
 	// Vector of objects in the image.
-	vector<SegmentedObject> objs1;
+	vector<SegmentedObject> objs;
 
 	// Preparando los filtros de Kalman
 	Mat x0 = (Mat_<double>(6, 1) << 2, 2, 2, 0, 0, 0);
@@ -94,7 +94,7 @@ int main(int argc, char** argv) {
 			GroundTrackingEKF(matQ, matR, x0), GroundTrackingEKF(matQ, matR, x0),
 			GroundTrackingEKF(matQ, matR, x0) };
 
-	camera cam1(alphaX, alphaY, gammaSkew, u0, v0, distortionMat,
+	camera cam(alphaX, alphaY, gammaSkew, u0, v0, distortionMat,
 			projectionMat);
 	
 	// ObjectMatching ---> Searcher of current tracked objects (8 colors)
@@ -124,7 +124,7 @@ int main(int argc, char** argv) {
 		timers[i] = gTimer->frameTime();
 	}
 
-	Mat frame1, ori1;
+	Mat frame, ori;
 	// loop
 	while (waitKey(1) && exitFlag) {
 		// MIRAR SI HEMOS CAMBIADO EL SWITCH
@@ -159,28 +159,28 @@ int main(int argc, char** argv) {
 		gTimer->update();
 		t1 = gTimer->frameTime();
 
-		aRLE1.reserve(50000); // Need to be optimised
-		objs1.reserve(5000);
+		aRLE.reserve(50000); // Need to be optimised
+		objs.reserve(5000);
 
 		idManager.updateFrame();
-		idManager.getFrame(frame1);
+		idManager.getFrame(frame);
 
-		frame1.copyTo(ori1);
+		frame.copyTo(ori);
 
-		medianBlur(frame1, frame1, 5);
-		medianBlur(frame1, frame1, 5);
+		medianBlur(frame, frame, 5);
+		medianBlur(frame, frame, 5);
 
-		imageBGR2HSV(frame1);
+		imageBGR2HSV(frame);
 
-		segmentateImage(frame1, CS, objs1, aRLE1);
+		segmentateImage(frame, CS, objs, aRLE);
 
 		// Free memory
-		aRLE1.clear();
+		aRLE.clear();
 
 		// Update camera positions
 		double incT;
 
-		idManager.getNextCamPos(cam1, incT);
+		idManager.getNextCamPos(cam, incT);
 
 		// EKFs
 		for (unsigned int i = 0; i < sizeof(uchar) * 8; i++) {
@@ -207,7 +207,7 @@ int main(int argc, char** argv) {
 				cout << "Zk: {" << match.mPos.x << ", " << match.mPos.y
 						<< "} " << endl;
 
-				EKFs[i].updateCameraPos(cam1.pos, cam1.ori);
+				EKFs[i].updateCameraPos(cam.pos, cam.ori);
 				EKFs[i].updateIncT(diff);
 				EKFs[i].stepEKF(Zk);
 
@@ -215,19 +215,19 @@ int main(int argc, char** argv) {
 
 				Mat Xak;
 				EKFs[i].getStateVector(Xak);
-				match[i].updated = FALSE;
-
 				double refTime = auxTime - refTime0;
 
 
 				cout << "Time: " << refTime << endl << "State: " << Xak << endl;
 
-				outFile[match[i].color] << refTime << " "
+				outFile[i] << refTime << " "
 						<< Xak.ptr<double>(0)[0] << " " << Xak.ptr<double>(1)[0]
 						<< " " << Xak.ptr<double>(2)[0] << endl;
 
 			}
 		}
+
+		objectMatching.setFlags(false);
 
 		gTimer->update();
 		t2 = gTimer->frameTime();
@@ -236,19 +236,19 @@ int main(int argc, char** argv) {
 
 		// Since here everything is for & about displaying information not real algorithm, so it's not included
 		// in the time counter.
-		imageHSV2BGR(frame1);
+		imageHSV2BGR(frame);
 
-		highlighObjs(objs1, ori1, sizeThreshold);
+		highlighObjs(objs, ori, sizeThreshold);
 
-		hconcat(frame1, ori1, frame1);
-		imshow("Frames", frame1);
+		hconcat(frame, ori, frame);
+		imshow("Frames", frame);
 
-		objs1.clear();
+		objs.clear();
 
 		idManager.updateCurrentFrame();
 	}
 
-	aRLE1.clear();
-	objs1.clear();
+	aRLE.clear();
+	objs.clear();
 
 }

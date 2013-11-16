@@ -63,6 +63,9 @@
     <ClCompile Include="timefuns\time.cpp">
       <Filter>Source Files\timefuns</Filter>
     </ClCompile>
+    <ClCompile Include="kalmanfilter\GroundTrackingEKF.cpp">
+      <Filter>Source Files\kalmanfilter</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="acquisition\ImageAcquisitor.h">

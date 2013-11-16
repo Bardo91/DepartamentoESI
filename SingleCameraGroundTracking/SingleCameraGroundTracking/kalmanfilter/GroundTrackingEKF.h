@@ -52,7 +52,6 @@ namespace sysctrl{
 class GroundTrackingEKF{
 public:
 	GroundTrackingEKF(const cv::Mat&, const cv::Mat&, const cv::Mat&);
-	~GroundTrackingEKF();
 
 	void updateCameraPos(const cv::Mat&, const cv::Mat&);
 	void updateIncT(const double&);
@@ -71,7 +70,7 @@ private:
 	cv::Mat Xfk, Xak, K, Jf, Jh, P, Q, R, h_Zk;
 	double incT;
 
-	camera cam1, cam2;
+	camera cam;
 
 
 };
