@@ -15,10 +15,10 @@ using namespace cv;
 
 double ccss::energyDistance(cv::Point2d obj1, cv::Point2d obj2){
 		return sqrt(pow((obj1.x + obj2.x)/2, 2) + pow((obj1.y + obj2.y)/2,2));
-	}
+}
 
 trackedObject::trackedObject(){
-	mPos = Point(0, 0);
+	mPos = Point(1, 1);
 	mSize = 0;
 	flagUpdate = false;
 }
@@ -31,11 +31,6 @@ trackedObject::trackedObject(cv::Point2d _pos, double _size){
 
 ObjectMatching::ObjectMatching(){
 	mCurrentObjs = new trackedObject[8]; // Reserve memory for every object according to color
-	for (unsigned i = 0; i < 8 ; i++){
-		mCurrentObjs[i].mSize = 1;
-		mCurrentObjs[i].mPos = Point(1,1);
-}
-
 	mVelocity = 0.5; // 0.0 to 1.0 param that define the velocity of the matching algorithm
 
 }
@@ -73,8 +68,10 @@ void ObjectMatching::compareAndUpdate(const std::vector<SegmentedObject>& _objs)
 			Point2d newPoint = _objs[ci[i]].getCentroid();
 			Point2d lastPoint = mCurrentObjs[i].mPos;
 
-			mCurrentObjs[i].mPos.x = (mVelocity*lastPoint.x + (1-mVelocity)*newPoint.x)/2;
-			mCurrentObjs[i].mPos.y = (mVelocity*lastPoint.y + (1-mVelocity)*newPoint.y)/2;
+			mCurrentObjs[i].mPos.x = (mVelocity * lastPoint.x + (1 - mVelocity) * newPoint.x)/2;
+			mCurrentObjs[i].mPos.y = (mVelocity * lastPoint.y + (1 - mVelocity) * newPoint.y)/2;
+
+			mCurrentObjs[i].mSize = 1+(mVelocity * _objs[ci[i]].getSize() + (1 - mVelocity) * mCurrentObjs[i].mSize)/2;
 
 			mCurrentObjs[i].flagUpdate = true;
 
@@ -92,21 +89,4 @@ void ObjectMatching::setFlags(bool _flag){
 
 void ObjectMatching::getCurrentObject(trackedObject& _obj, const int _color) const{
 	_obj = mCurrentObjs[_color];
-}
-
-void StereoObjectMatching::compareAndUpdate(const std::vector<SegmentedObject>& _objs1, const std::vector<SegmentedObject>& _objs2){
-	mObjMatching1.compareAndUpdate(_objs1);
-	mObjMatching2.compareAndUpdate(_objs2);
-}
-
-
-void StereoObjectMatching::getCurrentObjects(trackedObject& _obj1, trackedObject& _obj2, const int _color) const{
-	mObjMatching1.getCurrentObject(_obj1, _color);
-	mObjMatching2.getCurrentObject(_obj2, _color);
-}
-
-void StereoObjectMatching::setFlags(bool _flag){
-	mObjMatching1.setFlags(_flag);
-	mObjMatching2.setFlags(_flag);
-
 }

@@ -14,8 +14,7 @@
 namespace sysctrl {
 
 class InputDataManager {
-	ccss::ImageAcquisitor imagAc1;
-	ccss::ImageAcquisitor imagAc2;
+	ccss::ImageAcquisitor imagAc;
 
 	sysctrl::ViconDataAcquisitor vicon;
 

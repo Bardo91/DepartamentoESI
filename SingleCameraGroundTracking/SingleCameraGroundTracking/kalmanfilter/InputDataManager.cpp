@@ -17,8 +17,8 @@ namespace sysctrl {
 InputDataManager::InputDataManager(string pathName, string imageNameFormat1,
 		int width, int height, string dataPathName_) {
 
-	imagAc1 = ImageAcquisitor(pathName, imageNameFormat1, width, height);
-	inputMethod = imagAc1.getInputMethod();
+	imagAc = ImageAcquisitor(pathName, imageNameFormat1, width, height);
+	inputMethod = imagAc.getInputMethod();
 
 	vicon.changePath(dataPathName_);
 
@@ -27,32 +27,32 @@ InputDataManager::InputDataManager(string pathName, string imageNameFormat1,
 }
 
 InputDataManager::InputDataManager(int dev1, int width, int height) {
-	imagAc1 = ImageAcquisitor(dev1, width, height);
-	inputMethod = imagAc1.getInputMethod();
+	imagAc = ImageAcquisitor(dev1, width, height);
+	inputMethod = imagAc.getInputMethod();
 
 	currentFrame = 0;
 
 }
 
 void InputDataManager::updateFrame() {
-	imagAc1.updateFrame(currentFrame);
+	imagAc.updateFrame(currentFrame);
 }
 
 void InputDataManager::getFrame(Mat& frame1) {
-	imagAc1.getFrame(frame1);
+	imagAc.getFrame(frame1);
 }
 
 void InputDataManager::changeViconPath(string path) {
 	vicon.changePath(path);
 }
 
-void InputDataManager::getNextCamPos(camera& cam1, double& incT) {
+void InputDataManager::getNextCamPos(camera& cam, double& incT) {
 	if (inputMethod)
-		vicon.getNextViconData(cam1, incT);
+		vicon.getNextViconData(cam, incT);
 	else {
-		cam1.pos = (Mat_<double>(3, 1) << 0, 0, 0);
-
-		cam1.ori = (Mat_<double>(3, 3) << 1, 0, 0, 0, 1, 0, 0, 0, 1);
+		// 666 TODO: change for voluble pos and rot.
+		cam.updatePos(0,0,0);
+		cam.updateRot(0,20.f*3.141592/180.f,0);
 
 		incT = -1;
 
@@ -70,8 +70,8 @@ int InputDataManager::getInputMethod() {
 void InputDataManager::changeMethod(string pathName, string imageNameFormat1,
 		int width, int height, string dataPathName_) {
 
-	imagAc1 = ImageAcquisitor(pathName, imageNameFormat1, width, height);
-	inputMethod = imagAc1.getInputMethod();
+	imagAc = ImageAcquisitor(pathName, imageNameFormat1, width, height);
+	inputMethod = imagAc.getInputMethod();
 
 	vicon.changePath(dataPathName_);
 
@@ -80,8 +80,8 @@ void InputDataManager::changeMethod(string pathName, string imageNameFormat1,
 }
 
 void InputDataManager::changeMethod(int dev1, int width, int height) {
-	imagAc1 = ImageAcquisitor(dev1, width, height);
-	inputMethod = imagAc1.getInputMethod();
+	imagAc = ImageAcquisitor(dev1, width, height);
+	inputMethod = imagAc.getInputMethod();
 
 	currentFrame = 0;
 

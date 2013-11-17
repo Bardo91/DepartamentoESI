@@ -45,6 +45,19 @@ namespace sysctrl{
 		projectionMat = _projMat;
 	}
 
+	void updateRot(double a, double b, double c){
+		cv::Mat Rx = (cv::Mat_<double>(3, 3) << 1, 0, 0, 0, cos(a), -sin(a), 0, sin(a), cos(a));
+
+		cv::Mat Ry = (cv::Mat_<double>(3, 3) << cos(b), 0, sin(b), 0, 1, 0, -sin(b), 0, cos(b));
+
+		cv::Mat Rz = (cv::Mat_<double>(3, 3) << cos(c), -sin(c), 0, sin(c), cos(c), 0, 0, 0, 1);
+
+		ori = Rx * Ry * Rz;
+	};
+	void updatePos(double x, double y, double z){
+		pos = (cv::Mat_<double>(3,1) << x, y, z);
+	};
+
 };
 
 

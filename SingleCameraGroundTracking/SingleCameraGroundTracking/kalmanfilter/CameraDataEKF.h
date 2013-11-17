@@ -18,7 +18,7 @@ using namespace std;
 const Mat matQ =
 		(Mat_<double>(6, 6) << 0.05, 0, 0, 0, 0, 0, 0, 0.05, 0, 0, 0, 0, 0, 0, 0.05, 0, 0, 0, 0, 0, 0, 0.05, 0, 0, 0, 0, 0, 0, 0.05, 0, 0, 0, 0, 0, 0, 0.05);
 const Mat matR =
-		(Mat_<double>(4, 4) << 0.1, 0, 0, 0, 0, 0.1, 0, 0, 0, 0, 0.1, 0, 0, 0, 0, 0.1);
+		(Mat_<double>(2, 2) << 0.1, 0, 0, 0.1);
 
 //Parameters obtained by ROS mono-camera calibration module for Logitech c525:
 //Focal length in term of pixels related to width and height.

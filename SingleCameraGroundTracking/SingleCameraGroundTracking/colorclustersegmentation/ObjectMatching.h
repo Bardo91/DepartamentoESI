@@ -47,22 +47,6 @@ namespace ccss {
 
 	};
 
-
-	class StereoObjectMatching{
-	public:
-		void compareAndUpdate(const std::vector<SegmentedObject>& _objs1, const std::vector<SegmentedObject>& _objs2);
-
-		void getCurrentObjects(trackedObject& _obj1, trackedObject& _obj2, const int _color) const;
-
-		void setFlags(bool flag);
-	private:
-		ccss::ObjectMatching mObjMatching1;
-		ccss::ObjectMatching mObjMatching2;
-
-
-
-	};
-
 } // namespace ccss
 
 #endif // OBJECTMATCHING_H_

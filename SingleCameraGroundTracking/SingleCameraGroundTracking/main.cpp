@@ -56,14 +56,16 @@ int main(int argc, char** argv) {
 
 	InputDataManager idManager(dev1, width, height);
 
-	namedWindow("Frames", CV_WINDOW_FREERATIO);
+	string windowName = "Frames";
+
+	namedWindow(windowName, CV_WINDOW_FREERATIO);
 
 	///  CREATE SWITCH
-	cvCreateTrackbar("Switch", "Frames", &switchButtonValue, 1,
+	cvCreateTrackbar("Switch", windowName.c_str(), &switchButtonValue, 1,
 			switch_callback);
 	///
 
-	setMouseCallback("Frames", onMouse, 0); // Callback for properly closing the app.
+	setMouseCallback(windowName, onMouse, 0); // Callback for properly closing the app.
 
 	// OutputFile
 	ofstream outFile[8];
@@ -94,6 +96,7 @@ int main(int argc, char** argv) {
 			GroundTrackingEKF(matQ, matR, x0), GroundTrackingEKF(matQ, matR, x0),
 			GroundTrackingEKF(matQ, matR, x0) };
 
+	// Setting up the camera
 	camera cam(alphaX, alphaY, gammaSkew, u0, v0, distortionMat,
 			projectionMat);
 	
@@ -182,6 +185,8 @@ int main(int argc, char** argv) {
 
 		idManager.getNextCamPos(cam, incT);
 
+		objectMatching.compareAndUpdate(objs);
+
 		// EKFs
 		for (unsigned int i = 0; i < sizeof(uchar) * 8; i++) {
 			// EKF triangulation.
@@ -190,7 +195,7 @@ int main(int argc, char** argv) {
 
 			if (match.flagUpdate) {
 				Mat Zk =
-					(Mat_<double>(4, 1) <<match.mPos.x, match.mPos.y);  // Zk = [x', y'] <-- variables de estado observado es el centroide del objeto en la imagen
+					(Mat_<double>(2, 1) <<match.mPos.x, match.mPos.y);  // Zk = [x', y'] <-- variables de estado observado es el centroide del objeto en la imagen
 
 				TReal auxTime;
 				gTimer->update();
@@ -241,7 +246,7 @@ int main(int argc, char** argv) {
 		highlighObjs(objs, ori, sizeThreshold);
 
 		hconcat(frame, ori, frame);
-		imshow("Frames", frame);
+		imshow(windowName, frame);
 
 		objs.clear();
 
