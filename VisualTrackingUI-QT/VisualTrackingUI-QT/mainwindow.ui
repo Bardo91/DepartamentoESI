@@ -20,7 +20,7 @@
       <x>30</x>
       <y>61</y>
       <width>528</width>
-      <height>542</height>
+      <height>581</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="mainLayout">
@@ -94,17 +94,37 @@
         </widget>
        </item>
        <item>
-        <widget class="QPlainTextEdit" name="imgAcqMethodEditText">
-         <property name="enabled">
-          <bool>false</bool>
+        <layout class="QHBoxLayout" name="fileMethodLayout">
+         <property name="bottomMargin">
+          <number>0</number>
          </property>
-         <property name="maximumSize">
-          <size>
-           <width>16777214</width>
-           <height>25</height>
-          </size>
-         </property>
-        </widget>
+         <item>
+          <widget class="QPlainTextEdit" name="imgAcqMethodPathEditText">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>25</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPlainTextEdit" name="imgAcqMethodFileNameEditText">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>150</width>
+             <height>25</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </item>
        <item>
         <layout class="QVBoxLayout" name="deviceMethodLayout">

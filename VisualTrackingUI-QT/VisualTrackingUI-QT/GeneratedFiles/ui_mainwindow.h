@@ -44,7 +44,9 @@ public:
     QVBoxLayout *imgAcqMethodLayout;
     QLabel *imgAcqMethodLabel;
     QComboBox *imgAcqMethodSelector;
-    QPlainTextEdit *imgAcqMethodEditText;
+    QHBoxLayout *fileMethodLayout;
+    QPlainTextEdit *imgAcqMethodPathEditText;
+    QPlainTextEdit *imgAcqMethodFileNameEditText;
     QVBoxLayout *deviceMethodLayout;
     QHBoxLayout *rBDeviceLayout;
     QRadioButton *rB1Device;
@@ -84,7 +86,7 @@ public:
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         layoutWidget = new QWidget(centralWidget);
         layoutWidget->setObjectName(QStringLiteral("layoutWidget"));
-        layoutWidget->setGeometry(QRect(30, 61, 528, 542));
+        layoutWidget->setGeometry(QRect(30, 61, 528, 581));
         mainLayout = new QVBoxLayout(layoutWidget);
         mainLayout->setSpacing(6);
         mainLayout->setContentsMargins(11, 11, 11, 11);
@@ -129,12 +131,26 @@ public:
 
         imgAcqMethodLayout->addWidget(imgAcqMethodSelector);
 
-        imgAcqMethodEditText = new QPlainTextEdit(layoutWidget);
-        imgAcqMethodEditText->setObjectName(QStringLiteral("imgAcqMethodEditText"));
-        imgAcqMethodEditText->setEnabled(false);
-        imgAcqMethodEditText->setMaximumSize(QSize(16777214, 25));
+        fileMethodLayout = new QHBoxLayout();
+        fileMethodLayout->setSpacing(6);
+        fileMethodLayout->setObjectName(QStringLiteral("fileMethodLayout"));
+        fileMethodLayout->setContentsMargins(-1, -1, -1, 0);
+        imgAcqMethodPathEditText = new QPlainTextEdit(layoutWidget);
+        imgAcqMethodPathEditText->setObjectName(QStringLiteral("imgAcqMethodPathEditText"));
+        imgAcqMethodPathEditText->setEnabled(false);
+        imgAcqMethodPathEditText->setMaximumSize(QSize(16777215, 25));
 
-        imgAcqMethodLayout->addWidget(imgAcqMethodEditText);
+        fileMethodLayout->addWidget(imgAcqMethodPathEditText);
+
+        imgAcqMethodFileNameEditText = new QPlainTextEdit(layoutWidget);
+        imgAcqMethodFileNameEditText->setObjectName(QStringLiteral("imgAcqMethodFileNameEditText"));
+        imgAcqMethodFileNameEditText->setEnabled(false);
+        imgAcqMethodFileNameEditText->setMaximumSize(QSize(150, 25));
+
+        fileMethodLayout->addWidget(imgAcqMethodFileNameEditText);
+
+
+        imgAcqMethodLayout->addLayout(fileMethodLayout);
 
         deviceMethodLayout = new QVBoxLayout();
         deviceMethodLayout->setSpacing(6);

@@ -1,8 +1,20 @@
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+////////////////////////////////////////////////////////////////////////////////
+//	Visual Tracking UI
+//		Author: Pablo Ramón Soria
+//		Date: 2013/10/31
+////////////////////////////////////////////////////////////////////////////////
+// MainWindow
+
+
+#ifndef _VISUAL_TRACKING_UI_MAINWINDOW_H
+#define _VISUAL_TRACKING_UI_MAINWINDOW_H
 
 #include <QtWidgets/QMainWindow>
 #include "ui_mainwindow.h"
+
+#include "ThreadManager.h"
+
+#include <string>
 
 class MainWindow : public QMainWindow
 {
@@ -11,6 +23,18 @@ class MainWindow : public QMainWindow
 public:
 	MainWindow(QWidget *parent = 0);
 	~MainWindow();
+
+public: // Functions assiciated to ThreadManager class.
+	void setUpThread(MainWindow mainWindow);
+
+public: // Functions to adquire mainwindow widgets information.
+	int getImgAcqMethod();
+	int getNumberDevices();
+	int getIdDevice1();
+	int getIdDevice2();
+	std::string getImagesPath();
+	std::string getImageNameFormat();
+
 
 private slots:
 	// Combo Box Slots
@@ -23,12 +47,15 @@ private slots:
 	void on_testDevicesButton_clicked();
 	void on_startButton_clicked();
 
-
 private: // private actions to control UI
 	void toggleImageAcquisitionLayout(bool enable); // if true device else path.
 
 private:
 	Ui::MainWindowClass ui;
+
+	vision::ThreadManager *threadManager;
 };
 
-#endif // MAINWINDOW_H
+
+
+#endif // _VISUAL_TRACKING_UI_MAINWINDOW_H
