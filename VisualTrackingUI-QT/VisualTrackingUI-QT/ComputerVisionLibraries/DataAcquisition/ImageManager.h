@@ -24,6 +24,7 @@ namespace vision{
 		int setUpImageAcquisitor(const int _number, const std::string& _pathName, const std::string& _nameFormat, const int _width, const int _heigth);
 
 		void setTwoCameras(const bool set);
+		bool areTwoCameras();
 
 		void updateFrames();
 		void getFrames(cv::Mat& _frame1, cv::Mat& _frame2);

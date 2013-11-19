@@ -6,23 +6,30 @@
 // Endless thread that run the specified algorithm
 
 #include "ThreadAlgorithm.h"
-
-#ifdef _WIN32
-#include <Windows.h>
-#endif
+#include "ComputerVisionLibraries/DataAcquisition/ImageManager.h"
 
 #include <iostream>
 #include <opencv/cv.h>
 
 
 using namespace std;
+using namespace vision;
+using namespace cv;
 
 namespace vision{
 void threadAlgoritm(InfoPointers *infoPointers){
-	cv::namedWindow("example", CV_WINDOW_AUTOSIZE);
-	while(cv::waitKey(100) && infoPointers->looping){
-		cv::Mat aux = cv::Mat::eye(100,100, CV_64F);
-		cv::imshow("example", aux);
+	const String wTitle = "example";
+	cv::namedWindow(wTitle, CV_WINDOW_FREERATIO);
+	ImageManager *imageManager = infoPointers->imageManager;
+
+	Mat frame1, frame2;
+	while(cv::waitKey(1) && infoPointers->looping){
+		imageManager->updateFrames();
+		imageManager->getFrames(frame1, frame2);
+		if(imageManager->areTwoCameras())
+			hconcat(frame1, frame2, frame1);
+		
+		imshow(wTitle, frame1);
 	}
 }
 

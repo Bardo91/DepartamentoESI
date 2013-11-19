@@ -75,6 +75,12 @@ void ImageManager::setTwoCameras(const bool set){
 }
 
 //------------------------------------------------------------------------------
+bool ImageManager::areTwoCameras(){
+	return twoCameras;
+}
+
+
+//------------------------------------------------------------------------------
 void ImageManager::updateFrames(){
 	imageAcquisitor1->updateFrame();
 	if(twoCameras)
