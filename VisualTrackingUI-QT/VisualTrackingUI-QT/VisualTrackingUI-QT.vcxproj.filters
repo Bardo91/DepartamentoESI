@@ -108,5 +108,11 @@
     <ClInclude Include="Types\types.h">
       <Filter>ComputerVisionLibraries\Types</Filter>
     </ClInclude>
+    <ClInclude Include="SimpleObject.h">
+      <Filter>ComputerVisionLibraries\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="SegmentationManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

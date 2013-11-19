@@ -25,9 +25,11 @@ namespace vision{
 
 	void InfoCollector::CollectInfo(){
 		setUpImageManager(); // Prepare image manager
+		//setUpSegmentationManager
 		//setUpPositionManager();
 		//setUpAlgorithmManager();
 
+		//infoPointers.segmentationManager = segmentationManager
 		//infoPointers.positionManager = positionManager
 		//infoPointers.algorithManager = algorithmManager
 

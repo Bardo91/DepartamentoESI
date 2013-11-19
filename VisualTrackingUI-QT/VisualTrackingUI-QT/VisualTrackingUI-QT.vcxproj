@@ -129,6 +129,8 @@
     <ClInclude Include="ComputerVisionLibraries\DataAcquisition\ImageManager.h" />
     <ClInclude Include="GeneratedFiles\ui_mainwindow.h" />
     <ClInclude Include="InfoCollector.h" />
+    <ClInclude Include="SegmentationManager.h" />
+    <ClInclude Include="SimpleObject.h" />
     <ClInclude Include="ThreadAlgorithm.h" />
     <ClInclude Include="ThreadManager.h" />
     <ClInclude Include="Types\types.h" />

@@ -1,7 +1,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 //	Visual Tracking UI
 //		Author: Pablo Ramón Soria
-//		Date: 2013/10/31
+//		Date: 2013/11/19
 ////////////////////////////////////////////////////////////////////////////////
 // This class manage to collect all info setted at the UI and prepare it to be sent to the algorithm's thread
 
@@ -19,8 +19,9 @@ namespace vision{
 	bool looping; // Variable used to stop the loop of the thread
 
 	ImageManager *imageManager;
-	//PositionManager *positionManager
-	//AlgorithmManager *AlgorithmManager
+	//SegmentationManager *segmentationManager;
+	//PositionManager *positionManager;
+	//AlgorithmManager *AlgorithmManager;
 	};
 
 	class InfoCollector {
