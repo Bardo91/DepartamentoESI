@@ -7,6 +7,9 @@
 
 #include "ThreadAlgorithm.h"
 
+#ifdef _WIN32
+#include <Windows.h>
+#endif
 
 #include <iostream>
 #include <opencv/cv.h>
@@ -15,13 +18,12 @@
 using namespace std;
 
 namespace vision{
-void threadAlgoritm(/*InfoPointers *infoPointers*/){
-
-	while(cv::waitKey(100)){
-		cout << "Heyy estoy corriendo y el imageManager está en "/*<< infoPointers->imageManager*/ << endl;
-		cin.get();
+void threadAlgoritm(InfoPointers *infoPointers){
+	cv::namedWindow("example", CV_WINDOW_AUTOSIZE);
+	while(cv::waitKey(100) && infoPointers->looping){
+		cv::Mat aux = cv::Mat::eye(100,100, CV_64F);
+		cv::imshow("example", aux);
 	}
-
 }
 
 } // namespace vision

@@ -68,6 +68,9 @@
     <ClCompile Include="ThreadAlgorithm.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="InfoCollector.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="mainwindow.h">
@@ -94,6 +97,9 @@
       <Filter>ComputerVisionLibraries\DataAcquisition</Filter>
     </ClInclude>
     <ClInclude Include="ThreadAlgorithm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="InfoCollector.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

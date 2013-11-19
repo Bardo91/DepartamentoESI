@@ -6,42 +6,47 @@
 // ThreadManager
 
 #include "ThreadManager.h"
-#include "mainwindow.h"
+#include "ThreadAlgorithm.h"
 
 #include <thread>
-#include <qmessagebox.h>
+#include <mutex>
 
 using namespace vision;
-using namespace Ui;
 using namespace std;
 
 namespace vision{
 
-ThreadManager::ThreadManager(MainWindow *_mainWindow){
+	ThreadManager::ThreadManager(){
 	pThread = 0;
-	imageManager = new ImageManager();
-	
-	mainWindow = _mainWindow;
 }
 
 //------------------------------------------------------------------------------
 ThreadManager::~ThreadManager(){
-	delete imageManager;
 
+}
+
+//----------------------------------------------------------------------------
+void ThreadManager::setInfo(InfoPointers * _infoPointers){
+	infoPointers = _infoPointers;
 }
 
 //----------------------------------------------------------------------------
 bool ThreadManager::isRunning(){
-	return running;
+	return infoPointers->looping;
+
 }
 
 //----------------------------------------------------------------------------
 int ThreadManager::stopThread(){
-	if(running && pThread != 0){ //If Thread is currently been running first need to be stoped
-		running = false;
+	std::mutex mutex;
+
+	mutex.lock();
+	if(isRunning() && pThread != nullptr){ //If Thread is currently been running first need to be stoped
+		infoPointers->looping = false;
 		pThread->join();
 		pThread = 0;
 	}
+	mutex.unlock();
 	return 0;
 }
 
@@ -50,54 +55,17 @@ int ThreadManager::startThread(){
 	if(stopThread() != 0) //If Thread is currently been running first need to be stoped
 		return -1; // Thread can not be stopped
 
-	running = true; // Set the flag to control that the thread is going to be running.
+	pThread = new thread(threadAlgoritm, infoPointers);
 
-	try{
-		pThread = new thread(threadAlgoritm/*, infoPointers*/);
-	}catch(_exception e){
-		return -1; // Thread can not be started
-	}
+	if(pThread != nullptr)
+		return -1;
+
+	std::mutex mutex;
+	mutex.lock();
+	infoPointers->looping = true; // Set the flag to control that the thread is going to be running.
+	mutex.unlock();
 
 	return 0; // Thread started properly.
-
-}
-
-//----------------------------------------------------------------------------
-//------------- SET UP THREAD FUNCTIONS--------------- -----------------------
-void ThreadManager::setUpThread(){
-	// Call functions.
-	setUpImageManager();
-
-	// Assign pointers to infoPointer structure to send it to the thread.
-	infoPointers.imageManager = imageManager;
-	*infoPointers.looping = true;
-}
-
-void ThreadManager::setUpImageManager(){
-	int method = mainWindow->getImgAcqMethod(); // 777 TODO: implement width and heigth.
-	if(method == 0){ // From device/s.
-		imageManager->setUpImageAcquisitor(1, mainWindow->getIdDevice1(), 320, 240);
-		if(mainWindow->getNumberDevices() == 2){
-			imageManager->setUpImageAcquisitor(2, mainWindow->getIdDevice2(), 320, 240);
-			imageManager->setTwoCameras(true);
-		}else{
-			imageManager->setTwoCameras(false);
-		}
-
-	}else if(method == 1){ // From images.
-		// 777 TODO: implement two edit text to different camera name Format
-		imageManager->setUpImageAcquisitor(1, mainWindow->getImagesPath(), mainWindow->getImageNameFormat(), 320, 240);
-		if(mainWindow->getNumberDevices() == 2){
-			imageManager->setUpImageAcquisitor(2, mainWindow->getImagesPath(), mainWindow->getImageNameFormat(), 320,240);
-			imageManager->setTwoCameras(true);
-		}else{
-			imageManager->setTwoCameras(false);
-		}
-
-	} else if(method == 2){ // From video
-		QMessageBox::information(mainWindow, "Error", "Video acquisition method is not implemented");
-		// 666 TODO: Implement video acquisition method.
-	}
 
 }
 } // namespace vision

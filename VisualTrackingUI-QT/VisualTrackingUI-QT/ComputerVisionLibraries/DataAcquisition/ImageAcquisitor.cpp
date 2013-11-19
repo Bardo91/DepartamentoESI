@@ -17,36 +17,36 @@ ImageAcquisitor::ImageAcquisitor() {
 	flagInputError = false;
 }
 
-ImageAcquisitor::ImageAcquisitor(string pathName, std::string imageNameFormat,
-		int width, int height) {
+ImageAcquisitor::ImageAcquisitor(string _pathName, std::string _imageNameFormat,
+		int _width, int _height) {
 	inputMethod = 1;
-	this->pathName = pathName;
-	this->imageNameFormat = imageNameFormat;
-	this->width = width;
-	this->height = height;
+	pathName = _pathName;
+	imageNameFormat = _imageNameFormat;
+	width = _width;
+	height = _height;
 
 	flagInputError = false;
 }
 
-ImageAcquisitor::ImageAcquisitor(int device, int width, int height) {
+ImageAcquisitor::ImageAcquisitor(int _device, int _width, int _height) {
 	inputMethod = 0;
-	this->device = VideoCapture(device);
-	this->width = width;
-	this->height = height;
+	device = VideoCapture(_device);
+	width = _width;
+	height = _height;
 
 	flagInputError = false;
 
 	changeResolution(width, height);
 
 	try {
-		this->device.open(1);
+		device.open(1);
 	} catch (Exception e) { //Catching errors.
 		cout << "Error, could not connect to the device" << endl;
 		flagInputError = true;
 	}
-	if (!this->device.isOpened()) { // If camera can not be openned.
+	if (!device.isOpened()) { // If camera can not be openned.
 		cout << "Error, could not connect to the device" << endl;
-		this->device.release();
+		device.release();
 		flagInputError = true;
 	}
 }
@@ -55,29 +55,28 @@ ImageAcquisitor::~ImageAcquisitor() {
 	device.release();
 }
 
-void ImageAcquisitor::changeInputMethod(int device) {
+void ImageAcquisitor::changeInputMethod(int _device) {
 	inputMethod = 0;
-	if (this->device.isOpened())
-		this->device.release();
+	closeDevice();
 
-	this->device = VideoCapture(device);
-	this->device.open(1);
+	device = VideoCapture(device);
+	device.open(1);
 
 }
 
-void ImageAcquisitor::changeInputMethod(string pathName,
-		string imageNameFormat) {
+void ImageAcquisitor::changeInputMethod(string _pathName,
+		string _imageNameFormat) {
 	inputMethod = 1;
 	device.release();
-	this->pathName = pathName;
-	this->imageNameFormat = imageNameFormat;
+	pathName = _pathName;
+	imageNameFormat = _imageNameFormat;
 
 }
 
-int ImageAcquisitor::changeResolution(int width, int height) {
+int ImageAcquisitor::changeResolution(int _width, int _height) {
 	if (inputMethod) {
-		this->width = width;
-		this->height = height;
+		width = _width;
+		height = _height;
 		return 0;
 	}
 
@@ -91,12 +90,18 @@ int ImageAcquisitor::changeResolution(int width, int height) {
 	return 0;
 }
 
-void ImageAcquisitor::changePathName(std::string pathName) {
-	this->pathName = pathName;
+void ImageAcquisitor::changePathName(std::string _pathName) {
+	pathName = _pathName;
 }
 
-void ImageAcquisitor::changeImageNameFormat(std::string imageNameFormat) {
-	this->imageNameFormat = imageNameFormat;
+void ImageAcquisitor::changeImageNameFormat(std::string _imageNameFormat) {
+	imageNameFormat = _imageNameFormat;
+}
+
+void ImageAcquisitor::closeDevice(){
+	if(!inputMethod)
+		if (device.isOpened())
+			device.release();
 }
 
 bool ImageAcquisitor::canCapture() {

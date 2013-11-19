@@ -46,6 +46,7 @@ private slots:
 	// Button Slots:
 	void on_testDevicesButton_clicked();
 	void on_startButton_clicked();
+	void on_stopButton_clicked();
 
 private: // private actions to control UI
 	void toggleImageAcquisitionLayout(bool enable); // if true device else path.
@@ -53,7 +54,9 @@ private: // private actions to control UI
 private:
 	Ui::MainWindowClass ui;
 
-	vision::ThreadManager *threadManager;
+	vision::ThreadManager threadManager;
+
+	vision::InfoCollector *infoCollector;
 };
 
 

@@ -94,6 +94,7 @@
     <ClCompile Include="GeneratedFiles\Release\moc_mainwindow.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="InfoCollector.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="mainwindow.cpp" />
     <ClCompile Include="ThreadAlgorithm.cpp" />
@@ -127,6 +128,7 @@
     <ClInclude Include="ComputerVisionLibraries\DataAcquisition\ImageAcquisitor.h" />
     <ClInclude Include="ComputerVisionLibraries\DataAcquisition\ImageManager.h" />
     <ClInclude Include="GeneratedFiles\ui_mainwindow.h" />
+    <ClInclude Include="InfoCollector.h" />
     <ClInclude Include="ThreadAlgorithm.h" />
     <ClInclude Include="ThreadManager.h" />
   </ItemGroup>

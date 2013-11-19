@@ -72,7 +72,9 @@ public:
     QVBoxLayout *posReconAlgLayout;
     QLabel *posReconAlgLabel;
     QComboBox *posReconAlgorithmSelector;
+    QHBoxLayout *horizontalLayout;
     QPushButton *startButton;
+    QPushButton *stopButton;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -81,7 +83,7 @@ public:
     {
         if (MainWindowClass->objectName().isEmpty())
             MainWindowClass->setObjectName(QStringLiteral("MainWindowClass"));
-        MainWindowClass->resize(571, 657);
+        MainWindowClass->resize(571, 722);
         centralWidget = new QWidget(MainWindowClass);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         layoutWidget = new QWidget(centralWidget);
@@ -299,11 +301,23 @@ public:
 
         mainLayout->addLayout(posReconAlgLayout);
 
+        horizontalLayout = new QHBoxLayout();
+        horizontalLayout->setSpacing(6);
+        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
+        horizontalLayout->setContentsMargins(-1, -1, -1, 10);
         startButton = new QPushButton(layoutWidget);
         startButton->setObjectName(QStringLiteral("startButton"));
         startButton->setMaximumSize(QSize(2000, 2000));
 
-        mainLayout->addWidget(startButton);
+        horizontalLayout->addWidget(startButton);
+
+        stopButton = new QPushButton(layoutWidget);
+        stopButton->setObjectName(QStringLiteral("stopButton"));
+
+        horizontalLayout->addWidget(stopButton);
+
+
+        mainLayout->addLayout(horizontalLayout);
 
         MainWindowClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindowClass);
@@ -361,6 +375,7 @@ public:
          << QApplication::translate("MainWindowClass", "Stereo Tracking", 0)
         );
         startButton->setText(QApplication::translate("MainWindowClass", "Start", 0));
+        stopButton->setText(QApplication::translate("MainWindowClass", "Stop", 0));
     } // retranslateUi
 
 };

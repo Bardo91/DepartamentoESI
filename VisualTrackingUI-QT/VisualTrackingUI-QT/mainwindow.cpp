@@ -19,12 +19,12 @@ MainWindow::MainWindow(QWidget *parent)
 {
 	ui.setupUi(this);
 
-	threadManager = new ThreadManager(this);
+	infoCollector = new InfoCollector(this);
 }
 //----------------------------------------------------------------------------
 MainWindow::~MainWindow()
 {
-	delete threadManager;
+
 
 }
 
@@ -96,14 +96,23 @@ void MainWindow::on_segMethodSelector_currentIndexChanged(int index){
 
 //----------------------------------------------------------------------------
 void MainWindow::on_startButton_clicked(){
-//	threadManager->setUpThread();
+	infoCollector->CollectInfo();
 
-	threadManager->startThread();
+	threadManager.setInfo(infoCollector->getPointers());
+	threadManager.startThread();
+}
+
+void MainWindow::on_stopButton_clicked(){
+	threadManager.stopThread();
 }
 
 //----------------------------------------------------------------------------
 void MainWindow::on_testDevicesButton_clicked(){
-	QMessageBox::information(this, "TestDevices", "testing");
+
+	infoCollector->setUpImageManager();
+	int i;
+	if((i = infoCollector->getPointers()->imageManager->showCurrentFrames())!= 0)
+		QMessageBox::information(this, "Error", "Device: " + QString::number(-i) + " is not found.\n Wait a second and try it again, the device might be changing his state.");
 }
 
 //----------------------------------------------------------------------------

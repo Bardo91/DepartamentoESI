@@ -33,12 +33,15 @@ public:
 
 	~ImageAcquisitor();
 
+public:
 	void changeInputMethod(int currentFrame = 0);
 	void changeInputMethod(std::string, std::string);
 	int changeResolution(int, int);
 	void changePathName(std::string);
 	void changeImageNameFormat(std::string);
 
+	void closeDevice();
+public:
 	bool canCapture();
 
 	int updateFrame(int currentImage = 0);

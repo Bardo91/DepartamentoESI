@@ -19,8 +19,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_MainWindow_t {
-    QByteArrayData data[9];
-    char stringdata[249];
+    QByteArrayData data[10];
+    char stringdata[271];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -37,14 +37,15 @@ QT_MOC_LITERAL(4, 62, 40),
 QT_MOC_LITERAL(5, 103, 43),
 QT_MOC_LITERAL(6, 147, 48),
 QT_MOC_LITERAL(7, 196, 28),
-QT_MOC_LITERAL(8, 225, 22)
+QT_MOC_LITERAL(8, 225, 22),
+QT_MOC_LITERAL(9, 248, 21)
     },
     "MainWindow\0on_imgAcqMethodSelector_currentIndexChanged\0"
     "\0index\0on_segMethodSelector_currentIndexChanged\0"
     "on_posAcqMethodSelector_currentIndexChanged\0"
     "on_posReconAlgorithmSelector_currentIndexChanged\0"
     "on_testDevicesButton_clicked\0"
-    "on_startButton_clicked\0"
+    "on_startButton_clicked\0on_stopButton_clicked\0"
 };
 #undef QT_MOC_LITERAL
 
@@ -54,7 +55,7 @@ static const uint qt_meta_data_MainWindow[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-       6,   14, // methods
+       7,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -62,18 +63,20 @@ static const uint qt_meta_data_MainWindow[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    1,   44,    2, 0x08,
-       4,    1,   47,    2, 0x08,
-       5,    1,   50,    2, 0x08,
-       6,    1,   53,    2, 0x08,
-       7,    0,   56,    2, 0x08,
-       8,    0,   57,    2, 0x08,
+       1,    1,   49,    2, 0x08,
+       4,    1,   52,    2, 0x08,
+       5,    1,   55,    2, 0x08,
+       6,    1,   58,    2, 0x08,
+       7,    0,   61,    2, 0x08,
+       8,    0,   62,    2, 0x08,
+       9,    0,   63,    2, 0x08,
 
  // slots: parameters
     QMetaType::Void, QMetaType::Int,    3,
     QMetaType::Void, QMetaType::Int,    3,
     QMetaType::Void, QMetaType::Int,    3,
     QMetaType::Void, QMetaType::Int,    3,
+    QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
 
@@ -91,6 +94,7 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 3: _t->on_posReconAlgorithmSelector_currentIndexChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 4: _t->on_testDevicesButton_clicked(); break;
         case 5: _t->on_startButton_clicked(); break;
+        case 6: _t->on_stopButton_clicked(); break;
         default: ;
         }
     }
@@ -121,13 +125,13 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 6)
+        if (_id < 7)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 6;
+        _id -= 7;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 6)
+        if (_id < 7)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 6;
+        _id -= 7;
     }
     return _id;
 }
