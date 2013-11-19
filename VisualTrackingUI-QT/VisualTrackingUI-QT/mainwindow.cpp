@@ -126,5 +126,6 @@ void MainWindow::toggleImageAcquisitionLayout(bool show){
 	ui.label2Devices->setEnabled(show);
 	ui.spin1Device->setEnabled(show);
 	ui.spin2Devices->setEnabled(show);
+	ui.testDevicesButton->setEnabled(show);
 }
 //----------------------------------------------------------------------------
