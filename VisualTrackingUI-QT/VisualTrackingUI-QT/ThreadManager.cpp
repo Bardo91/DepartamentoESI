@@ -6,7 +6,7 @@
 // ThreadManager
 
 #include "ThreadManager.h"
-#include "ThreadAlgorithm.h"
+#include "mainwindow.h"
 
 #include <thread>
 #include <qmessagebox.h>
@@ -15,7 +15,10 @@ using namespace vision;
 using namespace Ui;
 using namespace std;
 
+namespace vision{
+
 ThreadManager::ThreadManager(MainWindow *_mainWindow){
+	pThread = 0;
 	imageManager = new ImageManager();
 	
 	mainWindow = _mainWindow;
@@ -34,17 +37,10 @@ bool ThreadManager::isRunning(){
 
 //----------------------------------------------------------------------------
 int ThreadManager::stopThread(){
-	if(running){ //If Thread is currently been running first need to be stoped
+	if(running && pThread != 0){ //If Thread is currently been running first need to be stoped
 		running = false;
-		bool retry = true;
-		while(retry){ // Make sure that the thread will be stopped.
-			try{
-				pThread->join();
-				retry = false;
-			}catch(_exception e){
-				// try again.
-			}
-		}
+		pThread->join();
+		pThread = 0;
 	}
 	return 0;
 }
@@ -57,7 +53,7 @@ int ThreadManager::startThread(){
 	running = true; // Set the flag to control that the thread is going to be running.
 
 	try{
-		pThread = new thread(threadAlgoritm, infoPointers);
+		pThread = new thread(threadAlgoritm/*, infoPointers*/);
 	}catch(_exception e){
 		return -1; // Thread can not be started
 	}
@@ -104,3 +100,4 @@ void ThreadManager::setUpImageManager(){
 	}
 
 }
+} // namespace vision

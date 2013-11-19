@@ -13,12 +13,15 @@
 
 
 using namespace std;
-using namespace vision;
 
-void threadAlgoritm(InfoPointers *infoPointers){
+namespace vision{
+void threadAlgoritm(/*InfoPointers *infoPointers*/){
 
-	while(cv::waitKey(5)){
-		cout << "Heyy estoy corriendo y el imageManager está en "<< infoPointers->imageManager << endl;
+	while(cv::waitKey(100)){
+		cout << "Heyy estoy corriendo y el imageManager está en "/*<< infoPointers->imageManager*/ << endl;
+		cin.get();
 	}
 
 }
+
+} // namespace vision

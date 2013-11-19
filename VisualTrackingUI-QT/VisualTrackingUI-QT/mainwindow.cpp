@@ -96,7 +96,7 @@ void MainWindow::on_segMethodSelector_currentIndexChanged(int index){
 
 //----------------------------------------------------------------------------
 void MainWindow::on_startButton_clicked(){
-	threadManager->setUpThread();
+//	threadManager->setUpThread();
 
 	threadManager->startThread();
 }

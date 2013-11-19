@@ -18,7 +18,7 @@ struct InfoPointers{
 
 };
 
-void threadAlgoritm(InfoPointers *infoPointers);
+void threadAlgoritm(/*InfoPointers *infoPointers*/);
 } // namespace vision
 
 #endif // _VISUAL_TRACKING_UI_THREAD_ALGORITHM_H_

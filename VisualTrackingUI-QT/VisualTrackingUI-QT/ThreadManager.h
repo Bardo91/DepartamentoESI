@@ -9,13 +9,13 @@
 #define _VISUAL_TRACKING_UI_THREAD_MANAGER_H_
 
 #include <ComputerVisionLibraries/DataAcquisition/ImageManager.h>
-
 #include "ThreadAlgorithm.h"
-#include "mainwindow.h"
-
 
 #include <thread>
 #include <ui_mainwindow.h>
+
+
+class MainWindow;
 
 namespace vision{
 
