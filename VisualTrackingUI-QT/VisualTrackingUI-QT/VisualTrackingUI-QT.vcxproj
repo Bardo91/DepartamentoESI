@@ -131,6 +131,7 @@
     <ClInclude Include="InfoCollector.h" />
     <ClInclude Include="ThreadAlgorithm.h" />
     <ClInclude Include="ThreadManager.h" />
+    <ClInclude Include="Types\types.h" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="mainwindow.qrc">

@@ -39,6 +39,9 @@
     <Filter Include="ComputerVisionLibraries\DataAcquisition">
       <UniqueIdentifier>{c6cce291-afd3-45df-a9a7-31783a7d2cb7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ComputerVisionLibraries\Types">
+      <UniqueIdentifier>{3f60c373-51fe-40f2-9282-354acaf939ae}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -101,6 +104,9 @@
     </ClInclude>
     <ClInclude Include="InfoCollector.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Types\types.h">
+      <Filter>ComputerVisionLibraries\Types</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
