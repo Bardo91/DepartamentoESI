@@ -82,6 +82,10 @@
   <ItemGroup>
     <ClCompile Include="ComputerVisionLibraries\DataAcquisition\ImageAcquisitor.cpp" />
     <ClCompile Include="ComputerVisionLibraries\DataAcquisition\ImageManager.cpp" />
+    <ClCompile Include="ComputerVisionLibraries\ImageSegmentation\ColorClusterSpace.cpp" />
+    <ClCompile Include="ComputerVisionLibraries\ImageSegmentation\ColorSpaceHSV8.cpp" />
+    <ClCompile Include="ComputerVisionLibraries\ImageSegmentation\SegmentateImage.cpp" />
+    <ClCompile Include="ComputerVisionLibraries\ImageSegmentation\SegmentedObject.cpp" />
     <ClCompile Include="GeneratedFiles\Debug\moc_mainwindow.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
@@ -97,6 +101,7 @@
     <ClCompile Include="InfoCollector.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="mainwindow.cpp" />
+    <ClCompile Include="SegmentationManager.cpp" />
     <ClCompile Include="ThreadAlgorithm.cpp" />
     <ClCompile Include="ThreadManager.cpp" />
   </ItemGroup>
@@ -127,6 +132,10 @@
   <ItemGroup>
     <ClInclude Include="ComputerVisionLibraries\DataAcquisition\ImageAcquisitor.h" />
     <ClInclude Include="ComputerVisionLibraries\DataAcquisition\ImageManager.h" />
+    <ClInclude Include="ComputerVisionLibraries\ImageSegmentation\ColorClusterSpace.h" />
+    <ClInclude Include="ComputerVisionLibraries\ImageSegmentation\ColorSpaceHSV8.h" />
+    <ClInclude Include="ComputerVisionLibraries\ImageSegmentation\SegmentateImage.h" />
+    <ClInclude Include="ComputerVisionLibraries\ImageSegmentation\SegmentedObject.h" />
     <ClInclude Include="GeneratedFiles\ui_mainwindow.h" />
     <ClInclude Include="InfoCollector.h" />
     <ClInclude Include="SegmentationManager.h" />

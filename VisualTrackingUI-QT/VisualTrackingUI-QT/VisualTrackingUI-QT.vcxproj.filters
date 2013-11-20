@@ -42,6 +42,9 @@
     <Filter Include="ComputerVisionLibraries\Types">
       <UniqueIdentifier>{3f60c373-51fe-40f2-9282-354acaf939ae}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ComputerVisionLibraries\ImageSegmentation">
+      <UniqueIdentifier>{e9b754ef-f56a-45a8-b874-62b7b7547d13}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -73,6 +76,21 @@
     </ClCompile>
     <ClCompile Include="InfoCollector.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SegmentationManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ComputerVisionLibraries\ImageSegmentation\SegmentateImage.cpp">
+      <Filter>ComputerVisionLibraries\ImageSegmentation</Filter>
+    </ClCompile>
+    <ClCompile Include="ComputerVisionLibraries\ImageSegmentation\ColorClusterSpace.cpp">
+      <Filter>ComputerVisionLibraries\ImageSegmentation</Filter>
+    </ClCompile>
+    <ClCompile Include="ComputerVisionLibraries\ImageSegmentation\ColorSpaceHSV8.cpp">
+      <Filter>ComputerVisionLibraries\ImageSegmentation</Filter>
+    </ClCompile>
+    <ClCompile Include="ComputerVisionLibraries\ImageSegmentation\SegmentedObject.cpp">
+      <Filter>ComputerVisionLibraries\ImageSegmentation</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -113,6 +131,18 @@
     </ClInclude>
     <ClInclude Include="SegmentationManager.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ComputerVisionLibraries\ImageSegmentation\SegmentateImage.h">
+      <Filter>ComputerVisionLibraries\ImageSegmentation</Filter>
+    </ClInclude>
+    <ClInclude Include="ComputerVisionLibraries\ImageSegmentation\ColorClusterSpace.h">
+      <Filter>ComputerVisionLibraries\ImageSegmentation</Filter>
+    </ClInclude>
+    <ClInclude Include="ComputerVisionLibraries\ImageSegmentation\ColorSpaceHSV8.h">
+      <Filter>ComputerVisionLibraries\ImageSegmentation</Filter>
+    </ClInclude>
+    <ClInclude Include="ComputerVisionLibraries\ImageSegmentation\SegmentedObject.h">
+      <Filter>ComputerVisionLibraries\ImageSegmentation</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
