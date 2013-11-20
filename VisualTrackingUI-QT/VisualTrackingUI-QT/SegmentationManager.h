@@ -28,8 +28,8 @@ namespace vision{
 
 
 	public: // Manager external actions.
-		static int applyAlgorithm(eSegmentationAlgorithms _algorithm, cv::Mat _frame, std::vector<SimpleObject> _objects);
-		static int applyAlgorithm(eSegmentationAlgorithms _algorithm, cv::Mat _frame1, cv::Mat _frame2, std::vector<SimpleObject> _objects1, std::vector<SimpleObject> _objects2);
+		static int applyAlgorithm(eSegmentationAlgorithms _algorithm, cv::Mat _frame, unsigned int threshold, std::vector<SimpleObject> _objects);
+		static int applyAlgorithm(eSegmentationAlgorithms _algorithm, cv::Mat _frame1, cv::Mat _frame2, unsigned int threshold, std::vector<SimpleObject> _objects1, std::vector<SimpleObject> _objects2);
 
 	private:
 		eSegmentationAlgorithms eAlgorithhm;

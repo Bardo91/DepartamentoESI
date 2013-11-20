@@ -80,9 +80,6 @@
     <ClCompile Include="SegmentationManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ComputerVisionLibraries\ImageSegmentation\SegmentateImage.cpp">
-      <Filter>ComputerVisionLibraries\ImageSegmentation</Filter>
-    </ClCompile>
     <ClCompile Include="ComputerVisionLibraries\ImageSegmentation\ColorClusterSpace.cpp">
       <Filter>ComputerVisionLibraries\ImageSegmentation</Filter>
     </ClCompile>
@@ -90,6 +87,9 @@
       <Filter>ComputerVisionLibraries\ImageSegmentation</Filter>
     </ClCompile>
     <ClCompile Include="ComputerVisionLibraries\ImageSegmentation\SegmentedObject.cpp">
+      <Filter>ComputerVisionLibraries\ImageSegmentation</Filter>
+    </ClCompile>
+    <ClCompile Include="ComputerVisionLibraries\ImageSegmentation\ColorClusterImageSegmentation.cpp">
       <Filter>ComputerVisionLibraries\ImageSegmentation</Filter>
     </ClCompile>
   </ItemGroup>
@@ -132,9 +132,6 @@
     <ClInclude Include="SegmentationManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ComputerVisionLibraries\ImageSegmentation\SegmentateImage.h">
-      <Filter>ComputerVisionLibraries\ImageSegmentation</Filter>
-    </ClInclude>
     <ClInclude Include="ComputerVisionLibraries\ImageSegmentation\ColorClusterSpace.h">
       <Filter>ComputerVisionLibraries\ImageSegmentation</Filter>
     </ClInclude>
@@ -142,6 +139,9 @@
       <Filter>ComputerVisionLibraries\ImageSegmentation</Filter>
     </ClInclude>
     <ClInclude Include="ComputerVisionLibraries\ImageSegmentation\SegmentedObject.h">
+      <Filter>ComputerVisionLibraries\ImageSegmentation</Filter>
+    </ClInclude>
+    <ClInclude Include="ComputerVisionLibraries\ImageSegmentation\ColocClusterImageSegmentation.h">
       <Filter>ComputerVisionLibraries\ImageSegmentation</Filter>
     </ClInclude>
   </ItemGroup>
