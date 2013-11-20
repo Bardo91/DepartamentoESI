@@ -9,21 +9,23 @@
 #ifndef _VISUAL_TRACKING_UI_INFO_COLLECTOR_H_
 #define _VISUAL_TRACKING_UI_INFO_COLLECTOR_H_
 
-#include <ComputerVisionLibraries/DataAcquisition/ImageManager.h>
+#include "ImageManager.h"
+#include  "SegmentationManager.h"
 
 class MainWindow;
 
 
 namespace vision{
+	//------------------------------------------------------------------------
 	struct InfoPointers{
 	bool looping; // Variable used to stop the loop of the thread
-
+	
 	ImageManager *imageManager;
-	//SegmentationManager *segmentationManager;
+	SegmentationManager *segmentationManager;
 	//PositionManager *positionManager;
 	//AlgorithmManager *AlgorithmManager;
 	};
-
+	//------------------------------------------------------------------------
 	class InfoCollector {
 	public:
 		InfoCollector(MainWindow *mainWindow);
@@ -34,6 +36,7 @@ namespace vision{
 		InfoPointers * getPointers();
 
 		void setUpImageManager();
+		void setUpSegmentationManager();
 		// 666 TODO: void setUpPositionManager();
 		// 666 TODO: void setUpAlgorithmManager();
 
@@ -41,8 +44,6 @@ namespace vision{
 
 	private: // Private scope with information about the thread type.
 		MainWindow * mainWindow; // Pointer to current context.
-
-		ImageManager * imageManager;
 
 		InfoPointers infoPointers;
 

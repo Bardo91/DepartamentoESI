@@ -28,6 +28,7 @@ public: // Functions assiciated to ThreadManager class.
 	void setUpThread(MainWindow mainWindow);
 
 public: // Functions to adquire mainwindow widgets information.
+	// Functions related to Image acquisitior method
 	int getImgAcqMethod();
 	int getNumberDevices();
 	int getIdDevice1();
@@ -35,6 +36,8 @@ public: // Functions to adquire mainwindow widgets information.
 	std::string getImagesPath();
 	std::string getImageNameFormat();
 
+	// Functions related to Segmentation algorithm
+	int getSegmentationAlgorithm();
 
 private slots:
 	// Combo Box Slots

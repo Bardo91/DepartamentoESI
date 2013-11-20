@@ -38,12 +38,12 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
-    <IncludePath>C:\opencv\opencv\build\include;E:\qt\qt511\5.1.1\msvc2012\include;$(IncludePath)</IncludePath>
+    <IncludePath>C:\Programming\DepartamentoESI\VisualTrackingUI-QT\VisualTrackingUI-QT;C:\opencv\opencv\build\include;E:\qt\qt511\5.1.1\msvc2012\include;$(IncludePath)</IncludePath>
     <LibraryPath>C:\opencv\opencv\build\x86\vc11\bin;C:\opencv\opencv\build\x86\vc11\lib;E:\qt\qt511\5.1.1\msvc2012\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
-    <IncludePath>C:\opencv\opencv\build\include;E:\qt\qt511\5.1.1\msvc2012\include;$(IncludePath)</IncludePath>
+    <IncludePath>C:\Programming\DepartamentoESI\VisualTrackingUI-QT\VisualTrackingUI-QT\ComputerVisionLibraries;C:\opencv\opencv\build\include;E:\qt\qt511\5.1.1\msvc2012\include;$(IncludePath)</IncludePath>
     <LibraryPath>C:\opencv\opencv\build\x86\vc11\bin;C:\opencv\opencv\build\x86\vc11\lib;E:\qt\qt511\5.1.1\msvc2012\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -81,7 +81,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ComputerVisionLibraries\DataAcquisition\ImageAcquisitor.cpp" />
-    <ClCompile Include="ComputerVisionLibraries\DataAcquisition\ImageManager.cpp" />
     <ClCompile Include="ComputerVisionLibraries\ImageSegmentation\ColorClusterSpace.cpp" />
     <ClCompile Include="ComputerVisionLibraries\ImageSegmentation\ColorSpaceHSV8.cpp" />
     <ClCompile Include="ComputerVisionLibraries\ImageSegmentation\ColorClusterImageSegmentation.cpp" />
@@ -98,6 +97,7 @@
     <ClCompile Include="GeneratedFiles\Release\moc_mainwindow.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="ImageManager.cpp" />
     <ClCompile Include="InfoCollector.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="mainwindow.cpp" />
@@ -131,17 +131,17 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ComputerVisionLibraries\DataAcquisition\ImageAcquisitor.h" />
-    <ClInclude Include="ComputerVisionLibraries\DataAcquisition\ImageManager.h" />
     <ClInclude Include="ComputerVisionLibraries\ImageSegmentation\ColorClusterSpace.h" />
     <ClInclude Include="ComputerVisionLibraries\ImageSegmentation\ColorSpaceHSV8.h" />
     <ClInclude Include="ComputerVisionLibraries\ImageSegmentation\ColocClusterImageSegmentation.h" />
     <ClInclude Include="ComputerVisionLibraries\ImageSegmentation\SegmentedObject.h" />
     <ClInclude Include="GeneratedFiles\ui_mainwindow.h" />
+    <ClInclude Include="ImageManager.h" />
     <ClInclude Include="InfoCollector.h" />
     <ClInclude Include="SegmentationManager.h" />
-    <ClInclude Include="SimpleObject.h" />
     <ClInclude Include="ThreadAlgorithm.h" />
     <ClInclude Include="ThreadManager.h" />
+    <ClInclude Include="Types\SimpleObject.h" />
     <ClInclude Include="Types\types.h" />
   </ItemGroup>
   <ItemGroup>

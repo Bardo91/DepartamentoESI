@@ -8,6 +8,8 @@
 
 #include "SegmentationManager.h"
 #include "ComputerVisionLibraries/ImageSegmentation/ColocClusterImageSegmentation.h"
+#include "ComputerVisionLibraries/ImageSegmentation/ColorClusterSpace.h"
+
 
 using namespace cv;
 using namespace std;
@@ -26,18 +28,28 @@ namespace vision{
 
 	//------------------------------------------------------------------------
 	void SegmentationManager::setAlgorithm(eSegmentationAlgorithms _algorithm){
-		eAlgorithhm = _algorithm;
+		eAlgorithm = _algorithm;
 	}
 
 	//------------------------------------------------------------------------
-	int SegmentationManager::applyAlgorithm(eSegmentationAlgorithms _algorithm, Mat _frame, unsigned int threshold, vector<SimpleObject> _objects){
+	eSegmentationAlgorithms SegmentationManager::getAlgorithm(){
+		return eAlgorithm;
+	}
+
+	//------------------------------------------------------------------------
+	int SegmentationManager::applyAlgorithm(Mat _frame, unsigned int threshold, vector<SimpleObject> _objects){
 		if(_frame.rows == 0)
 			return -1; // Error frame is empty
 
-		switch (_algorithm)
+		switch (eAlgorithm)
 		{
 		case eSegmentationAlgorithms::ColorClustering:
-			return segmentation::ColorClusterImageSegmentation(CS, _frame, threshold, _objects);
+			// Create cluster space
+			segmentation::ColorClusterSpace CS = *segmentation::CreateHSVCS_8c(segmentation::bin2dec("11111111"),
+			segmentation::bin2dec("11111111"), segmentation::bin2dec("11111111"));
+			// Use Algorithm
+			// 666 TODO: implement 1 camera algorithm
+			// return segmentation::ColorClusterImageSegmentation(_frame, CS, _objects);
 			break;
 		}
 
@@ -45,14 +57,18 @@ namespace vision{
 	}
 
 	//------------------------------------------------------------------------
-	int SegmentationManager::applyAlgorithm(eSegmentationAlgorithms _algorithm, cv::Mat _frame1, cv::Mat _frame2, unsigned int threshold, std::vector<SimpleObject> _objects1, std::vector<SimpleObject> _objects2) {
+	int SegmentationManager::applyAlgorithm(cv::Mat _frame1, cv::Mat _frame2, unsigned int threshold, std::vector<SimpleObject> _objects1, std::vector<SimpleObject> _objects2) {
 		if(_frame1.rows == 0 ||_frame2.rows == 0)
 			return -1; // Any or both of frames are empty.
 
-		switch (_algorithm)
+		switch (eAlgorithm)
 		{
-		case eSegmentationAlgorithms::ColorClustering:
-			return segmentation::ColorClusterImageSegmentation(CS, _frame1, _frame2,  threshold, _objects1, _objects2);	
+		case eSegmentationAlgorithms::ColorClustering:			
+			// Create cluster space
+			segmentation::ColorClusterSpace CS = *segmentation::CreateHSVCS_8c(segmentation::bin2dec("11111111"),
+			segmentation::bin2dec("11111111"), segmentation::bin2dec("11111111"));
+			// Use Algorithm
+			return segmentation::ColorClusterImageSegmentation(_frame1, _frame2, CS, _objects1, _objects2);	
 			break;
 		}
 

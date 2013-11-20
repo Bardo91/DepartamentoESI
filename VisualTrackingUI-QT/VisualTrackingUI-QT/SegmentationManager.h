@@ -9,7 +9,7 @@
 #ifndef _VISUAL_TRACKING_UI_SEGMENTATION_MANAGER_H_
 #define _VISUAL_TRACKING_UI_SEGMENTATION_MANAGER_H_
 
-#include <SimpleObject.h>
+#include <Types/SimpleObject.h>
 
 #include <opencv/cv.h>
 #include <vector>
@@ -25,14 +25,14 @@ namespace vision{
 
 	public: // Config manager
 		void setAlgorithm(eSegmentationAlgorithms _algorithm);
-
+		eSegmentationAlgorithms getAlgorithm();
 
 	public: // Manager external actions.
-		static int applyAlgorithm(eSegmentationAlgorithms _algorithm, cv::Mat _frame, unsigned int threshold, std::vector<SimpleObject> _objects);
-		static int applyAlgorithm(eSegmentationAlgorithms _algorithm, cv::Mat _frame1, cv::Mat _frame2, unsigned int threshold, std::vector<SimpleObject> _objects1, std::vector<SimpleObject> _objects2);
+		int applyAlgorithm(cv::Mat _frame, unsigned int threshold, std::vector<SimpleObject> _objects);
+		int applyAlgorithm(cv::Mat _frame1, cv::Mat _frame2, unsigned int threshold, std::vector<SimpleObject> _objects1, std::vector<SimpleObject> _objects2);
 
 	private:
-		eSegmentationAlgorithms eAlgorithhm;
+		eSegmentationAlgorithms eAlgorithm;
 		unsigned int threshold;
 
 

@@ -39,11 +39,11 @@
     <Filter Include="ComputerVisionLibraries\DataAcquisition">
       <UniqueIdentifier>{c6cce291-afd3-45df-a9a7-31783a7d2cb7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ComputerVisionLibraries\Types">
-      <UniqueIdentifier>{3f60c373-51fe-40f2-9282-354acaf939ae}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ComputerVisionLibraries\ImageSegmentation">
       <UniqueIdentifier>{e9b754ef-f56a-45a8-b874-62b7b7547d13}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Types">
+      <UniqueIdentifier>{3f60c373-51fe-40f2-9282-354acaf939ae}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -68,9 +68,6 @@
     <ClCompile Include="ThreadManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ComputerVisionLibraries\DataAcquisition\ImageManager.cpp">
-      <Filter>ComputerVisionLibraries\DataAcquisition</Filter>
-    </ClCompile>
     <ClCompile Include="ThreadAlgorithm.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -91,6 +88,9 @@
     </ClCompile>
     <ClCompile Include="ComputerVisionLibraries\ImageSegmentation\ColorClusterImageSegmentation.cpp">
       <Filter>ComputerVisionLibraries\ImageSegmentation</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageManager.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -114,9 +114,6 @@
     <ClInclude Include="ComputerVisionLibraries\DataAcquisition\ImageAcquisitor.h">
       <Filter>ComputerVisionLibraries\DataAcquisition</Filter>
     </ClInclude>
-    <ClInclude Include="ComputerVisionLibraries\DataAcquisition\ImageManager.h">
-      <Filter>ComputerVisionLibraries\DataAcquisition</Filter>
-    </ClInclude>
     <ClInclude Include="ThreadAlgorithm.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -124,10 +121,7 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Types\types.h">
-      <Filter>ComputerVisionLibraries\Types</Filter>
-    </ClInclude>
-    <ClInclude Include="SimpleObject.h">
-      <Filter>ComputerVisionLibraries\Types</Filter>
+      <Filter>Types</Filter>
     </ClInclude>
     <ClInclude Include="SegmentationManager.h">
       <Filter>Header Files</Filter>
@@ -143,6 +137,12 @@
     </ClInclude>
     <ClInclude Include="ComputerVisionLibraries\ImageSegmentation\ColocClusterImageSegmentation.h">
       <Filter>ComputerVisionLibraries\ImageSegmentation</Filter>
+    </ClInclude>
+    <ClInclude Include="Types\SimpleObject.h">
+      <Filter>Types</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageManager.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

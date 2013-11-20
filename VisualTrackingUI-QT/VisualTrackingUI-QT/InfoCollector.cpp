@@ -9,27 +9,32 @@
 #include "InfoCollector.h"
 #include "mainwindow.h"
 
+
 #include <qmessagebox.h>
 
 
 namespace vision{
+	//------------------------------------------------------------------------
 	InfoCollector::InfoCollector(MainWindow *_mainWindow){
-		imageManager = new ImageManager();
-	
+		infoPointers.imageManager = new ImageManager();
+		infoPointers.segmentationManager = new SegmentationManager();
+
 		mainWindow = _mainWindow;
 	}
 
+	//------------------------------------------------------------------------
 	InfoCollector::~InfoCollector(){
-			delete imageManager;
+			delete infoPointers.imageManager;
+			delete infoPointers.segmentationManager;
 	}
 
+	//------------------------------------------------------------------------
 	void InfoCollector::CollectInfo(){
-		setUpImageManager(); // Prepare image manager
-		//setUpSegmentationManager
+		setUpImageManager(); 
+		setUpSegmentationManager();
 		//setUpPositionManager();
 		//setUpAlgorithmManager();
 
-		//infoPointers.segmentationManager = segmentationManager
 		//infoPointers.positionManager = positionManager
 		//infoPointers.algorithManager = algorithmManager
 
@@ -37,37 +42,46 @@ namespace vision{
 
 	}
 
+	//------------------------------------------------------------------------
 	InfoPointers * InfoCollector::getPointers(){
 		return &infoPointers;
 	}
 
+	//------------------------------------------------------------------------
 	void InfoCollector::setUpImageManager(){
 		int method = mainWindow->getImgAcqMethod(); // 777 TODO: implement width and heigth.
 		if(method == 0){ // From device/s.
-			imageManager->setUpImageAcquisitor(1, mainWindow->getIdDevice1(), 320, 240);
+			infoPointers.imageManager->setUpImageAcquisitor(1, mainWindow->getIdDevice1(), 320, 240);
 			if(mainWindow->getNumberDevices() == 2){
-				imageManager->setUpImageAcquisitor(2, mainWindow->getIdDevice2(), 320, 240);
-				imageManager->setTwoCameras(true);
+				infoPointers.imageManager->setUpImageAcquisitor(2, mainWindow->getIdDevice2(), 320, 240);
+				infoPointers.imageManager->setTwoCameras(true);
 			}else{
-				imageManager->setTwoCameras(false);
+				infoPointers.imageManager->setTwoCameras(false);
 			}
 
 		}else if(method == 1){ // From images.
 			// 777 TODO: implement two edit text to different camera name Format
-			imageManager->setUpImageAcquisitor(1, mainWindow->getImagesPath(), mainWindow->getImageNameFormat(), 320, 240);
+			infoPointers.imageManager->setUpImageAcquisitor(1, mainWindow->getImagesPath(), mainWindow->getImageNameFormat(), 320, 240);
 			if(mainWindow->getNumberDevices() == 2){
-				imageManager->setUpImageAcquisitor(2, mainWindow->getImagesPath(), mainWindow->getImageNameFormat(), 320,240);
-				imageManager->setTwoCameras(true);
+				infoPointers.imageManager->setUpImageAcquisitor(2, mainWindow->getImagesPath(), mainWindow->getImageNameFormat(), 320,240);
+				infoPointers.imageManager->setTwoCameras(true);
 			}else{
-				imageManager->setTwoCameras(false);
+				infoPointers.imageManager->setTwoCameras(false);
 			}
 
 		} else if(method == 2){ // From video
 			QMessageBox::information(mainWindow, "Error", "Video acquisition method is not implemented");
 			// 666 TODO: Implement video acquisition method.
 		}
-
-		infoPointers.imageManager = imageManager;
 	}
 
+	//------------------------------------------------------------------------
+	void InfoCollector::setUpSegmentationManager(){
+		switch (mainWindow->getSegmentationAlgorithm())
+		{
+			case 0:
+				infoPointers.segmentationManager->setAlgorithm(vision::eSegmentationAlgorithms::ColorClustering);
+				break;
+		}
+	}
 }

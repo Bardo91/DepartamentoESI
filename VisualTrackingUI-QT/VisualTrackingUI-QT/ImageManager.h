@@ -10,7 +10,8 @@
 #define _VISUAL_TRACKING_UI_IMAGE_MANAGER_H_
 
 
-#include "ImageAcquisitor.h"
+#include "ComputerVisionLibraries/DataAcquisition/ImageAcquisitor.h"
+
 
 namespace vision{
 	class ImageManager{

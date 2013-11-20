@@ -1,13 +1,15 @@
-/*
- * SegmentateImage.cpp
- *
- *  Created on: Oct 23, 2013
- *      Author: pablo
- */
+////////////////////////////////////////////////////////////////////////////////
+//	Visual Tracking UI
+//		Author: Pablo Ramón Soria
+//		Date: 2013/10/23
+////////////////////////////////////////////////////////////////////////////////
+// Color cluster segmentation algorithm.
+
 
 #include "ColocClusterImageSegmentation.h"
 #include "ColorSpaceHSV8.h"
 #include "SegmentedObject.h"
+
 
 #include <opencv/highgui.h>
 
@@ -16,9 +18,18 @@ using namespace vision::segmentation;
 
 namespace vision {
 	namespace segmentation{
-		void segmentateImage(Mat& _frame1, Mat& _frame2, ColorClusterSpace& _CS,
+		int ColorClusterImageSegmentation(Mat& _frame1, Mat& _frame2, ColorClusterSpace& _CS,
 				vector<SimpleObject>& _objects1,
 				vector<SimpleObject>& _objects2) {
+
+			vector<vector<struct LineObjRLE> > aRLE1;
+			vector<vector<struct LineObjRLE> > aRLE2;
+
+			aRLE1.reserve(5000);
+			aRLE2.reserve(5000);
+
+			vector<SegmentedObject> objs1;
+			vector<SegmentedObject> objs2;
 
 			int n = _frame1.channels(); // Count the number of image's channels to use the pointer
 
@@ -239,9 +250,9 @@ namespace vision {
 						}
 
 						if (aRLE1[i][j].parent->iObj == -1) {
-							aRLE1[i][j].parent->iObj = _objects1.size();
+							aRLE1[i][j].parent->iObj = objs1.size();
 							SegmentedObject obj(*aRLE1[i][j].parent);
-							_objects1.push_back(obj);
+							objs1.push_back(obj);
 						}
 					}
 				}
@@ -249,7 +260,7 @@ namespace vision {
 			for (unsigned int i = 0; i < aRLE1.size(); i++) {
 				for (unsigned int j = 0; j < aRLE1[i].size(); j++) {
 					if (aRLE1[i][j].parent != NULL) {
-						_objects1[aRLE1[i][j].parent->iObj].addLineObjRLE(aRLE1[i][j]);
+						objs1[aRLE1[i][j].parent->iObj].addLineObjRLE(aRLE1[i][j]);
 					}
 				}
 			}
@@ -267,9 +278,9 @@ namespace vision {
 						}
 
 						if (aRLE2[i][j].parent->iObj == -1) {
-							aRLE2[i][j].parent->iObj = _objects2.size();
+							aRLE2[i][j].parent->iObj = objs2.size();
 							SegmentedObject obj(*aRLE2[i][j].parent);
-							_objects2.push_back(obj);
+							objs2.push_back(obj);
 						}
 					}
 				}
@@ -277,10 +288,12 @@ namespace vision {
 			for (unsigned int i = 0; i < aRLE2.size(); i++) {
 				for (unsigned int j = 0; j < aRLE2[i].size(); j++) {
 					if (aRLE2[i][j].parent != NULL) {
-						_objects2[aRLE2[i][j].parent->iObj].addLineObjRLE(aRLE2[i][j]);
+						objs2[aRLE2[i][j].parent->iObj].addLineObjRLE(aRLE2[i][j]);
 					}
 				}
 			}
-		}
-	}
-}
+
+			return 0;
+		} // int ColorClusterImageSegmentation(...)
+	} // namespace segmentation
+} // namespace vision

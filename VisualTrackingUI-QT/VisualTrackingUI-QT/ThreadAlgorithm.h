@@ -8,8 +8,6 @@
 #ifndef _VISUAL_TRACKING_UI_THREAD_ALGORITHM_H_
 #define _VISUAL_TRACKING_UI_THREAD_ALGORITHM_H_
 
-#include <ComputerVisionLibraries/DataAcquisition/ImageManager.h>
-
 #include "InfoCollector.h"
 
 namespace vision{

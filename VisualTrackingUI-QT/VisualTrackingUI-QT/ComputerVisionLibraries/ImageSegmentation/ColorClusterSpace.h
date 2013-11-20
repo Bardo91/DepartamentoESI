@@ -11,6 +11,7 @@
 
 #include <math.h>
 #include <stdint.h>
+#include <string>
 
 #ifndef _VISUAL_TRACKING_UI_COLORCLUSTERSPACE_H_
 #define _VISUAL_TRACKING_UI_COLORCLUSTERSPACE_H_
@@ -62,6 +63,12 @@ namespace vision {
 
 			return aux;
 		}
+
+		// OTHER FUNCTIONS 
+		//666 TODO: change place
+		ColorClusterSpace *CreateHSVCS_8c(int MaskH, int MaskS, int MaskV);
+		int bin2dec(std::string bin);
+
 	} // namespace segmentation.
 } // namespace vision.
 #endif // _VISUAL_TRACKING_UI_COLORCLUSTERSPACE_H_

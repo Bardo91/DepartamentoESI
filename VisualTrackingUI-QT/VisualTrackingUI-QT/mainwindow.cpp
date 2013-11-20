@@ -36,6 +36,7 @@ void MainWindow::setUpThread(MainWindow mainWindow){
 //----------------------------------------------------------------------------
 //----------------------Acquire mainwindow widgets information----------------
 
+// Image acquisition.
 int MainWindow::getImgAcqMethod(){
 	return ui.imgAcqMethodSelector->currentIndex();
 }
@@ -63,6 +64,11 @@ string MainWindow::getImagesPath(){
 //----------------------------------------------------------------------------
 string MainWindow::getImageNameFormat(){
 	return ui.imgAcqMethodFileNameEditText->toPlainText().toStdString();
+}
+
+// Image segmentation
+int MainWindow::getSegmentationAlgorithm(){
+	return ui.segMethodSelector->currentIndex();
 }
 
 //----------------------------------------------------------------------------
