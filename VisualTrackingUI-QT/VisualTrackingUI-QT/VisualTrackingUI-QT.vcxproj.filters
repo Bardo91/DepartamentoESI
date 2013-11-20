@@ -45,6 +45,9 @@
     <Filter Include="Types">
       <UniqueIdentifier>{3f60c373-51fe-40f2-9282-354acaf939ae}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ComputerVisionLibraries\Timing">
+      <UniqueIdentifier>{6996805b-cff6-4a70-a35c-aabc1e1dfd8c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -91,6 +94,9 @@
     </ClCompile>
     <ClCompile Include="ImageManager.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ComputerVisionLibraries\Timing\time.cpp">
+      <Filter>ComputerVisionLibraries\Timing</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -143,6 +149,12 @@
     </ClInclude>
     <ClInclude Include="ImageManager.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ComputerVisionLibraries\Timing\time.h">
+      <Filter>ComputerVisionLibraries\Timing</Filter>
+    </ClInclude>
+    <ClInclude Include="ComputerVisionLibraries\Timing\timeSrc.h">
+      <Filter>ComputerVisionLibraries\Timing</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

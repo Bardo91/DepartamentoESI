@@ -24,12 +24,15 @@ namespace vision {
 
 			vector<vector<struct LineObjRLE> > aRLE1;
 			vector<vector<struct LineObjRLE> > aRLE2;
-
-			aRLE1.reserve(5000);
-			aRLE2.reserve(5000);
-
 			vector<SegmentedObject> objs1;
 			vector<SegmentedObject> objs2;
+
+			aRLE1.reserve(50000);
+			aRLE2.reserve(50000);
+
+			objs1.reserve(5000);
+			objs2.reserve(5000);
+			
 
 			int n = _frame1.channels(); // Count the number of image's channels to use the pointer
 
@@ -180,7 +183,7 @@ namespace vision {
 								}
 							}
 						}
-						if (j >= aRLE1[i].size() - 1 && jp >= aRLE1[i - 1].size() - 1)
+						if (j >= aRLE1[i].size() - 1 || jp >= aRLE1[i - 1].size() - 1)
 							break;
 						if (pp > pc) {
 							j++;
@@ -222,7 +225,7 @@ namespace vision {
 								}
 							}
 						}
-						if (j >= aRLE2[i].size() - 1 && jp >= aRLE2[i - 1].size() - 1)
+						if (j >= aRLE2[i].size() - 1 || jp >= aRLE2[i - 1].size() - 1)
 							break;
 						if (pp > pc) {
 							j++;
@@ -292,6 +295,7 @@ namespace vision {
 					}
 				}
 			}
+
 
 			return 0;
 		} // int ColorClusterImageSegmentation(...)
