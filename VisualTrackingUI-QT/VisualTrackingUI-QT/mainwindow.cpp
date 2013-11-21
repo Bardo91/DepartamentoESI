@@ -71,6 +71,10 @@ int MainWindow::getSegmentationAlgorithm(){
 	return ui.segMethodSelector->currentIndex();
 }
 
+int MainWindow::getThreshold(){
+	return ui.thresholdTextEdit->toPlainText().toInt();
+}
+
 //----------------------------------------------------------------------------
 //-------------------SIGNAL_SLOTS_ACTIONS-------------------------------------
 void MainWindow::on_imgAcqMethodSelector_currentIndexChanged(int index){
@@ -102,10 +106,11 @@ void MainWindow::on_segMethodSelector_currentIndexChanged(int index){
 
 //----------------------------------------------------------------------------
 void MainWindow::on_startButton_clicked(){
-	infoCollector->CollectInfo();
-
-	threadManager.setInfo(infoCollector->getPointers());
-	threadManager.startThread();
+	if(infoCollector->CollectInfo() != -1){
+		threadManager.setInfo(infoCollector->getPointers());
+		threadManager.startThread();
+	}
+	
 }
 
 void MainWindow::on_stopButton_clicked(){
@@ -115,10 +120,11 @@ void MainWindow::on_stopButton_clicked(){
 //----------------------------------------------------------------------------
 void MainWindow::on_testDevicesButton_clicked(){
 
-	infoCollector->setUpImageManager();
-	int i;
-	if((i = infoCollector->getPointers()->imageManager->showCurrentFrames())!= 0)
-		QMessageBox::information(this, "Error", "Device: " + QString::number(-i) + " is not found.\n Wait a second and try it again, the device might be changing his state.");
+	if(infoCollector->CollectInfo() != -1){
+		int i;
+		if((i = infoCollector->getPointers()->imageManager->showCurrentFrames())!= 0)
+			QMessageBox::information(this, "Error", "Device: " + QString::number(-i) + " is not found.\n Wait a second and try it again, the device might be changing his state.");
+	}
 }
 
 //----------------------------------------------------------------------------

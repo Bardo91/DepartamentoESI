@@ -38,6 +38,7 @@ public: // Functions to adquire mainwindow widgets information.
 
 	// Functions related to Segmentation algorithm
 	int getSegmentationAlgorithm();
+	int getThreshold();
 
 private slots:
 	// Combo Box Slots

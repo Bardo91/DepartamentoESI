@@ -72,6 +72,9 @@ public:
     QVBoxLayout *posReconAlgLayout;
     QLabel *posReconAlgLabel;
     QComboBox *posReconAlgorithmSelector;
+    QHBoxLayout *thresholdLayout;
+    QLabel *thresholdLabel;
+    QPlainTextEdit *thresholdTextEdit;
     QHBoxLayout *horizontalLayout;
     QPushButton *startButton;
     QPushButton *stopButton;
@@ -88,7 +91,7 @@ public:
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         layoutWidget = new QWidget(centralWidget);
         layoutWidget->setObjectName(QStringLiteral("layoutWidget"));
-        layoutWidget->setGeometry(QRect(30, 61, 528, 581));
+        layoutWidget->setGeometry(QRect(30, 61, 528, 634));
         mainLayout = new QVBoxLayout(layoutWidget);
         mainLayout->setSpacing(6);
         mainLayout->setContentsMargins(11, 11, 11, 11);
@@ -298,6 +301,36 @@ public:
 
         posReconAlgLayout->addWidget(posReconAlgorithmSelector);
 
+        thresholdLayout = new QHBoxLayout();
+        thresholdLayout->setSpacing(6);
+        thresholdLayout->setObjectName(QStringLiteral("thresholdLayout"));
+        thresholdLayout->setSizeConstraint(QLayout::SetDefaultConstraint);
+        thresholdLayout->setContentsMargins(-1, -1, -1, 0);
+        thresholdLabel = new QLabel(layoutWidget);
+        thresholdLabel->setObjectName(QStringLiteral("thresholdLabel"));
+        QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(thresholdLabel->sizePolicy().hasHeightForWidth());
+        thresholdLabel->setSizePolicy(sizePolicy);
+        thresholdLabel->setMaximumSize(QSize(16777215, 25));
+
+        thresholdLayout->addWidget(thresholdLabel);
+
+        thresholdTextEdit = new QPlainTextEdit(layoutWidget);
+        thresholdTextEdit->setObjectName(QStringLiteral("thresholdTextEdit"));
+        QSizePolicy sizePolicy1(QSizePolicy::Expanding, QSizePolicy::Expanding);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(thresholdTextEdit->sizePolicy().hasHeightForWidth());
+        thresholdTextEdit->setSizePolicy(sizePolicy1);
+        thresholdTextEdit->setMaximumSize(QSize(100, 25));
+
+        thresholdLayout->addWidget(thresholdTextEdit);
+
+
+        posReconAlgLayout->addLayout(thresholdLayout);
+
 
         mainLayout->addLayout(posReconAlgLayout);
 
@@ -374,6 +407,7 @@ public:
          << QApplication::translate("MainWindowClass", "Single Camera Ground Tracking", 0)
          << QApplication::translate("MainWindowClass", "Stereo Tracking", 0)
         );
+        thresholdLabel->setText(QApplication::translate("MainWindowClass", "Threshold", 0));
         startButton->setText(QApplication::translate("MainWindowClass", "Start", 0));
         stopButton->setText(QApplication::translate("MainWindowClass", "Stop", 0));
     } // retranslateUi

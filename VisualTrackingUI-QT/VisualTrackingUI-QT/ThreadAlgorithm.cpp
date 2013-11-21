@@ -7,7 +7,7 @@
 
 #include "ThreadAlgorithm.h"
 #include "ImageManager.h"
-#include "SegmentationManager.h"s
+#include "SegmentationManager.h"
 #include "ComputerVisionLibraries/Timing/time.h"
 
 #include <iostream>
@@ -26,7 +26,7 @@ void threadAlgoritm(InfoPointers *infoPointers){
 	ImageManager *imageManager = infoPointers->imageManager;
 	SegmentationManager *segmentationManager = infoPointers->segmentationManager;
 
-	Mat frame1, frame2;
+	Mat frame1, frame2, ori1, ori2;
 
 	vector<SimpleObject> objects1;
 	vector<SimpleObject> objects2;
@@ -52,16 +52,28 @@ void threadAlgoritm(InfoPointers *infoPointers){
 		imageManager->updateFrames();
 		imageManager->getFrames(frame1, frame2);		
 
+		frame1.copyTo(ori1);
+		frame2.copyTo(ori2);
+
 		medianBlur(frame1, frame1, 5);
 		medianBlur(frame1, frame1, 5);
-		medianBlur(frame2, frame2, 5);
-		medianBlur(frame2, frame2, 5);
+		if(imageManager->areTwoCameras()){
+			medianBlur(frame2, frame2, 5);
+			medianBlur(frame2, frame2, 5);
+		}
+
+
+		
 
 		// 666 TODO: implement threshold UI and etc...
 		segmentationManager->applyAlgorithm(frame1, frame2, 500, objects1, objects2);
 
-		if(imageManager->areTwoCameras())
+		if(imageManager->areTwoCameras()){
 			hconcat(frame1, frame2, frame1);
+			hconcat(ori1, ori2, ori1);
+		}
+
+		vconcat(ori1, frame1, frame1);
 
 		imshow(wTitle, frame1);
 		gTimer->update();
@@ -70,6 +82,8 @@ void threadAlgoritm(InfoPointers *infoPointers){
 		cout << "FINISHED IN " << diff << endl;
 
 	}
+	//------------------------------------//
+	STime::end();
 	//------------------------------------//
 }
 

@@ -22,8 +22,6 @@ class ImageAcquisitor {
 
 	int inputMethod; // 0 = from device ; 1 = from path
 
-	bool flagInputError;
-
 	cv::Mat frame;
 public:
 
@@ -34,13 +32,13 @@ public:
 	~ImageAcquisitor();
 
 public:
-	void changeInputMethod(int currentFrame = 0);
+	void changeInputMethod(int _device);
 	void changeInputMethod(std::string, std::string);
 	int changeResolution(int, int);
 	void changePathName(std::string);
 	void changeImageNameFormat(std::string);
 
-	void closeDevice();
+	bool isOpened();
 public:
 	bool canCapture();
 

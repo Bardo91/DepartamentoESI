@@ -20,6 +20,8 @@ namespace vision{
 	struct InfoPointers{
 	bool looping; // Variable used to stop the loop of the thread
 	
+	int threshold;
+
 	ImageManager *imageManager;
 	SegmentationManager *segmentationManager;
 	//PositionManager *positionManager;
@@ -32,11 +34,12 @@ namespace vision{
 		~InfoCollector();
 
 	public: // Functions that setUp the threads information.
-		void CollectInfo();
+		int CollectInfo();
 		InfoPointers * getPointers();
 
-		void setUpImageManager();
-		void setUpSegmentationManager();
+	private:
+		int setUpImageManager();
+		int setUpSegmentationManager();
 		// 666 TODO: void setUpPositionManager();
 		// 666 TODO: void setUpAlgorithmManager();
 

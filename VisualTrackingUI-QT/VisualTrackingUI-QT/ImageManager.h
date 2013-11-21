@@ -20,7 +20,6 @@ namespace vision{
 		~ImageManager();
 
 	public:
-		void closeDevice(int dev);
 		int setUpImageAcquisitor(const int _number, const  int _device, const int _width, const int _heigth);
 		int setUpImageAcquisitor(const int _number, const std::string& _pathName, const std::string& _nameFormat, const int _width, const int _heigth);
 

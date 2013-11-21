@@ -14,8 +14,8 @@ using namespace cv;
 namespace vision{
 //------------------------------------------------------------------------------
 ImageManager::ImageManager(){
-	imageAcquisitor1 = 0;
-	imageAcquisitor2 = 0;
+	imageAcquisitor1 = new ImageAcquisitor();
+	imageAcquisitor2 = new ImageAcquisitor();
 }
 
 //------------------------------------------------------------------------------
@@ -28,23 +28,13 @@ ImageManager::~ImageManager(){
 }
 
 //------------------------------------------------------------------------------
-void ImageManager::closeDevice(int dev){
-	if(dev == 1)
-		imageAcquisitor1->closeDevice();
-	else if(dev == 2)
-		imageAcquisitor2->closeDevice();
-}
-
-//------------------------------------------------------------------------------
 int ImageManager::setUpImageAcquisitor(const int _number, const int _device, const  int _width, const  int _heigth){
 	if(_number == 1){
-		if(imageAcquisitor1 != 0)
-			delete imageAcquisitor1;
-		imageAcquisitor1 = new ImageAcquisitor(_device, _width, _heigth);
+		imageAcquisitor1->changeInputMethod(_device);
+		imageAcquisitor1->changeResolution(_width, _heigth);
 	}else if(_number  == 2){
-		if(imageAcquisitor2 != 0)
-			delete imageAcquisitor2;
-		imageAcquisitor2 = new ImageAcquisitor(_device, _width, _heigth);
+		imageAcquisitor2->changeInputMethod(_device);
+		imageAcquisitor2->changeResolution(_width, _heigth);
 	}else{
 		return -1;
 	}
@@ -55,13 +45,13 @@ int ImageManager::setUpImageAcquisitor(const int _number, const int _device, con
 //------------------------------------------------------------------------------
 int ImageManager::setUpImageAcquisitor(const int _number, const std::string& _pathName, const std::string& _nameFormat, const int _width, const int _heigth){
 	if(_number == 1){
-		if(imageAcquisitor1 != 0)
-			delete imageAcquisitor1;
-		imageAcquisitor1 = new ImageAcquisitor(_pathName, _nameFormat, _width, _heigth);
+		imageAcquisitor1->changeInputMethod(_pathName, _nameFormat);
+		imageAcquisitor1->changeResolution(_width, _heigth);
+		assert(imageAcquisitor1->isOpened());
 	}else if(_number  == 2){
-		if(imageAcquisitor2 != 0)
-			delete imageAcquisitor2;
-		imageAcquisitor2 = new ImageAcquisitor(_pathName, _nameFormat, _width, _heigth);
+		imageAcquisitor2->changeInputMethod(_pathName, _nameFormat);
+		imageAcquisitor2->changeResolution(_width, _heigth);
+		assert(imageAcquisitor2->isOpened());
 	}else{
 		return -1;
 	}
@@ -90,8 +80,13 @@ void ImageManager::updateFrames(){
 //------------------------------------------------------------------------------
 void ImageManager::getFrames(Mat& _frame1, Mat& _frame2){
 	imageAcquisitor1->getFrame(_frame1);
-	if(twoCameras)
+	assert(_frame1.rows != 0); // Make sure that the frame is properly acquired, if not the error might be while updating the frame.
+
+	if(twoCameras){
 		imageAcquisitor2->getFrame(_frame2);
+		assert(_frame2.rows != 0); // Make sure that the frame is properly acquired, if not the error might be while updating the frame.
+	}
+	
 }
 
 //------------------------------------------------------------------------------
@@ -116,4 +111,5 @@ int ImageManager::showCurrentFrames(){
 
 	return 0;
 }
+
 }

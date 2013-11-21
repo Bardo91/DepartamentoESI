@@ -18,10 +18,6 @@
 
 #define LOG2 0.3010299957
 
-#ifndef COLOR_SPACE
-#define COLOR_SPACE 0  // Types 0-HSV ; 1-RGB ; ...
-#endif
-
 namespace vision {
 	namespace segmentation {
 		typedef unsigned int uint;
@@ -47,7 +43,7 @@ namespace vision {
 		inline int ColorClusterSpace::whichColor(c3i& color) { // If Opencv gives YCrCb values between 0 and 255
 			int i = 0, j = int(floor(color.b / 255.0 * (size - 1))), k = int(floor(color.c / 255.0 * (size - 1)));
 
-			i = int(floor(color.a / (COLOR_SPACE == 0 ? 180.0 : 255.0) * (size - 1)));
+			i = int(floor(color.a / 180.0 * (size - 1)));
 
 			int res = AClass[i] & BClass[j] & CClass[k]; //Supposing that colors are not over-layed there's only one possible solution and log2(x) returns an integer /
 

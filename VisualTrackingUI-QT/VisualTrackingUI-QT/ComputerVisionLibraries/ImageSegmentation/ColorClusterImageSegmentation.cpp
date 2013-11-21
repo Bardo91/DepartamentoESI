@@ -22,6 +22,10 @@ namespace vision {
 				vector<SimpleObject>& _objects1,
 				vector<SimpleObject>& _objects2) {
 
+			imageBGR2HSV(_frame1);
+			imageBGR2HSV(_frame2);
+
+			// 666 TODO: use statics variables to save time (allocating, etc...)
 			vector<vector<struct LineObjRLE> > aRLE1;
 			vector<vector<struct LineObjRLE> > aRLE2;
 			vector<SegmentedObject> objs1;
@@ -296,6 +300,9 @@ namespace vision {
 				}
 			}
 
+
+			imageHSV2BGR(_frame1);
+			imageHSV2BGR(_frame2);
 
 			return 0;
 		} // int ColorClusterImageSegmentation(...)

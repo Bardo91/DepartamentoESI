@@ -11,12 +11,12 @@ using namespace std;
 using namespace cv;
 
 namespace vision {
-
+//------------------------------------------------------------------------------
 ImageAcquisitor::ImageAcquisitor() {
 	width = height = inputMethod = -1;
-	flagInputError = false;
 }
 
+//------------------------------------------------------------------------------
 ImageAcquisitor::ImageAcquisitor(string _pathName, std::string _imageNameFormat,
 		int _width, int _height) {
 	inputMethod = 1;
@@ -25,45 +25,38 @@ ImageAcquisitor::ImageAcquisitor(string _pathName, std::string _imageNameFormat,
 	width = _width;
 	height = _height;
 
-	flagInputError = false;
 }
 
+//------------------------------------------------------------------------------
 ImageAcquisitor::ImageAcquisitor(int _device, int _width, int _height) {
 	inputMethod = 0;
 	device = VideoCapture(_device);
 	width = _width;
 	height = _height;
 
-	flagInputError = false;
 
 	changeResolution(width, height);
 
-	try {
-		device.open(1);
-	} catch (Exception e) { //Catching errors.
-		cout << "Error, could not connect to the device" << endl;
-		flagInputError = true;
-	}
-	if (!device.isOpened()) { // If camera can not be openned.
-		cout << "Error, could not connect to the device" << endl;
-		device.release();
-		flagInputError = true;
-	}
+	assert(device.open(1)); 	//Error, could not connect to the device
+	assert(device.isOpened());
 }
 
+//------------------------------------------------------------------------------
 ImageAcquisitor::~ImageAcquisitor() {
 	device.release();
 }
 
+//------------------------------------------------------------------------------
 void ImageAcquisitor::changeInputMethod(int _device) {
 	inputMethod = 0;
-	closeDevice();
 
-	device = VideoCapture(device);
-	device.open(1);
+	device = VideoCapture(_device);
 
+	assert(device.open(1)); 	//Error, could not connect to the device
+	assert(device.isOpened());
 }
 
+//------------------------------------------------------------------------------
 void ImageAcquisitor::changeInputMethod(string _pathName,
 		string _imageNameFormat) {
 	inputMethod = 1;
@@ -73,12 +66,10 @@ void ImageAcquisitor::changeInputMethod(string _pathName,
 
 }
 
+//------------------------------------------------------------------------------
 int ImageAcquisitor::changeResolution(int _width, int _height) {
-	if (inputMethod) {
-		width = _width;
-		height = _height;
-		return 0;
-	}
+	width = _width;
+	height = _height;
 
 	device.set(CV_CAP_PROP_FRAME_WIDTH, width);
 	device.set(CV_CAP_PROP_FRAME_HEIGHT, height);
@@ -90,24 +81,27 @@ int ImageAcquisitor::changeResolution(int _width, int _height) {
 	return 0;
 }
 
+//------------------------------------------------------------------------------
 void ImageAcquisitor::changePathName(std::string _pathName) {
 	pathName = _pathName;
 }
 
+//------------------------------------------------------------------------------
 void ImageAcquisitor::changeImageNameFormat(std::string _imageNameFormat) {
 	imageNameFormat = _imageNameFormat;
 }
 
-void ImageAcquisitor::closeDevice(){
-	if(!inputMethod)
-		if (device.isOpened())
-			device.release();
+//------------------------------------------------------------------------------
+bool ImageAcquisitor::isOpened(){
+	return device.isOpened();
 }
 
+//------------------------------------------------------------------------------
 bool ImageAcquisitor::canCapture() {
-	return !flagInputError;
+	return device.isOpened();
 }
 
+//------------------------------------------------------------------------------
 int ImageAcquisitor::updateFrame(int currentImage) {
 	if (inputMethod) {
 		const int sizeFormat = imageNameFormat.size() + 4;
@@ -132,6 +126,7 @@ int ImageAcquisitor::updateFrame(int currentImage) {
 	return frame.cols == 0 ? -1 : 0;
 }
 
+//------------------------------------------------------------------------------
 int ImageAcquisitor::getFrame(Mat& frame) {
 
 	frame = Mat(this->frame);
@@ -142,4 +137,5 @@ int ImageAcquisitor::getFrame(Mat& frame) {
 int ImageAcquisitor::getInputMethod() const {
 	return inputMethod;
 }
-}
+//------------------------------------------------------------------------------
+} // namespace vision
