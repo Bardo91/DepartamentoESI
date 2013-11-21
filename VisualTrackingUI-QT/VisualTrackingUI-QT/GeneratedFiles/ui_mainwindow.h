@@ -44,6 +44,11 @@ public:
     QVBoxLayout *imgAcqMethodLayout;
     QLabel *imgAcqMethodLabel;
     QComboBox *imgAcqMethodSelector;
+    QHBoxLayout *resolutionLayout;
+    QLabel *widthLabel;
+    QPlainTextEdit *widthTextEdit;
+    QLabel *heightLabel;
+    QPlainTextEdit *heightEditText;
     QHBoxLayout *fileMethodLayout;
     QPlainTextEdit *imgAcqMethodPathEditText;
     QPlainTextEdit *imgAcqMethodFileNameEditText;
@@ -86,12 +91,12 @@ public:
     {
         if (MainWindowClass->objectName().isEmpty())
             MainWindowClass->setObjectName(QStringLiteral("MainWindowClass"));
-        MainWindowClass->resize(571, 722);
+        MainWindowClass->resize(571, 848);
         centralWidget = new QWidget(MainWindowClass);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         layoutWidget = new QWidget(centralWidget);
         layoutWidget->setObjectName(QStringLiteral("layoutWidget"));
-        layoutWidget->setGeometry(QRect(30, 61, 528, 634));
+        layoutWidget->setGeometry(QRect(30, 61, 528, 788));
         mainLayout = new QVBoxLayout(layoutWidget);
         mainLayout->setSpacing(6);
         mainLayout->setContentsMargins(11, 11, 11, 11);
@@ -135,6 +140,40 @@ public:
         imgAcqMethodSelector->setObjectName(QStringLiteral("imgAcqMethodSelector"));
 
         imgAcqMethodLayout->addWidget(imgAcqMethodSelector);
+
+        resolutionLayout = new QHBoxLayout();
+        resolutionLayout->setSpacing(6);
+        resolutionLayout->setObjectName(QStringLiteral("resolutionLayout"));
+        resolutionLayout->setContentsMargins(-1, -1, -1, 0);
+        widthLabel = new QLabel(layoutWidget);
+        widthLabel->setObjectName(QStringLiteral("widthLabel"));
+
+        resolutionLayout->addWidget(widthLabel);
+
+        widthTextEdit = new QPlainTextEdit(layoutWidget);
+        widthTextEdit->setObjectName(QStringLiteral("widthTextEdit"));
+        QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(widthTextEdit->sizePolicy().hasHeightForWidth());
+        widthTextEdit->setSizePolicy(sizePolicy);
+        widthTextEdit->setMaximumSize(QSize(16777215, 25));
+
+        resolutionLayout->addWidget(widthTextEdit);
+
+        heightLabel = new QLabel(layoutWidget);
+        heightLabel->setObjectName(QStringLiteral("heightLabel"));
+
+        resolutionLayout->addWidget(heightLabel);
+
+        heightEditText = new QPlainTextEdit(layoutWidget);
+        heightEditText->setObjectName(QStringLiteral("heightEditText"));
+        heightEditText->setMaximumSize(QSize(16777215, 25));
+
+        resolutionLayout->addWidget(heightEditText);
+
+
+        imgAcqMethodLayout->addLayout(resolutionLayout);
 
         fileMethodLayout = new QHBoxLayout();
         fileMethodLayout->setSpacing(6);
@@ -262,13 +301,16 @@ public:
         posAcqMethodLayout = new QVBoxLayout();
         posAcqMethodLayout->setSpacing(6);
         posAcqMethodLayout->setObjectName(QStringLiteral("posAcqMethodLayout"));
+        posAcqMethodLayout->setSizeConstraint(QLayout::SetMinimumSize);
         posAcqMethodLabel = new QLabel(layoutWidget);
         posAcqMethodLabel->setObjectName(QStringLiteral("posAcqMethodLabel"));
+        posAcqMethodLabel->setMaximumSize(QSize(16777215, 25));
 
         posAcqMethodLayout->addWidget(posAcqMethodLabel);
 
         posAcqMethodSelector = new QComboBox(layoutWidget);
         posAcqMethodSelector->setObjectName(QStringLiteral("posAcqMethodSelector"));
+        posAcqMethodSelector->setMaximumSize(QSize(16777215, 25));
 
         posAcqMethodLayout->addWidget(posAcqMethodSelector);
 
@@ -304,26 +346,23 @@ public:
         thresholdLayout = new QHBoxLayout();
         thresholdLayout->setSpacing(6);
         thresholdLayout->setObjectName(QStringLiteral("thresholdLayout"));
-        thresholdLayout->setSizeConstraint(QLayout::SetDefaultConstraint);
+        thresholdLayout->setSizeConstraint(QLayout::SetMinimumSize);
         thresholdLayout->setContentsMargins(-1, -1, -1, 0);
         thresholdLabel = new QLabel(layoutWidget);
         thresholdLabel->setObjectName(QStringLiteral("thresholdLabel"));
-        QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
-        sizePolicy.setHorizontalStretch(0);
-        sizePolicy.setVerticalStretch(0);
-        sizePolicy.setHeightForWidth(thresholdLabel->sizePolicy().hasHeightForWidth());
-        thresholdLabel->setSizePolicy(sizePolicy);
+        QSizePolicy sizePolicy1(QSizePolicy::Preferred, QSizePolicy::Preferred);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(thresholdLabel->sizePolicy().hasHeightForWidth());
+        thresholdLabel->setSizePolicy(sizePolicy1);
         thresholdLabel->setMaximumSize(QSize(16777215, 25));
 
         thresholdLayout->addWidget(thresholdLabel);
 
         thresholdTextEdit = new QPlainTextEdit(layoutWidget);
         thresholdTextEdit->setObjectName(QStringLiteral("thresholdTextEdit"));
-        QSizePolicy sizePolicy1(QSizePolicy::Expanding, QSizePolicy::Expanding);
-        sizePolicy1.setHorizontalStretch(0);
-        sizePolicy1.setVerticalStretch(0);
-        sizePolicy1.setHeightForWidth(thresholdTextEdit->sizePolicy().hasHeightForWidth());
-        thresholdTextEdit->setSizePolicy(sizePolicy1);
+        sizePolicy.setHeightForWidth(thresholdTextEdit->sizePolicy().hasHeightForWidth());
+        thresholdTextEdit->setSizePolicy(sizePolicy);
         thresholdTextEdit->setMaximumSize(QSize(100, 25));
 
         thresholdLayout->addWidget(thresholdTextEdit);
@@ -385,6 +424,10 @@ public:
          << QApplication::translate("MainWindowClass", "Images", 0)
          << QApplication::translate("MainWindowClass", "Video", 0)
         );
+        widthLabel->setText(QApplication::translate("MainWindowClass", "Width: ", 0));
+        widthTextEdit->setPlainText(QApplication::translate("MainWindowClass", "320", 0));
+        heightLabel->setText(QApplication::translate("MainWindowClass", "Height: ", 0));
+        heightEditText->setPlainText(QApplication::translate("MainWindowClass", "240", 0));
         rB1Device->setText(QApplication::translate("MainWindowClass", "1 Device", 0));
         rB2Devices->setText(QApplication::translate("MainWindowClass", "2 Devices", 0));
         label1Device->setText(QApplication::translate("MainWindowClass", "Device 1:", 0));

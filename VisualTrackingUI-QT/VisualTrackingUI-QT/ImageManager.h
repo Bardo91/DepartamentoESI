@@ -30,6 +30,7 @@ namespace vision{
 		void getFrames(cv::Mat& _frame1, cv::Mat& _frame2);
 		int showCurrentFrames();
 
+		int closeDevices();
 	private:
 		ImageAcquisitor *imageAcquisitor1;
 		ImageAcquisitor *imageAcquisitor2; //Not always used, depend on the algorithm.

@@ -44,7 +44,7 @@ namespace vision{
 		infoPointers.threshold = mainWindow->getThreshold();
 
 		if(errors < 0)
-			return -1;
+			return -1; // ERROR collecting information.
 		return 0;
 	}
 
@@ -55,31 +55,31 @@ namespace vision{
 
 	//------------------------------------------------------------------------
 	int InfoCollector::setUpImageManager(){
+		infoPointers.imageManager->closeDevices(); //Release every device to avoid errors if device IDs are crossed.
 		int method = mainWindow->getImgAcqMethod(); // 777 TODO: implement width and heigth.
+		int width = mainWindow->getWidth();
+		int height = mainWindow->getHeight();
+
 		if(method == 0){ // From device/s.
-			int dev1 = mainWindow->getIdDevice1();
-			infoPointers.imageManager->setUpImageAcquisitor(1, dev1, 320, 240);
-			if(mainWindow->getNumberDevices() == 2){
+			int nDev = mainWindow->getNumberDevices();
+			if(nDev == 1){
+				int dev1 = mainWindow->getIdDevice1();
+				infoPointers.imageManager->setUpImageAcquisitor(1, dev1, width, height);
+				infoPointers.imageManager->setTwoCameras(false);
+			}else if(nDev == 2){
+				int dev1 = mainWindow->getIdDevice1();
 				int dev2 = mainWindow->getIdDevice2();
 				if(dev1 == dev2){  // Devices cant have the same ID
 					QMessageBox::information(mainWindow, "Error", "Devices cant have the same ID");
 					return -1;
 				}
-				infoPointers.imageManager->setUpImageAcquisitor(2, dev2, 320, 240);
+				infoPointers.imageManager->setUpImageAcquisitor(1, dev1, width, height);
+				infoPointers.imageManager->setUpImageAcquisitor(2, dev2, width, height);
 				infoPointers.imageManager->setTwoCameras(true);
-			}else{
-				infoPointers.imageManager->setTwoCameras(false);
 			}
-
 		}else if(method == 1){ // From images.
-			// 777 TODO: implement two edit text to different camera name Format
-			infoPointers.imageManager->setUpImageAcquisitor(1, mainWindow->getImagesPath(), mainWindow->getImageNameFormat(), 320, 240);
-			if(mainWindow->getNumberDevices() == 2){
-				infoPointers.imageManager->setUpImageAcquisitor(2, mainWindow->getImagesPath(), mainWindow->getImageNameFormat(), 320,240);
-				infoPointers.imageManager->setTwoCameras(true);
-			}else{
-				infoPointers.imageManager->setTwoCameras(false);
-			}
+			// 777 TODO: implement 
+			
 
 		} else if(method == 2){ // From video
 			QMessageBox::information(mainWindow, "Error", "Video acquisition method is not implemented");

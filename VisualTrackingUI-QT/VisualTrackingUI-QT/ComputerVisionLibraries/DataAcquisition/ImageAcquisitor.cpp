@@ -31,14 +31,10 @@ ImageAcquisitor::ImageAcquisitor(string _pathName, std::string _imageNameFormat,
 ImageAcquisitor::ImageAcquisitor(int _device, int _width, int _height) {
 	inputMethod = 0;
 	device = VideoCapture(_device);
-	width = _width;
-	height = _height;
-
 
 	changeResolution(width, height);
 
-	assert(device.open(1)); 	//Error, could not connect to the device
-	assert(device.isOpened());
+	assert(device.isOpened()); //Error, could not connect to the device
 }
 
 //------------------------------------------------------------------------------
@@ -50,10 +46,13 @@ ImageAcquisitor::~ImageAcquisitor() {
 void ImageAcquisitor::changeInputMethod(int _device) {
 	inputMethod = 0;
 
-	device = VideoCapture(_device);
-
-	assert(device.open(1)); 	//Error, could not connect to the device
-	assert(device.isOpened());
+	if(device.isOpened()){
+		device.release();
+		waitKey(10); // Wait for the device to be stopped.
+	}
+	//device = VideoCapture(_device);
+	assert(device.open(_device));
+	assert(device.isOpened());  	//Error, could not connect to the device
 }
 
 //------------------------------------------------------------------------------
@@ -97,6 +96,13 @@ bool ImageAcquisitor::isOpened(){
 }
 
 //------------------------------------------------------------------------------
+int ImageAcquisitor::closeDevice(){
+	device.release();
+
+	return 0;
+}
+
+//------------------------------------------------------------------------------
 bool ImageAcquisitor::canCapture() {
 	return device.isOpened();
 }
@@ -120,6 +126,7 @@ int ImageAcquisitor::updateFrame(int currentImage) {
 			resize(frame, frame, Size(width, height));
 
 	} else {
+		assert(device.isOpened());
 		device >> frame;
 	}
 
@@ -127,9 +134,9 @@ int ImageAcquisitor::updateFrame(int currentImage) {
 }
 
 //------------------------------------------------------------------------------
-int ImageAcquisitor::getFrame(Mat& frame) {
+int ImageAcquisitor::getFrame(Mat& _frame) {
 
-	frame = Mat(this->frame);
+	_frame = Mat(frame);
 
 	return frame.cols == 0 ? -1 : 0;
 }

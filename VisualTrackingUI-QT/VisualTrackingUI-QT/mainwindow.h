@@ -31,6 +31,8 @@ public: // Functions to adquire mainwindow widgets information.
 	// Functions related to Image acquisitior method
 	int getImgAcqMethod();
 	int getNumberDevices();
+	int getWidth();
+	int getHeight();	
 	int getIdDevice1();
 	int getIdDevice2();
 	std::string getImagesPath();

@@ -47,6 +47,16 @@ int MainWindow::getNumberDevices(){
 }
 
 //----------------------------------------------------------------------------
+int MainWindow::getWidth(){
+	return ui.widthTextEdit->toPlainText().toInt();
+}
+
+//----------------------------------------------------------------------------
+int MainWindow::getHeight(){
+	return ui.heightEditText->toPlainText().toInt();
+}
+
+//----------------------------------------------------------------------------
 int MainWindow::getIdDevice1(){
 	return ui.spin1Device->value();
 }

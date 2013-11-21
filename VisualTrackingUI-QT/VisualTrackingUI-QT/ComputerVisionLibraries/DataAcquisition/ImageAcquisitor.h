@@ -39,6 +39,7 @@ public:
 	void changeImageNameFormat(std::string);
 
 	bool isOpened();
+	int closeDevice();
 public:
 	bool canCapture();
 

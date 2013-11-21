@@ -112,4 +112,13 @@ int ImageManager::showCurrentFrames(){
 	return 0;
 }
 
+//------------------------------------------------------------------------------
+int ImageManager::closeDevices(){
+	imageAcquisitor1->closeDevice();
+	imageAcquisitor2->closeDevice();
+	
+	return 0;
+}
+
+//------------------------------------------------------------------------------
 }
