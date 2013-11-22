@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 //	Visual Tracking UI
-//		Author: Pablo Ramón Soria
+//		Author: Pablo Ramï¿½n Soria
 //		Date: 2013/10/31
 ////////////////////////////////////////////////////////////////////////////////
 // ImageManager
@@ -12,6 +12,7 @@
 
 #include "ComputerVisionLibraries/DataAcquisition/ImageAcquisitor.h"
 
+#include <opencv/cv.h>
 
 namespace vision{
 	class ImageManager{

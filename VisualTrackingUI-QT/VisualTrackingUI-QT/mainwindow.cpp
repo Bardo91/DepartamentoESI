@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 //	Visual Tracking UI
-//		Author: Pablo Ramón Soria
+//		Author: Pablo Ramï¿½n Soria
 //		Date: 2013/10/31
 ////////////////////////////////////////////////////////////////////////////////
 // MainWindow
@@ -9,7 +9,12 @@
 #include "mainwindow.h"
 #include "ThreadManager.h"
 
+#ifdef WIN32
 #include <qmessagebox.h>
+#endif
+#ifdef __linux
+#include <QtWidgets/qmessagebox.h>
+#endif
 
 using namespace vision;
 using namespace std;

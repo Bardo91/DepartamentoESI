@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 //	Visual Tracking UI
-//		Author: Pablo Ramón Soria
+//		Author: Pablo Ramï¿½n Soria
 //		Date: 2013/10/31
 ////////////////////////////////////////////////////////////////////////////////
 // MainWindow
@@ -10,7 +10,17 @@
 #define _VISUAL_TRACKING_UI_MAINWINDOW_H
 
 #include <QtWidgets/QMainWindow>
+
+
+#ifdef WIN32
 #include "ui_mainwindow.h"
+#endif
+#ifdef __linux
+#include "GeneratedFiles/ui_mainwindow.h"
+#endif
+
+
+
 
 #include "ThreadManager.h"
 

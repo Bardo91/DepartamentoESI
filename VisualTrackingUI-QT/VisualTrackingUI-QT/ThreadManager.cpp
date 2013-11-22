@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 //	Visual Tracking UI
-//		Author: Pablo Ramón Soria
+//		Author: Pablo Ramï¿½n Soria
 //		Date: 2013/10/31
 ////////////////////////////////////////////////////////////////////////////////
 // ThreadManager
@@ -16,8 +16,9 @@ using namespace std;
 
 namespace vision{
 
-	ThreadManager::ThreadManager(){
+ThreadManager::ThreadManager(){
 	pThread = 0;
+	infoPointers = 0;
 }
 
 //------------------------------------------------------------------------------

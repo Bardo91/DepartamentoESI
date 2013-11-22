@@ -1,13 +1,19 @@
 ////////////////////////////////////////////////////////////////////////////////
 //	Visual Tracking UI
-//		Author: Pablo Ramón Soria
+//		Author: Pablo Ramï¿½n Soria
 //		Date: 2013/10/31
 ////////////////////////////////////////////////////////////////////////////////
 // ImageManager
 
 #include "ImageManager.h"
 
+#ifdef WIN32
 #include <qmessagebox.h>
+#endif
+#ifdef __linux
+#include <QtWidgets/qmessagebox.h>
+#endif
+
 #include <cassert>
 using namespace cv;
 
@@ -16,6 +22,7 @@ namespace vision{
 ImageManager::ImageManager(){
 	imageAcquisitor1 = new ImageAcquisitor();
 	imageAcquisitor2 = new ImageAcquisitor();
+	twoCameras = false;
 }
 
 //------------------------------------------------------------------------------

@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 //	Visual Tracking UI
-//		Author: Pablo Ramón Soria
+//		Author: Pablo Ramï¿½n Soria
 //		Date: 2013/10/31
 ////////////////////////////////////////////////////////////////////////////////
 // Endless thread that run the specified algorithm
@@ -9,6 +9,7 @@
 #include "ImageManager.h"
 #include "SegmentationManager.h"
 #include "ComputerVisionLibraries/Timing/time.h"
+
 
 #include <iostream>
 #include <opencv/cv.h>

@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 //	Visual Tracking UI
-//		Author: Pablo Ramón Soria
+//		Author: Pablo Ramï¿½n Soria
 //		Date: 2013/10/31
 ////////////////////////////////////////////////////////////////////////////////
 // This class manage to collect all info setted at the UI and prepare it to be sent to the algorithm's thread
@@ -9,9 +9,14 @@
 #include "InfoCollector.h"
 #include "mainwindow.h"
 
+#include <cassert>
 
+#ifdef WIN32
 #include <qmessagebox.h>
-
+#endif
+#ifdef __linux
+#include <QtWidgets/qmessagebox.h>
+#endif
 
 namespace vision{
 	//------------------------------------------------------------------------
