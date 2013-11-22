@@ -41,6 +41,8 @@ public:
     QLabel *titleLabel;
     QLabel *authorLabel;
     QLabel *dateLabel;
+    QFrame *line_2;
+    QHBoxLayout *infoLayout;
     QVBoxLayout *imgAcqMethodLayout;
     QLabel *imgAcqMethodLabel;
     QComboBox *imgAcqMethodSelector;
@@ -64,23 +66,25 @@ public:
     QLabel *label2Devices;
     QSpinBox *spin2Devices;
     QPushButton *testDevicesButton;
-    QFrame *line_2;
-    QVBoxLayout *segMethodLayout;
-    QLabel *segMethodLabel;
-    QComboBox *segMethodSelector;
-    QFrame *line_3;
+    QFrame *line;
+    QVBoxLayout *infoVerticalLayout;
     QVBoxLayout *posAcqMethodLayout;
     QLabel *posAcqMethodLabel;
     QComboBox *posAcqMethodSelector;
     QPlainTextEdit *posAcqMethodEditText;
-    QFrame *line_4;
+    QFrame *line_3;
+    QVBoxLayout *segMethodLayout;
+    QLabel *segMethodLabel;
+    QComboBox *segMethodSelector;
+    QFrame *line_5;
     QVBoxLayout *posReconAlgLayout;
     QLabel *posReconAlgLabel;
     QComboBox *posReconAlgorithmSelector;
     QHBoxLayout *thresholdLayout;
     QLabel *thresholdLabel;
     QPlainTextEdit *thresholdTextEdit;
-    QHBoxLayout *horizontalLayout;
+    QFrame *line_4;
+    QHBoxLayout *buttonLayout;
     QPushButton *startButton;
     QPushButton *stopButton;
     QMenuBar *menuBar;
@@ -91,12 +95,12 @@ public:
     {
         if (MainWindowClass->objectName().isEmpty())
             MainWindowClass->setObjectName(QStringLiteral("MainWindowClass"));
-        MainWindowClass->resize(571, 848);
+        MainWindowClass->resize(656, 537);
         centralWidget = new QWidget(MainWindowClass);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         layoutWidget = new QWidget(centralWidget);
         layoutWidget->setObjectName(QStringLiteral("layoutWidget"));
-        layoutWidget->setGeometry(QRect(30, 61, 528, 788));
+        layoutWidget->setGeometry(QRect(20, 20, 611, 451));
         mainLayout = new QVBoxLayout(layoutWidget);
         mainLayout->setSpacing(6);
         mainLayout->setContentsMargins(11, 11, 11, 11);
@@ -128,6 +132,17 @@ public:
 
         mainLayout->addLayout(titleLayout);
 
+        line_2 = new QFrame(layoutWidget);
+        line_2->setObjectName(QStringLiteral("line_2"));
+        line_2->setFrameShape(QFrame::HLine);
+        line_2->setFrameShadow(QFrame::Sunken);
+
+        mainLayout->addWidget(line_2);
+
+        infoLayout = new QHBoxLayout();
+        infoLayout->setSpacing(6);
+        infoLayout->setObjectName(QStringLiteral("infoLayout"));
+        infoLayout->setContentsMargins(-1, -1, -1, 0);
         imgAcqMethodLayout = new QVBoxLayout();
         imgAcqMethodLayout->setSpacing(6);
         imgAcqMethodLayout->setObjectName(QStringLiteral("imgAcqMethodLayout"));
@@ -152,7 +167,7 @@ public:
 
         widthTextEdit = new QPlainTextEdit(layoutWidget);
         widthTextEdit->setObjectName(QStringLiteral("widthTextEdit"));
-        QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+        QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(widthTextEdit->sizePolicy().hasHeightForWidth());
@@ -168,6 +183,8 @@ public:
 
         heightEditText = new QPlainTextEdit(layoutWidget);
         heightEditText->setObjectName(QStringLiteral("heightEditText"));
+        sizePolicy.setHeightForWidth(heightEditText->sizePolicy().hasHeightForWidth());
+        heightEditText->setSizePolicy(sizePolicy);
         heightEditText->setMaximumSize(QSize(16777215, 25));
 
         resolutionLayout->addWidget(heightEditText);
@@ -182,6 +199,8 @@ public:
         imgAcqMethodPathEditText = new QPlainTextEdit(layoutWidget);
         imgAcqMethodPathEditText->setObjectName(QStringLiteral("imgAcqMethodPathEditText"));
         imgAcqMethodPathEditText->setEnabled(false);
+        sizePolicy.setHeightForWidth(imgAcqMethodPathEditText->sizePolicy().hasHeightForWidth());
+        imgAcqMethodPathEditText->setSizePolicy(sizePolicy);
         imgAcqMethodPathEditText->setMaximumSize(QSize(16777215, 25));
 
         fileMethodLayout->addWidget(imgAcqMethodPathEditText);
@@ -189,6 +208,8 @@ public:
         imgAcqMethodFileNameEditText = new QPlainTextEdit(layoutWidget);
         imgAcqMethodFileNameEditText->setObjectName(QStringLiteral("imgAcqMethodFileNameEditText"));
         imgAcqMethodFileNameEditText->setEnabled(false);
+        sizePolicy.setHeightForWidth(imgAcqMethodFileNameEditText->sizePolicy().hasHeightForWidth());
+        imgAcqMethodFileNameEditText->setSizePolicy(sizePolicy);
         imgAcqMethodFileNameEditText->setMaximumSize(QSize(150, 25));
 
         fileMethodLayout->addWidget(imgAcqMethodFileNameEditText);
@@ -266,40 +287,21 @@ public:
         imgAcqMethodLayout->addLayout(deviceMethodLayout);
 
 
-        mainLayout->addLayout(imgAcqMethodLayout);
+        infoLayout->addLayout(imgAcqMethodLayout);
 
-        line_2 = new QFrame(layoutWidget);
-        line_2->setObjectName(QStringLiteral("line_2"));
-        line_2->setFrameShape(QFrame::HLine);
-        line_2->setFrameShadow(QFrame::Sunken);
+        line = new QFrame(layoutWidget);
+        line->setObjectName(QStringLiteral("line"));
+        line->setFrameShape(QFrame::VLine);
+        line->setFrameShadow(QFrame::Sunken);
 
-        mainLayout->addWidget(line_2);
+        infoLayout->addWidget(line);
 
-        segMethodLayout = new QVBoxLayout();
-        segMethodLayout->setSpacing(6);
-        segMethodLayout->setObjectName(QStringLiteral("segMethodLayout"));
-        segMethodLabel = new QLabel(layoutWidget);
-        segMethodLabel->setObjectName(QStringLiteral("segMethodLabel"));
-
-        segMethodLayout->addWidget(segMethodLabel);
-
-        segMethodSelector = new QComboBox(layoutWidget);
-        segMethodSelector->setObjectName(QStringLiteral("segMethodSelector"));
-
-        segMethodLayout->addWidget(segMethodSelector);
-
-
-        mainLayout->addLayout(segMethodLayout);
-
-        line_3 = new QFrame(layoutWidget);
-        line_3->setObjectName(QStringLiteral("line_3"));
-        line_3->setFrameShape(QFrame::HLine);
-        line_3->setFrameShadow(QFrame::Sunken);
-
-        mainLayout->addWidget(line_3);
-
+        infoVerticalLayout = new QVBoxLayout();
+        infoVerticalLayout->setSpacing(6);
+        infoVerticalLayout->setObjectName(QStringLiteral("infoVerticalLayout"));
+        infoVerticalLayout->setContentsMargins(0, -1, -1, -1);
         posAcqMethodLayout = new QVBoxLayout();
-        posAcqMethodLayout->setSpacing(6);
+        posAcqMethodLayout->setSpacing(0);
         posAcqMethodLayout->setObjectName(QStringLiteral("posAcqMethodLayout"));
         posAcqMethodLayout->setSizeConstraint(QLayout::SetMinimumSize);
         posAcqMethodLabel = new QLabel(layoutWidget);
@@ -316,19 +318,46 @@ public:
 
         posAcqMethodEditText = new QPlainTextEdit(layoutWidget);
         posAcqMethodEditText->setObjectName(QStringLiteral("posAcqMethodEditText"));
+        sizePolicy.setHeightForWidth(posAcqMethodEditText->sizePolicy().hasHeightForWidth());
+        posAcqMethodEditText->setSizePolicy(sizePolicy);
         posAcqMethodEditText->setMaximumSize(QSize(16777215, 25));
 
         posAcqMethodLayout->addWidget(posAcqMethodEditText);
 
 
-        mainLayout->addLayout(posAcqMethodLayout);
+        infoVerticalLayout->addLayout(posAcqMethodLayout);
 
-        line_4 = new QFrame(layoutWidget);
-        line_4->setObjectName(QStringLiteral("line_4"));
-        line_4->setFrameShape(QFrame::HLine);
-        line_4->setFrameShadow(QFrame::Sunken);
+        line_3 = new QFrame(layoutWidget);
+        line_3->setObjectName(QStringLiteral("line_3"));
+        line_3->setFrameShape(QFrame::HLine);
+        line_3->setFrameShadow(QFrame::Sunken);
 
-        mainLayout->addWidget(line_4);
+        infoVerticalLayout->addWidget(line_3);
+
+        segMethodLayout = new QVBoxLayout();
+        segMethodLayout->setSpacing(6);
+        segMethodLayout->setObjectName(QStringLiteral("segMethodLayout"));
+        segMethodLabel = new QLabel(layoutWidget);
+        segMethodLabel->setObjectName(QStringLiteral("segMethodLabel"));
+        segMethodLabel->setMaximumSize(QSize(16777215, 25));
+
+        segMethodLayout->addWidget(segMethodLabel);
+
+        segMethodSelector = new QComboBox(layoutWidget);
+        segMethodSelector->setObjectName(QStringLiteral("segMethodSelector"));
+        segMethodSelector->setMaximumSize(QSize(16777215, 25));
+
+        segMethodLayout->addWidget(segMethodSelector);
+
+
+        infoVerticalLayout->addLayout(segMethodLayout);
+
+        line_5 = new QFrame(layoutWidget);
+        line_5->setObjectName(QStringLiteral("line_5"));
+        line_5->setFrameShape(QFrame::HLine);
+        line_5->setFrameShadow(QFrame::Sunken);
+
+        infoVerticalLayout->addWidget(line_5);
 
         posReconAlgLayout = new QVBoxLayout();
         posReconAlgLayout->setSpacing(6);
@@ -350,11 +379,8 @@ public:
         thresholdLayout->setContentsMargins(-1, -1, -1, 0);
         thresholdLabel = new QLabel(layoutWidget);
         thresholdLabel->setObjectName(QStringLiteral("thresholdLabel"));
-        QSizePolicy sizePolicy1(QSizePolicy::Preferred, QSizePolicy::Preferred);
-        sizePolicy1.setHorizontalStretch(0);
-        sizePolicy1.setVerticalStretch(0);
-        sizePolicy1.setHeightForWidth(thresholdLabel->sizePolicy().hasHeightForWidth());
-        thresholdLabel->setSizePolicy(sizePolicy1);
+        sizePolicy.setHeightForWidth(thresholdLabel->sizePolicy().hasHeightForWidth());
+        thresholdLabel->setSizePolicy(sizePolicy);
         thresholdLabel->setMaximumSize(QSize(16777215, 25));
 
         thresholdLayout->addWidget(thresholdLabel);
@@ -371,30 +397,51 @@ public:
         posReconAlgLayout->addLayout(thresholdLayout);
 
 
-        mainLayout->addLayout(posReconAlgLayout);
+        infoVerticalLayout->addLayout(posReconAlgLayout);
 
-        horizontalLayout = new QHBoxLayout();
-        horizontalLayout->setSpacing(6);
-        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
-        horizontalLayout->setContentsMargins(-1, -1, -1, 10);
+
+        infoLayout->addLayout(infoVerticalLayout);
+
+
+        mainLayout->addLayout(infoLayout);
+
+        line_4 = new QFrame(layoutWidget);
+        line_4->setObjectName(QStringLiteral("line_4"));
+        line_4->setFrameShape(QFrame::HLine);
+        line_4->setFrameShadow(QFrame::Sunken);
+
+        mainLayout->addWidget(line_4);
+
+        buttonLayout = new QHBoxLayout();
+        buttonLayout->setSpacing(6);
+        buttonLayout->setObjectName(QStringLiteral("buttonLayout"));
+        buttonLayout->setContentsMargins(-1, -1, -1, 10);
         startButton = new QPushButton(layoutWidget);
         startButton->setObjectName(QStringLiteral("startButton"));
-        startButton->setMaximumSize(QSize(2000, 2000));
+        QSizePolicy sizePolicy1(QSizePolicy::Minimum, QSizePolicy::Preferred);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(startButton->sizePolicy().hasHeightForWidth());
+        startButton->setSizePolicy(sizePolicy1);
+        startButton->setMaximumSize(QSize(2000, 25));
 
-        horizontalLayout->addWidget(startButton);
+        buttonLayout->addWidget(startButton);
 
         stopButton = new QPushButton(layoutWidget);
         stopButton->setObjectName(QStringLiteral("stopButton"));
+        sizePolicy1.setHeightForWidth(stopButton->sizePolicy().hasHeightForWidth());
+        stopButton->setSizePolicy(sizePolicy1);
+        stopButton->setMaximumSize(QSize(16777215, 25));
 
-        horizontalLayout->addWidget(stopButton);
+        buttonLayout->addWidget(stopButton);
 
 
-        mainLayout->addLayout(horizontalLayout);
+        mainLayout->addLayout(buttonLayout);
 
         MainWindowClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindowClass);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 571, 21));
+        menuBar->setGeometry(QRect(0, 0, 656, 21));
         MainWindowClass->setMenuBar(menuBar);
         mainToolBar = new QToolBar(MainWindowClass);
         mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
@@ -433,16 +480,16 @@ public:
         label1Device->setText(QApplication::translate("MainWindowClass", "Device 1:", 0));
         label2Devices->setText(QApplication::translate("MainWindowClass", "Device 2:", 0));
         testDevicesButton->setText(QApplication::translate("MainWindowClass", "Test Devices", 0));
-        segMethodLabel->setText(QApplication::translate("MainWindowClass", "Segmentation Method:", 0));
-        segMethodSelector->clear();
-        segMethodSelector->insertItems(0, QStringList()
-         << QApplication::translate("MainWindowClass", "Color Cluster Segmentation", 0)
-        );
         posAcqMethodLabel->setText(QApplication::translate("MainWindowClass", "Position Acquisition Method:", 0));
         posAcqMethodSelector->clear();
         posAcqMethodSelector->insertItems(0, QStringList()
          << QApplication::translate("MainWindowClass", "File", 0)
          << QApplication::translate("MainWindowClass", "Vicon", 0)
+        );
+        segMethodLabel->setText(QApplication::translate("MainWindowClass", "Segmentation Method:", 0));
+        segMethodSelector->clear();
+        segMethodSelector->insertItems(0, QStringList()
+         << QApplication::translate("MainWindowClass", "Color Cluster Segmentation", 0)
         );
         posReconAlgLabel->setText(QApplication::translate("MainWindowClass", "Position Reconstructor Algorithm:", 0));
         posReconAlgorithmSelector->clear();

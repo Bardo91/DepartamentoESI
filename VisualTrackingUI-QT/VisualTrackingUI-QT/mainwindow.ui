@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>571</width>
-    <height>848</height>
+    <width>656</width>
+    <height>537</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,10 +17,10 @@
    <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
-      <x>30</x>
-      <y>61</y>
-      <width>528</width>
-      <height>788</height>
+      <x>20</x>
+      <y>20</y>
+      <width>611</width>
+      <height>451</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="mainLayout">
@@ -66,198 +66,6 @@
       </layout>
      </item>
      <item>
-      <layout class="QVBoxLayout" name="imgAcqMethodLayout">
-       <item>
-        <widget class="QLabel" name="imgAcqMethodLabel">
-         <property name="text">
-          <string>Image Acquisition Method:</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QComboBox" name="imgAcqMethodSelector">
-         <item>
-          <property name="text">
-           <string>Device/s</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Images</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Video</string>
-          </property>
-         </item>
-        </widget>
-       </item>
-       <item>
-        <layout class="QHBoxLayout" name="resolutionLayout">
-         <property name="bottomMargin">
-          <number>0</number>
-         </property>
-         <item>
-          <widget class="QLabel" name="widthLabel">
-           <property name="text">
-            <string>Width: </string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPlainTextEdit" name="widthTextEdit">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>16777215</width>
-             <height>25</height>
-            </size>
-           </property>
-           <property name="plainText">
-            <string>320</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLabel" name="heightLabel">
-           <property name="text">
-            <string>Height: </string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPlainTextEdit" name="heightEditText">
-           <property name="maximumSize">
-            <size>
-             <width>16777215</width>
-             <height>25</height>
-            </size>
-           </property>
-           <property name="plainText">
-            <string>240</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <layout class="QHBoxLayout" name="fileMethodLayout">
-         <property name="bottomMargin">
-          <number>0</number>
-         </property>
-         <item>
-          <widget class="QPlainTextEdit" name="imgAcqMethodPathEditText">
-           <property name="enabled">
-            <bool>false</bool>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>16777215</width>
-             <height>25</height>
-            </size>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPlainTextEdit" name="imgAcqMethodFileNameEditText">
-           <property name="enabled">
-            <bool>false</bool>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>150</width>
-             <height>25</height>
-            </size>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <layout class="QVBoxLayout" name="deviceMethodLayout">
-         <property name="bottomMargin">
-          <number>0</number>
-         </property>
-         <item>
-          <layout class="QHBoxLayout" name="rBDeviceLayout">
-           <property name="bottomMargin">
-            <number>0</number>
-           </property>
-           <item>
-            <widget class="QRadioButton" name="rB1Device">
-             <property name="text">
-              <string>1 Device</string>
-             </property>
-             <property name="checked">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QRadioButton" name="rB2Devices">
-             <property name="text">
-              <string>2 Devices</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-         <item>
-          <layout class="QHBoxLayout" name="spinDeviceLayout">
-           <property name="topMargin">
-            <number>0</number>
-           </property>
-           <property name="bottomMargin">
-            <number>0</number>
-           </property>
-           <item>
-            <layout class="QVBoxLayout" name="verticalLayout">
-             <item>
-              <widget class="QLabel" name="label1Device">
-               <property name="text">
-                <string>Device 1:</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QSpinBox" name="spin1Device"/>
-             </item>
-            </layout>
-           </item>
-           <item>
-            <layout class="QVBoxLayout" name="verticalLayout_3">
-             <item>
-              <widget class="QLabel" name="label2Devices">
-               <property name="text">
-                <string>Device 2:</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QSpinBox" name="spin2Devices"/>
-             </item>
-            </layout>
-           </item>
-          </layout>
-         </item>
-         <item>
-          <widget class="QPushButton" name="testDevicesButton">
-           <property name="text">
-            <string>Test Devices</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-      </layout>
-     </item>
-     <item>
       <widget class="Line" name="line_2">
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
@@ -265,79 +73,414 @@
       </widget>
      </item>
      <item>
-      <layout class="QVBoxLayout" name="segMethodLayout">
-       <item>
-        <widget class="QLabel" name="segMethodLabel">
-         <property name="text">
-          <string>Segmentation Method:</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QComboBox" name="segMethodSelector">
-         <item>
-          <property name="text">
-           <string>Color Cluster Segmentation</string>
-          </property>
-         </item>
-        </widget>
-       </item>
-      </layout>
-     </item>
-     <item>
-      <widget class="Line" name="line_3">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <layout class="QVBoxLayout" name="posAcqMethodLayout">
-       <property name="sizeConstraint">
-        <enum>QLayout::SetMinimumSize</enum>
+      <layout class="QHBoxLayout" name="infoLayout">
+       <property name="bottomMargin">
+        <number>0</number>
        </property>
        <item>
-        <widget class="QLabel" name="posAcqMethodLabel">
-         <property name="maximumSize">
-          <size>
-           <width>16777215</width>
-           <height>25</height>
-          </size>
-         </property>
-         <property name="text">
-          <string>Position Acquisition Method:</string>
+        <layout class="QVBoxLayout" name="imgAcqMethodLayout">
+         <item>
+          <widget class="QLabel" name="imgAcqMethodLabel">
+           <property name="text">
+            <string>Image Acquisition Method:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="imgAcqMethodSelector">
+           <item>
+            <property name="text">
+             <string>Device/s</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Images</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Video</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="resolutionLayout">
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
+           <item>
+            <widget class="QLabel" name="widthLabel">
+             <property name="text">
+              <string>Width: </string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPlainTextEdit" name="widthTextEdit">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>25</height>
+              </size>
+             </property>
+             <property name="plainText">
+              <string>320</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="heightLabel">
+             <property name="text">
+              <string>Height: </string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPlainTextEdit" name="heightEditText">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>25</height>
+              </size>
+             </property>
+             <property name="plainText">
+              <string>240</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="fileMethodLayout">
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
+           <item>
+            <widget class="QPlainTextEdit" name="imgAcqMethodPathEditText">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>25</height>
+              </size>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPlainTextEdit" name="imgAcqMethodFileNameEditText">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>150</width>
+               <height>25</height>
+              </size>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QVBoxLayout" name="deviceMethodLayout">
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
+           <item>
+            <layout class="QHBoxLayout" name="rBDeviceLayout">
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
+             <item>
+              <widget class="QRadioButton" name="rB1Device">
+               <property name="text">
+                <string>1 Device</string>
+               </property>
+               <property name="checked">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QRadioButton" name="rB2Devices">
+               <property name="text">
+                <string>2 Devices</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="spinDeviceLayout">
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
+             <item>
+              <layout class="QVBoxLayout" name="verticalLayout">
+               <item>
+                <widget class="QLabel" name="label1Device">
+                 <property name="text">
+                  <string>Device 1:</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QSpinBox" name="spin1Device"/>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QVBoxLayout" name="verticalLayout_3">
+               <item>
+                <widget class="QLabel" name="label2Devices">
+                 <property name="text">
+                  <string>Device 2:</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QSpinBox" name="spin2Devices"/>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <widget class="QPushButton" name="testDevicesButton">
+             <property name="text">
+              <string>Test Devices</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="Line" name="line">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QComboBox" name="posAcqMethodSelector">
-         <property name="maximumSize">
-          <size>
-           <width>16777215</width>
-           <height>25</height>
-          </size>
+        <layout class="QVBoxLayout" name="infoVerticalLayout">
+         <property name="spacing">
+          <number>6</number>
+         </property>
+         <property name="leftMargin">
+          <number>0</number>
          </property>
          <item>
-          <property name="text">
-           <string>File</string>
-          </property>
+          <layout class="QVBoxLayout" name="posAcqMethodLayout">
+           <property name="spacing">
+            <number>0</number>
+           </property>
+           <property name="sizeConstraint">
+            <enum>QLayout::SetMinimumSize</enum>
+           </property>
+           <item>
+            <widget class="QLabel" name="posAcqMethodLabel">
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>25</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>Position Acquisition Method:</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QComboBox" name="posAcqMethodSelector">
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>25</height>
+              </size>
+             </property>
+             <item>
+              <property name="text">
+               <string>File</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Vicon</string>
+              </property>
+             </item>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPlainTextEdit" name="posAcqMethodEditText">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>25</height>
+              </size>
+             </property>
+            </widget>
+           </item>
+          </layout>
          </item>
          <item>
-          <property name="text">
-           <string>Vicon</string>
-          </property>
+          <widget class="Line" name="line_3">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+          </widget>
          </item>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPlainTextEdit" name="posAcqMethodEditText">
-         <property name="maximumSize">
-          <size>
-           <width>16777215</width>
-           <height>25</height>
-          </size>
-         </property>
-        </widget>
+         <item>
+          <layout class="QVBoxLayout" name="segMethodLayout">
+           <item>
+            <widget class="QLabel" name="segMethodLabel">
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>25</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>Segmentation Method:</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QComboBox" name="segMethodSelector">
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>25</height>
+              </size>
+             </property>
+             <item>
+              <property name="text">
+               <string>Color Cluster Segmentation</string>
+              </property>
+             </item>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <widget class="Line" name="line_5">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <layout class="QVBoxLayout" name="posReconAlgLayout">
+           <item>
+            <widget class="QLabel" name="posReconAlgLabel">
+             <property name="text">
+              <string>Position Reconstructor Algorithm:</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QComboBox" name="posReconAlgorithmSelector">
+             <item>
+              <property name="text">
+               <string>Single Camera Ground Tracking</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Stereo Tracking</string>
+              </property>
+             </item>
+            </widget>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="thresholdLayout">
+             <property name="spacing">
+              <number>6</number>
+             </property>
+             <property name="sizeConstraint">
+              <enum>QLayout::SetMinimumSize</enum>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
+             <item>
+              <widget class="QLabel" name="thresholdLabel">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>25</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>Threshold</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPlainTextEdit" name="thresholdTextEdit">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>100</width>
+                 <height>25</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </item>
+        </layout>
        </item>
       </layout>
      </item>
@@ -349,89 +492,22 @@
       </widget>
      </item>
      <item>
-      <layout class="QVBoxLayout" name="posReconAlgLayout">
-       <item>
-        <widget class="QLabel" name="posReconAlgLabel">
-         <property name="text">
-          <string>Position Reconstructor Algorithm:</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QComboBox" name="posReconAlgorithmSelector">
-         <item>
-          <property name="text">
-           <string>Single Camera Ground Tracking</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Stereo Tracking</string>
-          </property>
-         </item>
-        </widget>
-       </item>
-       <item>
-        <layout class="QHBoxLayout" name="thresholdLayout">
-         <property name="spacing">
-          <number>6</number>
-         </property>
-         <property name="sizeConstraint">
-          <enum>QLayout::SetMinimumSize</enum>
-         </property>
-         <property name="bottomMargin">
-          <number>0</number>
-         </property>
-         <item>
-          <widget class="QLabel" name="thresholdLabel">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>16777215</width>
-             <height>25</height>
-            </size>
-           </property>
-           <property name="text">
-            <string>Threshold</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPlainTextEdit" name="thresholdTextEdit">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>100</width>
-             <height>25</height>
-            </size>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-      </layout>
-     </item>
-     <item>
-      <layout class="QHBoxLayout" name="horizontalLayout">
+      <layout class="QHBoxLayout" name="buttonLayout">
        <property name="bottomMargin">
         <number>10</number>
        </property>
        <item>
         <widget class="QPushButton" name="startButton">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <property name="maximumSize">
           <size>
            <width>2000</width>
-           <height>2000</height>
+           <height>25</height>
           </size>
          </property>
          <property name="text">
@@ -441,6 +517,18 @@
        </item>
        <item>
         <widget class="QPushButton" name="stopButton">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>25</height>
+          </size>
+         </property>
          <property name="text">
           <string>Stop</string>
          </property>
@@ -456,7 +544,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>571</width>
+     <width>656</width>
      <height>21</height>
     </rect>
    </property>
