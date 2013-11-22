@@ -16,7 +16,7 @@
 
 namespace vision{
 
-	static enum eSegmentationAlgorithms {ColorClustering};
+	static enum eSegmentationAlgorithms {ColorClustering, RandomClustering};
 
 	class SegmentationManager{
 	public: // Constructors and deconstructors
