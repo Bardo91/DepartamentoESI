@@ -101,6 +101,9 @@
     <ClCompile Include="ComputerVisionLibraries\Timing\time.cpp">
       <Filter>ComputerVisionLibraries\Timing</Filter>
     </ClCompile>
+    <ClCompile Include="ComputerVisionLibraries\Positioning\ObjectGeo.cpp">
+      <Filter>ComputerVisionLibraries\Positioning</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="mainwindow.h">

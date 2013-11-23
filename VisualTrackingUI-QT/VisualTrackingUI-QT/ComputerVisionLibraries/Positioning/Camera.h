@@ -28,7 +28,7 @@ namespace vision{
 			const int nDistCoef; // Size of distorsion coeffient vector
 			const double* projectionCoef; // Projection coefficients to make the properly correction of an image.
 			const int nProjCoef; // Size of projection coeffient vector
-		}; class Camera
+		}; //class Camera
 
 	} // namespace position
 } // namespace vision

@@ -10,8 +10,8 @@
 #define _VISUAL_TRACKING_UI_INFO_COLLECTOR_H_
 
 #include "ImageManager.h"
-#include  "SegmentationManager.h"
-
+#include "SegmentationManager.h"
+#include "PositionManager.h"
 class MainWindow;
 
 

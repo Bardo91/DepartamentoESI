@@ -14,14 +14,12 @@
 #include <opencv/cv.h>
 
 namespace vision{
-	namespace position{
-		class PositionManager{
-		public:
+	class PositionManager{
+	public:
 
-		private:
-			Camera cam1, cam2;
-		}; // class PositionManager
-	} // namespace position
+	private:
+		position::Camera cam1, cam2;
+	}; // class PositionManager
 } // namespace vision
 
 

@@ -85,6 +85,7 @@
     <ClCompile Include="ComputerVisionLibraries\ImageSegmentation\ColorSpaceHSV8.cpp" />
     <ClCompile Include="ComputerVisionLibraries\ImageSegmentation\ColorClusterImageSegmentation.cpp" />
     <ClCompile Include="ComputerVisionLibraries\ImageSegmentation\SegmentedObject.cpp" />
+    <ClCompile Include="ComputerVisionLibraries\Positioning\ObjectGeo.cpp" />
     <ClCompile Include="ComputerVisionLibraries\Timing\time.cpp" />
     <ClCompile Include="GeneratedFiles\Debug\moc_mainwindow.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>

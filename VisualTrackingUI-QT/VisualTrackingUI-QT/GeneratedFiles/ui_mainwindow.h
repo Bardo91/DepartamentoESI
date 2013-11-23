@@ -25,6 +25,7 @@
 #include <QtWidgets/QRadioButton>
 #include <QtWidgets/QSpinBox>
 #include <QtWidgets/QStatusBar>
+#include <QtWidgets/QTextEdit>
 #include <QtWidgets/QToolBar>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
@@ -82,7 +83,7 @@ public:
     QComboBox *posReconAlgorithmSelector;
     QHBoxLayout *thresholdLayout;
     QLabel *thresholdLabel;
-    QPlainTextEdit *thresholdTextEdit;
+    QTextEdit *thresholdTextEdit;
     QFrame *line_4;
     QHBoxLayout *buttonLayout;
     QPushButton *startButton;
@@ -95,12 +96,12 @@ public:
     {
         if (MainWindowClass->objectName().isEmpty())
             MainWindowClass->setObjectName(QStringLiteral("MainWindowClass"));
-        MainWindowClass->resize(656, 537);
+        MainWindowClass->resize(760, 500);
         centralWidget = new QWidget(MainWindowClass);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         layoutWidget = new QWidget(centralWidget);
         layoutWidget->setObjectName(QStringLiteral("layoutWidget"));
-        layoutWidget->setGeometry(QRect(20, 20, 611, 451));
+        layoutWidget->setGeometry(QRect(20, 20, 731, 413));
         mainLayout = new QVBoxLayout(layoutWidget);
         mainLayout->setSpacing(6);
         mainLayout->setContentsMargins(11, 11, 11, 11);
@@ -111,6 +112,8 @@ public:
         titleLayout->setObjectName(QStringLiteral("titleLayout"));
         titleLabel = new QLabel(layoutWidget);
         titleLabel->setObjectName(QStringLiteral("titleLabel"));
+        titleLabel->setMinimumSize(QSize(700, 0));
+        titleLabel->setMaximumSize(QSize(700, 16777215));
         titleLabel->setStyleSheet(QLatin1String("font: 45pt \"Palatino Linotype\";\n"
 ""));
         titleLabel->setTextFormat(Qt::PlainText);
@@ -119,12 +122,16 @@ public:
 
         authorLabel = new QLabel(layoutWidget);
         authorLabel->setObjectName(QStringLiteral("authorLabel"));
+        authorLabel->setMinimumSize(QSize(700, 0));
+        authorLabel->setMaximumSize(QSize(700, 16777215));
         authorLabel->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
 
         titleLayout->addWidget(authorLabel);
 
         dateLabel = new QLabel(layoutWidget);
         dateLabel->setObjectName(QStringLiteral("dateLabel"));
+        dateLabel->setMinimumSize(QSize(700, 0));
+        dateLabel->setMaximumSize(QSize(700, 16777215));
         dateLabel->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
 
         titleLayout->addWidget(dateLabel);
@@ -148,11 +155,14 @@ public:
         imgAcqMethodLayout->setObjectName(QStringLiteral("imgAcqMethodLayout"));
         imgAcqMethodLabel = new QLabel(layoutWidget);
         imgAcqMethodLabel->setObjectName(QStringLiteral("imgAcqMethodLabel"));
+        imgAcqMethodLabel->setMaximumSize(QSize(400, 16777215));
 
         imgAcqMethodLayout->addWidget(imgAcqMethodLabel);
 
         imgAcqMethodSelector = new QComboBox(layoutWidget);
         imgAcqMethodSelector->setObjectName(QStringLiteral("imgAcqMethodSelector"));
+        imgAcqMethodSelector->setMinimumSize(QSize(400, 20));
+        imgAcqMethodSelector->setMaximumSize(QSize(400, 16777215));
 
         imgAcqMethodLayout->addWidget(imgAcqMethodSelector);
 
@@ -162,6 +172,8 @@ public:
         resolutionLayout->setContentsMargins(-1, -1, -1, 0);
         widthLabel = new QLabel(layoutWidget);
         widthLabel->setObjectName(QStringLiteral("widthLabel"));
+        widthLabel->setMinimumSize(QSize(100, 25));
+        widthLabel->setMaximumSize(QSize(100, 16777215));
 
         resolutionLayout->addWidget(widthLabel);
 
@@ -172,12 +184,15 @@ public:
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(widthTextEdit->sizePolicy().hasHeightForWidth());
         widthTextEdit->setSizePolicy(sizePolicy);
-        widthTextEdit->setMaximumSize(QSize(16777215, 25));
+        widthTextEdit->setMinimumSize(QSize(100, 25));
+        widthTextEdit->setMaximumSize(QSize(100, 25));
 
         resolutionLayout->addWidget(widthTextEdit);
 
         heightLabel = new QLabel(layoutWidget);
         heightLabel->setObjectName(QStringLiteral("heightLabel"));
+        heightLabel->setMinimumSize(QSize(100, 25));
+        heightLabel->setMaximumSize(QSize(100, 16777215));
 
         resolutionLayout->addWidget(heightLabel);
 
@@ -185,7 +200,8 @@ public:
         heightEditText->setObjectName(QStringLiteral("heightEditText"));
         sizePolicy.setHeightForWidth(heightEditText->sizePolicy().hasHeightForWidth());
         heightEditText->setSizePolicy(sizePolicy);
-        heightEditText->setMaximumSize(QSize(16777215, 25));
+        heightEditText->setMinimumSize(QSize(100, 25));
+        heightEditText->setMaximumSize(QSize(100, 25));
 
         resolutionLayout->addWidget(heightEditText);
 
@@ -201,7 +217,7 @@ public:
         imgAcqMethodPathEditText->setEnabled(false);
         sizePolicy.setHeightForWidth(imgAcqMethodPathEditText->sizePolicy().hasHeightForWidth());
         imgAcqMethodPathEditText->setSizePolicy(sizePolicy);
-        imgAcqMethodPathEditText->setMaximumSize(QSize(16777215, 25));
+        imgAcqMethodPathEditText->setMaximumSize(QSize(400, 25));
 
         fileMethodLayout->addWidget(imgAcqMethodPathEditText);
 
@@ -210,7 +226,7 @@ public:
         imgAcqMethodFileNameEditText->setEnabled(false);
         sizePolicy.setHeightForWidth(imgAcqMethodFileNameEditText->sizePolicy().hasHeightForWidth());
         imgAcqMethodFileNameEditText->setSizePolicy(sizePolicy);
-        imgAcqMethodFileNameEditText->setMaximumSize(QSize(150, 25));
+        imgAcqMethodFileNameEditText->setMaximumSize(QSize(200, 25));
 
         fileMethodLayout->addWidget(imgAcqMethodFileNameEditText);
 
@@ -227,12 +243,16 @@ public:
         rBDeviceLayout->setContentsMargins(-1, -1, -1, 0);
         rB1Device = new QRadioButton(layoutWidget);
         rB1Device->setObjectName(QStringLiteral("rB1Device"));
+        rB1Device->setMinimumSize(QSize(200, 20));
+        rB1Device->setMaximumSize(QSize(200, 16777215));
         rB1Device->setChecked(true);
 
         rBDeviceLayout->addWidget(rB1Device);
 
         rB2Devices = new QRadioButton(layoutWidget);
         rB2Devices->setObjectName(QStringLiteral("rB2Devices"));
+        rB2Devices->setMinimumSize(QSize(200, 20));
+        rB2Devices->setMaximumSize(QSize(200, 16777215));
 
         rBDeviceLayout->addWidget(rB2Devices);
 
@@ -248,11 +268,15 @@ public:
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         label1Device = new QLabel(layoutWidget);
         label1Device->setObjectName(QStringLiteral("label1Device"));
+        label1Device->setMinimumSize(QSize(200, 20));
+        label1Device->setMaximumSize(QSize(200, 25));
 
         verticalLayout->addWidget(label1Device);
 
         spin1Device = new QSpinBox(layoutWidget);
         spin1Device->setObjectName(QStringLiteral("spin1Device"));
+        spin1Device->setMinimumSize(QSize(200, 20));
+        spin1Device->setMaximumSize(QSize(200, 25));
 
         verticalLayout->addWidget(spin1Device);
 
@@ -264,11 +288,15 @@ public:
         verticalLayout_3->setObjectName(QStringLiteral("verticalLayout_3"));
         label2Devices = new QLabel(layoutWidget);
         label2Devices->setObjectName(QStringLiteral("label2Devices"));
+        label2Devices->setMinimumSize(QSize(200, 20));
+        label2Devices->setMaximumSize(QSize(200, 25));
 
         verticalLayout_3->addWidget(label2Devices);
 
         spin2Devices = new QSpinBox(layoutWidget);
         spin2Devices->setObjectName(QStringLiteral("spin2Devices"));
+        spin2Devices->setMinimumSize(QSize(200, 20));
+        spin2Devices->setMaximumSize(QSize(200, 25));
 
         verticalLayout_3->addWidget(spin2Devices);
 
@@ -280,6 +308,8 @@ public:
 
         testDevicesButton = new QPushButton(layoutWidget);
         testDevicesButton->setObjectName(QStringLiteral("testDevicesButton"));
+        testDevicesButton->setMinimumSize(QSize(400, 25));
+        testDevicesButton->setMaximumSize(QSize(16777215, 400));
 
         deviceMethodLayout->addWidget(testDevicesButton);
 
@@ -306,13 +336,15 @@ public:
         posAcqMethodLayout->setSizeConstraint(QLayout::SetMinimumSize);
         posAcqMethodLabel = new QLabel(layoutWidget);
         posAcqMethodLabel->setObjectName(QStringLiteral("posAcqMethodLabel"));
-        posAcqMethodLabel->setMaximumSize(QSize(16777215, 25));
+        posAcqMethodLabel->setMinimumSize(QSize(300, 20));
+        posAcqMethodLabel->setMaximumSize(QSize(300, 20));
 
         posAcqMethodLayout->addWidget(posAcqMethodLabel);
 
         posAcqMethodSelector = new QComboBox(layoutWidget);
         posAcqMethodSelector->setObjectName(QStringLiteral("posAcqMethodSelector"));
-        posAcqMethodSelector->setMaximumSize(QSize(16777215, 25));
+        posAcqMethodSelector->setMinimumSize(QSize(300, 20));
+        posAcqMethodSelector->setMaximumSize(QSize(300, 20));
 
         posAcqMethodLayout->addWidget(posAcqMethodSelector);
 
@@ -320,7 +352,8 @@ public:
         posAcqMethodEditText->setObjectName(QStringLiteral("posAcqMethodEditText"));
         sizePolicy.setHeightForWidth(posAcqMethodEditText->sizePolicy().hasHeightForWidth());
         posAcqMethodEditText->setSizePolicy(sizePolicy);
-        posAcqMethodEditText->setMaximumSize(QSize(16777215, 25));
+        posAcqMethodEditText->setMinimumSize(QSize(300, 25));
+        posAcqMethodEditText->setMaximumSize(QSize(300, 20));
 
         posAcqMethodLayout->addWidget(posAcqMethodEditText);
 
@@ -339,13 +372,15 @@ public:
         segMethodLayout->setObjectName(QStringLiteral("segMethodLayout"));
         segMethodLabel = new QLabel(layoutWidget);
         segMethodLabel->setObjectName(QStringLiteral("segMethodLabel"));
-        segMethodLabel->setMaximumSize(QSize(16777215, 25));
+        segMethodLabel->setMinimumSize(QSize(300, 20));
+        segMethodLabel->setMaximumSize(QSize(300, 20));
 
         segMethodLayout->addWidget(segMethodLabel);
 
         segMethodSelector = new QComboBox(layoutWidget);
         segMethodSelector->setObjectName(QStringLiteral("segMethodSelector"));
-        segMethodSelector->setMaximumSize(QSize(16777215, 25));
+        segMethodSelector->setMinimumSize(QSize(300, 20));
+        segMethodSelector->setMaximumSize(QSize(300, 20));
 
         segMethodLayout->addWidget(segMethodSelector);
 
@@ -364,11 +399,15 @@ public:
         posReconAlgLayout->setObjectName(QStringLiteral("posReconAlgLayout"));
         posReconAlgLabel = new QLabel(layoutWidget);
         posReconAlgLabel->setObjectName(QStringLiteral("posReconAlgLabel"));
+        posReconAlgLabel->setMinimumSize(QSize(300, 20));
+        posReconAlgLabel->setMaximumSize(QSize(300, 20));
 
         posReconAlgLayout->addWidget(posReconAlgLabel);
 
         posReconAlgorithmSelector = new QComboBox(layoutWidget);
         posReconAlgorithmSelector->setObjectName(QStringLiteral("posReconAlgorithmSelector"));
+        posReconAlgorithmSelector->setMinimumSize(QSize(300, 20));
+        posReconAlgorithmSelector->setMaximumSize(QSize(300, 20));
 
         posReconAlgLayout->addWidget(posReconAlgorithmSelector);
 
@@ -381,15 +420,17 @@ public:
         thresholdLabel->setObjectName(QStringLiteral("thresholdLabel"));
         sizePolicy.setHeightForWidth(thresholdLabel->sizePolicy().hasHeightForWidth());
         thresholdLabel->setSizePolicy(sizePolicy);
-        thresholdLabel->setMaximumSize(QSize(16777215, 25));
+        thresholdLabel->setMinimumSize(QSize(100, 20));
+        thresholdLabel->setMaximumSize(QSize(100, 20));
 
         thresholdLayout->addWidget(thresholdLabel);
 
-        thresholdTextEdit = new QPlainTextEdit(layoutWidget);
+        thresholdTextEdit = new QTextEdit(layoutWidget);
         thresholdTextEdit->setObjectName(QStringLiteral("thresholdTextEdit"));
         sizePolicy.setHeightForWidth(thresholdTextEdit->sizePolicy().hasHeightForWidth());
         thresholdTextEdit->setSizePolicy(sizePolicy);
-        thresholdTextEdit->setMaximumSize(QSize(100, 25));
+        thresholdTextEdit->setMinimumSize(QSize(200, 20));
+        thresholdTextEdit->setMaximumSize(QSize(200, 20));
 
         thresholdLayout->addWidget(thresholdTextEdit);
 
@@ -423,7 +464,8 @@ public:
         sizePolicy1.setVerticalStretch(0);
         sizePolicy1.setHeightForWidth(startButton->sizePolicy().hasHeightForWidth());
         startButton->setSizePolicy(sizePolicy1);
-        startButton->setMaximumSize(QSize(2000, 25));
+        startButton->setMinimumSize(QSize(400, 20));
+        startButton->setMaximumSize(QSize(400, 25));
 
         buttonLayout->addWidget(startButton);
 
@@ -431,7 +473,8 @@ public:
         stopButton->setObjectName(QStringLiteral("stopButton"));
         sizePolicy1.setHeightForWidth(stopButton->sizePolicy().hasHeightForWidth());
         stopButton->setSizePolicy(sizePolicy1);
-        stopButton->setMaximumSize(QSize(16777215, 25));
+        stopButton->setMinimumSize(QSize(400, 20));
+        stopButton->setMaximumSize(QSize(400, 25));
 
         buttonLayout->addWidget(stopButton);
 
@@ -441,7 +484,7 @@ public:
         MainWindowClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindowClass);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 656, 21));
+        menuBar->setGeometry(QRect(0, 0, 760, 21));
         MainWindowClass->setMenuBar(menuBar);
         mainToolBar = new QToolBar(MainWindowClass);
         mainToolBar->setObjectName(QStringLiteral("mainToolBar"));

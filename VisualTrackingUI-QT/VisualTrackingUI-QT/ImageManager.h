@@ -14,7 +14,7 @@
 
 
 namespace vision{
-	class ImageManager{
+	class ImageManager{ // 666 TODO: implement thread with image data acquisition in order to relax algorithm time (Buffer of images, etc...).
 	public:
 		ImageManager();
 		~ImageManager();

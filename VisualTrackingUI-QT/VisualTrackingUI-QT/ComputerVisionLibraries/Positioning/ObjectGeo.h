@@ -18,6 +18,9 @@ namespace vision{
 
 		class ObjectGeo{ // Class that arrange and manage geometrical information of an object
 		public:
+			ObjectGeo();
+		
+		public:
 			void getPosition(cv::Mat& _position) const;
 			void getOrientation(cv::Mat& _orientation) const;
 
