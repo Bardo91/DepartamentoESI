@@ -12,12 +12,14 @@
 
 #include <qmessagebox.h>
 
+using namespace std;
 
 namespace vision{
 	//------------------------------------------------------------------------
 	InfoCollector::InfoCollector(MainWindow *_mainWindow){
 		infoPointers.imageManager = new ImageManager();
 		infoPointers.segmentationManager = new SegmentationManager();
+		infoPointers.positionManager = new PositionManager();
 
 		mainWindow = _mainWindow;
 	}
@@ -26,6 +28,7 @@ namespace vision{
 	InfoCollector::~InfoCollector(){
 			delete infoPointers.imageManager;
 			delete infoPointers.segmentationManager;
+			delete infoPointers.positionManager;
 	}
 
 	//------------------------------------------------------------------------
@@ -33,10 +36,10 @@ namespace vision{
 		int errors = 0;
 		errors += setUpImageManager(); 
 		errors += setUpSegmentationManager();
-		//setUpPositionManager();
-		//setUpAlgorithmManager();
+		errors += setUpPositionManager(mainWindow->getCameraInfoPath());
+		//error += setUpAlgorithmManager();
 
-		//infoPointers.positionManager = positionManager
+		
 		//infoPointers.algorithManager = algorithmManager
 
 
@@ -102,6 +105,14 @@ namespace vision{
 				assert(false);
 				break;
 		}
+
+		return 0;
+	}
+
+	//------------------------------------------------------------------------
+	int InfoCollector::setUpPositionManager(string& _filePath){
+		if(infoPointers.positionManager->configureCams(_filePath) != 0)
+			return -1;
 
 		return 0;
 	}

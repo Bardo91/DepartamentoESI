@@ -14,6 +14,11 @@ using namespace cv;
 namespace vision{
 	namespace position{
 		//--------------------------------------------------------------------
+		ObjectGeo::ObjectGeo(){
+			oriType = eEulerAngles;
+		}
+
+		//--------------------------------------------------------------------
 		void ObjectGeo::setPosition(const Mat& _position){
 			_position.copyTo(position);
 		}

@@ -12,7 +12,10 @@
 #include "ImageManager.h"
 #include "SegmentationManager.h"
 #include "PositionManager.h"
-class MainWindow;
+#include <string>
+
+
+class MainWindow; // Forward declaration
 
 
 namespace vision{
@@ -40,8 +43,8 @@ namespace vision{
 	private:
 		int setUpImageManager();
 		int setUpSegmentationManager();
-		// 666 TODO: void setUpPositionManager();
-		// 666 TODO: void setUpAlgorithmManager();
+		int setUpPositionManager(std::string& _filePath);
+		// 666 TODO: int setUpAlgorithmManager();
 
 
 

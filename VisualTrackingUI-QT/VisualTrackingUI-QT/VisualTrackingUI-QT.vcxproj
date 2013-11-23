@@ -104,6 +104,7 @@
     <ClCompile Include="InfoCollector.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="mainwindow.cpp" />
+    <ClCompile Include="PositionManager.cpp" />
     <ClCompile Include="SegmentationManager.cpp" />
     <ClCompile Include="ThreadAlgorithm.cpp" />
     <ClCompile Include="ThreadManager.cpp" />

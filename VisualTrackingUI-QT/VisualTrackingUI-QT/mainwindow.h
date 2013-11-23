@@ -36,7 +36,11 @@ public: // Functions to adquire mainwindow widgets information.
 	int getIdDevice1();
 	int getIdDevice2();
 	std::string getImagesPath();
-	std::string getImageNameFormat();
+	std::string getImageNameFormat1();
+	std::string getImageNameFormat2();
+
+	// Functions related to Camera information
+	std::string getCameraInfoPath();
 
 	// Functions related to Segmentation algorithm
 	int getSegmentationAlgorithm();

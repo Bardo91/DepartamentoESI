@@ -116,6 +116,9 @@
     <ClCompile Include="ComputerVisionLibraries\Positioning\Camera.cpp">
       <Filter>ComputerVisionLibraries\Positioning</Filter>
     </ClCompile>
+    <ClCompile Include="PositionManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="mainwindow.h">

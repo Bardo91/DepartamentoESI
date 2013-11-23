@@ -12,13 +12,19 @@
 #include "ComputerVisionLibraries/Positioning/Camera.h"
 
 #include <opencv/cv.h>
+#include <string>
 
 namespace vision{
 	class PositionManager{
 	public:
+		PositionManager();
+		~PositionManager();
+	
+	public:
+		int configureCams(std::string& _filePath); // both cams are supposed to have same properties.
 
 	private:
-		position::Camera cam1, cam2;
+		position::Camera *cam1, *cam2;
 	}; // class PositionManager
 } // namespace vision
 

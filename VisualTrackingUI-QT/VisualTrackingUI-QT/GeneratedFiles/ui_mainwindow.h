@@ -52,9 +52,12 @@ public:
     QPlainTextEdit *widthTextEdit;
     QLabel *heightLabel;
     QPlainTextEdit *heightEditText;
+    QVBoxLayout *verticalLayout_2;
     QHBoxLayout *fileMethodLayout;
     QPlainTextEdit *imgAcqMethodPathEditText;
-    QPlainTextEdit *imgAcqMethodFileNameEditText;
+    QHBoxLayout *horizontalLayout;
+    QPlainTextEdit *imgAcqMethodFileName2EditText;
+    QPlainTextEdit *imgAcqMethodFileName1EditText;
     QVBoxLayout *deviceMethodLayout;
     QHBoxLayout *rBDeviceLayout;
     QRadioButton *rB1Device;
@@ -70,6 +73,10 @@ public:
     QFrame *line;
     QVBoxLayout *infoVerticalLayout;
     QVBoxLayout *posAcqMethodLayout;
+    QVBoxLayout *verticalLayout_4;
+    QLabel *cameraInfoLabel;
+    QPlainTextEdit *cameraInfoPathEditTest;
+    QFrame *line_6;
     QLabel *posAcqMethodLabel;
     QComboBox *posAcqMethodSelector;
     QPlainTextEdit *posAcqMethodEditText;
@@ -96,12 +103,12 @@ public:
     {
         if (MainWindowClass->objectName().isEmpty())
             MainWindowClass->setObjectName(QStringLiteral("MainWindowClass"));
-        MainWindowClass->resize(760, 500);
+        MainWindowClass->resize(879, 603);
         centralWidget = new QWidget(MainWindowClass);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         layoutWidget = new QWidget(centralWidget);
         layoutWidget->setObjectName(QStringLiteral("layoutWidget"));
-        layoutWidget->setGeometry(QRect(20, 20, 731, 413));
+        layoutWidget->setGeometry(QRect(20, 20, 810, 466));
         mainLayout = new QVBoxLayout(layoutWidget);
         mainLayout->setSpacing(6);
         mainLayout->setContentsMargins(11, 11, 11, 11);
@@ -208,10 +215,14 @@ public:
 
         imgAcqMethodLayout->addLayout(resolutionLayout);
 
+        verticalLayout_2 = new QVBoxLayout();
+        verticalLayout_2->setSpacing(6);
+        verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
+        verticalLayout_2->setContentsMargins(-1, -1, -1, 0);
         fileMethodLayout = new QHBoxLayout();
         fileMethodLayout->setSpacing(6);
         fileMethodLayout->setObjectName(QStringLiteral("fileMethodLayout"));
-        fileMethodLayout->setContentsMargins(-1, -1, -1, 0);
+        fileMethodLayout->setContentsMargins(-1, -1, 0, 0);
         imgAcqMethodPathEditText = new QPlainTextEdit(layoutWidget);
         imgAcqMethodPathEditText->setObjectName(QStringLiteral("imgAcqMethodPathEditText"));
         imgAcqMethodPathEditText->setEnabled(false);
@@ -221,17 +232,36 @@ public:
 
         fileMethodLayout->addWidget(imgAcqMethodPathEditText);
 
-        imgAcqMethodFileNameEditText = new QPlainTextEdit(layoutWidget);
-        imgAcqMethodFileNameEditText->setObjectName(QStringLiteral("imgAcqMethodFileNameEditText"));
-        imgAcqMethodFileNameEditText->setEnabled(false);
-        sizePolicy.setHeightForWidth(imgAcqMethodFileNameEditText->sizePolicy().hasHeightForWidth());
-        imgAcqMethodFileNameEditText->setSizePolicy(sizePolicy);
-        imgAcqMethodFileNameEditText->setMaximumSize(QSize(200, 25));
 
-        fileMethodLayout->addWidget(imgAcqMethodFileNameEditText);
+        verticalLayout_2->addLayout(fileMethodLayout);
+
+        horizontalLayout = new QHBoxLayout();
+        horizontalLayout->setSpacing(6);
+        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
+        horizontalLayout->setContentsMargins(-1, 0, -1, -1);
+        imgAcqMethodFileName2EditText = new QPlainTextEdit(layoutWidget);
+        imgAcqMethodFileName2EditText->setObjectName(QStringLiteral("imgAcqMethodFileName2EditText"));
+        imgAcqMethodFileName2EditText->setEnabled(false);
+        imgAcqMethodFileName2EditText->setMinimumSize(QSize(200, 25));
+        imgAcqMethodFileName2EditText->setMaximumSize(QSize(200, 25));
+
+        horizontalLayout->addWidget(imgAcqMethodFileName2EditText);
+
+        imgAcqMethodFileName1EditText = new QPlainTextEdit(layoutWidget);
+        imgAcqMethodFileName1EditText->setObjectName(QStringLiteral("imgAcqMethodFileName1EditText"));
+        imgAcqMethodFileName1EditText->setEnabled(false);
+        sizePolicy.setHeightForWidth(imgAcqMethodFileName1EditText->sizePolicy().hasHeightForWidth());
+        imgAcqMethodFileName1EditText->setSizePolicy(sizePolicy);
+        imgAcqMethodFileName1EditText->setMinimumSize(QSize(200, 25));
+        imgAcqMethodFileName1EditText->setMaximumSize(QSize(200, 25));
+
+        horizontalLayout->addWidget(imgAcqMethodFileName1EditText);
 
 
-        imgAcqMethodLayout->addLayout(fileMethodLayout);
+        verticalLayout_2->addLayout(horizontalLayout);
+
+
+        imgAcqMethodLayout->addLayout(verticalLayout_2);
 
         deviceMethodLayout = new QVBoxLayout();
         deviceMethodLayout->setSpacing(6);
@@ -334,6 +364,32 @@ public:
         posAcqMethodLayout->setSpacing(0);
         posAcqMethodLayout->setObjectName(QStringLiteral("posAcqMethodLayout"));
         posAcqMethodLayout->setSizeConstraint(QLayout::SetMinimumSize);
+        verticalLayout_4 = new QVBoxLayout();
+        verticalLayout_4->setSpacing(6);
+        verticalLayout_4->setObjectName(QStringLiteral("verticalLayout_4"));
+        verticalLayout_4->setContentsMargins(-1, -1, -1, 10);
+        cameraInfoLabel = new QLabel(layoutWidget);
+        cameraInfoLabel->setObjectName(QStringLiteral("cameraInfoLabel"));
+
+        verticalLayout_4->addWidget(cameraInfoLabel);
+
+        cameraInfoPathEditTest = new QPlainTextEdit(layoutWidget);
+        cameraInfoPathEditTest->setObjectName(QStringLiteral("cameraInfoPathEditTest"));
+        cameraInfoPathEditTest->setMinimumSize(QSize(300, 25));
+        cameraInfoPathEditTest->setMaximumSize(QSize(300, 25));
+
+        verticalLayout_4->addWidget(cameraInfoPathEditTest);
+
+
+        posAcqMethodLayout->addLayout(verticalLayout_4);
+
+        line_6 = new QFrame(layoutWidget);
+        line_6->setObjectName(QStringLiteral("line_6"));
+        line_6->setFrameShape(QFrame::HLine);
+        line_6->setFrameShadow(QFrame::Sunken);
+
+        posAcqMethodLayout->addWidget(line_6);
+
         posAcqMethodLabel = new QLabel(layoutWidget);
         posAcqMethodLabel->setObjectName(QStringLiteral("posAcqMethodLabel"));
         posAcqMethodLabel->setMinimumSize(QSize(300, 20));
@@ -484,7 +540,7 @@ public:
         MainWindowClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindowClass);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 760, 21));
+        menuBar->setGeometry(QRect(0, 0, 879, 21));
         MainWindowClass->setMenuBar(menuBar);
         mainToolBar = new QToolBar(MainWindowClass);
         mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
@@ -502,7 +558,7 @@ public:
     {
         MainWindowClass->setWindowTitle(QApplication::translate("MainWindowClass", "MainWindow", 0));
 #ifndef QT_NO_TOOLTIP
-        titleLabel->setToolTip(QApplication::translate("MainWindowClass", "<html><head/><body><p><span style=\" font-size:36pt;\">Visual Tracking UI</span></p></body></html>", 0));
+        titleLabel->setToolTip(QApplication::translate("MainWindowClass", "<html><head/><body><p align=\"center\"><span style=\" font-size:36pt;\">Visual Tracking UI</span></p></body></html>", 0));
 #endif // QT_NO_TOOLTIP
         titleLabel->setText(QApplication::translate("MainWindowClass", "Visual Tracking UI", 0));
         authorLabel->setText(QApplication::translate("MainWindowClass", "Author: Pablo Ram\303\263n Soria", 0));
@@ -523,6 +579,7 @@ public:
         label1Device->setText(QApplication::translate("MainWindowClass", "Device 1:", 0));
         label2Devices->setText(QApplication::translate("MainWindowClass", "Device 2:", 0));
         testDevicesButton->setText(QApplication::translate("MainWindowClass", "Test Devices", 0));
+        cameraInfoLabel->setText(QApplication::translate("MainWindowClass", "Camera Info", 0));
         posAcqMethodLabel->setText(QApplication::translate("MainWindowClass", "Position Acquisition Method:", 0));
         posAcqMethodSelector->clear();
         posAcqMethodSelector->insertItems(0, QStringList()

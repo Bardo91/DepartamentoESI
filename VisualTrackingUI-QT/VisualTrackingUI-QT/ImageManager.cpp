@@ -93,7 +93,7 @@ void ImageManager::getFrames(Mat& _frame1, Mat& _frame2){
 int ImageManager::showCurrentFrames(){
 	if(!imageAcquisitor1->canCapture())
 		return -1; // Error: device 1 is not found.
-	if(imageAcquisitor2 != 0 && !imageAcquisitor2->canCapture())
+	if(twoCameras && imageAcquisitor2 != 0 && !imageAcquisitor2->canCapture())
 		return -2; // Error: device 2 is not found.
 
 	Mat frame1, frame2;

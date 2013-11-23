@@ -13,6 +13,7 @@
 
 #include <opencv/cv.h>
 #include <string>
+#include <fstream>
 
 namespace vision{
 	namespace position{
@@ -24,20 +25,22 @@ namespace vision{
 			int preparePositionFile();
 			int startViconConnection();
 
-			int init();
-
 		public:
 			double getFocalLenght() const;
 			int fixDistorsion(cv::Mat&_frame) const;
 
+		private: // Camera Parameters
+			double focalLenght; // Media between camera's X focal length and Y focal lenght.
+			double gammaSkew; // Skew coefficient between the x and y axis.
+			double u0, v0;  // Principal point (Ideally in the center of the image, in term of 1).
+			double* distorsionCoef; // Distorsión coefficients to make the properly correction of an image.
+			int nDistCoef; // Size of distorsion coeffient vector
+			double* projectionCoef; // Projection coefficients to make the properly correction of an image.
+			int nProjCoef; // Size of projection coeffient vector
 		private:
-			const double focalLenght; // Media between camera's X focal length and Y focal lenght.
-			const double gammaSkew; // Skew coefficient between the x and y axis.
-			const double u0, v0;  // Principal point (Ideally in the center of the image, in term of 1).
-			const double* distorsionCoef; // Distorsión coefficients to make the properly correction of an image.
-			const int nDistCoef; // Size of distorsion coeffient vector
-			const double* projectionCoef; // Projection coefficients to make the properly correction of an image.
-			const int nProjCoef; // Size of projection coeffient vector
+			std::ifstream positionFile;
+
+
 		}; //class Camera
 
 	} // namespace position

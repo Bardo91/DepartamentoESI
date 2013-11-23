@@ -72,8 +72,19 @@ string MainWindow::getImagesPath(){
 }
 
 //----------------------------------------------------------------------------
-string MainWindow::getImageNameFormat(){
-	return ui.imgAcqMethodFileNameEditText->toPlainText().toStdString();
+string MainWindow::getImageNameFormat1(){
+	return ui.imgAcqMethodFileName1EditText->toPlainText().toStdString();
+}
+
+//----------------------------------------------------------------------------
+string MainWindow::getImageNameFormat2(){
+	return ui.imgAcqMethodFileName2EditText->toPlainText().toStdString();
+}
+
+// Camera information
+//----------------------------------------------------------------------------
+string MainWindow::getCameraInfoPath(){
+	return ui.cameraInfoPathEditTest->toPlainText().toStdString();
 }
 
 // Image segmentation
@@ -141,7 +152,8 @@ void MainWindow::on_testDevicesButton_clicked(){
 //--------------------INTERNAL FUNCTIONS--------------------------------------
 void MainWindow::toggleImageAcquisitionLayout(bool show){
 	ui.imgAcqMethodPathEditText->setEnabled(!show);
-	ui.imgAcqMethodFileNameEditText->setEnabled(!show);
+	ui.imgAcqMethodFileName1EditText->setEnabled(!show);
+	ui.imgAcqMethodFileName2EditText->setEnabled(!show);
 	ui.rB1Device->setEnabled(show);
 	ui.rB2Devices->setEnabled(show);
 	ui.label1Device->setEnabled(show);

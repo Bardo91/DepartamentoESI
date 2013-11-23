@@ -28,7 +28,7 @@ namespace vision{
 			void getOrientation(cv::Mat& _orientation) const;
 
 		private:
-			const eOriType oriType;
+			eOriType oriType;
 			cv::Mat position;
 			cv::Mat orientation;
 		}; // class ObjectGeo
