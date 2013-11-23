@@ -136,11 +136,14 @@
     <ClInclude Include="ComputerVisionLibraries\ImageSegmentation\ColorSpaceHSV8.h" />
     <ClInclude Include="ComputerVisionLibraries\ImageSegmentation\ColocClusterImageSegmentation.h" />
     <ClInclude Include="ComputerVisionLibraries\ImageSegmentation\SegmentedObject.h" />
+    <ClInclude Include="ComputerVisionLibraries\Positioning\Camera.h" />
+    <ClInclude Include="ComputerVisionLibraries\Positioning\ObjectGeo.h" />
     <ClInclude Include="ComputerVisionLibraries\Timing\time.h" />
     <ClInclude Include="ComputerVisionLibraries\Timing\timeSrc.h" />
     <ClInclude Include="GeneratedFiles\ui_mainwindow.h" />
     <ClInclude Include="ImageManager.h" />
     <ClInclude Include="InfoCollector.h" />
+    <ClInclude Include="PositionManager.h" />
     <ClInclude Include="SegmentationManager.h" />
     <ClInclude Include="ThreadAlgorithm.h" />
     <ClInclude Include="ThreadManager.h" />

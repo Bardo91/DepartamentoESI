@@ -48,6 +48,9 @@
     <Filter Include="ComputerVisionLibraries\Timing">
       <UniqueIdentifier>{6996805b-cff6-4a70-a35c-aabc1e1dfd8c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ComputerVisionLibraries\Positioning">
+      <UniqueIdentifier>{339bd2dc-10b6-4b5f-b360-46c45ba471e9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -155,6 +158,15 @@
     </ClInclude>
     <ClInclude Include="ComputerVisionLibraries\Timing\timeSrc.h">
       <Filter>ComputerVisionLibraries\Timing</Filter>
+    </ClInclude>
+    <ClInclude Include="PositionManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ComputerVisionLibraries\Positioning\ObjectGeo.h">
+      <Filter>ComputerVisionLibraries\Positioning</Filter>
+    </ClInclude>
+    <ClInclude Include="ComputerVisionLibraries\Positioning\Camera.h">
+      <Filter>ComputerVisionLibraries\Positioning</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

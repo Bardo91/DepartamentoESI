@@ -24,7 +24,7 @@ namespace vision{
 
 	ImageManager *imageManager;
 	SegmentationManager *segmentationManager;
-	//PositionManager *positionManager;
+	PositionManager *positionManager;
 	//AlgorithmManager *AlgorithmManager;
 	};
 	//------------------------------------------------------------------------
