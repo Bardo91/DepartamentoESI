@@ -21,6 +21,9 @@ namespace vision{
 			ObjectGeo();
 		
 		public:
+			void setPosition(const cv::Mat& _position);
+			void setOrientation(const cv::Mat& _orientation);
+
 			void getPosition(cv::Mat& _position) const;
 			void getOrientation(cv::Mat& _orientation) const;
 

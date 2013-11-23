@@ -51,6 +51,15 @@
     <Filter Include="ComputerVisionLibraries\Positioning">
       <UniqueIdentifier>{339bd2dc-10b6-4b5f-b360-46c45ba471e9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="iofunctions">
+      <UniqueIdentifier>{f4dc4708-9e61-4955-9dee-6153d0274de4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="iofunctions\input">
+      <UniqueIdentifier>{69eedaa3-8c9c-4ac6-a94c-392717493da1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="iofunctions\output">
+      <UniqueIdentifier>{db43d7f0-34dd-4dac-a1bc-48ebc79ed2cc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -102,6 +111,9 @@
       <Filter>ComputerVisionLibraries\Timing</Filter>
     </ClCompile>
     <ClCompile Include="ComputerVisionLibraries\Positioning\ObjectGeo.cpp">
+      <Filter>ComputerVisionLibraries\Positioning</Filter>
+    </ClCompile>
+    <ClCompile Include="ComputerVisionLibraries\Positioning\Camera.cpp">
       <Filter>ComputerVisionLibraries\Positioning</Filter>
     </ClCompile>
   </ItemGroup>

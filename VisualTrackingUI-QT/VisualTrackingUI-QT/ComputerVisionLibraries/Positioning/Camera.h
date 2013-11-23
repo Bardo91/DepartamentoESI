@@ -12,13 +12,23 @@
 #include "ObjectGeo.h"
 
 #include <opencv/cv.h>
+#include <string>
 
 namespace vision{
 	namespace position{
 		class Camera: ObjectGeo{ // Class that store all information about recording cameras
 		public:
-			double getFocalLenght();
-			int fixDistorsion(cv::Mat&_frame);
+			Camera();
+			int loadPropertiesFromFile(std::string _filePath);
+			
+			int preparePositionFile();
+			int startViconConnection();
+
+			int init();
+
+		public:
+			double getFocalLenght() const;
+			int fixDistorsion(cv::Mat&_frame) const;
 
 		private:
 			const double focalLenght; // Media between camera's X focal length and Y focal lenght.
