@@ -111,7 +111,7 @@ namespace vision{
 
 	//------------------------------------------------------------------------
 	int InfoCollector::setUpPositionManager(string& _filePath){
-		if(infoPointers.positionManager->configureCams(_filePath) != 0)
+		if(infoPointers.positionManager->preparePositioner(_filePath) != 0)
 			return -1;
 
 		return 0;

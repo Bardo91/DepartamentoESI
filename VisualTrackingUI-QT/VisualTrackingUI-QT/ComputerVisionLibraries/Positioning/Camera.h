@@ -23,7 +23,7 @@ namespace vision{
 			int loadPropertiesFromFile(std::string _filePath);
 			
 			int preparePositionFile();
-			int startViconConnection();
+			int startViconConnection(); // 666 TODO: Implement function
 
 		public:
 			double getFocalLenght() const;
