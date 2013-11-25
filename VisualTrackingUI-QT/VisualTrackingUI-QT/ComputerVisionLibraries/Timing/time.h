@@ -25,6 +25,7 @@ namespace vision
             static void init();
             static STime* get();        ///< Returns the singleton instance
             static void end();
+			static bool isInitialized();
 
     public:
             // --- System management ---

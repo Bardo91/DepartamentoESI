@@ -111,7 +111,7 @@ public:
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         layoutWidget = new QWidget(centralWidget);
         layoutWidget->setObjectName(QStringLiteral("layoutWidget"));
-        layoutWidget->setGeometry(QRect(20, 20, 751, 477));
+        layoutWidget->setGeometry(QRect(20, 20, 810, 477));
         mainLayout = new QVBoxLayout(layoutWidget);
         mainLayout->setSpacing(6);
         mainLayout->setContentsMargins(11, 11, 11, 11);
@@ -597,6 +597,7 @@ public:
         label2Devices->setText(QApplication::translate("MainWindowClass", "Device 2:", 0));
         testDevicesButton->setText(QApplication::translate("MainWindowClass", "Test Devices", 0));
         cameraInfoLabel->setText(QApplication::translate("MainWindowClass", "Camera Info", 0));
+        cameraInfoPathEditTest->setPlainText(QApplication::translate("MainWindowClass", "C:\\cameraInfo.txt", 0));
         posAcqMethodLabel->setText(QApplication::translate("MainWindowClass", "Position Acquisition Method:", 0));
         posAcqMethodSelector->clear();
         posAcqMethodSelector->insertItems(0, QStringList()
@@ -604,6 +605,7 @@ public:
          << QApplication::translate("MainWindowClass", "Vicon", 0)
         );
         fixCamCheckBox->setText(QApplication::translate("MainWindowClass", "Fixed Cameras", 0));
+        posAcqMethodEditText->setPlainText(QApplication::translate("MainWindowClass", "C:\\ViconData2.txt", 0));
         segMethodLabel->setText(QApplication::translate("MainWindowClass", "Segmentation Method:", 0));
         segMethodSelector->clear();
         segMethodSelector->insertItems(0, QStringList()

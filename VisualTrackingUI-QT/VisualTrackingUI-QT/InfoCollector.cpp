@@ -112,12 +112,16 @@ namespace vision{
 	//------------------------------------------------------------------------
 	int InfoCollector::setUpPositionManager(string& _cameraInfoPath, string& _positionPath, bool _isFixed){
 		int posMethod = mainWindow->getPositionAcquisitionMethod();
+		int errors = 0;
 		if(posMethod == 0){
-			infoPointers.positionManager->configureCams(_cameraInfoPath);
-			infoPointers.positionManager->preparePositioner(_positionPath, _isFixed); // Change filename
+			errors += infoPointers.positionManager->configureCams(_cameraInfoPath);
+			errors += infoPointers.positionManager->preparePositioner(_positionPath, _isFixed); // Change filename
 		}else if (posMethod == 1){
-			
+			// 666 TODO: vicon data method
 		}
+
+		if(errors < 0)
+			QMessageBox::information(mainWindow, "Error", "Cant open camera files");
 
 		return 0;
 	}

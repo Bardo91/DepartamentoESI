@@ -91,5 +91,10 @@ namespace vision
             mLastTime = largeTicks.LowPart;
     #endif
     }
+	
+	//----------------------------------------------------------------------------------------------
+	bool STime::isInitialized(){
+		return 0 == sTime ? 0 : 1;
+	}
 
 }        // namespace vision

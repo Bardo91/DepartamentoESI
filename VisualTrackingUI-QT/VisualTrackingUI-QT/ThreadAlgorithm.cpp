@@ -9,6 +9,7 @@
 #include "ImageManager.h"
 #include "SegmentationManager.h"
 #include "ComputerVisionLibraries/Timing/time.h"
+#include "ComputerVisionLibraries/Positioning/Camera.h"
 
 #include <iostream>
 #include <opencv/cv.h>
@@ -25,14 +26,21 @@ void threadAlgoritm(InfoPointers *infoPointers){
 	cv::namedWindow(wTitle, CV_WINDOW_FREERATIO);
 	ImageManager *imageManager = infoPointers->imageManager;
 	SegmentationManager *segmentationManager = infoPointers->segmentationManager;
+	PositionManager *positionManager = infoPointers->positionManager;
+
+	int threshold = infoPointers->threshold;
 
 	Mat frame1, frame2, ori1, ori2;
 
 	vector<SimpleObject> objects1;
 	vector<SimpleObject> objects2;
 	//------------------------------------//
+	position::Camera cam1, cam2;
+	TReal currentTime;
+
+	//------------------------------------//
 	// Prepare Timer.
-	STime::init();
+	//STime::init(); <-- Is initialized at the PositionerManager
 
 	STime *gTimer = STime::get();
 
@@ -62,11 +70,11 @@ void threadAlgoritm(InfoPointers *infoPointers){
 			medianBlur(frame2, frame2, 5);
 		}
 
+		segmentationManager->applyAlgorithm(frame1, frame2, threshold, objects1, objects2);
 
+		positionManager->updatePosAndTime();
 		
-
-		// 666 TODO: implement threshold UI and etc...
-		segmentationManager->applyAlgorithm(frame1, frame2, 500, objects1, objects2);
+		positionManager->getCameraAndTime(cam1,cam2, currentTime);
 
 		if(imageManager->areTwoCameras()){
 			hconcat(frame1, frame2, frame1);
