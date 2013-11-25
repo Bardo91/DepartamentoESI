@@ -24,6 +24,7 @@ namespace vision{
 	//------------------------------------------------------------------------
 	PositionManager::~PositionManager(){
 		delete cam1, cam2;
+		STime::end();
 	}
 
 	//------------------------------------------------------------------------
@@ -36,8 +37,7 @@ namespace vision{
 
 	//------------------------------------------------------------------------
 	int PositionManager::initTimer(){
-		if(!STime::isInitialized())
-			STime::init();
+		STime::init();
 		timer = STime::get();
 		timer->update();
 		refTime = timer->frameTime();
@@ -114,6 +114,6 @@ namespace vision{
 		_cam1.setOrientation(cam1->getOrientation());
 		_cam2.setPosition(cam2->getPosition());
 		_cam2.setOrientation(cam2->getOrientation());
-		
+		_time = currentTime;
 	}
 } // namespace vision

@@ -55,8 +55,8 @@ void threadAlgoritm(InfoPointers *infoPointers){
 	refTime0 = gTimer->frameTime();
 	//------------------------------------//
 	while(cv::waitKey(1) && infoPointers->looping){
-		gTimer->update();
-		t1 = gTimer->frameTime();
+		/*gTimer->update();
+		t1 = gTimer->frameTime();*/
 		imageManager->updateFrames();
 		imageManager->getFrames(frame1, frame2);		
 
@@ -76,6 +76,11 @@ void threadAlgoritm(InfoPointers *infoPointers){
 		
 		positionManager->getCameraAndTime(cam1,cam2, currentTime);
 
+		cout << "Camera1: " << cam1.getPosition() << endl;
+		cout << "Camera2: " << cam2.getPosition() << endl;
+		cout << "CurrentTime" << currentTime << endl;
+
+
 		if(imageManager->areTwoCameras()){
 			hconcat(frame1, frame2, frame1);
 			hconcat(ori1, ori2, ori1);
@@ -84,14 +89,13 @@ void threadAlgoritm(InfoPointers *infoPointers){
 		vconcat(ori1, frame1, frame1);
 
 		imshow(wTitle, frame1);
-		gTimer->update();
+		/*gTimer->update();
 		t2 = gTimer->frameTime();
 		double diff = t2-t1;
-		cout << "FINISHED IN " << diff << endl;
+		cout << "FINISHED IN " << diff << endl;*/
 
 	}
 	//------------------------------------//
-	STime::end();
 	//------------------------------------//
 }
 

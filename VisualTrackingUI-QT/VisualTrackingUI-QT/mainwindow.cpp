@@ -121,6 +121,7 @@ void MainWindow::on_imgAcqMethodSelector_currentIndexChanged(int index){
 		toggleImageAcquisitionLayout(true);
 	}else if (index == 1 || index == 2){
 		toggleImageAcquisitionLayout(false);
+		ui.posAcqMethodSelector->setCurrentIndex(0);
 	}
 }
 
