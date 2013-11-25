@@ -17,7 +17,7 @@
 
 namespace vision{
 	namespace position{
-		class Camera: ObjectGeo{ // Class that store all information about recording cameras
+		class Camera: public ObjectGeo{ // Class that store all information about recording cameras
 		public:
 			Camera();
 			int loadPropertiesFromFile(std::string _filePath);

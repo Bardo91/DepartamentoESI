@@ -19,8 +19,8 @@
      <rect>
       <x>20</x>
       <y>20</y>
-      <width>810</width>
-      <height>466</height>
+      <width>751</width>
+      <height>477</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="mainLayout">
@@ -585,30 +585,56 @@
             </widget>
            </item>
            <item>
-            <widget class="QComboBox" name="posAcqMethodSelector">
-             <property name="minimumSize">
-              <size>
-               <width>300</width>
-               <height>20</height>
-              </size>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>300</width>
-               <height>20</height>
-              </size>
+            <layout class="QHBoxLayout" name="horizontalLayout_2">
+             <property name="bottomMargin">
+              <number>0</number>
              </property>
              <item>
-              <property name="text">
-               <string>File</string>
-              </property>
+              <widget class="QComboBox" name="posAcqMethodSelector">
+               <property name="minimumSize">
+                <size>
+                 <width>200</width>
+                 <height>20</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>200</width>
+                 <height>20</height>
+                </size>
+               </property>
+               <item>
+                <property name="text">
+                 <string>File</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>Vicon</string>
+                </property>
+               </item>
+              </widget>
              </item>
              <item>
-              <property name="text">
-               <string>Vicon</string>
-              </property>
+              <widget class="QCheckBox" name="fixCamCheckBox">
+               <property name="minimumSize">
+                <size>
+                 <width>100</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>100</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>Fixed Cameras</string>
+               </property>
+              </widget>
              </item>
-            </widget>
+            </layout>
            </item>
            <item>
             <widget class="QPlainTextEdit" name="posAcqMethodEditText">

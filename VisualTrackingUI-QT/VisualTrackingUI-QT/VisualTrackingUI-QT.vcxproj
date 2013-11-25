@@ -80,6 +80,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AlgorithmManager.cpp" />
     <ClCompile Include="ComputerVisionLibraries\DataAcquisition\ImageAcquisitor.cpp" />
     <ClCompile Include="ComputerVisionLibraries\ImageSegmentation\ColorClusterSpace.cpp" />
     <ClCompile Include="ComputerVisionLibraries\ImageSegmentation\ColorSpaceHSV8.cpp" />
@@ -134,6 +135,7 @@
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AlgorithmManager.h" />
     <ClInclude Include="ComputerVisionLibraries\DataAcquisition\ImageAcquisitor.h" />
     <ClInclude Include="ComputerVisionLibraries\ImageSegmentation\ColorClusterSpace.h" />
     <ClInclude Include="ComputerVisionLibraries\ImageSegmentation\ColorSpaceHSV8.h" />

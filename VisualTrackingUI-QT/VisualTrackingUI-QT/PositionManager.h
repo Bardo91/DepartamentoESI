@@ -14,6 +14,7 @@
 
 #include <opencv/cv.h>
 #include <string>
+#include <fstream>
 
 namespace vision{
 	class PositionManager{
@@ -22,16 +23,28 @@ namespace vision{
 		~PositionManager();
 	
 	private:
-		int configureCams(std::string& _filePath); // both cams are supposed to have same properties.
 		int initTimer();
 
 	public:
-		int preparePositioner(std::string& _filePath, int _acquisitionMethod);
+		int configureCams(std::string& _filePath); // both cams are supposed to have same properties.
 
+		int preparePositioner(std::string& _posFilePath, bool _isFixed);
+		int preparePositioner(/*vicon stream*/);
+
+		int updatePosAndTime();
+
+		void getCameraAndTime(position::Camera& _cam1, position::Camera& _cam2, TReal& _time) const;
 	private:
+		int posMethod; // 0 from file ;  1 from vicon
+		bool isFixed;
+
 		position::Camera *cam1, *cam2;
 		STime *timer;
 		TReal refTime; // Reference of time when the application started
+		TReal currentTime;
+
+		std::ifstream posFile;
+
 	}; // class PositionManager
 } // namespace vision
 

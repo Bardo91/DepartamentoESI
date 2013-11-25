@@ -16,6 +16,9 @@ namespace vision{
 		enum eOriType {eEulerAngles, eQuaternaries};
 		enum ePosType {eCartesian, ePolar, eSphere};
 
+		cv::Mat obtainRotationMatrix(double a, double b, double c);
+
+
 		class ObjectGeo{ // Class that arrange and manage geometrical information of an object
 		public:
 			ObjectGeo();
@@ -25,7 +28,9 @@ namespace vision{
 			void setOrientation(const cv::Mat& _orientation);
 
 			void getPosition(cv::Mat& _position) const;
+			cv::Mat getPosition() const;
 			void getOrientation(cv::Mat& _orientation) const;
+			cv::Mat getOrientation() const;
 
 		private:
 			eOriType oriType;

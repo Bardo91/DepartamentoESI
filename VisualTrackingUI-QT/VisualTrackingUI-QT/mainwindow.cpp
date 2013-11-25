@@ -35,7 +35,7 @@ void MainWindow::setUpThread(MainWindow mainWindow){
 
 //----------------------------------------------------------------------------
 //----------------------Acquire mainwindow widgets information----------------
-
+//----------------------------------------------------------------------------
 // Image acquisition.
 int MainWindow::getImgAcqMethod(){
 	return ui.imgAcqMethodSelector->currentIndex();
@@ -81,21 +81,39 @@ string MainWindow::getImageNameFormat2(){
 	return ui.imgAcqMethodFileName2EditText->toPlainText().toStdString();
 }
 
-// Camera information
 //----------------------------------------------------------------------------
-string MainWindow::getCameraInfoPath(){
-	return ui.cameraInfoPathEditTest->toPlainText().toStdString();
-}
-
 // Image segmentation
 int MainWindow::getSegmentationAlgorithm(){
 	return ui.segMethodSelector->currentIndex();
 }
 
+//----------------------------------------------------------------------------
 int MainWindow::getThreshold(){
 	return ui.thresholdTextEdit->toPlainText().toInt();
 }
 
+//----------------------------------------------------------------------------
+// Position Manager
+int MainWindow::getPositionAcquisitionMethod(){
+	return  ui.posAcqMethodSelector->currentIndex();
+}
+
+//----------------------------------------------------------------------------
+string MainWindow::getCameraInfoPath(){
+	return ui.cameraInfoPathEditTest->toPlainText().toStdString();
+}
+
+//----------------------------------------------------------------------------
+string MainWindow::getCameraPositionPath(){
+	return ui.posAcqMethodEditText->toPlainText().toStdString();
+}
+
+//----------------------------------------------------------------------------
+bool MainWindow::getIsFixedCameras(){
+	return ui.fixCamCheckBox->isChecked();
+}
+
+//----------------------------------------------------------------------------
 //----------------------------------------------------------------------------
 //-------------------SIGNAL_SLOTS_ACTIONS-------------------------------------
 void MainWindow::on_imgAcqMethodSelector_currentIndexChanged(int index){
@@ -110,8 +128,10 @@ void MainWindow::on_imgAcqMethodSelector_currentIndexChanged(int index){
 void MainWindow::on_posAcqMethodSelector_currentIndexChanged(int index){
 	if(index == 0){
 		ui.posAcqMethodEditText->setEnabled(true);
+		ui.fixCamCheckBox->setEnabled(true);
 	}else if (index == 1){
 		ui.posAcqMethodEditText->setEnabled(false);
+		ui.fixCamCheckBox->setEnabled(false);
 	}
 }
 

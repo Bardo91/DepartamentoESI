@@ -13,6 +13,7 @@
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
+#include <QtWidgets/QCheckBox>
 #include <QtWidgets/QComboBox>
 #include <QtWidgets/QFrame>
 #include <QtWidgets/QHBoxLayout>
@@ -78,7 +79,9 @@ public:
     QPlainTextEdit *cameraInfoPathEditTest;
     QFrame *line_6;
     QLabel *posAcqMethodLabel;
+    QHBoxLayout *horizontalLayout_2;
     QComboBox *posAcqMethodSelector;
+    QCheckBox *fixCamCheckBox;
     QPlainTextEdit *posAcqMethodEditText;
     QFrame *line_3;
     QVBoxLayout *segMethodLayout;
@@ -108,7 +111,7 @@ public:
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         layoutWidget = new QWidget(centralWidget);
         layoutWidget->setObjectName(QStringLiteral("layoutWidget"));
-        layoutWidget->setGeometry(QRect(20, 20, 810, 466));
+        layoutWidget->setGeometry(QRect(20, 20, 751, 477));
         mainLayout = new QVBoxLayout(layoutWidget);
         mainLayout->setSpacing(6);
         mainLayout->setContentsMargins(11, 11, 11, 11);
@@ -397,12 +400,26 @@ public:
 
         posAcqMethodLayout->addWidget(posAcqMethodLabel);
 
+        horizontalLayout_2 = new QHBoxLayout();
+        horizontalLayout_2->setSpacing(6);
+        horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
+        horizontalLayout_2->setContentsMargins(-1, -1, -1, 0);
         posAcqMethodSelector = new QComboBox(layoutWidget);
         posAcqMethodSelector->setObjectName(QStringLiteral("posAcqMethodSelector"));
-        posAcqMethodSelector->setMinimumSize(QSize(300, 20));
-        posAcqMethodSelector->setMaximumSize(QSize(300, 20));
+        posAcqMethodSelector->setMinimumSize(QSize(200, 20));
+        posAcqMethodSelector->setMaximumSize(QSize(200, 20));
 
-        posAcqMethodLayout->addWidget(posAcqMethodSelector);
+        horizontalLayout_2->addWidget(posAcqMethodSelector);
+
+        fixCamCheckBox = new QCheckBox(layoutWidget);
+        fixCamCheckBox->setObjectName(QStringLiteral("fixCamCheckBox"));
+        fixCamCheckBox->setMinimumSize(QSize(100, 0));
+        fixCamCheckBox->setMaximumSize(QSize(100, 16777215));
+
+        horizontalLayout_2->addWidget(fixCamCheckBox);
+
+
+        posAcqMethodLayout->addLayout(horizontalLayout_2);
 
         posAcqMethodEditText = new QPlainTextEdit(layoutWidget);
         posAcqMethodEditText->setObjectName(QStringLiteral("posAcqMethodEditText"));
@@ -586,6 +603,7 @@ public:
          << QApplication::translate("MainWindowClass", "File", 0)
          << QApplication::translate("MainWindowClass", "Vicon", 0)
         );
+        fixCamCheckBox->setText(QApplication::translate("MainWindowClass", "Fixed Cameras", 0));
         segMethodLabel->setText(QApplication::translate("MainWindowClass", "Segmentation Method:", 0));
         segMethodSelector->clear();
         segMethodSelector->insertItems(0, QStringList()

@@ -43,7 +43,7 @@ namespace vision{
 	private:
 		int setUpImageManager();
 		int setUpSegmentationManager();
-		int setUpPositionManager(std::string& _filePath);
+		int setUpPositionManager(std::string& _cameraInfoPath, std::string& _positionPath, bool isFixed);
 		// 666 TODO: int setUpAlgorithmManager();
 
 

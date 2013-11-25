@@ -36,7 +36,7 @@ namespace vision{
 		int errors = 0;
 		errors += setUpImageManager(); 
 		errors += setUpSegmentationManager();
-		errors += setUpPositionManager(mainWindow->getCameraInfoPath());
+		errors += setUpPositionManager(mainWindow->getCameraInfoPath(), mainWindow->getCameraPositionPath(), mainWindow->getIsFixedCameras());
 		//error += setUpAlgorithmManager();
 
 		
@@ -110,9 +110,14 @@ namespace vision{
 	}
 
 	//------------------------------------------------------------------------
-	int InfoCollector::setUpPositionManager(string& _filePath){
-		if(infoPointers.positionManager->preparePositioner(_filePath) != 0)
-			return -1;
+	int InfoCollector::setUpPositionManager(string& _cameraInfoPath, string& _positionPath, bool _isFixed){
+		int posMethod = mainWindow->getPositionAcquisitionMethod();
+		if(posMethod == 0){
+			infoPointers.positionManager->configureCams(_cameraInfoPath);
+			infoPointers.positionManager->preparePositioner(_positionPath, _isFixed); // Change filename
+		}else if (posMethod == 1){
+			
+		}
 
 		return 0;
 	}

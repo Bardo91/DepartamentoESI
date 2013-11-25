@@ -60,6 +60,9 @@
     <Filter Include="iofunctions\output">
       <UniqueIdentifier>{db43d7f0-34dd-4dac-a1bc-48ebc79ed2cc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ComputerVisionLibraries\TrackingAlgorithm">
+      <UniqueIdentifier>{8e9f2d12-b87d-4a27-b2a9-d3f3734ec873}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -117,6 +120,9 @@
       <Filter>ComputerVisionLibraries\Positioning</Filter>
     </ClCompile>
     <ClCompile Include="PositionManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AlgorithmManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -185,6 +191,9 @@
     </ClInclude>
     <ClInclude Include="ComputerVisionLibraries\Positioning\Camera.h">
       <Filter>ComputerVisionLibraries\Positioning</Filter>
+    </ClInclude>
+    <ClInclude Include="AlgorithmManager.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

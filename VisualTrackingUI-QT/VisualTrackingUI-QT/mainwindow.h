@@ -39,12 +39,15 @@ public: // Functions to adquire mainwindow widgets information.
 	std::string getImageNameFormat1();
 	std::string getImageNameFormat2();
 
-	// Functions related to Camera information
-	std::string getCameraInfoPath();
-
 	// Functions related to Segmentation algorithm
 	int getSegmentationAlgorithm();
 	int getThreshold();
+
+	// Functions related to Position acquisition
+	int getPositionAcquisitionMethod();
+	std::string getCameraInfoPath();
+	std::string getCameraPositionPath();
+	bool getIsFixedCameras();
 
 private slots:
 	// Combo Box Slots
