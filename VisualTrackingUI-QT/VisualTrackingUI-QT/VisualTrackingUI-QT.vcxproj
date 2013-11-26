@@ -89,6 +89,8 @@
     <ClCompile Include="ComputerVisionLibraries\Positioning\Camera.cpp" />
     <ClCompile Include="ComputerVisionLibraries\Positioning\ObjectGeo.cpp" />
     <ClCompile Include="ComputerVisionLibraries\Timing\time.cpp" />
+    <ClCompile Include="ComputerVisionLibraries\TrackingAlgorithm\GroundTrackingEKF.cpp" />
+    <ClCompile Include="ComputerVisionLibraries\TrackingAlgorithm\StereoVisionEKF.cpp" />
     <ClCompile Include="GeneratedFiles\Debug\moc_mainwindow.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
@@ -145,9 +147,13 @@
     <ClInclude Include="ComputerVisionLibraries\Positioning\ObjectGeo.h" />
     <ClInclude Include="ComputerVisionLibraries\Timing\time.h" />
     <ClInclude Include="ComputerVisionLibraries\Timing\timeSrc.h" />
+    <ClInclude Include="ComputerVisionLibraries\TrackingAlgorithm\GroundTrackingEKF.h" />
+    <ClInclude Include="ComputerVisionLibraries\TrackingAlgorithm\RobustStereoMatching.h" />
+    <ClInclude Include="ComputerVisionLibraries\TrackingAlgorithm\StereoVisionEKF.h" />
     <ClInclude Include="GeneratedFiles\ui_mainwindow.h" />
     <ClInclude Include="ImageManager.h" />
     <ClInclude Include="InfoCollector.h" />
+    <ClInclude Include="ParamsEKF.h" />
     <ClInclude Include="PositionManager.h" />
     <ClInclude Include="SegmentationManager.h" />
     <ClInclude Include="ThreadAlgorithm.h" />

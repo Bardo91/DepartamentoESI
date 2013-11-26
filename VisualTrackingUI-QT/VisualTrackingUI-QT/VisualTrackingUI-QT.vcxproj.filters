@@ -125,6 +125,12 @@
     <ClCompile Include="AlgorithmManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ComputerVisionLibraries\TrackingAlgorithm\GroundTrackingEKF.cpp">
+      <Filter>ComputerVisionLibraries\TrackingAlgorithm</Filter>
+    </ClCompile>
+    <ClCompile Include="ComputerVisionLibraries\TrackingAlgorithm\StereoVisionEKF.cpp">
+      <Filter>ComputerVisionLibraries\TrackingAlgorithm</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="mainwindow.h">
@@ -194,6 +200,18 @@
     </ClInclude>
     <ClInclude Include="AlgorithmManager.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ComputerVisionLibraries\TrackingAlgorithm\GroundTrackingEKF.h">
+      <Filter>ComputerVisionLibraries\TrackingAlgorithm</Filter>
+    </ClInclude>
+    <ClInclude Include="ComputerVisionLibraries\TrackingAlgorithm\RobustStereoMatching.h">
+      <Filter>ComputerVisionLibraries\TrackingAlgorithm</Filter>
+    </ClInclude>
+    <ClInclude Include="ComputerVisionLibraries\TrackingAlgorithm\StereoVisionEKF.h">
+      <Filter>ComputerVisionLibraries\TrackingAlgorithm</Filter>
+    </ClInclude>
+    <ClInclude Include="ParamsEKF.h">
+      <Filter>ComputerVisionLibraries\TrackingAlgorithm</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
