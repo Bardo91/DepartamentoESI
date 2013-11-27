@@ -148,7 +148,7 @@ void MainWindow::on_segMethodSelector_currentIndexChanged(int index){
 
 //----------------------------------------------------------------------------
 void MainWindow::on_startButton_clicked(){
-	if(infoCollector->CollectInfo() != -1){
+	if(infoCollector->CollectInfo() > -1){
 		threadManager.setInfo(infoCollector->getPointers());
 		threadManager.startThread();
 	}

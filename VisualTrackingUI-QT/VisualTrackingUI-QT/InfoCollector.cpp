@@ -116,7 +116,7 @@ namespace vision{
 
 			default:
 				QMessageBox::information(mainWindow, "Error", "Cant load this Segmentation Algorithm");
-				assert(false);
+				return -1;
 				break;
 		}
 
@@ -134,8 +134,10 @@ namespace vision{
 			// 666 TODO: vicon data method
 		}
 
-		if(errors < 0)
-			QMessageBox::information(mainWindow, "Error", "Cant open camera files");
+		if(errors < 0){
+			QMessageBox::information(mainWindow, "Error", "Cant open Camera Info-files");
+			return -1;
+		}
 
 		return 0;
 	}

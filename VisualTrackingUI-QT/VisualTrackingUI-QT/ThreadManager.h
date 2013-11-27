@@ -30,7 +30,7 @@ namespace vision{
 	public:
 		bool isRunning();
 		int startThread();
-		int stopThread();
+		void stopThread();
 	};
 
 } // namespace vision

@@ -96,6 +96,7 @@ void threadAlgoritm(InfoPointers *infoPointers){
 
 	}
 	//------------------------------------//
+	positionManager->closeStream();
 	//------------------------------------//
 }
 

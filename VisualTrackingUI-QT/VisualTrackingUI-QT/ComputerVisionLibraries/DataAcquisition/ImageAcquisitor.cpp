@@ -49,7 +49,7 @@ ImageAcquisitor::~ImageAcquisitor() {
 //------------------------------------------------------------------------------
 void ImageAcquisitor::changeInputMethod(int _device) {
 	inputMethod = 0;
-
+	currentFrame = 0;
 	if(device.isOpened()){
 		device.release();
 		waitKey(10); // Wait for the device to be stopped.
@@ -63,6 +63,7 @@ void ImageAcquisitor::changeInputMethod(int _device) {
 void ImageAcquisitor::changeInputMethod(string _pathName,
 		string _imageNameFormat) {
 	inputMethod = 1;
+	currentFrame = 0;
 	device.release();
 	pathName = _pathName;
 	imageNameFormat = _imageNameFormat;

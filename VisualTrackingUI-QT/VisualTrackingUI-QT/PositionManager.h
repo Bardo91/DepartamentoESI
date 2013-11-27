@@ -31,6 +31,8 @@ namespace vision{
 		int preparePositioner(std::string& _posFilePath, bool _isFixed);
 		int preparePositioner(/*vicon stream*/);
 
+		void closeStream();
+
 		int updatePosAndTime();
 
 		void getCameraAndTime(position::Camera& _cam1, position::Camera& _cam2, TReal& _time) const;

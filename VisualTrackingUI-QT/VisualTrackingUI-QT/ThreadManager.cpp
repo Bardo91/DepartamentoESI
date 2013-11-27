@@ -37,7 +37,7 @@ bool ThreadManager::isRunning(){
 }
 
 //----------------------------------------------------------------------------
-int ThreadManager::stopThread(){
+void ThreadManager::stopThread(){
 	std::mutex mutex;
 
 	mutex.lock();
@@ -47,17 +47,19 @@ int ThreadManager::stopThread(){
 		pThread = 0;
 	}
 	mutex.unlock();
-	return 0;
+
+	//delete infoPointers->algorithmManager;
+
 }
 
 //----------------------------------------------------------------------------
 int ThreadManager::startThread(){
-	if(stopThread() != 0) //If Thread is currently been running first need to be stoped
-		return -1; // Thread can not be stopped
+	if(pThread != 0) //If Thread is currently been running first need to be stoped
+		stopThread(); // Thread can not be stopped
 
 	pThread = new thread(threadAlgoritm, infoPointers);
 
-	if(pThread != nullptr)
+	if(pThread == 0)
 		return -1;
 
 	std::mutex mutex;

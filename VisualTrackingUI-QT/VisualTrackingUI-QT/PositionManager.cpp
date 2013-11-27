@@ -24,12 +24,16 @@ namespace vision{
 	//------------------------------------------------------------------------
 	PositionManager::~PositionManager(){
 		delete cam1, cam2;
+		posFile.close();
 		STime::end();
 	}
 
 	//------------------------------------------------------------------------
 	int PositionManager::configureCams(string& _filePath){
-		if (cam1->loadPropertiesFromFile(_filePath) != 0 ||cam2->loadPropertiesFromFile(_filePath) != 0)
+		int errors = 0;
+		errors += cam1->loadPropertiesFromFile(_filePath);
+		errors += cam2->loadPropertiesFromFile(_filePath);
+		if(errors < 0)
 			return -1;
 
 		return 0;
@@ -48,18 +52,34 @@ namespace vision{
 
 	//------------------------------------------------------------------------
 	int PositionManager::preparePositioner(string& _posFilePath, bool _isFixed){
+		posMethod = 0;
 		int errors = 0;
 		errors += initTimer();
-		posFile.open(_posFilePath);
+		posFile.open(_posFilePath); // Is only open 1st time.
 		
 		isFixed = _isFixed;
 
-		if(!posFile.is_open() || errors < 0)
+		if(!posFile.is_open() || !posFile.good() || errors < 0)
 			return -1;
 		
 		return 0;
 	}
-	
+	//------------------------------------------------------------------------
+	int PositionManager::preparePositioner(/*Vicon Connection*/){
+		// 666 TODO:
+		posMethod = 1;
+		return 0;
+	}
+	//------------------------------------------------------------------------
+	void PositionManager::closeStream(){
+		if(posMethod){
+			// 666 TODO: close vicon streaming
+		}else{
+			if(posFile != 0)
+				posFile.close();
+		}
+	}
+
 	//------------------------------------------------------------------------
 	int PositionManager::updatePosAndTime(){
 		string line;
@@ -71,6 +91,7 @@ namespace vision{
 		getline(posFile, line);
 		colCounter = line.size();
 
+		assert(colCounter > 0);
 				
 
 		for (int i = 0; i < colCounter; i++) {
