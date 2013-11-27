@@ -10,6 +10,9 @@
 #ifndef _VISUAL_TRACKING_UI_ROBUSTSTEREOMATCHING_H_
 #define _VISUAL_TRACKING_UI_ROBUSTSTEREOMATCHING_H_
 
+#include <Types/SimpleObject.h>
+
+#include <vector>
 
 namespace vision {
 	namespace tracking {
@@ -20,10 +23,11 @@ namespace vision {
 			~RobustStereoMatching();
 
 		public:
-
+			void updateObjects(std::vector<vision::SimpleObject> _objects);
 
 		private:
-
+			vision::SimpleObject *objects;
+			double velocity;
 
 		};
 

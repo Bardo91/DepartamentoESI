@@ -14,6 +14,7 @@ namespace vision {
 //------------------------------------------------------------------------------
 ImageAcquisitor::ImageAcquisitor() {
 	width = height = inputMethod = -1;
+	currentFrame = 0;
 }
 
 //------------------------------------------------------------------------------
@@ -24,6 +25,7 @@ ImageAcquisitor::ImageAcquisitor(string _pathName, std::string _imageNameFormat,
 	imageNameFormat = _imageNameFormat;
 	width = _width;
 	height = _height;
+	currentFrame = 0;
 
 }
 
@@ -33,6 +35,8 @@ ImageAcquisitor::ImageAcquisitor(int _device, int _width, int _height) {
 	device = VideoCapture(_device);
 
 	changeResolution(width, height);
+
+	currentFrame = 0;
 
 	assert(device.isOpened()); //Error, could not connect to the device
 }
@@ -108,27 +112,32 @@ bool ImageAcquisitor::canCapture() {
 }
 
 //------------------------------------------------------------------------------
-int ImageAcquisitor::updateFrame(int currentImage) {
+int ImageAcquisitor::updateFrame() {
 	if (inputMethod) {
 		const int sizeFormat = imageNameFormat.size() + 4;
 		char *buffer;// +4 suposing that number of input images ar less than 99.999
 		buffer = (char*) new char(sizeof(char)*sizeFormat);
-		sprintf(buffer, imageNameFormat.c_str(), currentImage);
+		sprintf(buffer, imageNameFormat.c_str(), currentFrame);
 
 		stringstream ss;
 		ss << pathName << buffer;
 
-		delete buffer;
+		frame = cvLoadImage(ss.str().c_str(), 1);//imread(ss.str(), CV_LOAD_IMAGE_COLOR);
 
-		frame = imread(ss.str(), CV_LOAD_IMAGE_COLOR);
+		assert(frame.cols != 0);
 
-		if (frame.cols != height && frame.cols != 0)
+		if (frame.cols != height)
 			resize(frame, frame, Size(width, height));
+
+		currentFrame++;
 
 	} else {
 		assert(device.isOpened());
 		device >> frame;
+		assert(frame.cols != 0);
 	}
+
+	
 
 	return frame.cols == 0 ? -1 : 0;
 }

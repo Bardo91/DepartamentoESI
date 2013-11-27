@@ -37,7 +37,8 @@ namespace vision{
 
 	//------------------------------------------------------------------------
 	int PositionManager::initTimer(){
-		STime::init();
+		if(!STime::isInitialized())
+			STime::init();
 		timer = STime::get();
 		timer->update();
 		refTime = timer->frameTime();

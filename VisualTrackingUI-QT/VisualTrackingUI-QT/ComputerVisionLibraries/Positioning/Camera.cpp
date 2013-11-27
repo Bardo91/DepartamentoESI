@@ -69,20 +69,6 @@ namespace vision{
 		}
 
 		//--------------------------------------------------------------------
-		int Camera::preparePositionFile(){
-			// 666 TODO: implement function.
-			
-			return 0;
-		}
-
-		//--------------------------------------------------------------------
-		int Camera::startViconConnection(){
-			// 666 TODO: implement function.
-			
-			return 0;
-		}
-
-		//--------------------------------------------------------------------
 		double Camera::getFocalLenght() const{
 			return focalLenght;
 		}

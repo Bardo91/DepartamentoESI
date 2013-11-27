@@ -21,9 +21,6 @@ namespace vision{
 		public:
 			Camera();
 			int loadPropertiesFromFile(std::string _filePath);
-			
-			int preparePositionFile();
-			int startViconConnection(); // 666 TODO: Implement function
 
 		public:
 			double getFocalLenght() const;
@@ -37,9 +34,6 @@ namespace vision{
 			int nDistCoef; // Size of distorsion coeffient vector
 			double* projectionCoef; // Projection coefficients to make the properly correction of an image.
 			int nProjCoef; // Size of projection coeffient vector
-		private:
-			std::ifstream positionFile;
-
 
 		}; //class Camera
 

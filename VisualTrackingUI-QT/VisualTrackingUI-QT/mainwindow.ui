@@ -19,8 +19,8 @@
      <rect>
       <x>20</x>
       <y>20</y>
-      <width>810</width>
-      <height>477</height>
+      <width>853</width>
+      <height>451</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="mainLayout">
@@ -255,6 +255,54 @@
           </layout>
          </item>
          <item>
+          <layout class="QHBoxLayout" name="rBDeviceLayout">
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
+           <item>
+            <widget class="QRadioButton" name="rB1Device">
+             <property name="minimumSize">
+              <size>
+               <width>200</width>
+               <height>20</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>200</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>1 Device</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QRadioButton" name="rB2Devices">
+             <property name="minimumSize">
+              <size>
+               <width>200</width>
+               <height>20</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>200</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>2 Devices</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
           <layout class="QVBoxLayout" name="verticalLayout_2">
            <property name="bottomMargin">
             <number>0</number>
@@ -284,6 +332,9 @@
                  <height>25</height>
                 </size>
                </property>
+               <property name="plainText">
+                <string>C:/Programming/Imagenes Stereo Tracking/P1_640x480/Images/</string>
+               </property>
               </widget>
              </item>
             </layout>
@@ -294,7 +345,7 @@
               <number>0</number>
              </property>
              <item>
-              <widget class="QPlainTextEdit" name="imgAcqMethodFileName2EditText">
+              <widget class="QPlainTextEdit" name="imgAcqMethodFileName1EditText">
                <property name="enabled">
                 <bool>false</bool>
                </property>
@@ -310,10 +361,13 @@
                  <height>25</height>
                 </size>
                </property>
+               <property name="plainText">
+                <string>img%d_cam1.jpg</string>
+               </property>
               </widget>
              </item>
              <item>
-              <widget class="QPlainTextEdit" name="imgAcqMethodFileName1EditText">
+              <widget class="QPlainTextEdit" name="imgAcqMethodFileName2EditText">
                <property name="enabled">
                 <bool>false</bool>
                </property>
@@ -335,6 +389,9 @@
                  <height>25</height>
                 </size>
                </property>
+               <property name="plainText">
+                <string>img%d_cam2.jpg</string>
+               </property>
               </widget>
              </item>
             </layout>
@@ -346,54 +403,6 @@
            <property name="bottomMargin">
             <number>0</number>
            </property>
-           <item>
-            <layout class="QHBoxLayout" name="rBDeviceLayout">
-             <property name="bottomMargin">
-              <number>0</number>
-             </property>
-             <item>
-              <widget class="QRadioButton" name="rB1Device">
-               <property name="minimumSize">
-                <size>
-                 <width>200</width>
-                 <height>20</height>
-                </size>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>200</width>
-                 <height>16777215</height>
-                </size>
-               </property>
-               <property name="text">
-                <string>1 Device</string>
-               </property>
-               <property name="checked">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QRadioButton" name="rB2Devices">
-               <property name="minimumSize">
-                <size>
-                 <width>200</width>
-                 <height>20</height>
-                </size>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>200</width>
-                 <height>16777215</height>
-                </size>
-               </property>
-               <property name="text">
-                <string>2 Devices</string>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </item>
            <item>
             <layout class="QHBoxLayout" name="spinDeviceLayout">
              <property name="topMargin">
@@ -544,18 +553,18 @@
               <widget class="QPlainTextEdit" name="cameraInfoPathEditTest">
                <property name="minimumSize">
                 <size>
-                 <width>300</width>
+                 <width>400</width>
                  <height>25</height>
                 </size>
                </property>
                <property name="maximumSize">
                 <size>
-                 <width>300</width>
+                 <width>400</width>
                  <height>25</height>
                 </size>
                </property>
                <property name="plainText">
-                <string>C:\cameraInfo.txt</string>
+                <string>C:/Programming/Imagenes Stereo Tracking/P1_640x480/cameraInfo.txt</string>
                </property>
               </widget>
              </item>
@@ -622,13 +631,13 @@
               <widget class="QCheckBox" name="fixCamCheckBox">
                <property name="minimumSize">
                 <size>
-                 <width>100</width>
+                 <width>200</width>
                  <height>0</height>
                 </size>
                </property>
                <property name="maximumSize">
                 <size>
-                 <width>100</width>
+                 <width>200</width>
                  <height>16777215</height>
                 </size>
                </property>
@@ -649,7 +658,7 @@
              </property>
              <property name="minimumSize">
               <size>
-               <width>300</width>
+               <width>400</width>
                <height>25</height>
               </size>
              </property>
@@ -660,7 +669,7 @@
               </size>
              </property>
              <property name="plainText">
-              <string>C:\ViconData2.txt</string>
+              <string>C:/Programming/Imagenes Stereo Tracking/P1_640x480/ViconData2.txt</string>
              </property>
             </widget>
            </item>
@@ -679,13 +688,13 @@
             <widget class="QLabel" name="segMethodLabel">
              <property name="minimumSize">
               <size>
-               <width>300</width>
+               <width>400</width>
                <height>20</height>
               </size>
              </property>
              <property name="maximumSize">
               <size>
-               <width>300</width>
+               <width>400</width>
                <height>20</height>
               </size>
              </property>
@@ -698,13 +707,13 @@
             <widget class="QComboBox" name="segMethodSelector">
              <property name="minimumSize">
               <size>
-               <width>300</width>
+               <width>400</width>
                <height>20</height>
               </size>
              </property>
              <property name="maximumSize">
               <size>
-               <width>300</width>
+               <width>40</width>
                <height>20</height>
               </size>
              </property>
@@ -749,13 +758,13 @@
             <widget class="QComboBox" name="posReconAlgorithmSelector">
              <property name="minimumSize">
               <size>
-               <width>300</width>
+               <width>400</width>
                <height>20</height>
               </size>
              </property>
              <property name="maximumSize">
               <size>
-               <width>300</width>
+               <width>400</width>
                <height>20</height>
               </size>
              </property>
@@ -792,13 +801,13 @@
                </property>
                <property name="minimumSize">
                 <size>
-                 <width>100</width>
+                 <width>200</width>
                  <height>20</height>
                 </size>
                </property>
                <property name="maximumSize">
                 <size>
-                 <width>100</width>
+                 <width>200</width>
                  <height>20</height>
                 </size>
                </property>

@@ -32,9 +32,11 @@ int ImageManager::setUpImageAcquisitor(const int _number, const int _device, con
 	if(_number == 1){
 		imageAcquisitor1->changeInputMethod(_device);
 		imageAcquisitor1->changeResolution(_width, _heigth);
+		assert(imageAcquisitor1->isOpened());
 	}else if(_number  == 2){
 		imageAcquisitor2->changeInputMethod(_device);
 		imageAcquisitor2->changeResolution(_width, _heigth);
+		assert(imageAcquisitor2->isOpened());
 	}else{
 		return -1;
 	}
@@ -47,11 +49,9 @@ int ImageManager::setUpImageAcquisitor(const int _number, const std::string& _pa
 	if(_number == 1){
 		imageAcquisitor1->changeInputMethod(_pathName, _nameFormat);
 		imageAcquisitor1->changeResolution(_width, _heigth);
-		assert(imageAcquisitor1->isOpened());
 	}else if(_number  == 2){
 		imageAcquisitor2->changeInputMethod(_pathName, _nameFormat);
 		imageAcquisitor2->changeResolution(_width, _heigth);
-		assert(imageAcquisitor2->isOpened());
 	}else{
 		return -1;
 	}

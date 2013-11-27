@@ -175,8 +175,6 @@ void MainWindow::toggleImageAcquisitionLayout(bool show){
 	ui.imgAcqMethodPathEditText->setEnabled(!show);
 	ui.imgAcqMethodFileName1EditText->setEnabled(!show);
 	ui.imgAcqMethodFileName2EditText->setEnabled(!show);
-	ui.rB1Device->setEnabled(show);
-	ui.rB2Devices->setEnabled(show);
 	ui.label1Device->setEnabled(show);
 	ui.label2Devices->setEnabled(show);
 	ui.spin1Device->setEnabled(show);

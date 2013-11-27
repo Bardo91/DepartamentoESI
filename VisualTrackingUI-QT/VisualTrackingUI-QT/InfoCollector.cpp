@@ -62,9 +62,8 @@ namespace vision{
 		int method = mainWindow->getImgAcqMethod(); // 777 TODO: implement width and heigth.
 		int width = mainWindow->getWidth();
 		int height = mainWindow->getHeight();
-
+		int nDev = mainWindow->getNumberDevices();
 		if(method == 0){ // From device/s.
-			int nDev = mainWindow->getNumberDevices();
 			if(nDev == 1){
 				int dev1 = mainWindow->getIdDevice1();
 				infoPointers.imageManager->setUpImageAcquisitor(1, dev1, width, height);
@@ -81,8 +80,23 @@ namespace vision{
 				infoPointers.imageManager->setTwoCameras(true);
 			}
 		}else if(method == 1){ // From images.
-			// 777 TODO: implement 
-			
+			int errors = 0;
+			if(nDev == 1){
+				int dev1 = mainWindow->getIdDevice1();
+				errors += infoPointers.imageManager->setUpImageAcquisitor(1, mainWindow->getImagesPath(), mainWindow->getImageNameFormat1(), width, height);
+				infoPointers.imageManager->setTwoCameras(false);
+			}else if(nDev == 2){
+				int dev1 = mainWindow->getIdDevice1();
+				int dev2 = mainWindow->getIdDevice2();
+				errors += infoPointers.imageManager->setUpImageAcquisitor(1, mainWindow->getImagesPath(), mainWindow->getImageNameFormat1(), width, height);
+				errors += infoPointers.imageManager->setUpImageAcquisitor(2, mainWindow->getImagesPath(), mainWindow->getImageNameFormat2(), width, height);
+				infoPointers.imageManager->setTwoCameras(true);
+			}
+
+			if(errors < 0){ 
+				QMessageBox::information(mainWindow, "Error", "Cant find images");
+				return -1;
+			}
 
 		} else if(method == 2){ // From video
 			QMessageBox::information(mainWindow, "Error", "Video acquisition method is not implemented");

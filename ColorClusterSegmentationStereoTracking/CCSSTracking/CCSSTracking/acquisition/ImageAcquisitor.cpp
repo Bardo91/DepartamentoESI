@@ -105,8 +105,8 @@ bool ImageAcquisitor::canCapture() {
 
 int ImageAcquisitor::updateFrame(int currentImage) {
 	if (inputMethod) {
-		const int sizeFormat = imageNameFormat.size() + 4;
-		char *buffer;// +4 suposing that number of input images ar less than 99.999
+		const int sizeFormat = imageNameFormat.size() + int(log10(currentImage));
+		char *buffer;
 		buffer = (char*) new char(sizeof(char)*sizeFormat);
 		sprintf(buffer, imageNameFormat.c_str(), currentImage);
 

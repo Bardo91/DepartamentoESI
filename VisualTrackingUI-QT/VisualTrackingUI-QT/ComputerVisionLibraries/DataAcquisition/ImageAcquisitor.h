@@ -22,6 +22,8 @@ class ImageAcquisitor {
 
 	int inputMethod; // 0 = from device ; 1 = from path
 
+	int currentFrame;
+
 	cv::Mat frame;
 public:
 
@@ -43,7 +45,7 @@ public:
 public:
 	bool canCapture();
 
-	int updateFrame(int currentImage = 0);
+	int updateFrame();
 	int getFrame(cv::Mat&);
 	int getInputMethod() const;
 
