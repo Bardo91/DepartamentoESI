@@ -20,6 +20,7 @@ namespace vision{
 		infoPointers.imageManager = new ImageManager();
 		infoPointers.segmentationManager = new SegmentationManager();
 		infoPointers.positionManager = new PositionManager();
+		infoPointers.algorithmManager = new AlgorithmManager();
 
 		mainWindow = _mainWindow;
 	}
@@ -29,6 +30,7 @@ namespace vision{
 			delete infoPointers.imageManager;
 			delete infoPointers.segmentationManager;
 			delete infoPointers.positionManager;
+			delete infoPointers.algorithmManager;
 	}
 
 	//------------------------------------------------------------------------
@@ -37,12 +39,9 @@ namespace vision{
 		errors += setUpImageManager(); 
 		errors += setUpSegmentationManager();
 		errors += setUpPositionManager(mainWindow->getCameraInfoPath(), mainWindow->getCameraPositionPath(), mainWindow->getIsFixedCameras());
-		//error += setUpAlgorithmManager();
+		errors += setUpAlgorithmManager();
 
 		
-		//infoPointers.algorithManager = algorithmManager
-
-
 		infoPointers.looping = true;
 		infoPointers.threshold = mainWindow->getThreshold();
 
@@ -127,18 +126,55 @@ namespace vision{
 	int InfoCollector::setUpPositionManager(string& _cameraInfoPath, string& _positionPath, bool _isFixed){
 		int posMethod = mainWindow->getPositionAcquisitionMethod();
 		int errors = 0;
-		if(posMethod == 0){
+		
+		switch (posMethod)
+		{
+		case 0:
 			errors += infoPointers.positionManager->configureCams(_cameraInfoPath);
 			errors += infoPointers.positionManager->preparePositioner(_positionPath, _isFixed); // Change filename
-		}else if (posMethod == 1){
-			// 666 TODO: vicon data method
-		}
 
-		if(errors < 0){
+			break;
+		case 1:
+			// 666 TODO: vicon data method
+
+			break;
+		default:
 			QMessageBox::information(mainWindow, "Error", "Cant open Camera Info-files");
 			return -1;
 		}
-
+		
 		return 0;
 	}
-}
+
+	//------------------------------------------------------------------------
+	int InfoCollector::setUpAlgorithmManager(){
+		int algortihm = mainWindow->getTrackingAlgorithm();
+		int errors = 0;
+		
+		vision::position::Camera cam1, cam2;
+		TReal fakeT;
+
+		switch (algortihm)
+		{
+		case 0: // Single Camera ground tracking
+			// 666 TODO: Implement algorithm
+			infoPointers.positionManager->getCameraAndTime(cam1, cam2, fakeT);
+			errors += infoPointers.algorithmManager->setUpAlgorithm(vision::eAlgorithms::eSingleCameraGroundEKF,cam1, cam2);
+			
+
+			break;
+		case 1: // Stereo Camera 3D tracking
+			// 666 TODO: Implement algorithm
+
+			infoPointers.positionManager->getCameraAndTime(cam1, cam2, fakeT);
+			errors += infoPointers.algorithmManager->setUpAlgorithm(vision::eAlgorithms::eStereoVisionEKF,cam1, cam2);
+			
+			break;
+		}
+
+		return errors < 0 ? -1 : 0;
+	}
+
+	//------------------------------------------------------------------------
+
+} // namespace vision.

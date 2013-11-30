@@ -58,7 +58,7 @@ namespace vision{
 		posFile.open(_posFilePath); // Is only open 1st time.
 		
 		isFixed = _isFixed;
-
+		isFirstPos = true;
 		if(!posFile.is_open() || !posFile.good() || errors < 0)
 			return -1;
 		
@@ -79,13 +79,11 @@ namespace vision{
 				posFile.close();
 		}
 	}
-
 	//------------------------------------------------------------------------
-	int PositionManager::updatePosAndTime(){
+	void PositionManager::getNextLine(vector<string>& _splittedString){
 		string line;
 		int colCounter = 0;
 		int init = 0;
-		vector<string> splittedString;
 		int counter = 0;
 
 		getline(posFile, line);
@@ -96,38 +94,60 @@ namespace vision{
 
 		for (int i = 0; i < colCounter; i++) {
 			if (((int) line.at(i)) == 9) {
-				splittedString.push_back(line.substr(init, i - init + 1));
+				_splittedString.push_back(line.substr(init, i - init + 1));
 				init = i + 1;
 				counter++;
 			}
 		}
-		
+	}
+	//------------------------------------------------------------------------
+	void PositionManager::updatePos(const vector<string>& _splittedString){
+		double a = atof(_splittedString.at(10).c_str()); // alpha, beta, gamma.
+		double b = atof(_splittedString.at(11).c_str());
+		double c = atof(_splittedString.at(12).c_str()); 
 
-		// assigning values
+		cam1->setPosition((Mat_<double>(3, 1) << atof(_splittedString.at(7).c_str()), atof(_splittedString.at(8).c_str()), atof(_splittedString.at(9).c_str())));
+
+		cam1->setOrientation(obtainRotationMatrix(a, b, c));
+
+		cam2->setPosition((Mat_<double>(3, 1) << atof(_splittedString.at(13).c_str()), atof(_splittedString.at(14).c_str()), atof(_splittedString.at(15).c_str())));
+
+		a = atof(_splittedString.at(16).c_str()); // alpha, beta, gamma.
+		b = atof(_splittedString.at(17).c_str());
+		c = atof(_splittedString.at(18).c_str()); 
+
+		cam2->setOrientation(obtainRotationMatrix(a, b, c));
+	}
+
+	//------------------------------------------------------------------------
+	void PositionManager::updateTime(const vector<string>& _splittedString){
+		currentTime = atof(_splittedString.at(0).c_str());
+	}
+	//------------------------------------------------------------------------
+	void PositionManager::updateTime(){
+		timer->update();
+		currentTime = timer->frameTime();
+
+	}
+
+	//------------------------------------------------------------------------
+	int PositionManager::updatePosAndTime(){
+		vector<string> splittedString;
+
+		getNextLine(splittedString);
+
 		if(isFixed){
-			timer->update();
-			currentTime = timer->frameTime(); // 666 TODO: if fixed, only read one line, etc...
-		}else
-			currentTime = atof(splittedString.at(0).c_str());
+			updateTime();
+			if(isFirstPos){
+				updatePos(splittedString);
+				isFirstPos = false;
+			}
+		} else{
+			updateTime(splittedString);
+			updatePos(splittedString);
+		}
 
-		// Update Cameras
-			double a = atof(splittedString.at(10).c_str()); // alpha, beta, gamma.
-			double b = atof(splittedString.at(11).c_str());
-			double c = atof(splittedString.at(12).c_str()); 
-
-			cam1->setPosition((Mat_<double>(3, 1) << atof(splittedString.at(7).c_str()), atof(splittedString.at(8).c_str()), atof(splittedString.at(9).c_str())));
-
-			cam1->setOrientation(obtainRotationMatrix(a, b, c));
-
-			cam2->setPosition((Mat_<double>(3, 1) << atof(splittedString.at(13).c_str()), atof(splittedString.at(14).c_str()), atof(splittedString.at(15).c_str())));
-
-			a = atof(splittedString.at(16).c_str()); // alpha, beta, gamma.
-			b = atof(splittedString.at(17).c_str());
-			c = atof(splittedString.at(18).c_str()); 
-
-			cam2->setOrientation(obtainRotationMatrix(a, b, c));
-
-			return 0;
+		return 0;
 	}
 
 	//------------------------------------------------------------------------

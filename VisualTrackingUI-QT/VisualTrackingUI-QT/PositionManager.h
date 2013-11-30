@@ -15,6 +15,7 @@
 #include <opencv/cv.h>
 #include <string>
 #include <fstream>
+#include <vector>
 
 namespace vision{
 	class PositionManager{
@@ -37,8 +38,15 @@ namespace vision{
 
 		void getCameraAndTime(position::Camera& _cam1, position::Camera& _cam2, TReal& _time) const;
 	private:
+		void getNextLine(std::vector<std::string>& _splittedString);
+		
+		void updatePos(const std::vector<std::string>& _splittedString);
+		void updateTime(const std::vector<std::string>& _splittedString);
+		void updateTime();
+
+	private:
 		int posMethod; // 0 from file ;  1 from vicon
-		bool isFixed;
+		bool isFixed, isFirstPos;
 
 		position::Camera *cam1, *cam2;
 		STime *timer;

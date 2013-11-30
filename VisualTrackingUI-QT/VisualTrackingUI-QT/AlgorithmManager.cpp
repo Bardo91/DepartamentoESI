@@ -13,80 +13,128 @@
 #include "ComputerVisionLibraries/Positioning/Camera.h"
 
 #include <cassert>
+#include <opencv/cv.h>
 
 using namespace cv;
 using namespace vision::tracking;
 using namespace vision::position;
 
 namespace vision{
-	namespace algorithms{
 
-		//--------------------------------------------------------------------
-		AlgorithmManager::AlgorithmManager(){
-			stereoEKF = 0;
-			singleEKF = 0;
-		}
+	//--------------------------------------------------------------------
+	AlgorithmManager::AlgorithmManager(){
+		matching1 = 0;
+		matching2 = 0;
+		stereoEKF = 0;
+		singleEKF = 0;
+	}
 
-		//--------------------------------------------------------------------
-		AlgorithmManager::~AlgorithmManager(){
-			if(stereoEKF != 0)
-				delete [] stereoEKF;
-			else if(singleEKF != 0)
-				delete [] singleEKF;
-		}
+	//--------------------------------------------------------------------
+	AlgorithmManager::~AlgorithmManager(){
 
-		//--------------------------------------------------------------------
-		int AlgorithmManager::setUpAlgorithm(eAlgorithms _algorithm, Camera _cam1, Camera _cam2){
-			algorithm = _algorithm;
+	}
 
-			switch (algorithm)
-			{
-			case vision::algorithms::eStereoVisionEKF: // 666 TODO: allocate memory rightly
-				stereoEKF = new StereoVisionEKF[8];
-				for(int i = 0; i < 8 ; i++){
-					stereoEKF[i].init(matQ, matR, x0, _cam1, _cam2);
-				}
-				break;
-			case vision::algorithms::eSingleCameraGroundEKF: // 666 TODO: allocate memory rightly
-				singleEKF = new GroundTrackingEKF[8];
-				for(int i = 0; i < 8 ; i++){
-					singleEKF[i].init(matQ, matR, x0, _cam1);
-				}
-				break;
-			default:
-				assert(false);
-				return -1;
+	//--------------------------------------------------------------------
+	int AlgorithmManager::setUpAlgorithm(eAlgorithms _algorithm, Camera _cam1, Camera _cam2){
+		algorithm = _algorithm;
+
+		switch (algorithm)
+		{
+		case vision::eStereoVisionEKF: // 666 TODO: allocate memory rightly
+			// Prepare EKF stereo algorithms
+			stereoEKF = new StereoVisionEKF[8];
+			for(int i = 0; i < 8 ; i++){
+				stereoEKF[i].init(matQ, matR, x0, _cam1, _cam2);
 			}
 
-			return 0;
-		}
+			// Prepare matching algorithm.
+			matching1 = new RobustStereoMatching();
+			matching1->init(0.5);
+			matching2 = new RobustStereoMatching();
+			matching2->init(0.5);
 
-		//--------------------------------------------------------------------
-		int AlgorithmManager::applyAlgorithmStep(std::vector<SimpleObject> _objects1, std::vector<SimpleObject> _objects2, double _incT){
-			switch (algorithm)
-			{
-			case vision::algorithms::eStereoVisionEKF: // 666 TODO: allocate memory rightly
-				// 666 TODO: implement 2 robust matching
-				break;
-			case vision::algorithms::eSingleCameraGroundEKF: // 666 TODO: allocate memory rightly
-				// 666 TODO: implement robust matching
-				break;
-			default:
-				assert(false);
-				return -1;
+			break;
+		case vision::eSingleCameraGroundEKF: // 666 TODO: allocate memory rightly
+			// Prepare EKF single algorithms.
+			singleEKF = new GroundTrackingEKF[8];
+			for(int i = 0; i < 8 ; i++){
+				singleEKF[i].init(matQ, matR, x0, _cam1);
 			}
-
-			return 0;
+			break;
+		default:
+			assert(false);
+			return -1;
 		}
 
-		//--------------------------------------------------------------------
-		void AlgorithmManager::getObjectPos(vector<position::ObjectGeo> _objects){
+		return 0;
+	}
 
+	//--------------------------------------------------------------------
+	int AlgorithmManager::freeAlgorithms(){
+		if(stereoEKF != 0){
+			delete [] stereoEKF;
+			delete matching1, matching2;
 		}
+		else if(singleEKF != 0)
+			delete [] singleEKF;
+
+		return 0;
+	}
+
+	//--------------------------------------------------------------------
+	int AlgorithmManager::updateCameras(position::Camera _cam1, position::Camera _cam2){
+		switch (algorithm)
+		{
+		case vision::eStereoVisionEKF:
+			stereoEKF->updateCameraPos(_cam1.getPosition(), _cam2.getPosition(), _cam1.getOrientation(), _cam2.getOrientation());
+			break;
+		case vision::eSingleCameraGroundEKF:
+			singleEKF->updateCameraPos(_cam1.getPosition(), _cam1.getOrientation());
+			break;
+		}
+
+		return 0;
+	}
+
+	//--------------------------------------------------------------------
+	int AlgorithmManager::applyAlgorithmStep(std::vector<SimpleObject> _objects1, std::vector<SimpleObject> _objects2, double _incT){
+		SimpleObject *objectsZK1; // 666 TODO: Decirle a carmelo quue no se pueden definir las variables dentro del swiitch a no ser que lo definas en todos los cases...  ¿por qué?
+		SimpleObject *objectsZK2;
+			
+		switch (algorithm)
+		{
+		case vision::eStereoVisionEKF: // 666 TODO: allocate memory rightly
+			matching1->updateObjects(_objects1);
+			matching2->updateObjects(_objects2);
+
+			objectsZK1 = matching1->getObjects();
+			objectsZK2 = matching2->getObjects();
+
+			for(int i = 0; i < 8; i ++){
+				Mat zk = (Mat_<double>(4,1) << objectsZK1[i].centroid.x, objectsZK1[i].centroid.y,
+												objectsZK2[i].centroid.x, objectsZK2[i].centroid.y);
+
+				stereoEKF->updateIncT( _incT);
+				stereoEKF->stepEKF(zk);
+			}
+			break;
+		case vision::eSingleCameraGroundEKF: // 666 TODO: allocate memory rightly
+			// 666 TODO: implement robust matching
+			break;
+
+		default:
+			assert(false);
+			return -1;
+		}
+
+		return 0;
+	}
+
+	//--------------------------------------------------------------------
+	void AlgorithmManager::getObjectPos(vector<position::ObjectGeo> _objects){
+
+	}
 			
 
-		//--------------------------------------------------------------------
-
-
-	} // namespace algorithms
+	//--------------------------------------------------------------------
 } // namespace vision

@@ -20,6 +20,11 @@ namespace vision{
 
 		int color; // This variable might not be used (Depend on Color Segmentation Algorithm).
 
+		SimpleObject();
+		SimpleObject(cv::Point2d& _upperLeft, cv::Point2d& _downRight, unsigned int _size, int _color);
+
+		double distanceTo(cv::Point2d& _p2);
+
 	};
 
 }

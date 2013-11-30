@@ -114,6 +114,12 @@ bool MainWindow::getIsFixedCameras(){
 }
 
 //----------------------------------------------------------------------------
+int MainWindow::getTrackingAlgorithm(){
+	return ui.posReconAlgorithmSelector->currentIndex();
+}
+
+
+//----------------------------------------------------------------------------
 //----------------------------------------------------------------------------
 //-------------------SIGNAL_SLOTS_ACTIONS-------------------------------------
 void MainWindow::on_imgAcqMethodSelector_currentIndexChanged(int index){
@@ -166,6 +172,8 @@ void MainWindow::on_testDevicesButton_clicked(){
 		int i;
 		if((i = infoCollector->getPointers()->imageManager->showCurrentFrames())!= 0)
 			QMessageBox::information(this, "Error", "Device: " + QString::number(-i) + " is not found.\n Wait a second and try it again, the device might be changing his state.");
+
+		infoCollector->getPointers()->positionManager->closeStream();
 	}
 }
 

@@ -27,6 +27,7 @@ void threadAlgoritm(InfoPointers *infoPointers){
 	ImageManager *imageManager = infoPointers->imageManager;
 	SegmentationManager *segmentationManager = infoPointers->segmentationManager;
 	PositionManager *positionManager = infoPointers->positionManager;
+	AlgorithmManager *algorithmManager = infoPointers->algorithmManager;
 
 	int threshold = infoPointers->threshold;
 
@@ -74,7 +75,12 @@ void threadAlgoritm(InfoPointers *infoPointers){
 
 		positionManager->updatePosAndTime();
 		
-		positionManager->getCameraAndTime(cam1,cam2, currentTime);
+		positionManager->getCameraAndTime(cam1,cam2, currentTime); 
+
+		algorithmManager->updateCameras(cam1, cam2);
+
+		TReal incT = currentTime - refTime0;
+		algorithmManager->applyAlgorithmStep(objects1, objects2, incT); // 666 TODO: calculate increment of time not absolute
 
 		cout << "Camera1: " << cam1.getPosition() << endl;
 		cout << "Camera2: " << cam2.getPosition() << endl;
@@ -97,6 +103,7 @@ void threadAlgoritm(InfoPointers *infoPointers){
 	}
 	//------------------------------------//
 	positionManager->closeStream();
+	algorithmManager->freeAlgorithms();
 	//------------------------------------//
 }
 

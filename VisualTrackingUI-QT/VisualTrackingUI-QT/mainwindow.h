@@ -41,13 +41,17 @@ public: // Functions to adquire mainwindow widgets information.
 
 	// Functions related to Segmentation algorithm
 	int getSegmentationAlgorithm();
-	int getThreshold();
+	int getThreshold(); // 666 TODO: add threshold to segmentation algorithms and change UI putting edittext next to segmentation algorthm selector
 
 	// Functions related to Position acquisition
 	int getPositionAcquisitionMethod();
 	std::string getCameraInfoPath();
 	std::string getCameraPositionPath();
 	bool getIsFixedCameras();
+
+	// Functions related to Tracking filters
+	int getTrackingAlgorithm();
+
 
 private slots:
 	// Combo Box Slots

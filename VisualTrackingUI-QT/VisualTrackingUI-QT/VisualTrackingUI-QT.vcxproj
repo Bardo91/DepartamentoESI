@@ -90,6 +90,7 @@
     <ClCompile Include="ComputerVisionLibraries\Positioning\ObjectGeo.cpp" />
     <ClCompile Include="ComputerVisionLibraries\Timing\time.cpp" />
     <ClCompile Include="ComputerVisionLibraries\TrackingAlgorithm\GroundTrackingEKF.cpp" />
+    <ClCompile Include="ComputerVisionLibraries\TrackingAlgorithm\RobustStereoMatching.cpp" />
     <ClCompile Include="ComputerVisionLibraries\TrackingAlgorithm\StereoVisionEKF.cpp" />
     <ClCompile Include="GeneratedFiles\Debug\moc_mainwindow.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -111,6 +112,7 @@
     <ClCompile Include="SegmentationManager.cpp" />
     <ClCompile Include="ThreadAlgorithm.cpp" />
     <ClCompile Include="ThreadManager.cpp" />
+    <ClCompile Include="Types\SimpleObject.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="mainwindow.h">

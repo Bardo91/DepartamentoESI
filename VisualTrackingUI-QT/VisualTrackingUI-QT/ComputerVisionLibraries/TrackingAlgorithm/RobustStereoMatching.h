@@ -16,21 +16,28 @@
 
 namespace vision {
 	namespace tracking {
-
+		//--------------------------------------------------------------------
 		class RobustStereoMatching{
 		public:
 			RobustStereoMatching();
 			~RobustStereoMatching();
 
+			void init(double _speed);
+
+		//--------------------------------------------------------------------
 		public:
 			void updateObjects(std::vector<vision::SimpleObject> _objects);
+			SimpleObject *getObjects();
 
+		//--------------------------------------------------------------------
 		private:
-			vision::SimpleObject *objects;
-			double velocity;
+			vision::SimpleObject objects[8];
+			bool updated[8];
+			double speed;
 
+		//--------------------------------------------------------------------
 		};
-
+	//--------------------------------------------------------------------
 	} // namespace tracking
 } // namespace vision
 

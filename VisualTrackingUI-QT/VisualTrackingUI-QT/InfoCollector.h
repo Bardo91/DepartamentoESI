@@ -12,6 +12,7 @@
 #include "ImageManager.h"
 #include "SegmentationManager.h"
 #include "PositionManager.h"
+#include "AlgorithmManager.h"
 #include <string>
 
 
@@ -28,7 +29,7 @@ namespace vision{
 	ImageManager *imageManager;
 	SegmentationManager *segmentationManager;
 	PositionManager *positionManager;
-	//AlgorithmManager *AlgorithmManager;
+	AlgorithmManager *algorithmManager;
 	};
 	//------------------------------------------------------------------------
 	class InfoCollector {
@@ -44,7 +45,7 @@ namespace vision{
 		int setUpImageManager();
 		int setUpSegmentationManager();
 		int setUpPositionManager(std::string& _cameraInfoPath, std::string& _positionPath, bool isFixed);
-		// 666 TODO: int setUpAlgorithmManager();
+		int setUpAlgorithmManager();
 
 
 

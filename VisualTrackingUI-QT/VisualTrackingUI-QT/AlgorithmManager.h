@@ -13,35 +13,36 @@
 
 #include "ComputerVisionLibraries/TrackingAlgorithm/GroundTrackingEKF.h"
 #include "ComputerVisionLibraries/TrackingAlgorithm/StereoVisionEKF.h"
+#include "ComputerVisionLibraries/TrackingAlgorithm/RobustStereoMatching.h"
 #include "ComputerVisionLibraries/Positioning/ObjectGeo.h"
 #include "Types\SimpleObject.h"
 
 #include <vector>
 
-namespace vision{
-	namespace algorithms{
-		enum eAlgorithms {eStereoVisionEKF, eSingleCameraGroundEKF};
+namespace vision{ // 666 TODO: add algorithms and algorithm manager to  InfoCollect class and set it up to be used in Threadalgorithm
+	enum eAlgorithms {eStereoVisionEKF, eSingleCameraGroundEKF};
 
-		class AlgorithmManager{
-		public:
-			AlgorithmManager();
-			~AlgorithmManager();
+	class AlgorithmManager{
+	public:
+		AlgorithmManager();
+		~AlgorithmManager();
 
-			int setUpAlgorithm(eAlgorithms _algorithm, position::Camera _cam1, position::Camera _cam2);
-		public: 
-			int applyAlgorithmStep(std::vector<SimpleObject> _objects1, std::vector<SimpleObject> _objects2, double _incT);
-			void getObjectPos(std::vector<position::ObjectGeo> _objects);
+		int setUpAlgorithm(eAlgorithms _algorithm, position::Camera _cam1, position::Camera _cam2);
 
-		private:
-			eAlgorithms algorithm; // Define algorithm type
+		int freeAlgorithms(); // This functions need to be called when the thread is closing in order to free memory, and let the application to setup new algorithms
+	public: 
+		int updateCameras(position::Camera _cam1, position::Camera _cam2);
+		int applyAlgorithmStep(std::vector<SimpleObject> _objects1, std::vector<SimpleObject> _objects2, double _incT);
+		void getObjectPos(std::vector<position::ObjectGeo> _objects);
+
+	private:
+		eAlgorithms algorithm; // Define algorithm type
 			
-			tracking::StereoVisionEKF *stereoEKF; // 666 TODO: Implement generic algorithm class.
-			tracking::GroundTrackingEKF * singleEKF;
+		tracking::RobustStereoMatching *matching1, *matching2; // Only one matching, because the vector of objects received from image segmentation has a mixture of objects.
+		tracking::StereoVisionEKF *stereoEKF; // Array of EKFs,one for each color.
+		tracking::GroundTrackingEKF * singleEKF; // Array of EKFs,one for each color.
 
-		}; // class AlgorithmManager.
-
-
-	} // namespace algorithms
+	}; // class AlgorithmManager.
 } // namespace vision
 
 

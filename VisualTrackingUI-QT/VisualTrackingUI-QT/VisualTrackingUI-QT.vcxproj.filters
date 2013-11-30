@@ -131,6 +131,12 @@
     <ClCompile Include="ComputerVisionLibraries\TrackingAlgorithm\StereoVisionEKF.cpp">
       <Filter>ComputerVisionLibraries\TrackingAlgorithm</Filter>
     </ClCompile>
+    <ClCompile Include="Types\SimpleObject.cpp">
+      <Filter>Types</Filter>
+    </ClCompile>
+    <ClCompile Include="ComputerVisionLibraries\TrackingAlgorithm\RobustStereoMatching.cpp">
+      <Filter>ComputerVisionLibraries\TrackingAlgorithm</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="mainwindow.h">

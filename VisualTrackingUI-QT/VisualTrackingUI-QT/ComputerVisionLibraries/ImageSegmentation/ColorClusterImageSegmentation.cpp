@@ -301,6 +301,14 @@ namespace vision {
 			}
 
 
+			for(int i = 0; i < objs1.size() ; i ++){
+				_objects1.push_back(SimpleObject(objs1[i].getUpperLeft(), objs1[i].getDownRight(), objs1[i].getSize(), objs1[i].getColor()));
+			}
+			for(int i = 0; i < objs2.size() ; i ++){
+				_objects2.push_back(SimpleObject(objs2[i].getUpperLeft(), objs2[i].getDownRight(), objs2[i].getSize(), objs2[i].getColor()));
+			}
+
+
 			imageHSV2BGR(_frame1);
 			imageHSV2BGR(_frame2);
 
