@@ -117,7 +117,7 @@ int ImageAcquisitor::updateFrame() {
 	if (inputMethod) {
 		const int sizeFormat = imageNameFormat.size() + 4;
 		char *buffer;// +4 suposing that number of input images ar less than 99.999
-		buffer = (char*) new char(sizeof(char)*sizeFormat);
+		buffer = new char[sizeFormat];
 		sprintf(buffer, imageNameFormat.c_str(), currentFrame);
 
 		stringstream ss;
@@ -132,6 +132,7 @@ int ImageAcquisitor::updateFrame() {
 
 		currentFrame++;
 
+		delete [] buffer;
 	} else {
 		assert(device.isOpened());
 		device >> frame;
@@ -147,7 +148,6 @@ int ImageAcquisitor::updateFrame() {
 int ImageAcquisitor::getFrame(Mat& _frame) {
 
 	_frame = Mat(frame);
-
 	return frame.cols == 0 ? -1 : 0;
 }
 

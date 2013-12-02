@@ -48,12 +48,14 @@ void threadAlgoritm(InfoPointers *infoPointers){
 	// Ref temp.
 	TReal refTime0;
 	TReal t1, t2;
-
+	TReal lastTime=0, incT;
 	// Update timer.
 	gTimer->update();
 
 	// Get time for reference
 	refTime0 = gTimer->frameTime();
+
+
 	//------------------------------------//
 	while(cv::waitKey(1) && infoPointers->looping){
 		/*gTimer->update();
@@ -74,17 +76,18 @@ void threadAlgoritm(InfoPointers *infoPointers){
 		segmentationManager->applyAlgorithm(frame1, frame2, threshold, objects1, objects2);
 
 		positionManager->updatePosAndTime();
-		
+
+		lastTime = currentTime , incT;
 		positionManager->getCameraAndTime(cam1,cam2, currentTime); 
 
 		algorithmManager->updateCameras(cam1, cam2);
 
-		TReal incT = currentTime - refTime0;
-		algorithmManager->applyAlgorithmStep(objects1, objects2, incT); // 666 TODO: calculate increment of time not absolute
+		incT = currentTime - lastTime;
+		algorithmManager->applyAlgorithmStep(objects1, objects2, incT);
 
 		cout << "Camera1: " << cam1.getPosition() << endl;
 		cout << "Camera2: " << cam2.getPosition() << endl;
-		cout << "CurrentTime" << currentTime << endl;
+		cout << "incT: " << incT << endl;
 
 
 		if(imageManager->areTwoCameras()){

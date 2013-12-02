@@ -98,17 +98,14 @@ namespace vision{
 
 	//--------------------------------------------------------------------
 	int AlgorithmManager::applyAlgorithmStep(std::vector<SimpleObject> _objects1, std::vector<SimpleObject> _objects2, double _incT){
-		SimpleObject *objectsZK1; // 666 TODO: Decirle a carmelo quue no se pueden definir las variables dentro del swiitch a no ser que lo definas en todos los cases...  ¿por qué?
-		SimpleObject *objectsZK2;
-			
 		switch (algorithm)
 		{
-		case vision::eStereoVisionEKF: // 666 TODO: allocate memory rightly
+		case vision::eStereoVisionEKF:{ // 666 TODO: allocate memory rightly
 			matching1->updateObjects(_objects1);
 			matching2->updateObjects(_objects2);
 
-			objectsZK1 = matching1->getObjects();
-			objectsZK2 = matching2->getObjects();
+			SimpleObject *objectsZK1 = matching1->getObjects();
+			SimpleObject *objectsZK2 = matching2->getObjects();
 
 			for(int i = 0; i < 8; i ++){
 				Mat zk = (Mat_<double>(4,1) << objectsZK1[i].centroid.x, objectsZK1[i].centroid.y,
@@ -118,6 +115,7 @@ namespace vision{
 				stereoEKF->stepEKF(zk);
 			}
 			break;
+			}
 		case vision::eSingleCameraGroundEKF: // 666 TODO: allocate memory rightly
 			// 666 TODO: implement robust matching
 			break;

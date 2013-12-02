@@ -144,7 +144,11 @@ void MainWindow::on_posAcqMethodSelector_currentIndexChanged(int index){
 
 //---------------------------------------------------------------------------
 void MainWindow::on_posReconAlgorithmSelector_currentIndexChanged(int index){
-
+		if(index == 0){
+		ui.rB1Device->setChecked(true);
+	}else if (index == 1){
+		ui.rB2Devices->setChecked(true);
+	}
 }
 
 //---------------------------------------------------------------------------
