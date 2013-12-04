@@ -110,7 +110,7 @@ namespace vision{
 		switch (mainWindow->getSegmentationAlgorithm())
 		{
 			case 0:
-				infoPointers.segmentationManager->setAlgorithm(vision::eSegmentationAlgorithms::ColorClustering, mainWindow->getThreshold());
+				infoPointers.segmentationManager->setAlgorithm(vision::eSegmentationAlgorithms::ColorClustering, mainWindow->getThreshold(), mainWindow->getColors());
 				break;
 
 			default:

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>879</width>
-    <height>603</height>
+    <height>578</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -20,7 +20,7 @@
       <x>20</x>
       <y>20</y>
       <width>853</width>
-      <height>547</height>
+      <height>491</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="mainLayout">
@@ -510,33 +510,6 @@
              </property>
             </widget>
            </item>
-          </layout>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <widget class="Line" name="line">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <layout class="QVBoxLayout" name="infoVerticalLayout">
-         <property name="spacing">
-          <number>6</number>
-         </property>
-         <property name="leftMargin">
-          <number>0</number>
-         </property>
-         <item>
-          <layout class="QVBoxLayout" name="posAcqMethodLayout">
-           <property name="spacing">
-            <number>0</number>
-           </property>
-           <property name="sizeConstraint">
-            <enum>QLayout::SetMinimumSize</enum>
-           </property>
            <item>
             <layout class="QVBoxLayout" name="verticalLayout_4">
              <property name="bottomMargin">
@@ -570,6 +543,33 @@
              </item>
             </layout>
            </item>
+          </layout>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="Line" name="line">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <layout class="QVBoxLayout" name="infoVerticalLayout">
+         <property name="spacing">
+          <number>6</number>
+         </property>
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <item>
+          <layout class="QVBoxLayout" name="posAcqMethodLayout">
+           <property name="spacing">
+            <number>0</number>
+           </property>
+           <property name="sizeConstraint">
+            <enum>QLayout::SetMinimumSize</enum>
+           </property>
            <item>
             <widget class="Line" name="line_6">
              <property name="orientation">
@@ -735,30 +735,30 @@
                 <number>0</number>
                </property>
                <item>
-                <widget class="QCheckBox" name="Bla">
+                <widget class="QCheckBox" name="blackCB">
                  <property name="text">
-                  <string>CheckBox</string>
+                  <string>Black</string>
                  </property>
                 </widget>
                </item>
                <item>
-                <widget class="QCheckBox" name="checkBox_3">
+                <widget class="QCheckBox" name="whiteCB">
                  <property name="text">
-                  <string>CheckBox</string>
+                  <string>White</string>
                  </property>
                 </widget>
                </item>
                <item>
-                <widget class="QCheckBox" name="checkBox_2">
+                <widget class="QCheckBox" name="blueCB">
                  <property name="text">
-                  <string>CheckBox</string>
+                  <string>Blue</string>
                  </property>
                 </widget>
                </item>
                <item>
-                <widget class="QCheckBox" name="checkBox">
+                <widget class="QCheckBox" name="purpleCB">
                  <property name="text">
-                  <string>CheckBox</string>
+                  <string>Purple</string>
                  </property>
                 </widget>
                </item>
@@ -770,30 +770,30 @@
                 <number>0</number>
                </property>
                <item>
-                <widget class="QCheckBox" name="checkBox_5">
+                <widget class="QCheckBox" name="redCB">
                  <property name="text">
-                  <string>CheckBox</string>
+                  <string>Red</string>
                  </property>
                 </widget>
                </item>
                <item>
-                <widget class="QCheckBox" name="checkBox_6">
+                <widget class="QCheckBox" name="orangeCB">
                  <property name="text">
-                  <string>CheckBox</string>
+                  <string>Orange</string>
                  </property>
                 </widget>
                </item>
                <item>
-                <widget class="QCheckBox" name="checkBox_7">
+                <widget class="QCheckBox" name="yellowCB">
                  <property name="text">
-                  <string>CheckBox</string>
+                  <string>Yellow</string>
                  </property>
                 </widget>
                </item>
                <item>
-                <widget class="QCheckBox" name="checkBox_8">
+                <widget class="QCheckBox" name="greenCB">
                  <property name="text">
-                  <string>CheckBox</string>
+                  <string>Green</string>
                  </property>
                 </widget>
                </item>

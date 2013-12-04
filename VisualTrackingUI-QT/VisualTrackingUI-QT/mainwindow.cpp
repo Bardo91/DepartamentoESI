@@ -11,6 +11,7 @@
 
 #include <qmessagebox.h>
 
+
 using namespace vision;
 using namespace std;
 //----------------------------------------------------------------------------
@@ -90,6 +91,30 @@ int MainWindow::getSegmentationAlgorithm(){
 //----------------------------------------------------------------------------
 int MainWindow::getThreshold(){
 	return ui.thresholdTextEdit->toPlainText().toInt();
+}
+
+//----------------------------------------------------------------------------
+string MainWindow::getColors(){
+	bool black = ui.blackCB->isChecked(),
+		white = ui.whiteCB->isChecked(),
+		blue = ui.blueCB->isChecked(), 
+		purple = ui.purpleCB->isChecked(), 
+		red = ui.redCB->isChecked(), 
+		orange = ui.orangeCB->isChecked(), 
+		yellow = ui.yellowCB->isChecked(), 
+		green = ui.greenCB->isChecked();
+
+	int colors =	green*10000000 +
+					yellow*1000000 +
+					orange*100000 +
+					red*10000 +
+					purple*1000 +
+					blue*100 +
+					white*10 +
+					black;
+
+
+	return QString::number(colors).toStdString();
 }
 
 //----------------------------------------------------------------------------

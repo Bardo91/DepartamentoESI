@@ -27,9 +27,10 @@ namespace vision{
 	}
 
 	//------------------------------------------------------------------------
-	void SegmentationManager::setAlgorithm(eSegmentationAlgorithms _algorithm, int _threshold){
+	void SegmentationManager::setAlgorithm(eSegmentationAlgorithms _algorithm, int _threshold, string _colors){
 		eAlgorithm = _algorithm;
 		threshold = _threshold;
+		colors = _colors;
 	}
 
 	//------------------------------------------------------------------------
@@ -47,7 +48,7 @@ namespace vision{
 		case eSegmentationAlgorithms::ColorClustering:
 			// 666 TODO: use statics variables to manage CS and segmentation function in order to save operations
 			// Create cluster space
-			segmentation::ColorClusterSpace CS = *segmentation::CreateHSVCS_8c(segmentation::bin2dec("11111111"), segmentation::bin2dec("11111111"), segmentation::bin2dec("11111111")); // 666 TODO: add edit text to add color selection (check boxes)
+			segmentation::ColorClusterSpace CS = *segmentation::CreateHSVCS_8c(segmentation::bin2dec(colors), segmentation::bin2dec("11111111"), segmentation::bin2dec("11111111")); // 666 TODO: add edit text to add color selection (check boxes)
 			// Use Algorithm
 			// 666 TODO: implement 1 camera algorithm
 			// return segmentation::ColorClusterImageSegmentation(_frame, CS, _objects);
@@ -67,7 +68,7 @@ namespace vision{
 		case eSegmentationAlgorithms::ColorClustering:	
 			// 666 TODO: use statics variables to manage CS and segmentation function in order to save operations
 			// Create cluster space
-			segmentation::ColorClusterSpace CS = *segmentation::CreateHSVCS_8c(segmentation::bin2dec("11111111"), segmentation::bin2dec("11111111"), segmentation::bin2dec("11111111")); // 666 TODO: add edit text to add color selection (check boxes)
+			segmentation::ColorClusterSpace CS = *segmentation::CreateHSVCS_8c(segmentation::bin2dec(colors), segmentation::bin2dec("11111111"), segmentation::bin2dec("11111111")); // 666 TODO: add edit text to add color selection (check boxes)
 			// Use Algorithm
 			return segmentation::ColorClusterImageSegmentation(_frame1, _frame2, CS, threshold, _objects1, _objects2);	
 			break;

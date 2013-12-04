@@ -76,7 +76,7 @@ void threadAlgoritm(InfoPointers *infoPointers){
 
 		segmentationManager->applyAlgorithm(frame1, frame2, objects1, objects2);
 
-		// BORRAR ESTO
+		// 666 TODO: BORRAR ESTO - IMPLEMENTAR BIEN EL RESALTADO DE OBJETOS DETECTADOS
 		for(int i = 0 ; i < objects1.size(); i++){
 			rectangle(ori1, objects1[i].downRight, objects1[i].upperLeft, Scalar(0,0,0), 1);
 		}
@@ -86,7 +86,6 @@ void threadAlgoritm(InfoPointers *infoPointers){
 			}
 		}
 
-
 		//
 
 
@@ -94,7 +93,7 @@ void threadAlgoritm(InfoPointers *infoPointers){
 
 		lastTime = currentTime , incT;
 		positionManager->getCameraPosAndTime(cam1,cam2, currentTime); 
-
+		
 		algorithmManager->updateCameras(cam1, cam2);
 
 		incT = currentTime - lastTime;

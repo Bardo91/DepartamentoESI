@@ -28,7 +28,7 @@ namespace vision {
 		public:
 			void updateObjects(std::vector<vision::SimpleObject>& _objects);
 			SimpleObject *getObjects();
-
+			bool isUpdated(unsigned int i);
 		//--------------------------------------------------------------------
 		private:
 			vision::SimpleObject objects[8];

@@ -71,12 +71,12 @@ public:
     QLabel *label2Devices;
     QSpinBox *spin2Devices;
     QPushButton *testDevicesButton;
-    QFrame *line;
-    QVBoxLayout *infoVerticalLayout;
-    QVBoxLayout *posAcqMethodLayout;
     QVBoxLayout *verticalLayout_4;
     QLabel *cameraInfoLabel;
     QPlainTextEdit *cameraInfoPathEditTest;
+    QFrame *line;
+    QVBoxLayout *infoVerticalLayout;
+    QVBoxLayout *posAcqMethodLayout;
     QFrame *line_6;
     QLabel *posAcqMethodLabel;
     QHBoxLayout *horizontalLayout_2;
@@ -87,6 +87,17 @@ public:
     QVBoxLayout *segMethodLayout;
     QLabel *segMethodLabel;
     QComboBox *segMethodSelector;
+    QVBoxLayout *verticalLayout_5;
+    QHBoxLayout *horizontalLayout_3;
+    QCheckBox *blackCB;
+    QCheckBox *whiteCB;
+    QCheckBox *blueCB;
+    QCheckBox *purpleCB;
+    QHBoxLayout *horizontalLayout_4;
+    QCheckBox *redCB;
+    QCheckBox *orangeCB;
+    QCheckBox *yellowCB;
+    QCheckBox *greenCB;
     QFrame *line_5;
     QVBoxLayout *posReconAlgLayout;
     QLabel *posReconAlgLabel;
@@ -106,12 +117,12 @@ public:
     {
         if (MainWindowClass->objectName().isEmpty())
             MainWindowClass->setObjectName(QStringLiteral("MainWindowClass"));
-        MainWindowClass->resize(879, 603);
+        MainWindowClass->resize(879, 578);
         centralWidget = new QWidget(MainWindowClass);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         layoutWidget = new QWidget(centralWidget);
         layoutWidget->setObjectName(QStringLiteral("layoutWidget"));
-        layoutWidget->setGeometry(QRect(20, 20, 853, 451));
+        layoutWidget->setGeometry(QRect(20, 20, 853, 491));
         mainLayout = new QVBoxLayout(layoutWidget);
         mainLayout->setSpacing(6);
         mainLayout->setContentsMargins(11, 11, 11, 11);
@@ -346,6 +357,25 @@ public:
 
         deviceMethodLayout->addWidget(testDevicesButton);
 
+        verticalLayout_4 = new QVBoxLayout();
+        verticalLayout_4->setSpacing(6);
+        verticalLayout_4->setObjectName(QStringLiteral("verticalLayout_4"));
+        verticalLayout_4->setContentsMargins(-1, -1, -1, 10);
+        cameraInfoLabel = new QLabel(layoutWidget);
+        cameraInfoLabel->setObjectName(QStringLiteral("cameraInfoLabel"));
+
+        verticalLayout_4->addWidget(cameraInfoLabel);
+
+        cameraInfoPathEditTest = new QPlainTextEdit(layoutWidget);
+        cameraInfoPathEditTest->setObjectName(QStringLiteral("cameraInfoPathEditTest"));
+        cameraInfoPathEditTest->setMinimumSize(QSize(400, 25));
+        cameraInfoPathEditTest->setMaximumSize(QSize(400, 25));
+
+        verticalLayout_4->addWidget(cameraInfoPathEditTest);
+
+
+        deviceMethodLayout->addLayout(verticalLayout_4);
+
 
         imgAcqMethodLayout->addLayout(deviceMethodLayout);
 
@@ -367,25 +397,6 @@ public:
         posAcqMethodLayout->setSpacing(0);
         posAcqMethodLayout->setObjectName(QStringLiteral("posAcqMethodLayout"));
         posAcqMethodLayout->setSizeConstraint(QLayout::SetMinimumSize);
-        verticalLayout_4 = new QVBoxLayout();
-        verticalLayout_4->setSpacing(6);
-        verticalLayout_4->setObjectName(QStringLiteral("verticalLayout_4"));
-        verticalLayout_4->setContentsMargins(-1, -1, -1, 10);
-        cameraInfoLabel = new QLabel(layoutWidget);
-        cameraInfoLabel->setObjectName(QStringLiteral("cameraInfoLabel"));
-
-        verticalLayout_4->addWidget(cameraInfoLabel);
-
-        cameraInfoPathEditTest = new QPlainTextEdit(layoutWidget);
-        cameraInfoPathEditTest->setObjectName(QStringLiteral("cameraInfoPathEditTest"));
-        cameraInfoPathEditTest->setMinimumSize(QSize(400, 25));
-        cameraInfoPathEditTest->setMaximumSize(QSize(400, 25));
-
-        verticalLayout_4->addWidget(cameraInfoPathEditTest);
-
-
-        posAcqMethodLayout->addLayout(verticalLayout_4);
-
         line_6 = new QFrame(layoutWidget);
         line_6->setObjectName(QStringLiteral("line_6"));
         line_6->setFrameShape(QFrame::HLine);
@@ -456,6 +467,67 @@ public:
         segMethodSelector->setMaximumSize(QSize(40, 20));
 
         segMethodLayout->addWidget(segMethodSelector);
+
+        verticalLayout_5 = new QVBoxLayout();
+        verticalLayout_5->setSpacing(6);
+        verticalLayout_5->setObjectName(QStringLiteral("verticalLayout_5"));
+        verticalLayout_5->setContentsMargins(-1, -1, -1, 0);
+        horizontalLayout_3 = new QHBoxLayout();
+        horizontalLayout_3->setSpacing(6);
+        horizontalLayout_3->setObjectName(QStringLiteral("horizontalLayout_3"));
+        horizontalLayout_3->setContentsMargins(-1, -1, -1, 0);
+        blackCB = new QCheckBox(layoutWidget);
+        blackCB->setObjectName(QStringLiteral("blackCB"));
+
+        horizontalLayout_3->addWidget(blackCB);
+
+        whiteCB = new QCheckBox(layoutWidget);
+        whiteCB->setObjectName(QStringLiteral("whiteCB"));
+
+        horizontalLayout_3->addWidget(whiteCB);
+
+        blueCB = new QCheckBox(layoutWidget);
+        blueCB->setObjectName(QStringLiteral("blueCB"));
+
+        horizontalLayout_3->addWidget(blueCB);
+
+        purpleCB = new QCheckBox(layoutWidget);
+        purpleCB->setObjectName(QStringLiteral("purpleCB"));
+
+        horizontalLayout_3->addWidget(purpleCB);
+
+
+        verticalLayout_5->addLayout(horizontalLayout_3);
+
+        horizontalLayout_4 = new QHBoxLayout();
+        horizontalLayout_4->setSpacing(6);
+        horizontalLayout_4->setObjectName(QStringLiteral("horizontalLayout_4"));
+        horizontalLayout_4->setContentsMargins(-1, -1, -1, 0);
+        redCB = new QCheckBox(layoutWidget);
+        redCB->setObjectName(QStringLiteral("redCB"));
+
+        horizontalLayout_4->addWidget(redCB);
+
+        orangeCB = new QCheckBox(layoutWidget);
+        orangeCB->setObjectName(QStringLiteral("orangeCB"));
+
+        horizontalLayout_4->addWidget(orangeCB);
+
+        yellowCB = new QCheckBox(layoutWidget);
+        yellowCB->setObjectName(QStringLiteral("yellowCB"));
+
+        horizontalLayout_4->addWidget(yellowCB);
+
+        greenCB = new QCheckBox(layoutWidget);
+        greenCB->setObjectName(QStringLiteral("greenCB"));
+
+        horizontalLayout_4->addWidget(greenCB);
+
+
+        verticalLayout_5->addLayout(horizontalLayout_4);
+
+
+        segMethodLayout->addLayout(verticalLayout_5);
 
 
         infoVerticalLayout->addLayout(segMethodLayout);
@@ -614,6 +686,14 @@ public:
         segMethodSelector->insertItems(0, QStringList()
          << QApplication::translate("MainWindowClass", "Color Cluster Segmentation", 0)
         );
+        blackCB->setText(QApplication::translate("MainWindowClass", "Black", 0));
+        whiteCB->setText(QApplication::translate("MainWindowClass", "White", 0));
+        blueCB->setText(QApplication::translate("MainWindowClass", "Blue", 0));
+        purpleCB->setText(QApplication::translate("MainWindowClass", "Purple", 0));
+        redCB->setText(QApplication::translate("MainWindowClass", "Red", 0));
+        orangeCB->setText(QApplication::translate("MainWindowClass", "Orange", 0));
+        yellowCB->setText(QApplication::translate("MainWindowClass", "Yellow", 0));
+        greenCB->setText(QApplication::translate("MainWindowClass", "Green", 0));
         posReconAlgLabel->setText(QApplication::translate("MainWindowClass", "Position Reconstructor Algorithm:", 0));
         posReconAlgorithmSelector->clear();
         posReconAlgorithmSelector->insertItems(0, QStringList()

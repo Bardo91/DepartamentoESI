@@ -41,7 +41,8 @@ public: // Functions to adquire mainwindow widgets information.
 
 	// Functions related to Segmentation algorithm
 	int getSegmentationAlgorithm();
-	int getThreshold(); // 666 TODO: add threshold to segmentation algorithms and change UI putting edittext next to segmentation algorthm selector
+	int getThreshold();
+	std::string getColors();
 
 	// Functions related to Position acquisition
 	int getPositionAcquisitionMethod();

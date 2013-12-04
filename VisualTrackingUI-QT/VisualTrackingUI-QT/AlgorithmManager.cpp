@@ -108,11 +108,13 @@ namespace vision{
 			SimpleObject *objectsZK2 = matching2->getObjects();
 
 			for(int i = 0; i < 8; i ++){
-				Mat zk = (Mat_<double>(4,1) << objectsZK1[i].centroid.x, objectsZK1[i].centroid.y,
-												objectsZK2[i].centroid.x, objectsZK2[i].centroid.y);
+				if(matching1->isUpdated(i) && matching2->isUpdated(i)){
+					Mat zk = (Mat_<double>(4,1) << objectsZK1[i].centroid.x, objectsZK1[i].centroid.y,
+													objectsZK2[i].centroid.x, objectsZK2[i].centroid.y);
 
-				stereoEKF->updateIncT( _incT);
-				stereoEKF->stepEKF(zk);
+					stereoEKF->updateIncT( _incT);
+					stereoEKF->stepEKF(zk);
+				}
 			}
 			break;
 			}

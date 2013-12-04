@@ -12,6 +12,7 @@
 #include <Types/SimpleObject.h>
 
 #include <opencv/cv.h>
+#include <string>
 #include <vector>
 
 namespace vision{
@@ -24,7 +25,7 @@ namespace vision{
 		~SegmentationManager();
 
 	public: // Config manager
-		void setAlgorithm(eSegmentationAlgorithms _algorithm, int _threshold);
+		void setAlgorithm(eSegmentationAlgorithms _algorithm, int _threshold, std::string _colors);
 		eSegmentationAlgorithms getAlgorithm();
 
 	public: // Manager external actions.
@@ -34,6 +35,7 @@ namespace vision{
 	private:
 		eSegmentationAlgorithms eAlgorithm;
 		unsigned int threshold;
+		std::string colors;
 
 
 

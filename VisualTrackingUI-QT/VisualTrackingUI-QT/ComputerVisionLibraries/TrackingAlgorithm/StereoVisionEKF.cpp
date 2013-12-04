@@ -139,17 +139,17 @@ namespace vision {
 		void StereoVisionEKF::forecastStep() {
 			//cout << "Jf = " << Jf << endl;
 			updateJf();
-
+			//
 			Xfk = Jf * Xak;
-
+			//
 			//cout << "Jf = " << Jf << endl;
 			//cout << "Xak = " << Xak << endl;
 			//cout << "Xfk = " << Xfk << endl;
 			//cout << "P = " << P << endl;
 			//cout << "Q = " << Q << endl;
-
+			//
 			P = Jf * P * Jf.t() + Q;
-
+			//
 			//cout << "P = " << P << endl;
 		}
 
@@ -159,7 +159,7 @@ namespace vision {
 			updateJh_and_hZk();
 			//cout << "hZk = " << h_Zk << endl;
 			//cout << "Jh = " << Jh << endl;
-
+			//
 			//cout << "K = " << K << endl;
 			//cout << "P = " << P << endl;
 			K = P * Jh.t() * (Jh * P * Jh.t() + R).inv();

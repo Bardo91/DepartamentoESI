@@ -46,7 +46,7 @@ namespace vision{
 			}
 
 
-			for(int i = 0; i < _objects.size() ; i ++){
+			for(int i = _objects.size()-1 ; i >= 0  ; i--){
 				double auxError = _objects[i].distanceTo(objects[_objects[i].color].centroid);
 				if(error[_objects[i].color] > auxError){
 					error[_objects[i].color]  = auxError;
@@ -67,6 +67,11 @@ namespace vision{
 		//--------------------------------------------------------------------
 		SimpleObject *RobustStereoMatching::getObjects(){
 			return objects;
+		}
+
+		//--------------------------------------------------------------------
+		bool RobustStereoMatching::isUpdated(unsigned int i){
+			return updated[i];
 		}
 
 		//--------------------------------------------------------------------
