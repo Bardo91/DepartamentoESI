@@ -22,7 +22,7 @@ namespace vision {
 			StereoVisionEKF();
 			StereoVisionEKF(const cv::Mat& _Q, const cv::Mat& _R, const cv::Mat& _x0, position::Camera& _cam1, position::Camera& _cam2);
 			
-			void init(const cv::Mat& _Q, const cv::Mat& _R, const cv::Mat& _x0, position::Camera& _cam1, position::Camera& _cam2);
+			void init(const cv::Mat& _Q, const cv::Mat& _R, const cv::Mat& _x0,const vision::position::Camera& _cam1,const vision::position::Camera& _cam2);
 
 		private:
 			void updateJf();

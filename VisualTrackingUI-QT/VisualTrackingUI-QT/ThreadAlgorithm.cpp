@@ -36,8 +36,9 @@ void threadAlgoritm(InfoPointers *infoPointers){
 	vector<SimpleObject> objects1;
 	vector<SimpleObject> objects2;
 	//------------------------------------//
-	position::Camera cam1, cam2;
-	TReal currentTime;
+	position::Camera cam1 = positionManager->getCamera(1), cam2 = positionManager->getCamera(2);
+
+	TReal currentTime = 0;
 
 	//------------------------------------//
 	// Prepare Timer.
@@ -48,7 +49,7 @@ void threadAlgoritm(InfoPointers *infoPointers){
 	// Ref temp.
 	TReal refTime0;
 	TReal t1, t2;
-	TReal lastTime=0, incT;
+	TReal lastTime, incT;
 	// Update timer.
 	gTimer->update();
 
@@ -73,20 +74,38 @@ void threadAlgoritm(InfoPointers *infoPointers){
 			medianBlur(frame2, frame2, 5);
 		}
 
-		segmentationManager->applyAlgorithm(frame1, frame2, threshold, objects1, objects2);
+		segmentationManager->applyAlgorithm(frame1, frame2, objects1, objects2);
+
+		// BORRAR ESTO
+		for(int i = 0 ; i < objects1.size(); i++){
+			rectangle(ori1, objects1[i].downRight, objects1[i].upperLeft, Scalar(0,0,0), 1);
+		}
+		if(frame2.rows != 0){
+			for(int i = 0 ; i < objects2.size(); i++){
+			rectangle(ori2, objects2[i].downRight, objects2[i].upperLeft, Scalar(0,0,0), 1);
+			}
+		}
+
+
+		//
+
 
 		positionManager->updatePosAndTime();
 
 		lastTime = currentTime , incT;
-		positionManager->getCameraAndTime(cam1,cam2, currentTime); 
+		positionManager->getCameraPosAndTime(cam1,cam2, currentTime); 
 
 		algorithmManager->updateCameras(cam1, cam2);
 
 		incT = currentTime - lastTime;
 		algorithmManager->applyAlgorithmStep(objects1, objects2, incT);
 
+		vector<Mat> trackedObj;
+		algorithmManager->getObjectPos(trackedObj);
+
 		cout << "Camera1: " << cam1.getPosition() << endl;
 		cout << "Camera2: " << cam2.getPosition() << endl;
+		cout << "Obj: " << trackedObj[5] << endl;
 		cout << "incT: " << incT << endl;
 
 
@@ -102,7 +121,8 @@ void threadAlgoritm(InfoPointers *infoPointers){
 		t2 = gTimer->frameTime();
 		double diff = t2-t1;
 		cout << "FINISHED IN " << diff << endl;*/
-
+		objects1.clear();
+		objects2.clear();
 	}
 	//------------------------------------//
 	positionManager->closeStream();

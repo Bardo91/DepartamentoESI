@@ -36,7 +36,7 @@ namespace vision{
 		}
 
 		//--------------------------------------------------------------------
-		void RobustStereoMatching::updateObjects(std::vector<vision::SimpleObject> _objects){
+		void RobustStereoMatching::updateObjects(std::vector<vision::SimpleObject>& _objects){
 			double *error = new double[8];
 			SimpleObject *tempObjects  = new SimpleObject[8];
 			for(int i = 0; i < 8 ; i ++){

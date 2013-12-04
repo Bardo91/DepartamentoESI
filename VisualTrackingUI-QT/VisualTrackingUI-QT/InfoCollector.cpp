@@ -110,7 +110,7 @@ namespace vision{
 		switch (mainWindow->getSegmentationAlgorithm())
 		{
 			case 0:
-				infoPointers.segmentationManager->setAlgorithm(vision::eSegmentationAlgorithms::ColorClustering);
+				infoPointers.segmentationManager->setAlgorithm(vision::eSegmentationAlgorithms::ColorClustering, mainWindow->getThreshold());
 				break;
 
 			default:
@@ -158,15 +158,16 @@ namespace vision{
 		{
 		case 0: // Single Camera ground tracking
 			// 666 TODO: Implement algorithm
-			infoPointers.positionManager->getCameraAndTime(cam1, cam2, fakeT);
+			cam1 = infoPointers.positionManager->getCamera(1);
 			errors += infoPointers.algorithmManager->setUpAlgorithm(vision::eAlgorithms::eSingleCameraGroundEKF,cam1, cam2);
 			
 
 			break;
 		case 1: // Stereo Camera 3D tracking
 			// 666 TODO: Implement algorithm
-
-			infoPointers.positionManager->getCameraAndTime(cam1, cam2, fakeT);
+			cam1 = infoPointers.positionManager->getCamera(1);
+			cam2 = infoPointers.positionManager->getCamera(2);
+			infoPointers.positionManager->getCameraPosAndTime(cam1, cam2, fakeT);
 			errors += infoPointers.algorithmManager->setUpAlgorithm(vision::eAlgorithms::eStereoVisionEKF,cam1, cam2);
 			
 			break;

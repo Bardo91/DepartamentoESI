@@ -9,8 +9,11 @@
 #include "opencv/cv.h"
 #include "opencv/highgui.h"
 
+#include <iostream>
+
 using namespace cv;
 using namespace vision::position;
+using namespace std;
 
 namespace vision {
 	namespace tracking {
@@ -37,7 +40,7 @@ namespace vision {
 			//The rest of variables needn't to be initialized
 		}
 
-		void StereoVisionEKF::init(const Mat& _Q, const Mat& _R, const Mat& _x0, Camera& _cam1, Camera& _cam2) {
+		void StereoVisionEKF::init(const Mat& _Q, const Mat& _R, const Mat& _x0,const Camera& _cam1,const Camera& _cam2) {
 
 			Q = _Q;
 			R = _R;
@@ -134,32 +137,41 @@ namespace vision {
 
 		}
 		void StereoVisionEKF::forecastStep() {
+			//cout << "Jf = " << Jf << endl;
 			updateJf();
 
 			Xfk = Jf * Xak;
 
+			//cout << "Jf = " << Jf << endl;
+			//cout << "Xak = " << Xak << endl;
+			//cout << "Xfk = " << Xfk << endl;
+			//cout << "P = " << P << endl;
+			//cout << "Q = " << Q << endl;
+
 			P = Jf * P * Jf.t() + Q;
 
+			//cout << "P = " << P << endl;
 		}
 
 		void StereoVisionEKF::filterStep(const Mat& Zk) {
+			//cout << "Jh = " << Jh << endl;
+			//cout << "hZk = " << h_Zk << endl;
 			updateJh_and_hZk();
+			//cout << "hZk = " << h_Zk << endl;
+			//cout << "Jh = " << Jh << endl;
 
+			//cout << "K = " << K << endl;
+			//cout << "P = " << P << endl;
 			K = P * Jh.t() * (Jh * P * Jh.t() + R).inv();
-
+			//cout << "K = " << K << endl;
+			//
+			//cout << "Xfk = " << Xfk << endl;
 			P = (Mat::eye(6, 6, CV_64F) - K * Jh);
-
+			//cout << "P = " << P << endl;
+			//cout << "Zk = " << Zk << endl;
 			Xak = Xfk + K * (Zk - h_Zk);
-
-			/*cout << "K = " << K << endl;
-			 cout << "P = " << P << endl;
-			 cout << "Jh = " << Jh << endl;
-			 cout << "Xfk = " << Xfk << endl;
-			 cout << "Xak = " << Xak << endl;
-			 cout << "Zk = " << Zk << endl;
-			 cout << "hZk = " << h_Zk << endl << "--------------------" << endl;
-
-			 waitKey();*/
+			//cout << "Xak = " << Xak << endl;
+			//cout << "--------------------" << endl;
 
 		}
 

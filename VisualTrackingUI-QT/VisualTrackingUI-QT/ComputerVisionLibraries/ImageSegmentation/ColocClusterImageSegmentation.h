@@ -22,7 +22,7 @@ namespace vision {
 		//int ColorClusterImageSegmentation(cv::Mat& frame, ColorClusterSpace& CS, unsigned int threshold, std::vector<SimpleObject>& objects);
 		
 		// Pair frames color cluster segmentation. Better that execute a couple times the previous algorithm, because reuse loops for both frames.
-		int ColorClusterImageSegmentation(cv::Mat& frame1, cv::Mat& frame2, ColorClusterSpace& CS, std::vector<SimpleObject>& objects1, std::vector<SimpleObject>& objects2);
+		int ColorClusterImageSegmentation(cv::Mat& frame1, cv::Mat& frame2, ColorClusterSpace& CS, const unsigned int threshold, std::vector<SimpleObject>& objects1, std::vector<SimpleObject>& objects2);
 		
 	} // namespace segmentation
 } // namespace vision

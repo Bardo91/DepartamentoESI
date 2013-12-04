@@ -26,7 +26,7 @@ namespace vision {
 
 		//--------------------------------------------------------------------
 		public:
-			void updateObjects(std::vector<vision::SimpleObject> _objects);
+			void updateObjects(std::vector<vision::SimpleObject>& _objects);
 			SimpleObject *getObjects();
 
 		//--------------------------------------------------------------------

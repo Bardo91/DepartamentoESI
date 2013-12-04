@@ -35,7 +35,7 @@ namespace vision{
 	}
 
 	//--------------------------------------------------------------------
-	int AlgorithmManager::setUpAlgorithm(eAlgorithms _algorithm, Camera _cam1, Camera _cam2){
+	int AlgorithmManager::setUpAlgorithm(eAlgorithms _algorithm,const Camera& _cam1, const Camera& _cam2){
 		algorithm = _algorithm;
 
 		switch (algorithm)
@@ -82,7 +82,7 @@ namespace vision{
 	}
 
 	//--------------------------------------------------------------------
-	int AlgorithmManager::updateCameras(position::Camera _cam1, position::Camera _cam2){
+	int AlgorithmManager::updateCameras(const position::Camera& _cam1, const position::Camera& _cam2){
 		switch (algorithm)
 		{
 		case vision::eStereoVisionEKF:
@@ -97,7 +97,7 @@ namespace vision{
 	}
 
 	//--------------------------------------------------------------------
-	int AlgorithmManager::applyAlgorithmStep(std::vector<SimpleObject> _objects1, std::vector<SimpleObject> _objects2, double _incT){
+	int AlgorithmManager::applyAlgorithmStep(std::vector<SimpleObject>& _objects1, std::vector<SimpleObject>& _objects2, double _incT){
 		switch (algorithm)
 		{
 		case vision::eStereoVisionEKF:{ // 666 TODO: allocate memory rightly
@@ -129,8 +129,12 @@ namespace vision{
 	}
 
 	//--------------------------------------------------------------------
-	void AlgorithmManager::getObjectPos(vector<position::ObjectGeo> _objects){
-
+	void AlgorithmManager::getObjectPos(vector<Mat>& _objects){
+		Mat auxPos;
+		for(int i = 0; i < 8 ; i ++){ // Right assignment of object
+			stereoEKF[i].getStateVector(auxPos);
+			_objects.push_back(auxPos);
+		}
 	}
 			
 

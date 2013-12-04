@@ -151,11 +151,22 @@ namespace vision{
 	}
 
 	//------------------------------------------------------------------------
-	void PositionManager::getCameraAndTime(position::Camera& _cam1, position::Camera& _cam2, TReal& _time) const{
+	void PositionManager::getCameraPosAndTime(position::Camera& _cam1, position::Camera& _cam2, TReal& _time) const{
 		_cam1.setPosition(cam1->getPosition());
 		_cam1.setOrientation(cam1->getOrientation());
 		_cam2.setPosition(cam2->getPosition());
 		_cam2.setOrientation(cam2->getOrientation());
 		_time = currentTime;
 	}
+
+	//------------------------------------------------------------------------
+	Camera PositionManager::getCamera(int _cam){
+		if(_cam == 1)
+			return *cam1;
+		else if(_cam == 2)
+			return *cam2;
+	}
+
+	//------------------------------------------------------------------------
+
 } // namespace vision

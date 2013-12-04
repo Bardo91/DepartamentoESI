@@ -18,8 +18,8 @@ using namespace vision::segmentation;
 
 namespace vision {
 	namespace segmentation{
-		int ColorClusterImageSegmentation(Mat& _frame1, Mat& _frame2, ColorClusterSpace& _CS,
-				vector<SimpleObject>& _objects1,
+		int ColorClusterImageSegmentation(Mat& _frame1, Mat& _frame2, ColorClusterSpace& _CS, const unsigned int _threshold,
+				vector<SimpleObject>& _objects1, 
 				vector<SimpleObject>& _objects2) {
 
 			imageBGR2HSV(_frame1);
@@ -300,12 +300,14 @@ namespace vision {
 				}
 			}
 
-
+			// 666 TODO: are objects been added?
 			for(int i = 0; i < objs1.size() ; i ++){
-				_objects1.push_back(SimpleObject(objs1[i].getUpperLeft(), objs1[i].getDownRight(), objs1[i].getSize(), objs1[i].getColor()));
+				if(objs1[i].getSize() >= _threshold)
+					_objects1.push_back(SimpleObject(objs1[i].getUpperLeft(), objs1[i].getDownRight(), objs1[i].getSize(), objs1[i].getColor()));
 			}
 			for(int i = 0; i < objs2.size() ; i ++){
-				_objects2.push_back(SimpleObject(objs2[i].getUpperLeft(), objs2[i].getDownRight(), objs2[i].getSize(), objs2[i].getColor()));
+				if(objs2[i].getSize() >= _threshold)
+					_objects2.push_back(SimpleObject(objs2[i].getUpperLeft(), objs2[i].getDownRight(), objs2[i].getSize(), objs2[i].getColor()));
 			}
 
 

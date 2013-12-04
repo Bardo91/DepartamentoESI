@@ -24,12 +24,12 @@ namespace vision{
 		~SegmentationManager();
 
 	public: // Config manager
-		void setAlgorithm(eSegmentationAlgorithms _algorithm);
+		void setAlgorithm(eSegmentationAlgorithms _algorithm, int _threshold);
 		eSegmentationAlgorithms getAlgorithm();
 
 	public: // Manager external actions.
-		int applyAlgorithm(cv::Mat _frame, unsigned int threshold, std::vector<SimpleObject> _objects);
-		int applyAlgorithm(cv::Mat _frame1, cv::Mat _frame2, unsigned int threshold, std::vector<SimpleObject> _objects1, std::vector<SimpleObject> _objects2);
+		int applyAlgorithm(cv::Mat _frame, std::vector<SimpleObject>& _objects);
+		int applyAlgorithm(cv::Mat _frame1, cv::Mat _frame2, std::vector<SimpleObject>& _objects1, std::vector<SimpleObject>& _objects2);
 
 	private:
 		eSegmentationAlgorithms eAlgorithm;

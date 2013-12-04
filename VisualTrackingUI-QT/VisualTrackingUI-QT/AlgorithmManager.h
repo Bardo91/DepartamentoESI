@@ -27,13 +27,13 @@ namespace vision{ // 666 TODO: add algorithms and algorithm manager to  InfoColl
 		AlgorithmManager();
 		~AlgorithmManager();
 
-		int setUpAlgorithm(eAlgorithms _algorithm, position::Camera _cam1, position::Camera _cam2);
+		int setUpAlgorithm(eAlgorithms _algorithm,const position::Camera& _cam1,const position::Camera& _cam2);
 
 		int freeAlgorithms(); // This functions need to be called when the thread is closing in order to free memory, and let the application to setup new algorithms
 	public: 
-		int updateCameras(position::Camera _cam1, position::Camera _cam2);
-		int applyAlgorithmStep(std::vector<SimpleObject> _objects1, std::vector<SimpleObject> _objects2, double _incT);
-		void getObjectPos(std::vector<position::ObjectGeo> _objects);
+		int updateCameras(const position::Camera& _cam1,const position::Camera& _cam2);
+		int applyAlgorithmStep(std::vector<SimpleObject>& _objects1, std::vector<SimpleObject>& _objects2, double _incT);
+		void getObjectPos(std::vector<cv::Mat>& _objects);
 
 	private:
 		eAlgorithms algorithm; // Define algorithm type

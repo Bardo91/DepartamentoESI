@@ -36,7 +36,8 @@ namespace vision{
 
 		int updatePosAndTime();
 
-		void getCameraAndTime(position::Camera& _cam1, position::Camera& _cam2, TReal& _time) const;
+		void getCameraPosAndTime(position::Camera& _cam1, position::Camera& _cam2, TReal& _time) const;
+		position::Camera getCamera(int _cam);
 	private:
 		void getNextLine(std::vector<std::string>& _splittedString);
 		
