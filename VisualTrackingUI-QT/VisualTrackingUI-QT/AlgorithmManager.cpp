@@ -113,7 +113,7 @@ namespace vision{
 													objectsZK2[i].centroid.x, objectsZK2[i].centroid.y);
 
 					stereoEKF->updateIncT( _incT);
-					stereoEKF->stepEKF(zk);
+					stereoEKF->stepEKF(zk);   // 666 TODO: rehacer algoritmo
 				}
 			}
 			break;

@@ -74,7 +74,12 @@ namespace vision {
 
 		void StereoVisionEKF::updateJf() {
 			Jf =
-					(Mat_<double>(6, 6) << 1, 0, 0, incT, 0, 0, 0, 1, 0, 0, incT, 0, 0, 0, 1, 0, 0, incT, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0);
+					(Mat_<double>(6, 6) <<	1, 0, 0, incT, 0, 0, 
+											0, 1, 0, 0, incT, 0, 
+											0, 0, 1, 0, 0, incT, 
+											0, 0, 0, 1, 0, 0, 
+											0, 0, 0, 0, 1, 0, 
+											0, 0, 0, 0, 0, 1);
 		}
 		void StereoVisionEKF::updateJh_and_hZk() {
 			double * R1 = (double*) cam1.getOrientation().data;
@@ -101,35 +106,29 @@ namespace vision {
 
 			double * hzkdata = (double*) h_Zk.data;
 
-			hzkdata[0] = f * PYc1 / PZc1;
-			hzkdata[1] = f * PXc1 / PZc1;
-			hzkdata[2] = f * PYc2 / PZc2;
-			hzkdata[3] = f * PXc2 / PZc2;
+			hzkdata[0] = - f * PYc1 / PZc1;
+			hzkdata[1] = - f * PXc1 / PZc1;
+			hzkdata[2] = - f * PYc2 / PZc2;
+			hzkdata[3] = - f * PXc2 / PZc2;
 			//
 
 			double * dataJh = (double*) Jh.data;
 
-			dataJh[0] = f * (R1[3 * 0 + 1] * PZc1 - R1[3 * 0 + 2] * PYc1) / PZc1 / PZc1;
-			dataJh[1] = f * (R1[3 * 1 + 1] * PZc1 - R1[3 * 1 + 2] * PYc1) / PZc1 / PZc1;
-			dataJh[2] = f * (R1[3 * 2 + 1] * PZc1 - R1[3 * 2 + 2] * PYc1) / PZc1 / PZc1;
+			dataJh[0] = -f * (R1[3 * 0 + 0] * PZc1 - R1[3 * 0 + 2] * PXc1) / PZc1 / PZc1;
+			dataJh[1] = -f * (R1[3 * 1 + 0] * PZc1 - R1[3 * 1 + 2] * PXc1) / PZc1 / PZc1;
+			dataJh[2] = -f * (R1[3 * 2 + 0] * PZc1 - R1[3 * 2 + 2] * PXc1) / PZc1 / PZc1;
 
-			dataJh[6] = f * (R1[3 * 0 + 0] * PZc1 - R1[3 * 0 + 2] * PXc1) / PZc1 / PZc1;
-			dataJh[7] = f * (R1[3 * 1 + 0] * PZc1 - R1[3 * 1 + 2] * PXc1) / PZc1 / PZc1;
-			dataJh[8] = f * (R1[3 * 2 + 0] * PZc1 - R1[3 * 2 + 2] * PXc1) / PZc1 / PZc1;
+			dataJh[8] = -f * (R1[3 * 0 + 1] * PZc1 - R1[3 * 0 + 2] * PYc1) / PZc1 / PZc1;
+			dataJh[7] = -f * (R1[3 * 1 + 1] * PZc1 - R1[3 * 1 + 2] * PYc1) / PZc1 / PZc1;
+			dataJh[6] = -f * (R1[3 * 2 + 1] * PZc1 - R1[3 * 2 + 2] * PYc1) / PZc1 / PZc1;
 
-			dataJh[12] = f * (R2[3 * 0 + 1] * PZc2 - R2[3 * 0 + 2] * PYc2) / PZc2
-					/ PZc2;
-			dataJh[13] = f * (R2[3 * 1 + 1] * PZc2 - R2[3 * 1 + 2] * PYc2) / PZc2
-					/ PZc2;
-			dataJh[14] = f * (R2[3 * 2 + 1] * PZc2 - R2[3 * 2 + 2] * PYc2) / PZc2
-					/ PZc2;
+			dataJh[12] = -f * (R2[3 * 0 + 0] * PZc2 - R2[3 * 0 + 2] * PXc2) / PZc2 / PZc2;
+			dataJh[13] = -f * (R2[3 * 1 + 0] * PZc2 - R2[3 * 1 + 2] * PXc2) / PZc2 / PZc2;
+			dataJh[14] = -f * (R2[3 * 2 + 0] * PZc2 - R2[3 * 2 + 2] * PXc2) / PZc2 / PZc2;
 
-			dataJh[18] = f * (R2[3 * 0 + 0] * PZc2 - R2[3 * 0 + 2] * PXc2) / PZc2
-					/ PZc2;
-			dataJh[19] = f * (R2[3 * 1 + 0] * PZc2 - R2[3 * 1 + 2] * PXc2) / PZc2
-					/ PZc2;
-			dataJh[20] = f * (R2[3 * 2 + 0] * PZc2 - R2[3 * 2 + 2] * PXc2) / PZc2
-					/ PZc2;
+			dataJh[18] = -f * (R2[3 * 0 + 1] * PZc2 - R2[3 * 0 + 2] * PYc2) / PZc2 / PZc2;
+			dataJh[19] = -f * (R2[3 * 1 + 1] * PZc2 - R2[3 * 1 + 2] * PYc2) / PZc2 / PZc2;
+			dataJh[20] = -f * (R2[3 * 2 + 1] * PZc2 - R2[3 * 2 + 2] * PYc2) / PZc2 / PZc2;
 
 			dataJh[3] = dataJh[4] = dataJh[5] = dataJh[9] = dataJh[10] = dataJh[11] =
 					dataJh[15] = dataJh[16] = dataJh[17] = dataJh[21] = dataJh[22] =
@@ -137,42 +136,22 @@ namespace vision {
 
 		}
 		void StereoVisionEKF::forecastStep() {
-			//cout << "Jf = " << Jf << endl;
 			updateJf();
-			//
+
 			Xfk = Jf * Xak;
-			//
-			//cout << "Jf = " << Jf << endl;
-			//cout << "Xak = " << Xak << endl;
-			//cout << "Xfk = " << Xfk << endl;
-			//cout << "P = " << P << endl;
-			//cout << "Q = " << Q << endl;
-			//
+			
 			P = Jf * P * Jf.t() + Q;
-			//
-			//cout << "P = " << P << endl;
 		}
 
 		void StereoVisionEKF::filterStep(const Mat& Zk) {
-			//cout << "Jh = " << Jh << endl;
-			//cout << "hZk = " << h_Zk << endl;
 			updateJh_and_hZk();
-			//cout << "hZk = " << h_Zk << endl;
-			//cout << "Jh = " << Jh << endl;
-			//
-			//cout << "K = " << K << endl;
-			//cout << "P = " << P << endl;
+		
 			K = P * Jh.t() * (Jh * P * Jh.t() + R).inv();
-			//cout << "K = " << K << endl;
-			//
-			//cout << "Xfk = " << Xfk << endl;
+		
 			P = (Mat::eye(6, 6, CV_64F) - K * Jh);
-			//cout << "P = " << P << endl;
-			//cout << "Zk = " << Zk << endl;
+			
 			Xak = Xfk + K * (Zk - h_Zk);
-			//cout << "Xak = " << Xak << endl;
-			//cout << "--------------------" << endl;
-
+			
 		}
 
 		void StereoVisionEKF::stepEKF(const Mat& Zk) {

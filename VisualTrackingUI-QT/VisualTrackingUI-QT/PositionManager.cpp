@@ -133,8 +133,10 @@ namespace vision{
 	//------------------------------------------------------------------------
 	int PositionManager::updatePosAndTime(){
 		vector<string> splittedString;
-
-		getNextLine(splittedString);
+		
+		if(isFirstPos){ // 666 TODO: Cambiar, no es elegante...
+			getNextLine(splittedString);
+		}
 
 		if(isFixed){
 			updateTime();

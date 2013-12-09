@@ -76,6 +76,22 @@ void threadAlgoritm(InfoPointers *infoPointers){
 
 		segmentationManager->applyAlgorithm(frame1, frame2, objects1, objects2);
 
+		positionManager->updatePosAndTime();
+
+		lastTime = currentTime , incT;
+		positionManager->getCameraPosAndTime(cam1,cam2, currentTime); 
+		
+		algorithmManager->updateCameras(cam1, cam2);
+
+		incT = currentTime - lastTime;
+		algorithmManager->applyAlgorithmStep(objects1, objects2, incT); // 666 TODO: Revisar con camaras y objeto verde controlado. Revisar
+
+		vector<Mat> trackedObj;
+		algorithmManager->getObjectPos(trackedObj);
+
+		cout << trackedObj[0] << endl;
+
+
 		// 666 TODO: BORRAR ESTO - IMPLEMENTAR BIEN EL RESALTADO DE OBJETOS DETECTADOS
 		for(int i = 0 ; i < objects1.size(); i++){
 			rectangle(ori1, objects1[i].downRight, objects1[i].upperLeft, Scalar(0,0,0), 1);
@@ -85,29 +101,7 @@ void threadAlgoritm(InfoPointers *infoPointers){
 			rectangle(ori2, objects2[i].downRight, objects2[i].upperLeft, Scalar(0,0,0), 1);
 			}
 		}
-
 		//
-
-
-		positionManager->updatePosAndTime();
-
-		lastTime = currentTime , incT;
-		positionManager->getCameraPosAndTime(cam1,cam2, currentTime); 
-		
-		algorithmManager->updateCameras(cam1, cam2);
-
-		incT = currentTime - lastTime;
-		algorithmManager->applyAlgorithmStep(objects1, objects2, incT);
-
-		vector<Mat> trackedObj;
-		algorithmManager->getObjectPos(trackedObj);
-
-		cout << "Camera1: " << cam1.getPosition() << endl;
-		cout << "Camera2: " << cam2.getPosition() << endl;
-		cout << "Obj: " << trackedObj[5] << endl;
-		cout << "incT: " << incT << endl;
-
-
 		if(imageManager->areTwoCameras()){
 			hconcat(frame1, frame2, frame1);
 			hconcat(ori1, ori2, ori1);

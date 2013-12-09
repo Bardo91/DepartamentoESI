@@ -183,6 +183,7 @@ void MainWindow::on_segMethodSelector_currentIndexChanged(int index){
 
 //----------------------------------------------------------------------------
 void MainWindow::on_startButton_clicked(){
+	infoCollector->deleteInfo();
 	if(infoCollector->CollectInfo() > -1){
 		threadManager.setInfo(infoCollector->getPointers());
 		threadManager.startThread();

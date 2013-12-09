@@ -38,6 +38,7 @@ namespace vision{
 		~InfoCollector();
 
 	public: // Functions that setUp the threads information.
+		void deleteInfo();
 		int CollectInfo();
 		InfoPointers * getPointers();
 

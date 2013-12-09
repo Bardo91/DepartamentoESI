@@ -27,12 +27,28 @@ namespace vision{
 
 	//------------------------------------------------------------------------
 	InfoCollector::~InfoCollector(){
-			delete infoPointers.imageManager;
-			delete infoPointers.segmentationManager;
-			delete infoPointers.positionManager;
-			delete infoPointers.algorithmManager;
+			
 	}
 
+	void InfoCollector::deleteInfo(){
+		if(infoPointers.imageManager != 0){
+			delete infoPointers.imageManager;
+			infoPointers.imageManager = 0;
+		}
+		if(infoPointers.segmentationManager != 0){
+			delete infoPointers.segmentationManager;
+			infoPointers.segmentationManager = 0;
+		}
+		if(infoPointers.positionManager != 0){
+			delete infoPointers.positionManager;
+			infoPointers.positionManager = 0;
+		}
+		if(infoPointers.algorithmManager != 0){
+			delete infoPointers.algorithmManager;
+			infoPointers.algorithmManager = 0;
+		}
+	}
+	
 	//------------------------------------------------------------------------
 	int InfoCollector::CollectInfo(){
 		int errors = 0;
