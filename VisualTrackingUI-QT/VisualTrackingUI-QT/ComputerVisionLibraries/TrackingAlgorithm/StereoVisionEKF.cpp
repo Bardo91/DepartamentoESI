@@ -19,11 +19,12 @@ using namespace std;
 
 namespace vision {
 	namespace tracking {
-		[TestMethod]
+		//--------------------------------------------------------------------
 		StereoVisionEKF::StereoVisionEKF(){
 
 		}
 
+		//--------------------------------------------------------------------
 		StereoVisionEKF::StereoVisionEKF(const Mat& _Q, const Mat& _R, const Mat& _x0, Camera& _cam1, Camera& _cam2) {
 
 			Q = _Q;
@@ -42,6 +43,7 @@ namespace vision {
 			//The rest of variables needn't to be initialized
 		}
 
+		//--------------------------------------------------------------------
 		void StereoVisionEKF::init(const Mat& _Q, const Mat& _R, const Mat& _x0,const Camera& _cam1,const Camera& _cam2) {
 
 			Q = _Q;
@@ -60,6 +62,7 @@ namespace vision {
 			//The rest of variables needn't to be initialized
 		}
 
+		//--------------------------------------------------------------------
 		void StereoVisionEKF::updateCameraPos(const cv::Mat& _pos1, const cv::Mat& _pos2,
 				const cv::Mat& _ori1, const cv::Mat& _ori2) {
 
@@ -70,10 +73,12 @@ namespace vision {
 
 		}
 
+		//--------------------------------------------------------------------
 		void StereoVisionEKF::updateIncT(const double& incT_) {
 			incT = incT_;
 		}
 
+		//--------------------------------------------------------------------
 		void StereoVisionEKF::updateJf() {
 			Jf =
 					(Mat_<double>(6, 6) <<	1, 0, 0, incT, 0, 0, 
@@ -83,6 +88,8 @@ namespace vision {
 											0, 0, 0, 0, 1, 0, 
 											0, 0, 0, 0, 0, 1);
 		}
+
+		//--------------------------------------------------------------------
 		void StereoVisionEKF::updateJh_and_hZk() {
 			double * R1 = (double*) cam1.getOrientation().data;
 			double * R2 = (double*) cam2.getOrientation().data;
@@ -105,13 +112,13 @@ namespace vision {
 			double PZc2 = pc2data[2];
 
 			// updating h_Zk
-
 			double * hzkdata = (double*) h_Zk.data;
 
 			hzkdata[0] = f * PXc1 / PYc1;
 			hzkdata[1] = f * PZc1 / PYc1;
 			hzkdata[2] = f * PXc2 / PYc2;
 			hzkdata[3] = f * PZc2 / PYc2;
+			
 			//
 
 			double * dataJh = (double*) Jh.data;
@@ -137,6 +144,8 @@ namespace vision {
 							dataJh[23] = 0;
 
 		}
+
+		//--------------------------------------------------------------------
 		void StereoVisionEKF::forecastStep() {
 			updateJf();
 
@@ -145,6 +154,7 @@ namespace vision {
 			P = Jf * P * Jf.t() + Q;
 		}
 
+		//--------------------------------------------------------------------
 		void StereoVisionEKF::filterStep(const Mat& Zk) {
 			updateJh_and_hZk();
 		
@@ -156,13 +166,17 @@ namespace vision {
 			
 		}
 
+		//--------------------------------------------------------------------
 		void StereoVisionEKF::stepEKF(const Mat& Zk) {
 			forecastStep();
 			filterStep(Zk);
 		}
 
+		//--------------------------------------------------------------------
 		void StereoVisionEKF::getStateVector(Mat& Xak_) const {
 			Xak_ = Xak;
 		}
+
+		//--------------------------------------------------------------------
 	} // namespace tracking
 } // namespace vision
