@@ -31,7 +31,7 @@ namespace vision{
 
 	//--------------------------------------------------------------------
 	AlgorithmManager::~AlgorithmManager(){
-
+		
 	}
 
 	//--------------------------------------------------------------------
@@ -138,7 +138,18 @@ namespace vision{
 			_objects.push_back(auxPos);
 		}
 	}
-			
+
+	//--------------------------------------------------------------------
+	void AlgorithmManager::getObservationObjects(vector<SimpleObject>& _objects1, vector<SimpleObject>& _objects2){
+		
+		SimpleObject *objectsZK1 = matching1->getObjects();
+		SimpleObject *objectsZK2 = matching2->getObjects();
+		
+		for(int i = 0; i < 8 ; i ++){ // Right assignment of object
+			_objects1.push_back(objectsZK1[i]);
+			_objects2.push_back(objectsZK2[i]);
+		}
+	}
 
 	//--------------------------------------------------------------------
 } // namespace vision

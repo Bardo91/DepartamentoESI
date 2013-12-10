@@ -52,6 +52,12 @@ namespace vision{
 	//------------------------------------------------------------------------
 	int InfoCollector::CollectInfo(){
 		int errors = 0;
+		// Reserve space for Managers
+		infoPointers.imageManager = new ImageManager();
+		infoPointers.segmentationManager = new SegmentationManager();
+		infoPointers.positionManager = new PositionManager();
+		infoPointers.algorithmManager = new AlgorithmManager();
+		// 666 TODO: whatalio!
 		errors += setUpImageManager(); 
 		errors += setUpSegmentationManager();
 		errors += setUpPositionManager(mainWindow->getCameraInfoPath(), mainWindow->getCameraPositionPath(), mainWindow->getIsFixedCameras());

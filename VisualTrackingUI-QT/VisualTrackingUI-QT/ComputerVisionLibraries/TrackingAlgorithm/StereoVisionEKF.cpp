@@ -6,8 +6,10 @@
  */
 
 #include "StereoVisionEKF.h"
-#include "opencv/cv.h"
-#include "opencv/highgui.h"
+#include <ParamsEKF.h>
+
+#include <opencv/cv.h>
+#include <opencv/highgui.h>
 
 #include <iostream>
 
@@ -17,7 +19,7 @@ using namespace std;
 
 namespace vision {
 	namespace tracking {
-
+		[TestMethod]
 		StereoVisionEKF::StereoVisionEKF(){
 
 		}
@@ -106,29 +108,29 @@ namespace vision {
 
 			double * hzkdata = (double*) h_Zk.data;
 
-			hzkdata[0] = - f * PYc1 / PZc1;
-			hzkdata[1] = - f * PXc1 / PZc1;
-			hzkdata[2] = - f * PYc2 / PZc2;
-			hzkdata[3] = - f * PXc2 / PZc2;
+			hzkdata[0] = f * PXc1 / PYc1;
+			hzkdata[1] = f * PZc1 / PYc1;
+			hzkdata[2] = f * PXc2 / PYc2;
+			hzkdata[3] = f * PZc2 / PYc2;
 			//
 
 			double * dataJh = (double*) Jh.data;
 
-			dataJh[0] = -f * (R1[3 * 0 + 0] * PZc1 - R1[3 * 0 + 2] * PXc1) / PZc1 / PZc1;
-			dataJh[1] = -f * (R1[3 * 1 + 0] * PZc1 - R1[3 * 1 + 2] * PXc1) / PZc1 / PZc1;
-			dataJh[2] = -f * (R1[3 * 2 + 0] * PZc1 - R1[3 * 2 + 2] * PXc1) / PZc1 / PZc1;
+			dataJh[0] = f * (R1[3 * 0 + 0] * PYc1 - R1[3 * 0 + 1] * PXc1) / PYc1 / PYc1;
+			dataJh[1] = f * (R1[3 * 1 + 0] * PYc1 - R1[3 * 1 + 1] * PXc1) / PYc1 / PYc1;
+			dataJh[2] = f * (R1[3 * 2 + 0] * PYc1 - R1[3 * 2 + 1] * PXc1) / PYc1 / PYc1;
 
-			dataJh[8] = -f * (R1[3 * 0 + 1] * PZc1 - R1[3 * 0 + 2] * PYc1) / PZc1 / PZc1;
-			dataJh[7] = -f * (R1[3 * 1 + 1] * PZc1 - R1[3 * 1 + 2] * PYc1) / PZc1 / PZc1;
-			dataJh[6] = -f * (R1[3 * 2 + 1] * PZc1 - R1[3 * 2 + 2] * PYc1) / PZc1 / PZc1;
+			dataJh[8] = f * (R1[3 * 0 + 2] * PYc1 - R1[3 * 0 + 1] * PZc1) / PYc1 / PYc1;
+			dataJh[7] = f * (R1[3 * 1 + 2] * PYc1 - R1[3 * 1 + 1] * PZc1) / PYc1 / PYc1;
+			dataJh[6] = f * (R1[3 * 2 + 2] * PYc1 - R1[3 * 2 + 1] * PZc1) / PYc1 / PYc1;
 
-			dataJh[12] = -f * (R2[3 * 0 + 0] * PZc2 - R2[3 * 0 + 2] * PXc2) / PZc2 / PZc2;
-			dataJh[13] = -f * (R2[3 * 1 + 0] * PZc2 - R2[3 * 1 + 2] * PXc2) / PZc2 / PZc2;
-			dataJh[14] = -f * (R2[3 * 2 + 0] * PZc2 - R2[3 * 2 + 2] * PXc2) / PZc2 / PZc2;
+			dataJh[12] = f * (R2[3 * 0 + 0] * PYc2 - R2[3 * 0 + 1] * PXc2) / PYc2 / PYc2;
+			dataJh[13] = f * (R2[3 * 1 + 0] * PYc2 - R2[3 * 1 + 1] * PXc2) / PYc2 / PYc2;
+			dataJh[14] = f * (R2[3 * 2 + 0] * PYc2 - R2[3 * 2 + 1] * PXc2) / PYc2 / PYc2;
 
-			dataJh[18] = -f * (R2[3 * 0 + 1] * PZc2 - R2[3 * 0 + 2] * PYc2) / PZc2 / PZc2;
-			dataJh[19] = -f * (R2[3 * 1 + 1] * PZc2 - R2[3 * 1 + 2] * PYc2) / PZc2 / PZc2;
-			dataJh[20] = -f * (R2[3 * 2 + 1] * PZc2 - R2[3 * 2 + 2] * PYc2) / PZc2 / PZc2;
+			dataJh[18] = f * (R2[3 * 0 + 2] * PYc2 - R2[3 * 0 + 1] * PZc2) / PYc2 / PYc2;
+			dataJh[19] = f * (R2[3 * 1 + 2] * PYc2 - R2[3 * 1 + 1] * PZc2) / PYc2 / PYc2;
+			dataJh[20] = f * (R2[3 * 2 + 2] * PYc2 - R2[3 * 2 + 1] * PZc2) / PYc2 / PYc2;
 
 			dataJh[3] = dataJh[4] = dataJh[5] = dataJh[9] = dataJh[10] = dataJh[11] =
 					dataJh[15] = dataJh[16] = dataJh[17] = dataJh[21] = dataJh[22] =
@@ -148,7 +150,7 @@ namespace vision {
 		
 			K = P * Jh.t() * (Jh * P * Jh.t() + R).inv();
 		
-			P = (Mat::eye(6, 6, CV_64F) - K * Jh);
+			P = (vision::I - K * Jh) * P;
 			
 			Xak = Xfk + K * (Zk - h_Zk);
 			

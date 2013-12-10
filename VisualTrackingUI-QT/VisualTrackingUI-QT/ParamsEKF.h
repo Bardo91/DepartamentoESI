@@ -15,26 +15,33 @@
 using namespace cv;
 
 // Adjust matrixes:
-const Mat matQ =
-		(Mat_<double>(6, 6) <<	0.05, 0, 0, 0, 0, 0, 
-								0, 0.05, 0, 0, 0, 0, 
-								0, 0, 0.05, 0, 0, 0, 
-								0, 0, 0, 0.05, 0, 0, 
-								0, 0, 0, 0, 0.05, 0, 
-								0, 0, 0, 0, 0, 0.05);
-const Mat matR =
-		(Mat_<double>(4, 4) <<	0.1, 0, 0, 0, 
-								0, 0.1, 0, 0, 
-								0, 0, 0.1, 0, 
-								0, 0, 0, 0.1);
+namespace vision{
+	static const Mat matQ =
+			(Mat_<double>(6, 6) <<	0.05, 0, 0, 0, 0, 0, 
+									0, 0.05, 0, 0, 0, 0, 
+									0, 0, 0.05, 0, 0, 0, 
+									0, 0, 0, 0.05, 0, 0, 
+									0, 0, 0, 0, 0.05, 0, 
+									0, 0, 0, 0, 0, 0.05);
+	static const Mat matR =
+			(Mat_<double>(4, 4) <<	0.1, 0, 0, 0, 
+									0, 0.1, 0, 0, 
+									0, 0, 0.1, 0, 
+									0, 0, 0, 0.1);
 
-const Mat x0 =
-		(Mat_<double>(6, 1) <<	0, 
-								0, 
-								0, 
-								0, 
-								0, 
-								0);
+	static const Mat x0 =
+			(Mat_<double>(6, 1) <<	0, 
+									0, 
+									0, 
+									0, 
+									0, 
+									0);
 
-
+	static const Mat I = (Mat_<double>(6,6) <<	1, 0, 0, 0, 0, 0,
+										0, 1, 0, 0, 0, 0,
+										0, 0, 1, 0, 0, 0,
+										0, 0, 0, 1, 0, 0,
+										0, 0, 0, 0, 1, 0,
+										0, 0, 0, 0, 0, 1);
+} // namespace vision
 #endif

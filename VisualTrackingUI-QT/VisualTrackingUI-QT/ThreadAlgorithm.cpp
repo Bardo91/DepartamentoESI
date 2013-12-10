@@ -89,19 +89,25 @@ void threadAlgoritm(InfoPointers *infoPointers){
 		vector<Mat> trackedObj;
 		algorithmManager->getObjectPos(trackedObj);
 
-		cout << trackedObj[0] << endl;
+		cout << trackedObj[4] << endl;
 
 
 		// 666 TODO: BORRAR ESTO - IMPLEMENTAR BIEN EL RESALTADO DE OBJETOS DETECTADOS
-		for(int i = 0 ; i < objects1.size(); i++){
-			rectangle(ori1, objects1[i].downRight, objects1[i].upperLeft, Scalar(0,0,0), 1);
+
+		vector<SimpleObject> zk1;
+		vector<SimpleObject> zk2;
+		algorithmManager->getObservationObjects(zk1, zk2);
+
+		for(int i = 0 ; i < 8; i++){
+			rectangle(ori1, zk1[i].downRight, zk1[i].upperLeft, Scalar(0,0,0), 1);
 		}
 		if(frame2.rows != 0){
-			for(int i = 0 ; i < objects2.size(); i++){
-			rectangle(ori2, objects2[i].downRight, objects2[i].upperLeft, Scalar(0,0,0), 1);
+			for(int i = 0 ; i < 8; i++){
+				rectangle(ori2, zk2[i].downRight, zk2[i].upperLeft, Scalar(0,0,0), 1);
 			}
 		}
-		//
+		//-------------------------------------------------------------------------------
+
 		if(imageManager->areTwoCameras()){
 			hconcat(frame1, frame2, frame1);
 			hconcat(ori1, ori2, ori1);

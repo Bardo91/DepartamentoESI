@@ -167,6 +167,7 @@ namespace vision{
 			return *cam1;
 		else if(_cam == 2)
 			return *cam2;
+		return *cam1;
 	}
 
 	//------------------------------------------------------------------------

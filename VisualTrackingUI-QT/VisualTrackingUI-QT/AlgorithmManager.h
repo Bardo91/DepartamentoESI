@@ -35,6 +35,8 @@ namespace vision{ // 666 TODO: add algorithms and algorithm manager to  InfoColl
 		int applyAlgorithmStep(std::vector<SimpleObject>& _objects1, std::vector<SimpleObject>& _objects2, double _incT);
 		void getObjectPos(std::vector<cv::Mat>& _objects);
 
+		void getObservationObjects(std::vector<SimpleObject>& _objects1, std::vector<SimpleObject>& _objects2);
+
 	private:
 		eAlgorithms algorithm; // Define algorithm type
 			
