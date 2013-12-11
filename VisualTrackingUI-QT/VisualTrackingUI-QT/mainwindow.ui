@@ -537,7 +537,7 @@
                 </size>
                </property>
                <property name="plainText">
-                <string>C:/Programming/Imagenes Stereo Tracking/P1_640x480/cameraInfo.txt</string>
+                <string>C:/Programming/Imagenes Stereo Tracking/P1_640x480/cameraInfo640480.txt</string>
                </property>
               </widget>
              </item>

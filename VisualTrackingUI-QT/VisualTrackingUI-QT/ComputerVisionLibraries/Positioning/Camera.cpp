@@ -74,6 +74,11 @@ namespace vision{
 		}
 
 		//--------------------------------------------------------------------
+		Point2d Camera::getCentroid() const{
+			return Point(u0,v0);
+		}
+
+		//--------------------------------------------------------------------
 		int Camera::fixDistorsion(Mat& _frame) const{
 			if(distorsionCoef == 0 || projectionCoef == 0)
 				return -1;

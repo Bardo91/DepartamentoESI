@@ -24,6 +24,7 @@ namespace vision{
 
 		public:
 			double getFocalLenght() const;
+			cv::Point2d getCentroid() const;
 			int fixDistorsion(cv::Mat&_frame) const;
 
 		private: // Camera Parameters
