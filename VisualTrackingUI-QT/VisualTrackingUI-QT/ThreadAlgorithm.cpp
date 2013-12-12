@@ -35,6 +35,21 @@ void threadAlgoritm(InfoPointers *infoPointers){
 
 	vector<SimpleObject> objects1;
 	vector<SimpleObject> objects2;
+
+	//------------------------------------//
+	// OutputFiles
+	// 666 TODO: implementar en fichero separado
+
+	ofstream outFile[8];
+	for (unsigned int i = 0; i < 8; i++) {
+		String pathName;
+		pathName = "c:/outputs/outputFile";
+		char ext[5] = { (char) (((int) '0') + i), '.', 't', 'x', 't' };
+		pathName.append(ext);
+		cout << pathName << endl;
+		outFile[i].open(pathName.c_str());
+	}
+
 	//------------------------------------//
 	position::Camera cam1 = positionManager->getCamera(1), cam2 = positionManager->getCamera(2);
 
@@ -90,6 +105,17 @@ void threadAlgoritm(InfoPointers *infoPointers){
 		algorithmManager->getObjectPos(trackedObj);
 
 		cout << trackedObj[4] << endl;
+
+		//------------------------------//
+		// OUTPUTFILES 
+		// 666 TODO: implementar en fichero separado
+		for(int i = 0 ; i < 8 ; i++){
+			outFile[i] <<	currentTime << "\t" <<
+							trackedObj[i].data[0] << "\t" << 
+							trackedObj[i].data[1] << "\t" << 
+							trackedObj[i].data[2] << endl;
+		}
+		//------------------------------//
 
 
 		// 666 TODO: BORRAR ESTO - IMPLEMENTAR BIEN EL RESALTADO DE OBJETOS DETECTADOS

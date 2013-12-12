@@ -219,5 +219,8 @@
     <ClInclude Include="ParamsEKF.h">
       <Filter>ComputerVisionLibraries\TrackingAlgorithm</Filter>
     </ClInclude>
+    <ClInclude Include="outFile.h">
+      <Filter>iofunctions\output</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

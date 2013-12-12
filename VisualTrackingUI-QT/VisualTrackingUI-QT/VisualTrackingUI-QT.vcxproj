@@ -155,6 +155,7 @@
     <ClInclude Include="GeneratedFiles\ui_mainwindow.h" />
     <ClInclude Include="ImageManager.h" />
     <ClInclude Include="InfoCollector.h" />
+    <ClInclude Include="outFile.h" />
     <ClInclude Include="ParamsEKF.h" />
     <ClInclude Include="PositionManager.h" />
     <ClInclude Include="SegmentationManager.h" />

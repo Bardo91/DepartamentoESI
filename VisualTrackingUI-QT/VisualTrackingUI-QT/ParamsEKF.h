@@ -7,8 +7,8 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Extended Kalman Filter parameters
 
-#ifndef CAMERADATAEKF_H_
-#define CAMERADATAEKF_H_
+#ifndef _VISUAL_TRACKING_UI_PARAMSEKF_H_
+#define _VISUAL_TRACKING_UI_PARAMSEKF_H_
 
 #include <opencv/cv.h>
 
@@ -44,4 +44,4 @@ namespace vision{
 										0, 0, 0, 0, 1, 0,
 										0, 0, 0, 0, 0, 1);
 } // namespace vision
-#endif
+#endif // _VISUAL_TRACKING_UI_PARAMSEKF_H_
