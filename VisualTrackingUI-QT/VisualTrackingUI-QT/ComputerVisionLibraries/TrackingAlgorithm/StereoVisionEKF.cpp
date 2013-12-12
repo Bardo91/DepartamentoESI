@@ -111,17 +111,31 @@ namespace vision {
 			double PYc2 = pc2data[1];
 			double PZc2 = pc2data[2];
 
-			// updating h_Zk
-			double * hzkdata = (double*) h_Zk.data;
-
-			hzkdata[0] = f * PXc1 / PYc1;
-			hzkdata[1] = f * PZc1 / PYc1;
-			hzkdata[2] = f * PXc2 / PYc2;
-			hzkdata[3] = f * PZc2 / PYc2;
-			
-			//
 
 			double * dataJh = (double*) Jh.data;
+
+
+			/*dataJh[0] = f * (R1[3 * 0 + 1] * PXc1 - R1[3 * 0 + 0] * PYc1) / PXc1 / PXc1;
+			dataJh[1] = f * (R1[3 * 1 + 1] * PXc1 - R1[3 * 1 + 0] * PYc1) / PXc1 / PXc1;
+			dataJh[2] = f * (R1[3 * 2 + 1] * PXc1 - R1[3 * 2 + 0] * PYc1) / PXc1 / PXc1;
+
+			dataJh[8] = f * (R1[3 * 0 + 2] * PXc1 - R1[3 * 0 + 0] * PZc1) / PXc1 / PXc1;
+			dataJh[7] = f * (R1[3 * 1 + 2] * PXc1 - R1[3 * 1 + 0] * PZc1) / PXc1 / PXc1;
+			dataJh[6] = f * (R1[3 * 2 + 2] * PXc1 - R1[3 * 2 + 0] * PZc1) / PXc1 / PXc1;
+
+			dataJh[12] = f * (R2[3 * 0 + 1] * PXc2 - R2[3 * 0 + 0] * PYc2) / PXc2 / PXc2;
+			dataJh[13] = f * (R2[3 * 1 + 1] * PXc2 - R2[3 * 1 + 0] * PYc2) / PXc2 / PXc2;
+			dataJh[14] = f * (R2[3 * 2 + 1] * PXc2 - R2[3 * 2 + 0] * PYc2) / PXc2 / PXc2;
+
+			dataJh[18] = f * (R2[3 * 0 + 2] * PXc2 - R2[3 * 0 + 0] * PZc2) / PXc2 / PXc2;
+			dataJh[19] = f * (R2[3 * 1 + 2] * PXc2 - R2[3 * 1 + 0] * PZc2) / PXc2 / PXc2;
+			dataJh[20] = f * (R2[3 * 2 + 2] * PXc2 - R2[3 * 2 + 0] * PZc2) / PXc2 / PXc2;
+			
+			Jh = -1*Jh; // 777 TODO: revisar. Creo que es asi negativo
+
+			*/
+
+
 
 			dataJh[0] = f * (R1[3 * 0 + 0] * PYc1 - R1[3 * 0 + 1] * PXc1) / PYc1 / PYc1;
 			dataJh[1] = f * (R1[3 * 1 + 0] * PYc1 - R1[3 * 1 + 1] * PXc1) / PYc1 / PYc1;
@@ -143,6 +157,26 @@ namespace vision {
 					dataJh[15] = dataJh[16] = dataJh[17] = dataJh[21] = dataJh[22] =
 							dataJh[23] = 0;
 
+			
+
+			// updating h_Zk
+			
+
+			Point2d cc1 = cam1.getCentroid();
+			Point2d cc2 = cam2.getCentroid();
+
+			/*double * hzkdata = (double*) h_Zk.data;
+
+			hzkdata[0] = cc1.x - f * PYc1 / PXc1;
+			hzkdata[1] = cc1.y - f * PZc1 / PXc1;
+			hzkdata[2] = cc2.x - f * PYc2 / PXc2;
+			hzkdata[3] = cc2.y - f * PZc2 / PXc2;*/
+
+			h_Zk = (Mat_<double>(4,1)<< cc1.x, cc1.y, cc2.x, cc2.y) + Jh*Xfk;
+
+			//
+
+
 		}
 
 		//--------------------------------------------------------------------
@@ -158,11 +192,11 @@ namespace vision {
 		void StereoVisionEKF::filterStep(const Mat& Zk) {
 			updateJh_and_hZk();
 		
-			K = P * Jh.t() * (Jh * P * Jh.t() + R).inv();
-		
-			P = (vision::I - K * Jh) * P;
+			K = P * Jh.t() * ((Jh * P * Jh.t() + R).inv());
 			
 			Xak = Xfk + K * (Zk - h_Zk);
+
+			P = (/*vision::I*/ Mat::eye(6, 6, CV_64F) - K * Jh) * P;
 			
 		}
 

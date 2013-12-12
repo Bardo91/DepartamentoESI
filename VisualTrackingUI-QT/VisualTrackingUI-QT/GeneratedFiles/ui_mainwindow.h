@@ -660,9 +660,9 @@ public:
          << QApplication::translate("MainWindowClass", "Video", 0)
         );
         widthLabel->setText(QApplication::translate("MainWindowClass", "Width: ", 0));
-        widthTextEdit->setPlainText(QApplication::translate("MainWindowClass", "320", 0));
+        widthTextEdit->setPlainText(QApplication::translate("MainWindowClass", "640", 0));
         heightLabel->setText(QApplication::translate("MainWindowClass", "Height: ", 0));
-        heightEditText->setPlainText(QApplication::translate("MainWindowClass", "240", 0));
+        heightEditText->setPlainText(QApplication::translate("MainWindowClass", "480", 0));
         rB1Device->setText(QApplication::translate("MainWindowClass", "1 Device", 0));
         rB2Devices->setText(QApplication::translate("MainWindowClass", "2 Devices", 0));
         imgAcqMethodPathEditText->setPlainText(QApplication::translate("MainWindowClass", "C:/Programming/Imagenes Stereo Tracking/P1_640x480/Images/", 0));
@@ -672,7 +672,7 @@ public:
         label2Devices->setText(QApplication::translate("MainWindowClass", "Device 2:", 0));
         testDevicesButton->setText(QApplication::translate("MainWindowClass", "Test Devices", 0));
         cameraInfoLabel->setText(QApplication::translate("MainWindowClass", "Camera Info", 0));
-        cameraInfoPathEditTest->setPlainText(QApplication::translate("MainWindowClass", "C:/Programming/Imagenes Stereo Tracking/P1_640x480/cameraInfo.txt", 0));
+        cameraInfoPathEditTest->setPlainText(QApplication::translate("MainWindowClass", "C:/Programming/Imagenes Stereo Tracking/P1_640x480/cameraInfo640480.txt", 0));
         posAcqMethodLabel->setText(QApplication::translate("MainWindowClass", "Position Acquisition Method:", 0));
         posAcqMethodSelector->clear();
         posAcqMethodSelector->insertItems(0, QStringList()
@@ -705,7 +705,7 @@ public:
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:8pt;\">200</span></p></body></html>", 0));
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:8pt;\">50</span></p></body></html>", 0));
         startButton->setText(QApplication::translate("MainWindowClass", "Start", 0));
         stopButton->setText(QApplication::translate("MainWindowClass", "Stop", 0));
     } // retranslateUi
