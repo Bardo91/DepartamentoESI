@@ -41,7 +41,7 @@ namespace vision {
 
 
 		inline int ColorClusterSpace::whichColor(c3i& color) { // If Opencv gives YCrCb values between 0 and 255
-			int i = int(floor(color.a * (size - 1) / 180.0));
+			int i = (color.a * (size - 1) / 180.0); // 666 TODO: check if right (?) floor was erased.
 			int j = color.b*(size - 1) >> 7;
 			j = (j>>1) + (j&1);
 			int k = color.c*(size - 1) >> 7;
