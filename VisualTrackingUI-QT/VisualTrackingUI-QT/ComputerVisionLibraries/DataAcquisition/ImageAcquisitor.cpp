@@ -116,14 +116,15 @@ bool ImageAcquisitor::canCapture() {
 int ImageAcquisitor::updateFrame() {
 	if (inputMethod) {
 		const int sizeFormat = imageNameFormat.size() + 4;
-		char *buffer;// +4 suposing that number of input images ar less than 99.999
+		char *buffer;// +4 suposing that number of input images or less than 99.999
 		buffer = new char[sizeFormat];
 		sprintf(buffer, imageNameFormat.c_str(), currentFrame);
 
-		stringstream ss;
-		ss << pathName << buffer;
+		string completePath = pathName;
+		completePath.append(buffer);
 
-		frame = cvLoadImage(ss.str().c_str(), 1);//imread(ss.str(), CV_LOAD_IMAGE_COLOR);
+		
+		frame =  imread(completePath.c_str(), CV_LOAD_IMAGE_COLOR);
 
 		assert(frame.cols != 0);
 

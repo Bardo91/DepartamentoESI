@@ -43,9 +43,8 @@ void threadAlgoritm(InfoPointers *infoPointers){
 	ofstream outFile[8];
 	for (unsigned int i = 0; i < 8; i++) {
 		String pathName;
-		pathName = "c:/outputs/outputFile";
-		char ext[5] = { (char) (((int) '0') + i), '.', 't', 'x', 't' };
-		pathName.append(ext);
+		pathName = "C:/outputs/outputFile";
+		pathName.push_back((char) (((int) '0') + i)); pathName.push_back('.'); pathName.push_back('t'); pathName.push_back('x');pathName.push_back('t');
 		cout << pathName << endl;
 		outFile[i].open(pathName.c_str());
 	}
@@ -71,17 +70,19 @@ void threadAlgoritm(InfoPointers *infoPointers){
 	// Get time for reference
 	refTime0 = gTimer->frameTime();
 
-
 	//------------------------------------//
 	while(cv::waitKey(1) && infoPointers->looping){
-		/*gTimer->update();
-		t1 = gTimer->frameTime();*/
+		gTimer->update(); // -------------
+		t1 = gTimer->frameTime(); //-------------
+
 		imageManager->updateFrames();
 		imageManager->getFrames(frame1, frame2);		
 
 		frame1.copyTo(ori1);
 		frame2.copyTo(ori2);
 
+
+		// 666 TODO: ver el efecto de los medianBlur en tiempo de proceso y calidad de la información.
 		medianBlur(frame1, frame1, 5);
 		medianBlur(frame1, frame1, 5);
 		if(imageManager->areTwoCameras()){
@@ -106,16 +107,11 @@ void threadAlgoritm(InfoPointers *infoPointers){
 
 		cout << trackedObj[4] << endl;
 
-		//------------------------------//
-		// OUTPUTFILES 
-		// 666 TODO: implementar en fichero separado
-		for(int i = 0 ; i < 8 ; i++){
-			outFile[i] <<	currentTime << "\t" <<
-							trackedObj[i].data[0] << "\t" << 
-							trackedObj[i].data[1] << "\t" << 
-							trackedObj[i].data[2] << endl;
-		}
-		//------------------------------//
+
+		gTimer->update(); //-----------
+		t2 = gTimer->frameTime(); //-----------
+		double diff = t2-t1; //-----------
+		cout << "FINISHED IN " << diff << endl; //-----------
 
 
 		// 666 TODO: BORRAR ESTO - IMPLEMENTAR BIEN EL RESALTADO DE OBJETOS DETECTADOS
@@ -134,6 +130,22 @@ void threadAlgoritm(InfoPointers *infoPointers){
 		}
 		//-------------------------------------------------------------------------------
 
+		//------------------------------//
+		// OUTPUTFILES 
+		// 666 TODO: implementar en fichero separado
+		for(int i = 0 ; i < 8 ; i++){
+			outFile[i] <<	currentTime							<< "\t" <<
+				((double*) trackedObj[i].data)[0]	<< "\t" << 
+				((double*) trackedObj[i].data)[1]	<< "\t" << 
+				((double*) trackedObj[i].data)[2]	<< "\t" << 
+				diff								<< "\t" <<
+				zk1[4].centroid.x					<< "\t" <<
+				zk1[4].centroid.y					<< "\t" <<
+				zk2[4].centroid.x					<< "\t" <<
+				zk2[4].centroid.y					<< "\t" << endl;
+		}
+		//------------------------------//
+
 		if(imageManager->areTwoCameras()){
 			hconcat(frame1, frame2, frame1);
 			hconcat(ori1, ori2, ori1);
@@ -142,10 +154,6 @@ void threadAlgoritm(InfoPointers *infoPointers){
 		vconcat(ori1, frame1, frame1);
 
 		imshow(wTitle, frame1);
-		/*gTimer->update();
-		t2 = gTimer->frameTime();
-		double diff = t2-t1;
-		cout << "FINISHED IN " << diff << endl;*/
 		objects1.clear();
 		objects2.clear();
 	}

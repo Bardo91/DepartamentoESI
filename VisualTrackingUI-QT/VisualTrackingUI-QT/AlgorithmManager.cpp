@@ -113,13 +113,12 @@ namespace vision{
 													objectsZK2[i].centroid.x, objectsZK2[i].centroid.y);
 
 					stereoEKF->updateIncT( _incT);
-					stereoEKF->stepEKF(zk);   // 666 TODO: rehacer algoritmo
+					stereoEKF->stepEKF(zk);
 				}
 			}
 			break;
 			}
 		case vision::eSingleCameraGroundEKF: // 666 TODO: allocate memory rightly
-			// 666 TODO: implement robust matching
 			break;
 
 		default:

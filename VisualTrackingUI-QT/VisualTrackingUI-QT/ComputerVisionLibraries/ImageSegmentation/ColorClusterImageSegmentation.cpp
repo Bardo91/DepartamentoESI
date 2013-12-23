@@ -300,7 +300,6 @@ namespace vision {
 				}
 			}
 
-			// 666 TODO: are objects been added?
 			for(int i = 0; i < objs1.size() ; i ++){
 				if(objs1[i].getSize() >= _threshold)
 					_objects1.push_back(SimpleObject(objs1[i].getUpperLeft(), objs1[i].getDownRight(), objs1[i].getSize(), objs1[i].getColor()));
