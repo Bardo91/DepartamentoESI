@@ -82,13 +82,13 @@ void threadAlgoritm(InfoPointers *infoPointers){
 		frame2.copyTo(ori2);
 
 
-		// 666 TODO: ver el efecto de los medianBlur en tiempo de proceso y calidad de la información.
-		medianBlur(frame1, frame1, 5);
-		medianBlur(frame1, frame1, 5);
-		if(imageManager->areTwoCameras()){
-			medianBlur(frame2, frame2, 5);
-			medianBlur(frame2, frame2, 5);
-		}
+		// 666 TODO: Va más rápido sin el MB pero es más sensible al ruido, por lo que hay que mejorar el matching
+		//medianBlur(frame1, frame1, 5);
+		//medianBlur(frame1, frame1, 5);
+		//if(imageManager->areTwoCameras()){
+		//	medianBlur(frame2, frame2, 5);
+		//	medianBlur(frame2, frame2, 5);
+		//}
 
 		segmentationManager->applyAlgorithm(frame1, frame2, objects1, objects2);
 

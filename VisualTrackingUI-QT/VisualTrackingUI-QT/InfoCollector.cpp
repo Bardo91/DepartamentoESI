@@ -57,7 +57,7 @@ namespace vision{
 		infoPointers.segmentationManager = new SegmentationManager();
 		infoPointers.positionManager = new PositionManager();
 		infoPointers.algorithmManager = new AlgorithmManager();
-		// 666 TODO: whatalio!
+
 		errors += setUpImageManager(); 
 		errors += setUpSegmentationManager();
 		errors += setUpPositionManager(mainWindow->getCameraInfoPath(), mainWindow->getCameraPositionPath(), mainWindow->getIsFixedCameras());
@@ -80,7 +80,7 @@ namespace vision{
 	//------------------------------------------------------------------------
 	int InfoCollector::setUpImageManager(){
 		infoPointers.imageManager->closeDevices(); //Release every device to avoid errors if device IDs are crossed.
-		int method = mainWindow->getImgAcqMethod(); // 777 TODO: implement width and heigth.
+		int method = mainWindow->getImgAcqMethod(); 
 		int width = mainWindow->getWidth();
 		int height = mainWindow->getHeight();
 		int nDev = mainWindow->getNumberDevices();
@@ -186,7 +186,6 @@ namespace vision{
 
 			break;
 		case 1: // Stereo Camera 3D tracking
-			// 666 TODO: Implement algorithm
 			cam1 = infoPointers.positionManager->getCamera(1);
 			cam2 = infoPointers.positionManager->getCamera(2);
 			infoPointers.positionManager->getCameraPosAndTime(cam1, cam2, fakeT);
