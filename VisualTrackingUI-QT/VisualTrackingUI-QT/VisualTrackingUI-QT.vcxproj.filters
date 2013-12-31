@@ -137,6 +137,9 @@
     <ClCompile Include="ComputerVisionLibraries\TrackingAlgorithm\RobustStereoMatching.cpp">
       <Filter>ComputerVisionLibraries\TrackingAlgorithm</Filter>
     </ClCompile>
+    <ClCompile Include="iofunctions\input\Vicon.cpp">
+      <Filter>iofunctions\input</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="mainwindow.h">
@@ -219,8 +222,11 @@
     <ClInclude Include="ParamsEKF.h">
       <Filter>ComputerVisionLibraries\TrackingAlgorithm</Filter>
     </ClInclude>
-    <ClInclude Include="outFile.h">
+    <ClInclude Include="iofunctions\output\outFile.h">
       <Filter>iofunctions\output</Filter>
+    </ClInclude>
+    <ClInclude Include="iofunctions\input\Vicon.h">
+      <Filter>iofunctions\input</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -38,13 +38,13 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
-    <IncludePath>C:\Programming\DepartamentoESI\VisualTrackingUI-QT\VisualTrackingUI-QT;C:\opencv\opencv\build\include;E:\qt\qt511\5.1.1\msvc2012\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\opencv\opencv\build\x86\vc11\bin;C:\opencv\opencv\build\x86\vc11\lib;E:\qt\qt511\5.1.1\msvc2012\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Programming\DepartamentoESI\VisualTrackingUI-QT\VisualTrackingUI-QT;C:\opencv\opencv\build\include;E:\qt\qt511\5.1.1\msvc2012\include;C:\Program Files\Vicon\DataStream SDK\Win64\CPP;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Program Files\Vicon\DataStream SDK\Win64\CPP;C:\opencv\opencv\build\x86\vc11\bin;C:\opencv\opencv\build\x86\vc11\lib;E:\qt\qt511\5.1.1\msvc2012\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
-    <IncludePath>C:\Programming\DepartamentoESI\VisualTrackingUI-QT\VisualTrackingUI-QT;C:\opencv\opencv\build\include;E:\qt\qt511\5.1.1\msvc2012\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\opencv\opencv\build\x86\vc11\bin;C:\opencv\opencv\build\x86\vc11\lib;E:\qt\qt511\5.1.1\msvc2012\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Programming\DepartamentoESI\VisualTrackingUI-QT\VisualTrackingUI-QT;C:\opencv\opencv\build\include;E:\qt\qt511\5.1.1\msvc2012\include;C:\Program Files\Vicon\DataStream SDK\Win64\CPP;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Program Files\Vicon\DataStream SDK\Win64\CPP;C:\opencv\opencv\build\x86\vc11\bin;C:\opencv\opencv\build\x86\vc11\lib;E:\qt\qt511\5.1.1\msvc2012\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -58,9 +58,9 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <OutputFile>$(OutDir)\$(ProjectName).exe</OutputFile>
-      <AdditionalLibraryDirectories>$(QTDIR)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Program Files\Vicon\DataStream SDK\Win64\CPP;$(QTDIR)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>qtmaind.lib;Qt5Cored.lib;Qt5Guid.lib;Qt5Widgetsd.lib;opencv_calib3d246d.lib;opencv_contrib246d.lib;opencv_core246d.lib;opencv_features2d246d.lib;opencv_flann246d.lib;opencv_gpu246d.lib;opencv_highgui246d.lib;opencv_imgproc246d.lib;opencv_legacy246d.lib;opencv_ml246d.lib;opencv_objdetect246d.lib;opencv_video246d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>qtmaind.lib;Qt5Cored.lib;Qt5Guid.lib;Qt5Widgetsd.lib;opencv_calib3d246d.lib;opencv_contrib246d.lib;opencv_core246d.lib;opencv_features2d246d.lib;opencv_flann246d.lib;opencv_gpu246d.lib;opencv_highgui246d.lib;opencv_imgproc246d.lib;opencv_legacy246d.lib;opencv_ml246d.lib;opencv_objdetect246d.lib;opencv_video246d.lib;ViconDataStreamSDK_CPP.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -74,9 +74,9 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <OutputFile>$(OutDir)\$(ProjectName).exe</OutputFile>
-      <AdditionalLibraryDirectories>$(QTDIR)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Program Files\Vicon\DataStream SDK\Win64\CPP;$(QTDIR)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>false</GenerateDebugInformation>
-      <AdditionalDependencies>qtmaind.lib;Qt5Cored.lib;Qt5Guid.lib;Qt5Widgetsd.lib;opencv_calib3d246d.lib;opencv_contrib246d.lib;opencv_core246d.lib;opencv_features2d246d.lib;opencv_flann246d.lib;opencv_gpu246d.lib;opencv_highgui246d.lib;opencv_imgproc246d.lib;opencv_legacy246d.lib;opencv_ml246d.lib;opencv_objdetect246d.lib;opencv_video246d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>qtmaind.lib;Qt5Cored.lib;Qt5Guid.lib;Qt5Widgetsd.lib;opencv_calib3d246d.lib;opencv_contrib246d.lib;opencv_core246d.lib;opencv_features2d246d.lib;opencv_flann246d.lib;opencv_gpu246d.lib;opencv_highgui246d.lib;opencv_imgproc246d.lib;opencv_legacy246d.lib;opencv_ml246d.lib;opencv_objdetect246d.lib;opencv_video246d.lib;ViconDataStreamSDK_CPP.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -106,6 +106,7 @@
     </ClCompile>
     <ClCompile Include="ImageManager.cpp" />
     <ClCompile Include="InfoCollector.cpp" />
+    <ClCompile Include="iofunctions\input\Vicon.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="mainwindow.cpp" />
     <ClCompile Include="PositionManager.cpp" />
@@ -155,7 +156,8 @@
     <ClInclude Include="GeneratedFiles\ui_mainwindow.h" />
     <ClInclude Include="ImageManager.h" />
     <ClInclude Include="InfoCollector.h" />
-    <ClInclude Include="outFile.h" />
+    <ClInclude Include="iofunctions\input\Vicon.h" />
+    <ClInclude Include="iofunctions\output\outFile.h" />
     <ClInclude Include="ParamsEKF.h" />
     <ClInclude Include="PositionManager.h" />
     <ClInclude Include="SegmentationManager.h" />
