@@ -18,6 +18,178 @@ using namespace vision::segmentation;
 
 namespace vision {
 	namespace segmentation{
+	//-----------------------------------------------------------------------
+	//---------------- 1 Cameras
+
+		int ColorClusterImageSegmentation(Mat& _frame, ColorClusterSpace& _CS, const unsigned int _threshold,
+				vector<SimpleObject>& _objects) {
+					
+			imageBGR2HSV(_frame);
+
+			// 666 TODO: use statics variables to save time (allocating, etc...)
+			vector<vector<struct LineObjRLE> > aRLE;
+
+			vector<SegmentedObject> objs;
+
+			aRLE.reserve(50000);
+
+
+			objs.reserve(5000);
+
+
+			int n = _frame.channels(); // Count the number of image's channels to use the pointer
+
+			int color;
+
+			short int js = 0, colorRLE = -1; // Variables for RLE encode
+			for (int i = 0; i < _frame.rows; i++) {
+				uchar* ptr = _frame.ptr<uchar>(i); // Pointer to i row
+				vector<LineObjRLE> temp;
+				for (int j = 0; j < _frame.cols; j++) {
+					// Proximate the color to a cluster
+					c3i auxCol1;
+					auxCol1.a = ptr[n * j];
+					auxCol1.b = ptr[n * j + 1];
+					auxCol1.c = ptr[n * j + 2];
+					color = _CS.whichColor(auxCol1);
+
+					// RLE encoding
+					if (j == 0) {
+						colorRLE = color;
+						js = 0;
+					} else {
+						if (j == _frame.cols - 1) {
+							LineObjRLE aux;
+							aux.i = i;
+							aux.js = js;
+							aux.je = j;
+							aux.size = j - js;
+							aux.color = colorRLE;
+							aux.parent = NULL;
+							aux.iObj = -1;
+
+							temp.push_back(aux);
+						} else if (color != colorRLE) {
+							LineObjRLE aux;
+							aux.i = i;
+							aux.js = js;
+							aux.je = j;
+							aux.size = j - js;
+							aux.color = colorRLE;
+							aux.parent = NULL;
+							aux.iObj = -1;
+
+							temp.push_back(aux);
+							colorRLE = color;
+							js = j;
+						}
+					}
+
+					// Change the color (Possible improve assigning directly the BGR color instead of using imageHSV2BGR)
+
+					if (color == -1) {
+						ptr[n * j] = _CS.clusters[0].a;
+						ptr[n * j + 1] = _CS.clusters[0].b;
+						ptr[n * j + 2] = _CS.clusters[0].c;
+					} else {
+						ptr[n * j] = _CS.clusters[color].a;
+						ptr[n * j + 1] = _CS.clusters[color].b;
+						ptr[n * j + 2] = _CS.clusters[color].c;
+					}
+				}
+
+				aRLE.push_back(temp);
+
+				if (i) { // Except the first line that can't be child of any object (only parent) start joining objects grouped in LineObjRLE variables
+					unsigned int j = 0, jp = 0; // Pointer to current and previous LineObjRLE
+					unsigned int pp = aRLE[i - 1][jp].size, pc = aRLE[i][j].size; // Pointer to previous and current col
+					while (1) {
+						// Connecting
+						if (!(aRLE[i - 1][jp].color == -1 || aRLE[i][j].color == -1)) {
+							if (aRLE[i - 1][jp].color == aRLE[i][j].color
+									&& aRLE[i - 1][jp].je >= aRLE[i][j].js
+									&& aRLE[i - 1][jp].js <= aRLE[i][j].je) {
+
+								if (aRLE[i][j].parent == NULL) { // Solve overlap problem checking parent
+									if (aRLE[i - 1][jp].parent != NULL) { // Another parent
+										aRLE[i][j].parent = aRLE[i - 1][jp].parent;
+									} else {
+										// Is first parent
+										aRLE[i][j].parent = &(aRLE[i - 1][jp]);
+									}
+								} else { //In case of overlap
+									if (aRLE[i - 1][jp].parent != NULL) { // New family
+										if (aRLE[i - 1][jp].parent
+												!= aRLE[i][j].parent) {
+											aRLE[i - 1][jp].parent->parent =
+													aRLE[i][j].parent;
+										}
+
+									} else {
+										// Orphan
+										aRLE[i - 1][jp].parent = aRLE[i][j].parent;
+									}
+								}
+							}
+						}
+						if (j >= aRLE[i].size() - 1 || jp >= aRLE[i - 1].size() - 1)
+							break;
+						if (pp > pc) {
+							j++;
+							pc += aRLE[i][j].size;
+						} else if (pp <= pc) {
+							jp++;
+							pp += aRLE[i - 1][jp].size;
+						}
+					}
+				}
+
+			}
+
+			//Re-assign parents due to overlap
+			for (unsigned int i = 0; i < aRLE.size(); i++) {
+				for (unsigned int j = 0; j < aRLE[i].size(); j++) {
+					if (aRLE[i][j].parent != NULL) {
+						LineObjRLE auxRLE = *aRLE[i][j].parent;
+
+						int loopAvoider = 0; // Need to be checked if image size is larger than 320x240. If possible check the origin of loops
+						while (auxRLE.parent != NULL && loopAvoider < 30) {
+							aRLE[i][j].parent = auxRLE.parent;
+							auxRLE = *auxRLE.parent;
+							loopAvoider++;
+						}
+
+						if (aRLE[i][j].parent->iObj == -1) {
+							aRLE[i][j].parent->iObj = objs.size();
+							SegmentedObject obj(*aRLE[i][j].parent);
+							objs.push_back(obj);
+						}
+					}
+				}
+			}
+			for (unsigned int i = 0; i < aRLE.size(); i++) {
+				for (unsigned int j = 0; j < aRLE[i].size(); j++) {
+					if (aRLE[i][j].parent != NULL) {
+						objs[aRLE[i][j].parent->iObj].addLineObjRLE(aRLE[i][j]);
+					}
+				}
+			}
+
+			for(int i = 0; i < objs.size() ; i ++){
+				if(objs[i].getSize() >= _threshold)
+					_objects.push_back(SimpleObject(objs[i].getUpperLeft(), objs[i].getDownRight(), objs[i].getSize(), objs[i].getColor()));
+			}
+
+
+			imageHSV2BGR(_frame);
+
+			return 0;
+		} // int ColorClusterImageSegmentation(...) 1 camera
+
+	//-----------------------------------------------------------------------
+	//---------------- 2 Cameras
+
+
 		int ColorClusterImageSegmentation(Mat& _frame1, Mat& _frame2, ColorClusterSpace& _CS, const unsigned int _threshold,
 				vector<SimpleObject>& _objects1, 
 				vector<SimpleObject>& _objects2) {
