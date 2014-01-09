@@ -12,11 +12,6 @@
 
 namespace vision
 {
-	#if defined(_linux) || defined(ANDROID) || defined (WIN32)
-		typedef float TReal;
-	#endif // _linux || ANDROID || WIN32
-
-
     class STime
     {
             /// \brief this system provides time meassures to game. time is considered constant along a whole frame.
@@ -27,35 +22,32 @@ namespace vision
             static void end();
 			static bool isInitialized();
 
-    public:
-            // --- System management ---
-            void update();        ///< Update time system
-
-            // --- Public interface ---
-            TReal frameTime();
+    public: // --- Public interface ---
+            double frameTime();
 
     private:
             STime();
-
+			void update();        ///< Update time system
     private:
             // Singleton instance
             static STime* sTime;
 
             // last frame duration.
-            TReal mFrameTime;
+            double mFrameTime;
 
             // Internal use.
-	#if defined(_linux) || defined (ANDROID)
+	#if defined(_linux)
         int mLastTime;
 	#endif
-	#if defined (WIN32)
+	#if defined (_WIN32)
 		unsigned mLastTime;
 	#endif
     };
 
     //------------------------------------------------------------------------------------------------------------------
-    inline TReal STime::frameTime()
+    inline double STime::frameTime()
     {
+		update();
         return mFrameTime;
     }
 

@@ -8,9 +8,9 @@
 // Time and time functions
 
 // Standard headers
-#if defined(_linux) || defined(ANDROID)
+#if defined(_linux)
         #include <sys/time.h>
-#elif defined (WIN32)
+#elif defined (_WIN32)
         #include <Windows.h>
 #endif // _linux
 
@@ -49,31 +49,27 @@ namespace vision
     //------------------------------------------------------------------------------------------------------------------
     void STime::update()
     {
-    #if defined (_linux) || defined (ANDROID)
-            // Get current time
-            timeval currentTime;
-            gettimeofday(&currentTime, 0);
-            int usecTime = currentTime.tv_usec;
-            mFrameTime = TReal((usecTime - mLastTime)/ 1000000.0);        // Known conversion from double. There wont be loss of
-                                                                                                                            // information because tv_usec isn't that precise.
-            if(mFrameTime < 0.f)
-            {
-                    mFrameTime += 1.f;
-            }
-            mLastTime = usecTime;
-    #elif defined (WIN32)
-            // Get current time
-            LARGE_INTEGER largeTicks;
-            QueryPerformanceCounter(&largeTicks);
-            unsigned currTime = largeTicks.LowPart;
-            // Convert time difference to seconds
-            LARGE_INTEGER frequency;
-            QueryPerformanceFrequency(&frequency);
-            mFrameTime =  (TReal(currTime-mLastTime)/TReal(frequency.LowPart));
-            // --- Force minimun frame rate, so that time wont stall while debugging
-            mFrameTime = mFrameTime < 0.1f? mFrameTime : 0.1f;
-            // Replace last time
-            mLastTime = currTime;
+	#if defined (_linux)
+        // Get current time
+        timeval currentTime;
+        gettimeofday(&currentTime, 0);
+        int usecTime = currentTime.tv_usec;
+        mFrameTime = TReal((usecTime - mLastTime)/ 1000000.0);        // Known conversion from double. There wont be loss of
+                                                                                                                        // information because tv_usec isn't that precise.
+        if(mFrameTime < 0.f)
+        {
+                mFrameTime += 1.f;
+        }
+        mLastTime = usecTime;
+    #elif defined (_WIN32)
+        // Get current time
+        LARGE_INTEGER largeTicks;
+        QueryPerformanceCounter(&largeTicks);
+        unsigned currTime = largeTicks.LowPart;
+        // Convert time difference to seconds
+        LARGE_INTEGER frequency;
+        QueryPerformanceFrequency(&frequency);
+        mFrameTime =  (double(currTime)/double(frequency.LowPart));
     #endif 
     }
 
@@ -81,7 +77,7 @@ namespace vision
     STime::STime():
             mFrameTime(0.f)
     {
-    #if defined (_linux) || defined (ANDROID)
+    #if defined (_linux)
             // Get current time
             timeval currentTime;
             gettimeofday(&currentTime, 0);
@@ -90,7 +86,6 @@ namespace vision
             // Get initial time
             LARGE_INTEGER largeTicks;
             QueryPerformanceCounter(&largeTicks);
-            mLastTime = largeTicks.LowPart;
     #endif
     }
 	

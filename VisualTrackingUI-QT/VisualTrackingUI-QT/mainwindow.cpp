@@ -139,6 +139,16 @@ bool MainWindow::getIsFixedCameras(){
 }
 
 //----------------------------------------------------------------------------
+int MainWindow::getViconPosDev1(){
+	return ui.dev1ViconSpinBox->value();
+}
+
+//----------------------------------------------------------------------------
+int MainWindow::getViconPosDev2(){
+	return ui.dev2ViconSpinBox->value();
+}
+
+//----------------------------------------------------------------------------
 int MainWindow::getTrackingAlgorithm(){
 	return ui.posReconAlgorithmSelector->currentIndex();
 }

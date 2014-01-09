@@ -34,7 +34,8 @@ namespace iofunctions{
 
 	//---------------------------------------------------------------------------
 	bool Vicon::disconnect(){
-		mSocketClient.Disconnect();
+		if(mSocketClient.IsConnected().Connected)
+			mSocketClient.Disconnect();	
 
 		return mSocketClient.IsConnected().Connected;
 	}

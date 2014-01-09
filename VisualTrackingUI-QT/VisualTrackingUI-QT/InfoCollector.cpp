@@ -156,10 +156,14 @@ namespace vision{
 			errors += infoPointers.positionManager->preparePositioner(_positionPath, _isFixed); // Change filename
 
 			break;
-		case 1:
-			// 666 TODO: vicon data method
+		case 1:{
+			errors += infoPointers.positionManager->configureCams(_cameraInfoPath);
+			int idObj1 = mainWindow->getViconPosDev1();
+			int idObj2 = mainWindow->getViconPosDev2();
 
-			break;
+			errors += infoPointers.positionManager->preparePositionerFromVicon(idObj1, idObj2);
+
+			break;}
 		default:
 			QMessageBox::information(mainWindow, "Error", "Cant open Camera Info-files");
 			return -1;
@@ -174,7 +178,7 @@ namespace vision{
 		int errors = 0;
 		
 		vision::position::Camera cam1, cam2;
-		TReal fakeT;
+		double fakeT;
 
 		switch (algortihm)
 		{
