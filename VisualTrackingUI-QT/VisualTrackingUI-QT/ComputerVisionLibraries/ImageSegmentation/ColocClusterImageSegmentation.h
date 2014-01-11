@@ -18,7 +18,6 @@
 namespace vision {
 	namespace segmentation {
 		// Unique frame color cluster segmentation.
-		// 666 TODO: implement 1 camera algorithm
 		int ColorClusterImageSegmentation(cv::Mat& frame, ColorClusterSpace& CS, unsigned int threshold, std::vector<SimpleObject>& objects);
 		
 		// Pair frames color cluster segmentation. Better that execute a couple times the previous algorithm, because reuse loops for both frames.

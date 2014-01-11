@@ -21,9 +21,7 @@ namespace vision {
 	//-----------------------------------------------------------------------
 	//---------------- 1 Cameras
 
-		int ColorClusterImageSegmentation(Mat& _frame, ColorClusterSpace& _CS, const unsigned int _threshold,
-				vector<SimpleObject>& _objects) {
-					
+		int ColorClusterImageSegmentation(cv::Mat& _frame, ColorClusterSpace& _CS, unsigned int _threshold, std::vector<SimpleObject>& _objects){
 			imageBGR2HSV(_frame);
 
 			// 666 TODO: use statics variables to save time (allocating, etc...)
@@ -32,7 +30,6 @@ namespace vision {
 			vector<SegmentedObject> objs;
 
 			aRLE.reserve(50000);
-
 
 			objs.reserve(5000);
 
@@ -181,7 +178,7 @@ namespace vision {
 			}
 
 
-			imageHSV2BGR(_frame);
+			imageHSV2BGR(_frame);// 666 TODO: delete if visualization isn't needed (get 5%)
 
 			return 0;
 		} // int ColorClusterImageSegmentation(...) 1 camera
@@ -482,7 +479,7 @@ namespace vision {
 			}
 
 
-			imageHSV2BGR(_frame1);
+			imageHSV2BGR(_frame1); // 666 TODO: delete if visualization isn't needed (get 5%)
 			imageHSV2BGR(_frame2);
 
 			return 0;

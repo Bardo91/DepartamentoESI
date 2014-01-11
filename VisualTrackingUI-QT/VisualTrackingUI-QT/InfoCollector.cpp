@@ -183,7 +183,6 @@ namespace vision{
 		switch (algortihm)
 		{
 		case 0: // Single Camera ground tracking
-			// 666 TODO: Implement algorithm
 			cam1 = infoPointers.positionManager->getCamera(1);
 			errors += infoPointers.algorithmManager->setUpAlgorithm(vision::eAlgorithms::eSingleCameraGroundEKF,cam1, cam2);
 			
