@@ -79,7 +79,7 @@ void threadAlgoritm(InfoPointers *infoPointers){
 		frame2.copyTo(ori2);
 
 
-		// 666 TODO: Va más rápido sin el MB pero es más sensible al ruido, por lo que hay que mejorar el matching
+		// 666 TODO: Va más rápido sin el MedianBlur pero es más sensible al ruido, por lo que hay que mejorar el matching
 		//medianBlur(frame1, frame1, 5);
 		//medianBlur(frame1, frame1, 5);
 		//if(imageManager->areTwoCameras()){

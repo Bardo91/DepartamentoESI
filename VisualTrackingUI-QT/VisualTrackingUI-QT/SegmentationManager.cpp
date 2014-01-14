@@ -48,7 +48,7 @@ namespace vision{
 		case eSegmentationAlgorithms::ColorClustering:
 			// 666 TODO: use statics variables to manage CS and segmentation function in order to save operations
 			// Create cluster space
-			segmentation::ColorClusterSpace CS = *segmentation::CreateHSVCS_8c(segmentation::bin2dec(colors), segmentation::bin2dec("11111111"), segmentation::bin2dec("11111111")); // 666 TODO: add edit text to add color selection (check boxes)
+			segmentation::ColorClusterSpace CS = *segmentation::CreateHSVCS_8c(segmentation::bin2dec(colors), segmentation::bin2dec("11111111"), segmentation::bin2dec("11111111"));
 			// Use Algorithm
 			// 666 TODO: implement 1 camera algorithm
 			// return segmentation::ColorClusterImageSegmentation(_frame, CS, _objects);
