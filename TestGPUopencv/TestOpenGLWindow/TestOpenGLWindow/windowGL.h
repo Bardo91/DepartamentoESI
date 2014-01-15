@@ -2,7 +2,7 @@
 //																		//
 //		OpenGL Helper Libraries for CPU Processing  (GLHL)				//
 //			Author: Pablo Ramón Soria									//
-//			Date:	2013-01-14											//
+//			Date:	2014-01-14											//
 //																		//
 //////////////////////////////////////////////////////////////////////////
 //	windowGL.h This header contain declaration, variables and structures
@@ -17,7 +17,7 @@
 
 #include <string>
 
-namespace windowGL{
+namespace windowGL{ // 666 TODO: do it cross-platform.
 	// Setting up in windows. En linux seria usando glx:
 	static HGLRC hRC = NULL;			// Permanent Rendering Context. (Conecta las llamadas de OpenGL con el Device Context)
 	static HDC hDC = NULL;				// Device Context. (Conecta la ventana de contexto con el GDI-Graphic device Interface)

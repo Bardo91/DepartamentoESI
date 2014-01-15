@@ -1,3 +1,12 @@
+//////////////////////////////////////////////////////////////////////////
+//																		//
+//		OpenGL Helper Libraries for CPU Processing  (GLHL)				//
+//			Author: Pablo Ramón Soria									//
+//			Date:	2014-01-15											//
+//																		//
+//////////////////////////////////////////////////////////////////////////
+//	OpenGl Extended libraries
+
 #ifndef __glext_h_
 #define __glext_h_
 

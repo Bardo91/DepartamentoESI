@@ -2,7 +2,7 @@
 //																		//
 //		OpenGL Helper Libraries for CPU Processing  (GLHL)				//
 //			Author: Pablo Ramón Soria									//
-//			Date:	2013-01-15											//
+//			Date:	2014-01-15											//
 //																		//
 //////////////////////////////////////////////////////////////////////////
 //	shaderFuns
@@ -13,31 +13,16 @@
 #include <Windows.h>
 #include <gl/GL.h>
 #include <gl/GLU.h>
+namespace GLHL{
+	namespace shadersGL{
+		// This function is used to create the shader object. It's loaded from a source and then is compiled.
+		GLuint loadShader(GLenum _type, const char* _shaderSrc);
+	
+		// This function initialize the vertex and fragment shaders 666 TODO: this is a prototype, do it better
+		bool initShaders();
 
-namespace shadersGL{
-	//---------------------------------------------------------------------------
-	// This function is used to create the shader object. It's loaded from a 
-	// source and then is compiled.
-	GLuint LoadShader(const char* _shaderSrc, GLenum _type){
-		// Externally, both shader and compiled shader are index to an internal reference.
-		GLuint shader;
-		GLint compiledShader;
-
-		// Create the shader object
-		shader = glCreateShader(_type);
-
-		if(!shader)
-			return 0; // Check if the shader was created properlly.
-
-		// Load the shader from the source.
-		glShaderSource(shader, 1, &_shaderSrc, NULL);
-
-	}
-
-	//---------------------------------------------------------------------------
-
-} // namespace shadersGL
-
+	} // namespace shadersGL
+} // namespace GLHL
 
 
 #endif // _GLHL_SHADERFUNS_H_

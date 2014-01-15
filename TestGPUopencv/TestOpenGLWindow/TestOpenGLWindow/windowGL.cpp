@@ -2,7 +2,7 @@
 //																		//
 //		OpenGL Helper Libraries for CPU Processing  (GLHL)				//
 //			Author: Pablo Ramón Soria									//
-//			Date:	2013-01-14											//
+//			Date:	2014-01-14											//
 //																		//
 //////////////////////////////////////////////////////////////////////////
 //	windowGL.cpp this source contain the definition of functions used to

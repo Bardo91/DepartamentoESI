@@ -2,7 +2,7 @@
 //																		//
 //		OpenGL Helper Libraries for CPU Processing  (GLHL)				//
 //			Author: Pablo Ramón Soria									//
-//			Date:	2013-01-15											//
+//			Date:	2014-01-15											//
 //																		//
 //////////////////////////////////////////////////////////////////////////
 //	LoaderOpenGLExtensions
@@ -38,19 +38,26 @@ namespace GLHL {
 		static void loadOpenGLExtensions();
 
 	public: // Extended functions - secured
-		GLuint glCreteShader(GLenum _type);
+		static GLuint glCreateShader(GLenum _type);
+		static GLvoid glShaderSource(GLuint _shader, GLsizei _count, const GLchar* const *_string, const GLint *_length);
+		static GLvoid glCompileShader(GLuint _shader);
+		static GLvoid glGetShaderiv(GLuint _shader, GLenum _pname, GLint *_params);
+		static GLvoid glGetShaderInfoLog(GLuint _shader, GLsizei _bufSize, GLsizei *_length, GLchar *_infoLog);
+		static GLvoid glDeleteShader(GLuint _shader);
+		static GLuint glCreateProgram(GLvoid);
+		static GLvoid glAttachShader(GLuint _program, GLuint _shader);
+		static GLvoid glBindAttribLocation(GLuint _program, GLuint _index, const GLchar *_name);
 
 	private: // Extended functions - unsecured
-		//---------------------------------------------------------------------------
-		// Shader Functions
 		static PFNGLCREATESHADERPROC glCreateShaderUnsecure;
 		static PFNGLSHADERSOURCEPROC glShaderSourceUnsecure;
 		static PFNGLCOMPILESHADERPROC glCompileShaderUnsecure;
 		static PFNGLGETSHADERIVPROC glGetShaderivUnsecure;
 		static PFNGLGETSHADERINFOLOGPROC glGetShaderInfoLogUnsecure;
 		static PFNGLDELETESHADERPROC glDeleteShaderUnsecure;
-
-		//---------------------------------------------------------------------------
+		static PFNGLCREATEPROGRAMPROC glCreateProgramUnsecure;
+		static PFNGLATTACHSHADERPROC glAttachShaderUnsecure;
+		static PFNGLBINDATTRIBLOCATIONPROC glBindAttribLocationUnsecure;
 	};
 
 } // namespace shadersGL.
