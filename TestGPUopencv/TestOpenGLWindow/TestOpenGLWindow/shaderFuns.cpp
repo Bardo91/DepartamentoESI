@@ -1,0 +1,13 @@
+//////////////////////////////////////////////////////////////////////////
+//																		//
+//		OpenGL Helper Libraries for CPU Processing  (GLHL)				//
+//			Author: Pablo Ramón Soria									//
+//			Date:	2013-01-15											//
+//																		//
+//////////////////////////////////////////////////////////////////////////
+//	shaderFuns
+
+
+#include "shaderFuns.h"
+
+using namespace shadersGL;

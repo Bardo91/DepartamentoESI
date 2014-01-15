@@ -80,10 +80,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="loaderOpenGLExtensions.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="shaderFuns.cpp" />
     <ClCompile Include="windowGL.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="loaderOpenGLExtensions.h" />
+    <ClInclude Include="OpenGLExtensions\glext.h" />
+    <ClInclude Include="shaderFuns.h" />
     <ClInclude Include="windowGL.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
