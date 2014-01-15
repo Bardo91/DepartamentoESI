@@ -226,18 +226,22 @@ namespace windowGL{
 
 		return DefWindowProc(_hWnd, _uMsg, _wParam, _lParam);
 	}
-	int WINAPI WinMain(HINSTANCE hInstance,			// Instance
-					   HINSTANCE hPrevInstance,		// Previous Instance
-					   LPSTR lpCmdLine,				// Command line parameters
-					   int nCmdShow){				// Windows show state
+
+
+	int	mainApp(HINSTANCE _hInstance,				// Instance
+				HINSTANCE _hPrevInstance,			// Previous Instance
+				LPSTR _lpCmdLine,					// Command line parameters
+				int _nCmdShow){						// Windows show state
 
 		MSG msg;				// Windows menssage Structure.
 		BOOL done = FALSE;		// Variable to exit loop.
 
 		// Creamos la ventana de windows, si devuelve falso la función es que no se ha creado la ventana y acabamos la aplicación.
-		if (!CreateGLWindow("NeHe's OpenGL Framework",640,480,16,fullscreen)) {
+		if (!CreateGLWindow("OpenGl FrameWork",640,480,16,fullscreen)) {
 			return 0;                           // Quit If Window Was Not Created
 		}
+
+		InitGL();
 
 		while(!done){
 			if(PeekMessage(&msg, NULL, 0,0, PM_REMOVE)){ // Comprobamos si hay algun mensaje esperando en la cola
@@ -248,6 +252,8 @@ namespace windowGL{
 					DispatchMessage(&msg); // Reenviamos el mensaje, lo despachamos
 				}
 			}
+			glClear(GL_COLOR_BUFFER_BIT);
+			SwapBuffers(hDC);
 		}
 
 		return 1;

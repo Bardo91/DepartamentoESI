@@ -19,21 +19,21 @@
 
 namespace windowGL{
 	// Setting up in windows. En linux seria usando glx:
-	HGLRC hRC = NULL;			// Permanent Rendering Context. (Conecta las llamadas de OpenGL con el Device Context)
-	HDC hDC = NULL;				// Device Context. (Conecta la ventana de contexto con el GDI-Graphic device Interface)
-	HWND hWnd = NULL;			// Handle window. (Manejador de la ventana en windows)
-	HINSTANCE hInstance;		// Instancia de la ventana del programa.
+	static HGLRC hRC = NULL;			// Permanent Rendering Context. (Conecta las llamadas de OpenGL con el Device Context)
+	static HDC hDC = NULL;				// Device Context. (Conecta la ventana de contexto con el GDI-Graphic device Interface)
+	static HWND hWnd = NULL;			// Handle window. (Manejador de la ventana en windows)
+	static HINSTANCE hInstance;		// Instancia de la ventana del programa.
 
 	// Flags y variables varias:
-	bool keys[256];				// Array para las teclas del teclado.
-	bool active = TRUE;			// Flag si no está o está minimizada la ventana.
-	bool fullscreen = TRUE;		// Flag para fullscreen o no.
+	static bool keys[256];				// Array para las teclas del teclado.
+	static bool active = TRUE;			// Flag si no está o está minimizada la ventana.
+	static bool fullscreen = TRUE;		// Flag para fullscreen o no.
 
 	// Declaración de WndProc. Funcion callback que se llama cuando se recibe un mensaje.
 	LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM); 
 
 	// Función para redimensionar el tamaño de la ventana e inicializar al ventana. Esta será llamada cada vez que haya un cambio en el tamaño de la ventana, o se pase de fullscreen a screen, etc...
-	GLvoid ReSizeGLScene(GLsizei width, GLsizei height);
+	GLvoid ReSizeGLScene(GLsizei _width, GLsizei _height);
 
 	// Función de set up de OpenGL
 	int InitGL(GLvoid);
@@ -45,7 +45,7 @@ namespace windowGL{
 	BOOL CreateGLWindow(char* _title, int _width, int _height, int _bits, bool _fullscreenFlag);
 
 	// Función principal que cre la ventana y prepara el programa.
-	int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow);
+	int mainApp(HINSTANCE _hInstance, HINSTANCE _hPrevInstance, LPSTR _lpCmdLine, int _nCmdShow);
 
 }	//namespace windowGL.
 
