@@ -27,7 +27,7 @@
     <ClCompile Include="shaderFuns.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="loaderOpenGLExtensions.cpp">
+    <ClCompile Include="DriverGPU.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -38,14 +38,14 @@
     <ClInclude Include="shaderFuns.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="loaderOpenGLExtensions.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="OpenGLExtensions\glext.h">
       <Filter>Header Files\OpenGLExtensions</Filter>
     </ClInclude>
     <ClInclude Include="OpenGLExtensions\wglext.h">
       <Filter>Header Files\OpenGLExtensions</Filter>
+    </ClInclude>
+    <ClInclude Include="DriverGPU.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

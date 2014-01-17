@@ -8,7 +8,7 @@
 //	windowGL.cpp this source contain the definition of functions used to
 //	configure the main window and main program (In Windows)
 
-#include "loaderOpenGLExtensions.h"
+#include "DriverGPU.h"
 #include "shaderFuns.h"
 #include "windowGL.h"
 
@@ -237,8 +237,8 @@ namespace windowGL{
 				LPSTR _lpCmdLine,					// Command line parameters
 				int _nCmdShow){						// Windows show state
 
-		// LOAD OPENGLEXTENSIONS 666 sitio mejor?
-		GLHL::OpenGLExtensions::loadOpenGLExtensions();
+		// LOAD DriverGPU 666 sitio mejor?
+		GLHL::DriverGPU::initDriver(); // 666 TODO: aqui no funciona cargar drivers, no se ha iniciado algo???
 
 		MSG msg;				// Windows menssage Structure.
 		BOOL done = FALSE;		// Variable to exit loop.
@@ -284,11 +284,11 @@ namespace windowGL{
 
 		glClear(GL_COLOR_BUFFER_BIT);
 
-		GLHL::OpenGLExtensions::glUseProgram(_program);
+		GLHL::DriverGPU::glUseProgram(_program);
 
 		// Load vertex Data
-		GLHL::OpenGLExtensions::glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, vVertices);
-		GLHL::OpenGLExtensions::glEnableVertexAttribArray(0);
+		GLHL::DriverGPU::glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, vVertices);
+		GLHL::DriverGPU::glEnableVertexAttribArray(0);
 
 		glDrawArrays(GL_TRIANGLES, 0, 3);
 

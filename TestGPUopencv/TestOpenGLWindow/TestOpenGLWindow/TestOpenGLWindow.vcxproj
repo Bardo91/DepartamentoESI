@@ -80,13 +80,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="loaderOpenGLExtensions.cpp" />
+    <ClCompile Include="DriverGPU.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="shaderFuns.cpp" />
     <ClCompile Include="windowGL.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="loaderOpenGLExtensions.h" />
+    <ClInclude Include="DriverGPU.h" />
     <ClInclude Include="OpenGLExtensions\glext.h" />
     <ClInclude Include="OpenGLExtensions\wglext.h" />
     <ClInclude Include="shaderFuns.h" />

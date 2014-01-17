@@ -7,8 +7,7 @@
 //////////////////////////////////////////////////////////////////////////
 //	shaderFuns
 
-
-#include "loaderOpenGLExtensions.h"
+#include "DriverGPU.h"
 #include "shaderFuns.h"
 
 #include <cassert>
@@ -23,35 +22,37 @@ namespace GLHL{
 			GLuint shader;
 			GLint isShaderCompiled;
 
+			GLHL::DriverGPU::initDriver();
+
 			// Create the shader object
-			shader = OpenGLExtensions::glCreateShader(_type);
+			shader = DriverGPU::glCreateShader(_type);
 			if(!shader)
 				return 0; // Check if the shader was created properlly.
 
 			// Load the shader from the source.
-			OpenGLExtensions::glShaderSource(shader, 1, &_shaderSrc, NULL);
+			DriverGPU::glShaderSource(shader, 1, &_shaderSrc, NULL);
 
 			// Compile the shader.
-			OpenGLExtensions::glCompileShader(shader);
+			DriverGPU::glCompileShader(shader);
 
 			// Check if compiled properlly.
-			OpenGLExtensions::glGetShaderiv(shader, GL_COMPILE_STATUS, &isShaderCompiled);
+			DriverGPU::glGetShaderiv(shader, GL_COMPILE_STATUS, &isShaderCompiled);
 
 			if(!isShaderCompiled){
 				GLint infoLen = 0;
 
-				OpenGLExtensions::glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &infoLen);
+				DriverGPU::glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &infoLen);
 
 				if(infoLen > 1){
 					char* infoLog = new char[infoLen];
 
-					OpenGLExtensions::glGetShaderInfoLog(shader, infoLen, NULL, infoLog);
+					DriverGPU::glGetShaderInfoLog(shader, infoLen, NULL, infoLog);
 					// infoLog got the error message and can be displayed. 666 TODO: generic display system.
 					assert(FALSE);
 
 					delete infoLog;
 				}
-				OpenGLExtensions::glDeleteShader(shader);
+				DriverGPU::glDeleteShader(shader);
 				return 0;
 			}
 
@@ -86,39 +87,39 @@ namespace GLHL{
 			fragmentShader = loadShader(GL_FRAGMENT_SHADER, fShaderStr);
 
 			// Create a program object to attach the shaders
-			programObject = OpenGLExtensions::glCreateProgram();
+			programObject = DriverGPU::glCreateProgram();
 
 			if(!programObject) // Check error
 				return FALSE;
 
 			// Attachs the shaders
-			OpenGLExtensions::glAttachShader(programObject, vertexShader);
-			OpenGLExtensions::glAttachShader(programObject, fragmentShader);
+			DriverGPU::glAttachShader(programObject, vertexShader);
+			DriverGPU::glAttachShader(programObject, fragmentShader);
 
 			// Bind vPosition to attribute 0 --> 666 TODO: only because this tutorial, do it generic...
-			OpenGLExtensions::glBindAttribLocation(programObject, 0, "vPosition");
+			DriverGPU::glBindAttribLocation(programObject, 0, "vPosition");
 
 			// Link the program
-			OpenGLExtensions::glLinkProgram(programObject);
+			DriverGPU::glLinkProgram(programObject);
 
 			// Check link status
-			OpenGLExtensions::glGetProgramiv(programObject, GL_LINK_STATUS, &isLinked);
+			DriverGPU::glGetProgramiv(programObject, GL_LINK_STATUS, &isLinked);
 
 			if(!isLinked){
 				GLint infoLen = 0;
 
-				OpenGLExtensions::glGetProgramiv(programObject, GL_INFO_LOG_LENGTH, &infoLen);
+				DriverGPU::glGetProgramiv(programObject, GL_INFO_LOG_LENGTH, &infoLen);
 				if(infoLen > 1){
 					char* infoLog = new char[infoLen];
 
-					OpenGLExtensions::glGetProgramInfoLog(programObject, infoLen, NULL, infoLog);
+					DriverGPU::glGetProgramInfoLog(programObject, infoLen, NULL, infoLog);
 					// infoLog got the error message and can be displayed. 666 TODO: generic display system.
 					assert(FALSE);
 
 					delete infoLog;
 				}
 
-				OpenGLExtensions::glDeleteProgram(programObject);
+				DriverGPU::glDeleteProgram(programObject);
 				return FALSE;
 
 			}
