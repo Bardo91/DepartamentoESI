@@ -34,8 +34,6 @@ namespace GLHL {
 
 	class OpenGLExtensions{ // 666 TODO: ¿Cambiar de clase  a algo tipo drivers o abstraccion de hardware o algo asi?
 	public:
-		OpenGLExtensions();
-
 		static void loadOpenGLExtensions();
 
 	public: // Extended functions - secured

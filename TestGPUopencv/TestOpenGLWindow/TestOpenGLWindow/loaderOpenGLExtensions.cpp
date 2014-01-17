@@ -15,7 +15,7 @@ using namespace GLHL;
 //-----------------------------------------------------------------------------
 // function pointers are initialized initially to nullptr in order to check 
 // afterwards if they were loaded properlly.
-PFNGLCREATESHADERPROC OpenGLExtensions::glCreateShaderUnsecure = nullptr;
+/*PFNGLCREATESHADERPROC OpenGLExtensions::glCreateShaderUnsecure = nullptr;
 PFNGLSHADERSOURCEPROC OpenGLExtensions::glShaderSourceUnsecure = nullptr;
 PFNGLCOMPILESHADERPROC OpenGLExtensions::glCompileShaderUnsecure = nullptr;
 PFNGLGETSHADERIVPROC OpenGLExtensions::glGetShaderivUnsecure = nullptr;
@@ -32,7 +32,7 @@ PFNGLDELETEPROGRAMPROC OpenGLExtensions::glDeleteProgramUnsecure = nullptr;
 PFNGLUSEPROGRAMPROC OpenGLExtensions::glUseProgramUnsecure = nullptr;
 
 PFNGLVERTEXATTRIBPOINTERPROC OpenGLExtensions::glVertexAttribPointerUnsecure = nullptr;
-PFNGLENABLEVERTEXATTRIBARRAYPROC OpenGLExtensions::glEnableVertexAttribArrayUnsecure = nullptr;
+PFNGLENABLEVERTEXATTRIBARRAYPROC OpenGLExtensions::glEnableVertexAttribArrayUnsecure = nullptr;*/
 
 //-----------------------------------------------------------------------------
 // Load OpenGL extended functions
