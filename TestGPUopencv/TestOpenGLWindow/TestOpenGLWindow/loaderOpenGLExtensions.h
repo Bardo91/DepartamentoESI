@@ -17,6 +17,7 @@
 #include <gl/GL.h>
 #include <gl/GLU.h>
 #include "OpenGLExtensions/glext.h"
+#include "OpenGLExtensions/wglext.h"
 
 // La carga de funciones de expansión de OpenGl se hacen de forma diferente
 // en windows y en linux, para que sea comodo el traslado del código entre 

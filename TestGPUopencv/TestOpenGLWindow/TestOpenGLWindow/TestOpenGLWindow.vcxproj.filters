@@ -44,5 +44,8 @@
     <ClInclude Include="OpenGLExtensions\glext.h">
       <Filter>Header Files\OpenGLExtensions</Filter>
     </ClInclude>
+    <ClInclude Include="OpenGLExtensions\wglext.h">
+      <Filter>Header Files\OpenGLExtensions</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
