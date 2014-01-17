@@ -19,7 +19,10 @@ namespace GLHL{
 		GLuint loadShader(GLenum _type, const char* _shaderSrc);
 	
 		// This function initialize the vertex and fragment shaders 666 TODO: this is a prototype, do it better
-		bool initShaders();
+		bool initShaders(GLuint _program);
+
+		// Draw into the current window and program.
+		void drawOnWindow();
 
 	} // namespace shadersGL
 } // namespace GLHL

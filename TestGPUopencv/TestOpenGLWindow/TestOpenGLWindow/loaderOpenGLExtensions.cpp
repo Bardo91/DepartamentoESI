@@ -21,9 +21,44 @@ PFNGLCOMPILESHADERPROC OpenGLExtensions::glCompileShaderUnsecure = nullptr;
 PFNGLGETSHADERIVPROC OpenGLExtensions::glGetShaderivUnsecure = nullptr;
 PFNGLGETSHADERINFOLOGPROC OpenGLExtensions::glGetShaderInfoLogUnsecure = nullptr;
 PFNGLDELETESHADERPROC OpenGLExtensions::glDeleteShaderUnsecure = nullptr;
+
 PFNGLCREATEPROGRAMPROC OpenGLExtensions::glCreateProgramUnsecure = nullptr;
 PFNGLATTACHSHADERPROC OpenGLExtensions::glAttachShaderUnsecure = nullptr;
 PFNGLBINDATTRIBLOCATIONPROC OpenGLExtensions::glBindAttribLocationUnsecure = nullptr;
+PFNGLLINKPROGRAMPROC OpenGLExtensions::glLinkProgramUnsecure = nullptr;
+PFNGLGETPROGRAMIVPROC OpenGLExtensions::glGetProgramivUnsecure = nullptr;
+PFNGLGETPROGRAMINFOLOGPROC OpenGLExtensions::glGetProgramInfoLogUnsecure = nullptr;
+PFNGLDELETEPROGRAMPROC OpenGLExtensions::glDeleteProgramUnsecure = nullptr;
+PFNGLUSEPROGRAMPROC OpenGLExtensions::glUseProgramUnsecure = nullptr;
+
+PFNGLVERTEXATTRIBPOINTERPROC OpenGLExtensions::glVertexAttribPointerUnsecure = nullptr;
+PFNGLENABLEVERTEXATTRIBARRAYPROC OpenGLExtensions::glEnableVertexAttribArrayUnsecure = nullptr;
+
+//-----------------------------------------------------------------------------
+// Load OpenGL extended functions
+void OpenGLExtensions::loadOpenGLExtensions(){
+
+	//----------------------------------------------------------------------------
+	// Shader Functions
+	glCreateShaderUnsecure = (PFNGLCREATESHADERPROC) loadGlFunction("glCreateShader");
+	glShaderSourceUnsecure = (PFNGLSHADERSOURCEPROC) loadGlFunction("glShaderSource");
+	glCompileShaderUnsecure = (PFNGLCOMPILESHADERPROC) loadGlFunction("glCompileShader");
+	glGetShaderivUnsecure = (PFNGLGETSHADERIVPROC) loadGlFunction("glGetShaderiv");
+	glGetShaderInfoLogUnsecure = (PFNGLGETSHADERINFOLOGPROC) loadGlFunction("glGetShaderInfoLog");
+	glDeleteShaderUnsecure = (PFNGLDELETESHADERPROC) loadGlFunction("glDeleteShader");
+
+	glCreateProgramUnsecure = (PFNGLCREATEPROGRAMPROC) loadGlFunction("glCreateProgram");
+	glAttachShaderUnsecure = (PFNGLATTACHSHADERPROC) loadGlFunction("glAttachShader");
+	glBindAttribLocationUnsecure = (PFNGLBINDATTRIBLOCATIONPROC) loadGlFunction("glBindAttribLocation");
+	glLinkProgramUnsecure = (PFNGLLINKPROGRAMPROC) loadGlFunction("glLinkProgram");
+	glGetProgramivUnsecure = (PFNGLGETPROGRAMIVPROC) loadGlFunction("glGetProgramiv");
+	glGetProgramInfoLogUnsecure = (PFNGLGETPROGRAMINFOLOGPROC) loadGlFunction("glGetProgramInfoLog");
+	glDeleteProgramUnsecure = (PFNGLDELETEPROGRAMPROC) loadGlFunction("glDeleteFunction");
+	glUseProgramUnsecure = (PFNGLUSEPROGRAMPROC) loadGlFunction("glUseProgram");
+
+	glVertexAttribPointerUnsecure = (PFNGLVERTEXATTRIBPOINTERPROC) loadGlFunction("glAttribPointer");
+	glEnableVertexAttribArrayUnsecure = (PFNGLENABLEVERTEXATTRIBARRAYPROC) loadGlFunction("glEnableVertexAttribArray");
+}
 
 //-----------------------------------------------------------------------------
 GLuint OpenGLExtensions::glCreateShader(GLenum _type){
@@ -78,22 +113,44 @@ GLvoid OpenGLExtensions::glBindAttribLocation(GLuint _program, GLuint _index, co
 	glBindAttribLocationUnsecure(_program, _index, _name);
 }
 
-
 //-----------------------------------------------------------------------------
-// Load OpenGL extended functions
-void OpenGLExtensions::loadOpenGLExtensions(){
-
-	//----------------------------------------------------------------------------
-	// Shader Functions
-	glCreateShaderUnsecure = (PFNGLCREATESHADERPROC) loadGlFunction("glCreateShader");
-	glShaderSourceUnsecure = (PFNGLSHADERSOURCEPROC) loadGlFunction("glShaderSource");
-	glCompileShaderUnsecure = (PFNGLCOMPILESHADERPROC) loadGlFunction("glCompileShader");
-	glGetShaderivUnsecure = (PFNGLGETSHADERIVPROC) loadGlFunction("glGetShaderiv");
-	glGetShaderInfoLogUnsecure = (PFNGLGETSHADERINFOLOGPROC) loadGlFunction("glGetShaderInfoLog");
-	glDeleteShaderUnsecure = (PFNGLDELETESHADERPROC) loadGlFunction("glDeleteShader");
-	glCreateProgramUnsecure = (PFNGLCREATEPROGRAMPROC) loadGlFunction("glCreateProgram");
-	glAttachShaderUnsecure = (PFNGLATTACHSHADERPROC) loadGlFunction("glAttachShader");
-	glBindAttribLocationUnsecure = (PFNGLBINDATTRIBLOCATIONPROC) loadGlFunction("glBindAttribLocation");
+GLvoid OpenGLExtensions::glLinkProgram(GLuint _program){
+	assert(glLinkProgramUnsecure != nullptr);
+	glLinkProgramUnsecure(_program);
 }
 
-//---------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+GLvoid OpenGLExtensions::glGetProgramiv (GLuint _program, GLenum _pname, GLint *_params){
+	assert(glGetProgramivUnsecure != nullptr);
+	glGetProgramivUnsecure(_program, _pname, _params);
+}
+
+//-----------------------------------------------------------------------------
+GLvoid OpenGLExtensions::glGetProgramInfoLog(GLuint _program, GLsizei _bufSize, GLsizei *_length, GLchar *_infoLog){
+	assert(glGetProgramInfoLogUnsecure != nullptr);
+	glGetProgramInfoLogUnsecure(_program, _bufSize, _length, _infoLog);
+}
+
+//-----------------------------------------------------------------------------
+GLvoid OpenGLExtensions::glDeleteProgram(GLuint _program){
+	assert(glDeleteProgramUnsecure != nullptr);
+	glDeleteProgramUnsecure(_program);
+}
+
+//-----------------------------------------------------------------------------
+GLvoid OpenGLExtensions::glUseProgram(GLuint _program){
+	assert(glUseProgramUnsecure != nullptr);
+	glUseProgramUnsecure(_program);
+}
+
+//-----------------------------------------------------------------------------
+GLvoid OpenGLExtensions::glVertexAttribPointer(GLuint _index, GLint _size, GLenum _type, GLboolean _normalized, GLsizei _stride, const GLvoid *_pointer){
+	assert(glVertexAttribPointerUnsecure != nullptr);
+	glVertexAttribPointerUnsecure(_index, _size, _type, _normalized, _stride, _pointer);
+}
+
+//-----------------------------------------------------------------------------
+GLvoid OpenGLExtensions::glEnableVertexAttribArray(GLuint _index){
+	assert(glEnableVertexAttribArrayUnsecure != nullptr);
+	glEnableVertexAttribArrayUnsecure(_index);
+}

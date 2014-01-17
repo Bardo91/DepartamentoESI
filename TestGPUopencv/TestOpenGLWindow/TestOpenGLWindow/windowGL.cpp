@@ -8,15 +8,19 @@
 //	windowGL.cpp this source contain the definition of functions used to
 //	configure the main window and main program (In Windows)
 
+#include "loaderOpenGLExtensions.h"
+#include "shaderFuns.h"
 #include "windowGL.h"
+
+#include <cassert>
 
 namespace windowGL{
 	// Función para redimensionar el tamaño de la ventana e inicializar al ventana. Esta será llamada cada vez que haya un cambio en el tamaño de la ventana, o se pase de fullscreen a screen, etc...
-	GLvoid ReSizeGLScene(GLsizei width, GLsizei height){
-		if(height == 0) // Para evitar divisiones por cero.
-			height = 1;
+	GLvoid reSizeGLScene(GLsizei _width, GLsizei _height){
+		if(_height == 0) // Para evitar divisiones por cero.
+			_height = 1;
 
-		glViewport(0,0,width, height); // Resete el viewport actual.
+		glViewport(0, 0, _width, _height); // Resetea el viewport actual.
 
 		//glMatrixMode(GL_PROJECTION); // Seleciona la matriz de proyección para ser modificada.
 		//glLoadIdentity(); // Cargamos la matriz identidad sobre la matriz de proyección para setearla a cero
@@ -31,7 +35,7 @@ namespace windowGL{
 	}
 
 	// Función de set up de OpenGL
-	int InitGL(GLvoid){
+	int initGL(GLvoid){
 		//glShadeModel(GL_SMOOTH); // habilita smooth shading (Sombredo suave o transiciones suaves entre sombras y luces).
 
 		glClearColor(0.0f, 0.0f, 0.0f, 0.0f); // Estabece el color de "limpiado" de la pantalla, en este caso el negro. Los parámetros son (R,G,B,A).
@@ -44,7 +48,7 @@ namespace windowGL{
 	}
 
 	// Función para destruir la ventana adecuadamente.
-	GLvoid KillGLWindow(){
+	GLvoid killGLWindow(){
 		if(hRC){ // Si tenemos un contexto de renderizado
 			if(!wglMakeCurrent(NULL,NULL)){ // Comprobamos si podemos librerar el Device context y el render context.
 				MessageBoxA(NULL,"Release Of DC And RC Failed.","SHUTDOWN ERROR",MB_OK | MB_ICONINFORMATION);
@@ -76,7 +80,7 @@ namespace windowGL{
 
 
 	// Función para crear una ventana para OpenGL
-	BOOL CreateGLWindow(char* _title, int _width, int _height, int _bits, bool _fullscreenFlag){
+	BOOL createGLWindow(char* _title, int _width, int _height, int _bits, bool _fullscreenFlag){
 		GLuint PixelFormat;				// Holds the results after searching for a Match.
 
 		WNDCLASSA wc;					// en esta variable se almacena la información de nuestra ventana.
@@ -129,7 +133,7 @@ namespace windowGL{
 									NULL,									// No tiene menu
 									hInstance,								// Instancia de la ventana
 									NULL))){									// Ningun parámetro para WM_CREATE.
-			KillGLWindow(); //Reset the display
+			killGLWindow(); //Reset the display
 			MessageBoxA(NULL,"Window Creation Error.","ERROR",MB_OK|MB_ICONEXCLAMATION);
 			return FALSE;                           // Return FALSE
 		}
@@ -155,23 +159,23 @@ namespace windowGL{
 			0, 0, 0 };							// se ignoran las mascaras de capas.
 
 		if (!(hDC=GetDC(hWnd))){					// Did We Get A Device Context?
-			KillGLWindow();                         // Reset The Display
+			killGLWindow();                         // Reset The Display
 			MessageBoxA(NULL,"Can't Create A GL Device Context.","ERROR",MB_OK|MB_ICONEXCLAMATION);
 			return FALSE;							// Return FALSE
 		} if (!(PixelFormat=ChoosePixelFormat(hDC,&pfd))){	// Did Windows Find A Matching Pixel Format?
-			KillGLWindow();                         // Reset The Display
+			killGLWindow();                         // Reset The Display
 			MessageBoxA(NULL,"Can't Find A Suitable PixelFormat.","ERROR",MB_OK|MB_ICONEXCLAMATION);
 			return FALSE;                           // Return FALSE
 		} if(!SetPixelFormat(hDC,PixelFormat,&pfd)){// Are We Able To Set The Pixel Format?
-			KillGLWindow();                         // Reset The Display
+			killGLWindow();                         // Reset The Display
 			MessageBoxA(NULL,"Can't Set The PixelFormat.","ERROR",MB_OK|MB_ICONEXCLAMATION);
 			return FALSE;							// Return FALSE
 		} if (!(hRC=wglCreateContext(hDC))){		// Are We Able To Get A Rendering Context?
-			KillGLWindow();							// Reset The Display
+			killGLWindow();							// Reset The Display
 			MessageBoxA(NULL,"Can't Create A GL Rendering Context.","ERROR",MB_OK|MB_ICONEXCLAMATION);
 			return FALSE;							// Return FALSE
 		} if(!wglMakeCurrent(hDC,hRC)){				// Try To Activate The Rendering Context
-			KillGLWindow();                         // Reset The Display
+			killGLWindow();                         // Reset The Display
 			MessageBoxA(NULL,"Can't Activate The GL Rendering Context.","ERROR",MB_OK|MB_ICONEXCLAMATION);
 			return FALSE;                           // Return FALSE
 		}
@@ -181,12 +185,12 @@ namespace windowGL{
 		ShowWindow(hWnd, SW_SHOW);
 		SetForegroundWindow(hWnd);
 		SetFocus(hWnd);
-		ReSizeGLScene(_width, _height);
+		reSizeGLScene(_width, _height);
 
 		// Por último llamamos a la funcion initGL
 
-		if(!InitGL()){
-			KillGLWindow();
+		if(!initGL()){
+			killGLWindow();
 			MessageBoxA(NULL,"Initialization Failed.","ERROR",MB_OK|MB_ICONEXCLAMATION);
 			return false;
 		}
@@ -220,7 +224,7 @@ namespace windowGL{
 			keys[_wParam] = FALSE;
 			return 0;
 		case WM_SIZE:				// Si se redimensiona la ventana
-			ReSizeGLScene(LOWORD(_lParam), HIWORD(_lParam));	// Redimensionamos. Extraemos los parámetros LoWord = Width / HiWord = Height.
+			reSizeGLScene(LOWORD(_lParam), HIWORD(_lParam));	// Redimensionamos. Extraemos los parámetros LoWord = Width / HiWord = Height.
 			return 0;
 		}
 
@@ -233,15 +237,24 @@ namespace windowGL{
 				LPSTR _lpCmdLine,					// Command line parameters
 				int _nCmdShow){						// Windows show state
 
+		// LOAD OPENGLEXTENSIONS 666 sitio mejor?
+		GLHL::OpenGLExtensions::loadOpenGLExtensions();
+
 		MSG msg;				// Windows menssage Structure.
 		BOOL done = FALSE;		// Variable to exit loop.
 
 		// Creamos la ventana de windows, si devuelve falso la función es que no se ha creado la ventana y acabamos la aplicación.
-		if (!CreateGLWindow("OpenGl FrameWork",640,480,16,fullscreen)) {
+		if (!createGLWindow("OpenGl FrameWork",640,480,16,fullscreen)) {
 			return 0;                           // Quit If Window Was Not Created
 		}
 
-		InitGL();
+		initGL();
+
+		GLuint program = NULL;
+
+		GLHL::shadersGL::initShaders(program);
+
+		assert( program == NULL );
 
 		while(!done){
 			if(PeekMessage(&msg, NULL, 0,0, PM_REMOVE)){ // Comprobamos si hay algun mensaje esperando en la cola
@@ -252,10 +265,34 @@ namespace windowGL{
 					DispatchMessage(&msg); // Reenviamos el mensaje, lo despachamos
 				}
 			}
-			glClear(GL_COLOR_BUFFER_BIT);
-			SwapBuffers(hDC);
+
+			drawOnWindow(640, 480, program);
+
+			//glClear(GL_COLOR_BUFFER_BIT);
+			//SwapBuffers(hDC);
 		}
 
 		return 1;
+	}
+
+
+	void drawOnWindow(GLsizei _width, GLsizei _height, GLuint _program){
+		GLfloat vVertices[] = { 0.0f, 0.5f, 0.0f,
+								-0.5f, -0.5f, 0.0f,
+								0.5f, -0.5f, 0.0f};
+		reSizeGLScene(_width, _height);
+
+		glClear(GL_COLOR_BUFFER_BIT);
+
+		GLHL::OpenGLExtensions::glUseProgram(_program);
+
+		// Load vertex Data
+		GLHL::OpenGLExtensions::glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, vVertices);
+		GLHL::OpenGLExtensions::glEnableVertexAttribArray(0);
+
+		glDrawArrays(GL_TRIANGLES, 0, 3);
+
+		SwapBuffers(hDC);
+
 	}
 }	// namespace windowGL

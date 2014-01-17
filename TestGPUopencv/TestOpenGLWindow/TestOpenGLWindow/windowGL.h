@@ -33,20 +33,22 @@ namespace windowGL{ // 666 TODO: do it cross-platform.
 	LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM); 
 
 	// Función para redimensionar el tamaño de la ventana e inicializar al ventana. Esta será llamada cada vez que haya un cambio en el tamaño de la ventana, o se pase de fullscreen a screen, etc...
-	GLvoid ReSizeGLScene(GLsizei _width, GLsizei _height);
+	GLvoid reSizeGLScene(GLsizei _width, GLsizei _height);
 
 	// Función de set up de OpenGL
-	int InitGL(GLvoid);
+	int initGL(GLvoid);
 
 	// Función para destruir la ventana adecuadamente.
-	GLvoid KillGLWindow();
+	GLvoid killGLWindow();
 
 	// Función para crear una ventana para OpenGL
-	BOOL CreateGLWindow(char* _title, int _width, int _height, int _bits, bool _fullscreenFlag);
+	BOOL createGLWindow(char* _title, int _width, int _height, int _bits, bool _fullscreenFlag);
 
 	// Función principal que cre la ventana y prepara el programa.
 	int mainApp(HINSTANCE _hInstance, HINSTANCE _hPrevInstance, LPSTR _lpCmdLine, int _nCmdShow);
 
+	// Dibuja en la ventana
+	void drawOnWindow(GLsizei _width, GLsizei _height, GLuint _program);
 }	//namespace windowGL.
 
 #endif //_GLHL_WINDOWGL_H_

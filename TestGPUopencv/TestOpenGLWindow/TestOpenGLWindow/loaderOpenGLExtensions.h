@@ -44,9 +44,18 @@ namespace GLHL {
 		static GLvoid glGetShaderiv(GLuint _shader, GLenum _pname, GLint *_params);
 		static GLvoid glGetShaderInfoLog(GLuint _shader, GLsizei _bufSize, GLsizei *_length, GLchar *_infoLog);
 		static GLvoid glDeleteShader(GLuint _shader);
+
 		static GLuint glCreateProgram(GLvoid);
 		static GLvoid glAttachShader(GLuint _program, GLuint _shader);
 		static GLvoid glBindAttribLocation(GLuint _program, GLuint _index, const GLchar *_name);
+		static GLvoid glLinkProgram(GLuint _program);
+		static GLvoid glGetProgramiv(GLuint _program, GLenum _pname, GLint *_params);
+		static GLvoid glGetProgramInfoLog(GLuint _program, GLsizei _bufSize, GLsizei *_length, GLchar *_infoLog);
+		static GLvoid glDeleteProgram(GLuint _program);
+		static GLvoid glUseProgram(GLuint _program);
+
+		static GLvoid glVertexAttribPointer(GLuint _index, GLint _size, GLenum _type, GLboolean _normalized, GLsizei _stride, const GLvoid *_pointer);
+		static GLvoid glEnableVertexAttribArray(GLuint _index);
 
 	private: // Extended functions - unsecured
 		static PFNGLCREATESHADERPROC glCreateShaderUnsecure;
@@ -55,9 +64,18 @@ namespace GLHL {
 		static PFNGLGETSHADERIVPROC glGetShaderivUnsecure;
 		static PFNGLGETSHADERINFOLOGPROC glGetShaderInfoLogUnsecure;
 		static PFNGLDELETESHADERPROC glDeleteShaderUnsecure;
+
 		static PFNGLCREATEPROGRAMPROC glCreateProgramUnsecure;
 		static PFNGLATTACHSHADERPROC glAttachShaderUnsecure;
 		static PFNGLBINDATTRIBLOCATIONPROC glBindAttribLocationUnsecure;
+		static PFNGLLINKPROGRAMPROC glLinkProgramUnsecure;
+		static PFNGLGETPROGRAMIVPROC glGetProgramivUnsecure;
+		static PFNGLGETPROGRAMINFOLOGPROC glGetProgramInfoLogUnsecure;
+		static PFNGLDELETEPROGRAMPROC glDeleteProgramUnsecure;
+		static PFNGLUSEPROGRAMPROC glUseProgramUnsecure;
+
+		static PFNGLVERTEXATTRIBPOINTERPROC glVertexAttribPointerUnsecure;
+		static PFNGLENABLEVERTEXATTRIBARRAYPROC glEnableVertexAttribArrayUnsecure;
 	};
 
 } // namespace shadersGL.
