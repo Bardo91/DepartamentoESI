@@ -36,7 +36,7 @@ namespace GLHL{
 	public:			
 		DriverGPU();				// Class constructor.
 	public:
-		bool initDriver();
+		GLboolean initDriver();
 
 	public: // Public interface to OpenGL Extended libraries
 		// --> Shaders
@@ -61,7 +61,7 @@ namespace GLHL{
 	
 
 	public:		// Public interface to shaders
-		bool initShaders();
+		GLboolean initShaders();
 
 	private:
 		GLuint loadShader(GLenum _type, const char* _shaderSrc);
@@ -71,7 +71,7 @@ namespace GLHL{
 		GLuint program;
 
 	public: // Draw
-		void drawOnBuffer(GLint _widt, GLint _height, HDC _hDC);
+		GLvoid drawOnBuffer(GLint _widt, GLint _height, HDC _hDC);
 	};
 
 } // namespace GLHL

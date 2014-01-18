@@ -34,7 +34,7 @@ namespace GLHL{
 		glEnableVertexAttribArray = nullptr;
 	}
 	//---------------------------------------------------------------------------
-	bool DriverGPU::initDriver(){
+	GLboolean DriverGPU::initDriver(){
 		//---------------------------------------------------------------------------
 		glCreateShader = (PFNGLCREATESHADERPROC) loadGlFunction("glCreateShader");
 		if(glCreateShader == nullptr)
@@ -147,7 +147,7 @@ namespace GLHL{
 			return shader;
 		}
 	//---------------------------------------------------------------------------
-	bool DriverGPU::initShaders(){
+	GLboolean DriverGPU::initShaders(){
 		GLchar vShaderStr[] = 
 			 "attribute vec4 vPosition; \n"
 			 "void main() \n"
@@ -220,7 +220,7 @@ namespace GLHL{
 	}
 	//---------------------------------------------------------------------------
 
-	void DriverGPU::drawOnBuffer(GLint _width, GLint _height, HDC _hDC){
+	GLvoid DriverGPU::drawOnBuffer(GLint _width, GLint _height, HDC _hDC){
 		GLfloat vVertices[] = { 0.0f, 0.5f, 0.0f,
 								-0.5f, -0.5f, 0.0f,
 								0.5f, -0.5f, 0.0f};

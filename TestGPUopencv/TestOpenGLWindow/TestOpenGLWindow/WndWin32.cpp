@@ -130,10 +130,10 @@ namespace GLHL {
 	}
 
 	//-------------------------------------------------------------------------------------------------
-	LRESULT CALLBACK WndWin32::WndProc (HWND _hWnd,			// Manejador para la ventana.
-							  UINT _uMsg,			// Mensaje para la ventana.
-							  WPARAM _wParam,		// Información adicional del mensaje.
-							  LPARAM _lParam){		// Información adicional del mensaje.
+	LRESULT CALLBACK WndWin32::WndProc(	  HWND _hWnd,			// Manejador para la ventana.
+										  UINT _uMsg,			// Mensaje para la ventana.
+										  WPARAM _wParam,		// Información adicional del mensaje.
+										  LPARAM _lParam){		// Información adicional del mensaje.
 		switch (_uMsg) {			// Vamos aver que tipo de mensaje hemos recibido.
 		case WM_ACTIVATE:			// Si es un mensaje de activación de la ventana.
 			if(!HIWORD(_wParam))	// Vemos el estado de minimización, si es activamos la ventana y si no, la desactivamos.
