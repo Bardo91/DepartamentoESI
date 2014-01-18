@@ -33,44 +33,45 @@
 
 namespace GLHL{
 	class DriverGPU{	// Only one GPU driver is created
+	public:			
+		DriverGPU();				// Class constructor.
 	public:
-		static bool initDriver();
+		bool initDriver();
 
 	public: // Public interface to OpenGL Extended libraries
 		// --> Shaders
-		static PFNGLCREATESHADERPROC glCreateShader;
-		static PFNGLSHADERSOURCEPROC glShaderSource;
-		static PFNGLCOMPILESHADERPROC glCompileShader;
-		static PFNGLGETSHADERIVPROC glGetShaderiv;
-		static PFNGLGETSHADERINFOLOGPROC glGetShaderInfoLog;
-		static PFNGLDELETESHADERPROC glDeleteShader;
+		PFNGLCREATESHADERPROC glCreateShader;
+		PFNGLSHADERSOURCEPROC glShaderSource;
+		PFNGLCOMPILESHADERPROC glCompileShader;
+		PFNGLGETSHADERIVPROC glGetShaderiv;
+		PFNGLGETSHADERINFOLOGPROC glGetShaderInfoLog;
+		PFNGLDELETESHADERPROC glDeleteShader;
 		
-		static PFNGLCREATEPROGRAMPROC glCreateProgram;
-		static PFNGLATTACHSHADERPROC glAttachShader;
-		static PFNGLBINDATTRIBLOCATIONPROC glBindAttribLocation;
-		static PFNGLLINKPROGRAMPROC glLinkProgram;
-		static PFNGLGETPROGRAMIVPROC glGetProgramiv;
-		static PFNGLGETPROGRAMINFOLOGPROC glGetProgramInfoLog;
-		static PFNGLDELETEPROGRAMPROC glDeleteProgram;
-		static PFNGLUSEPROGRAMPROC glUseProgram;
+		PFNGLCREATEPROGRAMPROC glCreateProgram;
+		PFNGLATTACHSHADERPROC glAttachShader;
+		PFNGLBINDATTRIBLOCATIONPROC glBindAttribLocation;
+		PFNGLLINKPROGRAMPROC glLinkProgram;
+		PFNGLGETPROGRAMIVPROC glGetProgramiv;
+		PFNGLGETPROGRAMINFOLOGPROC glGetProgramInfoLog;
+		PFNGLDELETEPROGRAMPROC glDeleteProgram;
+		PFNGLUSEPROGRAMPROC glUseProgram;
 		
-		static PFNGLVERTEXATTRIBPOINTERPROC glVertexAttribPointer;
-		static PFNGLENABLEVERTEXATTRIBARRAYPROC glEnableVertexAttribArray;
-	private:			
-		DriverGPU();				// Class constructor.
+		PFNGLVERTEXATTRIBPOINTERPROC glVertexAttribPointer;
+		PFNGLENABLEVERTEXATTRIBARRAYPROC glEnableVertexAttribArray;
+	
 
 	public:		// Public interface to shaders
-		static bool initShaders();
+		bool initShaders();
 
 	private:
-		static GLuint loadShader(GLenum _type, const char* _shaderSrc);
+		GLuint loadShader(GLenum _type, const char* _shaderSrc);
 
 	private:	// Shaders declaration.
-		static GLuint vShader, gShader, fShader; // 666 TODO: maybe arent necessary
-		static GLuint program;
+		GLuint vShader, gShader, fShader; // 666 TODO: maybe arent necessary
+		GLuint program;
 
 	public: // Draw
-		static void drawOnWindow(GLint _widt, GLint _height, HDC _hDC);
+		void drawOnWindow(GLint _widt, GLint _height, HDC _hDC);
 	};
 
 } // namespace GLHL

@@ -13,25 +13,26 @@
 
 namespace GLHL{
 	//---------------------------------------------------------------------------
-	PFNGLCREATESHADERPROC DriverGPU::glCreateShader = nullptr;
-	PFNGLSHADERSOURCEPROC DriverGPU::glShaderSource = nullptr;
-	PFNGLCOMPILESHADERPROC DriverGPU::glCompileShader = nullptr;
-	PFNGLGETSHADERIVPROC DriverGPU::glGetShaderiv = nullptr;
-	PFNGLGETSHADERINFOLOGPROC DriverGPU::glGetShaderInfoLog = nullptr;
-	PFNGLDELETESHADERPROC DriverGPU::glDeleteShader = nullptr;
+	DriverGPU::DriverGPU(){
+		glCreateShader = nullptr;
+		glShaderSource = nullptr;
+		glCompileShader = nullptr;
+		glGetShaderiv = nullptr;
+		glGetShaderInfoLog = nullptr;
+		glDeleteShader = nullptr;
 
-	PFNGLCREATEPROGRAMPROC DriverGPU::glCreateProgram = nullptr;
-	PFNGLATTACHSHADERPROC DriverGPU::glAttachShader = nullptr;
-	PFNGLBINDATTRIBLOCATIONPROC DriverGPU::glBindAttribLocation = nullptr;
-	PFNGLLINKPROGRAMPROC DriverGPU::glLinkProgram = nullptr;
-	PFNGLGETPROGRAMIVPROC DriverGPU::glGetProgramiv = nullptr;
-	PFNGLGETPROGRAMINFOLOGPROC DriverGPU::glGetProgramInfoLog = nullptr;
-	PFNGLDELETEPROGRAMPROC DriverGPU::glDeleteProgram = nullptr;
-	PFNGLUSEPROGRAMPROC DriverGPU::glUseProgram = nullptr;
+		glCreateProgram = nullptr;
+		glAttachShader = nullptr;
+		glBindAttribLocation = nullptr;
+		glLinkProgram = nullptr;
+		glGetProgramiv = nullptr;
+		glGetProgramInfoLog = nullptr;
+		glDeleteProgram = nullptr;
+		glUseProgram = nullptr;
 
-	PFNGLVERTEXATTRIBPOINTERPROC DriverGPU::glVertexAttribPointer = nullptr;
-	PFNGLENABLEVERTEXATTRIBARRAYPROC DriverGPU::glEnableVertexAttribArray = nullptr;
-
+		glVertexAttribPointer = nullptr;
+		glEnableVertexAttribArray = nullptr;
+	}
 	//---------------------------------------------------------------------------
 	bool DriverGPU::initDriver(){
 		//---------------------------------------------------------------------------
@@ -111,8 +112,6 @@ namespace GLHL{
 			GLuint shader;
 			GLint isShaderCompiled;
 
-			GLHL::DriverGPU::initDriver();
-
 			// Create the shader object
 			shader = DriverGPU::glCreateShader(_type);
 			if(!shader)
@@ -149,21 +148,19 @@ namespace GLHL{
 		}
 	//---------------------------------------------------------------------------
 	bool DriverGPU::initShaders(){
-		GLchar vShaderStr[] = {
-			"attribute vec4 vPosition;		\n"
-			"void main()					\n"
-			"{								\n"
-			"	gl_position = vPosition;	\n"
-			"}								\n"
-		};
+		GLchar vShaderStr[] = 
+			 "attribute vec4 vPosition; \n"
+			 "void main() \n"
+			 "{ \n"
+			 " gl_Position = vPosition; \n"
+			 "} \n";
 
-		GLchar fShaderStr[] = {
-			"precision medium float;					\n"
-			"void main()								\n"
-			"{											\n"
-			"	gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0)	\n"
-			"}											\n"
-		};
+		GLchar fShaderStr[] = 
+			 "precision mediump float; \n"
+			 "void main() \n"
+			 "{ \n"
+			 " gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0); \n"
+			 "} \n";
 
 		GLuint vertexShader;
 		GLuint fragmentShader;

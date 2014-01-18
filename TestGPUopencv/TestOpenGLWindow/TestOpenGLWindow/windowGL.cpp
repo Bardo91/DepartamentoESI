@@ -236,9 +236,6 @@ namespace windowGL{
 				LPSTR _lpCmdLine,					// Command line parameters
 				int _nCmdShow){						// Windows show state
 
-		// LOAD DriverGPU 666 sitio mejor?
-		GLHL::DriverGPU::initDriver(); // 666 TODO: aqui no funciona cargar drivers, no se ha iniciado algo???
-
 		MSG msg;				// Windows menssage Structure.
 		BOOL done = FALSE;		// Variable to exit loop.
 
@@ -249,7 +246,12 @@ namespace windowGL{
 
 		initGL();
 
-		GLHL::DriverGPU::initShaders();
+		GLHL::DriverGPU driverGPU;
+		// LOAD DriverGPU 666 sitio mejor?
+		if(!driverGPU.initDriver()) // 666 TODO: aqui no funciona cargar drivers, no se ha iniciado algo???
+			return 0;
+
+		driverGPU.initShaders();
 
 		while(!done){
 			if(PeekMessage(&msg, NULL, 0,0, PM_REMOVE)){ // Comprobamos si hay algun mensaje esperando en la cola
@@ -260,9 +262,9 @@ namespace windowGL{
 					DispatchMessage(&msg); // Reenviamos el mensaje, lo despachamos
 				}
 			}
-
+			driverGPU.drawOnWindow(640, 480, hDC);
 			//glClear(GL_COLOR_BUFFER_BIT);
-			//SwapBuffers(hDC);
+			SwapBuffers(hDC);
 		}
 
 		return 1;
