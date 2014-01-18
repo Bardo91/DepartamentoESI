@@ -18,20 +18,20 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="windowGL.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="DriverGPU.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="windowGLold.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="windowGL.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="windowGL.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="OpenGLExtensions\glext.h">
       <Filter>Header Files\OpenGLExtensions</Filter>
     </ClInclude>
@@ -39,6 +39,15 @@
       <Filter>Header Files\OpenGLExtensions</Filter>
     </ClInclude>
     <ClInclude Include="DriverGPU.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="windowGLold.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="windowGL.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ActivityGL.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

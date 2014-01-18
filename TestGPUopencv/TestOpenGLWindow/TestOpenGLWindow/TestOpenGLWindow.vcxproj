@@ -83,12 +83,15 @@
     <ClCompile Include="DriverGPU.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="windowGL.cpp" />
+    <ClCompile Include="windowGLold.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ActivityGL.h" />
     <ClInclude Include="DriverGPU.h" />
     <ClInclude Include="OpenGLExtensions\glext.h" />
     <ClInclude Include="OpenGLExtensions\wglext.h" />
     <ClInclude Include="windowGL.h" />
+    <ClInclude Include="windowGLold.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
