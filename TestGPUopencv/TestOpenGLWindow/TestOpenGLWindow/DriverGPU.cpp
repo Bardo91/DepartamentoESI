@@ -9,6 +9,8 @@
 
 #include "DriverGPU.h"
 
+#include <cassert>
+
 namespace GLHL{
 	//---------------------------------------------------------------------------
 	PFNGLCREATESHADERPROC DriverGPU::glCreateShader = nullptr;
@@ -102,8 +104,143 @@ namespace GLHL{
 		return true;
 	}
 	//---------------------------------------------------------------------------
-
+	//---------------------- SHADERS -------------------------------------------
 	//---------------------------------------------------------------------------
+	GLuint DriverGPU::loadShader(GLenum _type, const char* _shaderSrc){
+			// Externally, both shader and compiled shader are index to an internal reference.
+			GLuint shader;
+			GLint isShaderCompiled;
+
+			GLHL::DriverGPU::initDriver();
+
+			// Create the shader object
+			shader = DriverGPU::glCreateShader(_type);
+			if(!shader)
+				return 0; // Check if the shader was created properlly.
+
+			// Load the shader from the source.
+			DriverGPU::glShaderSource(shader, 1, &_shaderSrc, NULL);
+
+			// Compile the shader.
+			DriverGPU::glCompileShader(shader);
+
+			// Check if compiled properlly.
+			DriverGPU::glGetShaderiv(shader, GL_COMPILE_STATUS, &isShaderCompiled);
+
+			if(!isShaderCompiled){
+				GLint infoLen = 0;
+
+				DriverGPU::glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &infoLen);
+
+				if(infoLen > 1){
+					char* infoLog = new char[infoLen];
+
+					DriverGPU::glGetShaderInfoLog(shader, infoLen, NULL, infoLog);
+					// infoLog got the error message and can be displayed. 666 TODO: generic display system.
+					assert(FALSE);
+
+					delete infoLog;
+				}
+				DriverGPU::glDeleteShader(shader);
+				return 0;
+			}
+
+			return shader;
+		}
+	//---------------------------------------------------------------------------
+	bool DriverGPU::initShaders(){
+		GLchar vShaderStr[] = {
+			"attribute vec4 vPosition;		\n"
+			"void main()					\n"
+			"{								\n"
+			"	gl_position = vPosition;	\n"
+			"}								\n"
+		};
+
+		GLchar fShaderStr[] = {
+			"precision medium float;					\n"
+			"void main()								\n"
+			"{											\n"
+			"	gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0)	\n"
+			"}											\n"
+		};
+
+		GLuint vertexShader;
+		GLuint fragmentShader;
+		GLuint programObject;
+		GLint isLinked;
+
+		// Load vertex and fragment shader
+		vertexShader = DriverGPU::loadShader(GL_VERTEX_SHADER, vShaderStr);
+		fragmentShader = DriverGPU::loadShader(GL_FRAGMENT_SHADER, fShaderStr);
+
+		// Create a program object to attach the shaders
+		programObject = DriverGPU::glCreateProgram();
+
+		if(!programObject) // Check error
+			return FALSE;
+
+		// Attachs the shaders
+		DriverGPU::glAttachShader(programObject, vertexShader);
+		DriverGPU::glAttachShader(programObject, fragmentShader);
+
+		// Bind vPosition to attribute 0 --> 666 TODO: only because this tutorial, do it generic...
+		DriverGPU::glBindAttribLocation(programObject, 0, "vPosition");
+
+		// Link the program
+		DriverGPU::glLinkProgram(programObject);
+
+		// Check link status
+		DriverGPU::glGetProgramiv(programObject, GL_LINK_STATUS, &isLinked);
+
+		if(!isLinked){
+			GLint infoLen = 0;
+
+			DriverGPU::glGetProgramiv(programObject, GL_INFO_LOG_LENGTH, &infoLen);
+			if(infoLen > 1){
+				char* infoLog = new char[infoLen];
+
+				DriverGPU::glGetProgramInfoLog(programObject, infoLen, NULL, infoLog);
+				// infoLog got the error message and can be displayed. 666 TODO: generic display system.
+				assert(FALSE);
+
+				delete infoLog;
+			}
+
+			DriverGPU::glDeleteProgram(programObject);
+			return FALSE;
+
+		}
+
+		// 666 TODO: Habria que guardar ahora el programa en alguna variable de entrada, añadir variable de entrada etc...
+
+		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+
+		program = programObject;
+
+		return TRUE;
+
+	}
+	//---------------------------------------------------------------------------
+
+	void DriverGPU::drawOnWindow(GLint _width, GLint _height, HDC _hDC){
+		GLfloat vVertices[] = { 0.0f, 0.5f, 0.0f,
+								-0.5f, -0.5f, 0.0f,
+								0.5f, -0.5f, 0.0f};
+		glViewport(0, 0, _width, _height);
+
+		glClear(GL_COLOR_BUFFER_BIT);
+
+		GLHL::DriverGPU::glUseProgram(program);
+
+		// Load vertex Data
+		GLHL::DriverGPU::glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, vVertices);
+		GLHL::DriverGPU::glEnableVertexAttribArray(0);
+
+		glDrawArrays(GL_TRIANGLES, 0, 3);
+
+		SwapBuffers(_hDC);
+	}
 
 	//---------------------------------------------------------------------------
 } //namespace GLHL

@@ -24,18 +24,12 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="shaderFuns.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="DriverGPU.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="windowGL.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="shaderFuns.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="OpenGLExtensions\glext.h">

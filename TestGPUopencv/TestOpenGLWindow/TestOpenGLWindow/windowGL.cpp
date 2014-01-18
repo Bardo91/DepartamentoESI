@@ -9,7 +9,6 @@
 //	configure the main window and main program (In Windows)
 
 #include "DriverGPU.h"
-#include "shaderFuns.h"
 #include "windowGL.h"
 
 #include <cassert>
@@ -250,11 +249,7 @@ namespace windowGL{
 
 		initGL();
 
-		GLuint program = NULL;
-
-		GLHL::shadersGL::initShaders(program);
-
-		assert( program == NULL );
+		GLHL::DriverGPU::initShaders();
 
 		while(!done){
 			if(PeekMessage(&msg, NULL, 0,0, PM_REMOVE)){ // Comprobamos si hay algun mensaje esperando en la cola
@@ -266,33 +261,10 @@ namespace windowGL{
 				}
 			}
 
-			drawOnWindow(640, 480, program);
-
 			//glClear(GL_COLOR_BUFFER_BIT);
 			//SwapBuffers(hDC);
 		}
 
 		return 1;
-	}
-
-
-	void drawOnWindow(GLsizei _width, GLsizei _height, GLuint _program){
-		GLfloat vVertices[] = { 0.0f, 0.5f, 0.0f,
-								-0.5f, -0.5f, 0.0f,
-								0.5f, -0.5f, 0.0f};
-		reSizeGLScene(_width, _height);
-
-		glClear(GL_COLOR_BUFFER_BIT);
-
-		GLHL::DriverGPU::glUseProgram(_program);
-
-		// Load vertex Data
-		GLHL::DriverGPU::glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, vVertices);
-		GLHL::DriverGPU::glEnableVertexAttribArray(0);
-
-		glDrawArrays(GL_TRIANGLES, 0, 3);
-
-		SwapBuffers(hDC);
-
 	}
 }	// namespace windowGL

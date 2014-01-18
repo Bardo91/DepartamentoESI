@@ -59,9 +59,18 @@ namespace GLHL{
 	private:			
 		DriverGPU();				// Class constructor.
 
-	public: // Public interface to shaders
+	public:		// Public interface to shaders
+		static bool initShaders();
 
 	private:
+		static GLuint loadShader(GLenum _type, const char* _shaderSrc);
+
+	private:	// Shaders declaration.
+		static GLuint vShader, gShader, fShader; // 666 TODO: maybe arent necessary
+		static GLuint program;
+
+	public: // Draw
+		static void drawOnWindow(GLint _widt, GLint _height, HDC _hDC);
 	};
 
 } // namespace GLHL
