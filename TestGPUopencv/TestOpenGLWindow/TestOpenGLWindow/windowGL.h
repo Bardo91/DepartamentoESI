@@ -18,50 +18,50 @@
 #ifdef _linux
 #endif
 
+#include <cassert>
 #include <gl/GL.h>
 #include <gl/GLU.h>
 
 namespace GLHL{
 	// Abstact classs of windows
-	class windowGL{
+	class WindowGL{
 	public:			// Public interface.
-		windowGL();							//  Basic Constructor.
-		
-		// Función de set up de OpenGL
-		int initGL(GLvoid);
+		WindowGL();							//  Basic Constructor.
 
-		// Función para crear una ventana para OpenGL
-		BOOL initWindow(char* _title, int _width, int _height, int _bits, bool _fullscreenFlag);
+		// Función para crear una ventana para OpenGL. This functions depend on the OS
+		virtual GLboolean initWindow(char* _title, int _width, int _height, int _bits, bool _fullscreenFlag){ 
+			assert(FALSE);
+			return false;
+		}
 
-		// Función principal que cre la ventana y prepara el programa. 666 TODO: depende de windows
-		int mainApp(HINSTANCE _hInstance, HINSTANCE _hPrevInstance, LPSTR _lpCmdLine, int _nCmdShow);
-
-		// Dibuja en la ventana
-		void drawOnWindow(GLsizei _width, GLsizei _height, GLuint _program);
+		// Dibuja en la ventana. Esta función cambia el buffer de la imagen de la ventana que ya ha sido rellenado por el driver de la GPU
+		virtual GLvoid onDraw(){ 
+			assert(FALSE);
+		}
 
 	protected:		// Private members
-		// Declaración de WndProc. Funcion callback que se llama cuando se recibe un mensaje.
-		LRESULT CALLBACK wndProc(HWND, UINT, WPARAM, LPARAM); // 666 TODO: depende de window
+		// Función para redimensionar el tamaño de la ventana e inicializar al ventana. Esta será llamada cada vez que haya un cambio en el tamaño de la ventana, o se pase de fullscreen a screen, etc... (Por esta razón, sera inline)
+		GLvoid resizeViewport(GLsizei _width, GLsizei _height);
 
-		// Función para redimensionar el tamaño de la ventana e inicializar al ventana. Esta será llamada cada vez que haya un cambio en el tamaño de la ventana, o se pase de fullscreen a screen, etc...
-		GLvoid reSizeGLScene(GLsizei _width, GLsizei _height);
-
-		// Función para destruir la ventana adecuadamente.
-		GLvoid selfDestroy();
+		// Función para destruir la ventana adecuadamente. This functions depend on the OS
+		virtual GLvoid selfDestroy(){ 
+			assert(FALSE);
+		}
 
 	protected:
-		// Setting up in windows. En linux seria usando glx:
-		HGLRC hRC;			// Permanent Rendering Context. (Conecta las llamadas de OpenGL con el Device Context)
-		HDC hDC;				// Device Context. (Conecta la ventana de contexto con el GDI-Graphic device Interface)
-		HWND hWnd;			// Handle window. (Manejador de la ventana en windows)
-		HINSTANCE hInstance;		// Instancia de la ventana del programa.
-
 		// Flags y variables varias:
-		bool keys[256];				// Array para las teclas del teclado.
-		bool active;			// Flag si no está o está minimizada la ventana.
-		bool fullscreen;		// Flag para fullscreen o no.
+		GLuint width, height;
+
+		GLboolean keys[256];				// Array para las teclas del teclado.
+		GLboolean active;			// Flag si no está o está minimizada la ventana.
+		GLboolean fullscreen;		// Flag para fullscreen o no.
 
 	}; //class windowGL
+
+	inline GLvoid WindowGL::resizeViewport(GLsizei _width, GLsizei _height){
+		glViewport(0, 0, _width, _height); // Resetea el viewport actual.
+	}
+
 } // namespace GLHL
 
 #endif // _GLHL_WINDOWHL_H_

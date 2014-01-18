@@ -27,7 +27,10 @@
     <ClCompile Include="windowGLold.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="windowGL.cpp">
+    <ClCompile Include="WindowGL.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="WndWin32.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -41,13 +44,13 @@
     <ClInclude Include="DriverGPU.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="windowGLold.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="windowGL.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="ActivityGL.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WindowGL.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WndWin32.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

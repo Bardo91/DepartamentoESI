@@ -10,12 +10,16 @@
 #ifndef _GLHL_ACTIVITYGL_H_
 #define _GLHL_ACTIVITYGL_H_
 
+#include "DriverGPU.h"
+#include "WindowGL.h"
+
 namespace GLHL{
 	class ActivityGL{
 	public:
-
+		
 	private:
-
+		DriverGPU driverGPU;
+		WindowGL** windows; // Pointers to windows of the current activity
 	}; // class ActivityGL
 } // namespace GLHL
 

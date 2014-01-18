@@ -24,10 +24,10 @@
 // en windows y en linux, para que sea comodo el traslado del código entre 
 // una plataforma y otra se ha escrito la siguiente macro.
 #ifdef _WIN32
-#define loadGlFunction( func ) wglGetProcAddress ( func )
+#define loadGlFunction( args ) wglGetProcAddress ( args )
 #endif
 #ifdef _linux
-#define loadGlFunction( func ) glXGetProcAddress ( (GLuint*)func )
+#define loadGlFunction( args ) glXGetProcAddress ( (GLuint*)args )
 #endif
 //-------------------------------------------------------------------//
 
@@ -71,7 +71,7 @@ namespace GLHL{
 		GLuint program;
 
 	public: // Draw
-		void drawOnWindow(GLint _widt, GLint _height, HDC _hDC);
+		void drawOnBuffer(GLint _widt, GLint _height, HDC _hDC);
 	};
 
 } // namespace GLHL

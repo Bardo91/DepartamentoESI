@@ -220,7 +220,7 @@ namespace GLHL{
 	}
 	//---------------------------------------------------------------------------
 
-	void DriverGPU::drawOnWindow(GLint _width, GLint _height, HDC _hDC){
+	void DriverGPU::drawOnBuffer(GLint _width, GLint _height, HDC _hDC){
 		GLfloat vVertices[] = { 0.0f, 0.5f, 0.0f,
 								-0.5f, -0.5f, 0.0f,
 								0.5f, -0.5f, 0.0f};
@@ -235,8 +235,6 @@ namespace GLHL{
 		GLHL::DriverGPU::glEnableVertexAttribArray(0);
 
 		glDrawArrays(GL_TRIANGLES, 0, 3);
-
-		SwapBuffers(_hDC);
 	}
 
 	//---------------------------------------------------------------------------
