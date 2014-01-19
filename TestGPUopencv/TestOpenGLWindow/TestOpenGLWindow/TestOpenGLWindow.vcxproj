@@ -80,14 +80,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ActivityGL.cpp" />
+    <ClCompile Include="ActivityWin32.cpp" />
     <ClCompile Include="DriverGPU.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="WindowGL.cpp" />
-    <ClCompile Include="windowGLold.cpp" />
     <ClCompile Include="WndWin32.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ActivityGL.h" />
+    <ClInclude Include="ActivityWin32.h" />
     <ClInclude Include="DriverGPU.h" />
     <ClInclude Include="OpenGLExtensions\glext.h" />
     <ClInclude Include="OpenGLExtensions\wglext.h" />

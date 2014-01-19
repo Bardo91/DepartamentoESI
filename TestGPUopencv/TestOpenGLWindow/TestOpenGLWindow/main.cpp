@@ -8,7 +8,7 @@
 //	main.cpp
 
 
-#include "ActivityGL.h"
+#include "ActivityWin32.h"
 
 
 using namespace GLHL;
@@ -18,6 +18,8 @@ int WINAPI WinMain(HINSTANCE _hInstance,			// Instance
 				   LPSTR _lpCmdLine,				// Command line parameters
 				   int _nCmdShow){				// Windows show state
 	
-	ActivityGL activity;
+	ActivityWin32 activity(1, _hInstance, _hPrevInstance, _lpCmdLine, _nCmdShow);
 	
+	activity.mainProgram();
+
 }

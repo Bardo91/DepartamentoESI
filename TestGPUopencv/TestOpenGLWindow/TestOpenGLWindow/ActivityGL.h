@@ -16,11 +16,19 @@
 namespace GLHL{
 	class ActivityGL{
 	public:
-		
-	private:
-		DriverGPU driverGPU;
-		WindowGL** windows; // Pointers to windows of the current activity
-	}; // class ActivityGL
-} // namespace GLHL
+		ActivityGL();				// Basic constructor.
+		~ActivityGL();				// Basic deconstructor.
+
+		virtual bool mainProgram(){	// Main program that will be executed.
+			assert(FALSE);
+			return false;
+		}
+
+	protected:
+		DriverGPU* driverGPU;
+		WindowGL* windows; // Pointers to windows of the current windows.
+		GLuint nWnd;
+	}; // class ActivityGL.
+} // namespace GLHL.
 
 #endif // _GLHL_ACTIVITY_H_

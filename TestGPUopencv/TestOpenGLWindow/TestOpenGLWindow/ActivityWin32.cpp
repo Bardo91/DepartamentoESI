@@ -2,36 +2,41 @@
 //																		//
 //		OpenGL Helper Libraries for CPU Processing  (GLHL)				//
 //			Author: Pablo Ramón Soria									//
-//			Date:	2014-01-14											//
+//			Date:	2014-01-19											//
 //																		//
 //////////////////////////////////////////////////////////////////////////
-//	windowGL.cpp this source contain the definition of functions used to
-//	configure the main window and main program (In Windows)
+//	ActivityWin32
 
-#include "DriverGPU.h"
-#include "windowGL.h"
+#include "ActivityWin32.h"
+#include "WndWin32.h"
 
-#include <cassert>
+namespace GLHL{
+	//---------------------------------------------------------------------------------
+	ActivityWin32::ActivityWin32(UINT8 _nWnd, HINSTANCE _hInstance, HINSTANCE _hPrevInstance, LPSTR _lpCmdLine, int _nCmdShow){
+		hInstance = _hInstance;
+		hPrevInstance = _hPrevInstance;
+		lpCmdLine = _lpCmdLine;
+		nCmdShow = _nCmdShow;
+		
+		nWnd = _nWnd;
+		windows = new WndWin32[nWnd];
 
-	int	mainApp(HINSTANCE _hInstance,				// Instance
-				HINSTANCE _hPrevInstance,			// Previous Instance
-				LPSTR _lpCmdLine,					// Command line parameters
-				int _nCmdShow){						// Windows show state
+		for(UINT8 i = 0; i < _nWnd ; i ++){
+			windows[i].initWindow("window", 640, 480, 16, false);
+		}
+	}
 
+	//---------------------------------------------------------------------------------
+	bool ActivityWin32::mainProgram(){
 		MSG msg;				// Windows menssage Structure.
 		BOOL done = FALSE;		// Variable to exit loop.
 
-		// Creamos la ventana de windows, si devuelve falso la función es que no se ha creado la ventana y acabamos la aplicación.
-		if (!createGLWindow("OpenGl FrameWork",640,480,16,fullscreen)) {
-			return 0;                           // Quit If Window Was Not Created
-		}
-
-		initGL();
+		driverGPU->initShaders();
 
 		GLHL::DriverGPU driverGPU;
 		// LOAD DriverGPU 666 sitio mejor?
 		if(!driverGPU.initDriver()) // 666 TODO: aqui no funciona cargar drivers, no se ha iniciado algo???
-			return 0;
+			return FALSE;
 
 		driverGPU.initShaders();
 
@@ -44,7 +49,14 @@
 					DispatchMessage(&msg); // Reenviamos el mensaje, lo despachamos
 				}
 			}
-			driverGPU.drawOnWindow(640, 480, hDC);
+			driverGPU.drawOnBuffer(640, 480, hDC);
 			//glClear(GL_COLOR_BUFFER_BIT);
 			SwapBuffers(hDC);
 		}
+
+		return TRUE;
+	}
+
+	//---------------------------------------------------------------------------------
+
+}	// namespace GLHL

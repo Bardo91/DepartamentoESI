@@ -11,7 +11,38 @@
 
 
 namespace GLHL {
+	//---------------------------------------------------------------------------------
+	LRESULT CALLBACK WndProc(	HWND _hWnd,			// Manejador para la ventana.
+								UINT _uMsg,			// Mensaje para la ventana.
+								WPARAM _wParam,		// Información adicional del mensaje.
+								LPARAM _lParam){		// Información adicional del mensaje.
+		/*switch (_uMsg) {			// Vamos aver que tipo de mensaje hemos recibido.
+		case WM_ACTIVATE:			// Si es un mensaje de activación de la ventana.
+			if(!HIWORD(_wParam))	// Vemos el estado de minimización, si es activamos la ventana y si no, la desactivamos.
+				active = TRUE;
+			else
+				active = FALSE;
+			return 0;
+		case WM_SYSCOMMAND:			// Si interceptamos una señal del sistema.
+			switch (_wParam) {
+			case SC_SCREENSAVE:		// Empieza el salvapantallas.
+			case SC_MONITORPOWER:	// El monitor se pone en powersave.
+				return 0;			// evitamos que ocurra.
+			}
+			break;
+		case WM_KEYDOWN:			// Si se presiona una tecla, ponemos su valor en el array a verdadero.
+			keys[_wParam] = TRUE;	
+			return 0;				// Acabamos.
+		case WM_KEYUP:				// Si se levanta una tecla ponemos su valor en el array a falso.
+			keys[_wParam] = FALSE;
+			return 0;
+		case WM_SIZE:				// Si se redimensiona la ventana
+			resizeViewport(LOWORD(_lParam), HIWORD(_lParam));	// Redimensionamos. Extraemos los parámetros LoWord = Width / HiWord = Height.
+			return 0;
+		}*/
 
+		return DefWindowProc(_hWnd, _uMsg, _wParam, _lParam);
+	}
 	//---------------------------------------------------------------------------------
 	WndWin32::WndWin32(){
 		hRC = NULL;	
@@ -127,39 +158,6 @@ namespace GLHL {
 		resizeViewport(_width, _height);
 
 		return true;
-	}
-
-	//-------------------------------------------------------------------------------------------------
-	LRESULT CALLBACK WndWin32::WndProc(	  HWND _hWnd,			// Manejador para la ventana.
-										  UINT _uMsg,			// Mensaje para la ventana.
-										  WPARAM _wParam,		// Información adicional del mensaje.
-										  LPARAM _lParam){		// Información adicional del mensaje.
-		switch (_uMsg) {			// Vamos aver que tipo de mensaje hemos recibido.
-		case WM_ACTIVATE:			// Si es un mensaje de activación de la ventana.
-			if(!HIWORD(_wParam))	// Vemos el estado de minimización, si es activamos la ventana y si no, la desactivamos.
-				active = TRUE;
-			else
-				active = FALSE;
-			return 0;
-		case WM_SYSCOMMAND:			// Si interceptamos una señal del sistema.
-			switch (_wParam) {
-			case SC_SCREENSAVE:		// Empieza el salvapantallas.
-			case SC_MONITORPOWER:	// El monitor se pone en powersave.
-				return 0;			// evitamos que ocurra.
-			}
-			break;
-		case WM_KEYDOWN:			// Si se presiona una tecla, ponemos su valor en el array a verdadero.
-			keys[_wParam] = TRUE;	
-			return 0;				// Acabamos.
-		case WM_KEYUP:				// Si se levanta una tecla ponemos su valor en el array a falso.
-			keys[_wParam] = FALSE;
-			return 0;
-		case WM_SIZE:				// Si se redimensiona la ventana
-			resizeViewport(LOWORD(_lParam), HIWORD(_lParam));	// Redimensionamos. Extraemos los parámetros LoWord = Width / HiWord = Height.
-			return 0;
-		}
-
-		return DefWindowProc(_hWnd, _uMsg, _wParam, _lParam);
 	}
 
 	//-------------------------------------------------------------------------------------------------

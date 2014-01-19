@@ -13,16 +13,17 @@
 #include "WindowGL.h"
 
 namespace GLHL{
+	// Declaración de WndProc. Funcion callback que se llama cuando se recibe un mensaje.
+	LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM); 
+
 	class WndWin32: public WindowGL{
 	public:				// Public interface.
 		WndWin32();
 		GLboolean initWindow(char* _title, int _width, int _height, int _bits, bool _fullscreenFlag);
 
 	private:			// Private members
-		// Declaración de WndProc. Funcion callback que se llama cuando se recibe un mensaje.
-		LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM); 
-
 		GLvoid selfDestroy();
+
 	private:
 		// Setting up in windows. En linux seria usando glx:
 		HGLRC hRC;					// Permanent Rendering Context. (Conecta las llamadas de OpenGL con el Device Context)
