@@ -14,14 +14,15 @@
 namespace GLHL{
 	//---------------------------------------------------------------------------------
 	ActivityGL::ActivityGL(){
-		driverGPU = new DriverGPU();
-		assert(driverGPU->initDriver());
+		driverGPU = nullptr;
+		windows = nullptr;
+		nWnd = 0;
 			
 	}
 
 	//---------------------------------------------------------------------------------
 	ActivityGL::~ActivityGL(){
-		delete driverGPU;
+
 	}
 
 	//---------------------------------------------------------------------------------

@@ -156,7 +156,7 @@ namespace GLHL {
 		SetForegroundWindow(hWnd);
 		SetFocus(hWnd);
 		resizeViewport(_width, _height);
-
+			
 		return true;
 	}
 

@@ -17,6 +17,7 @@ namespace GLHL{
 	class ActivityWin32: public ActivityGL{
 	public:
 		ActivityWin32(UINT8 _nWnd, HINSTANCE _hInstance, HINSTANCE _hPrevInstance, LPSTR _lpCmdLine, int _nCmdShow);
+		~ActivityWin32();
 
 		bool mainProgram();
 

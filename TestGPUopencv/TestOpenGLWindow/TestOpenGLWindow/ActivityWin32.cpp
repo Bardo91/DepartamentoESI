@@ -13,6 +13,7 @@
 namespace GLHL{
 	//---------------------------------------------------------------------------------
 	ActivityWin32::ActivityWin32(UINT8 _nWnd, HINSTANCE _hInstance, HINSTANCE _hPrevInstance, LPSTR _lpCmdLine, int _nCmdShow){
+		// Prepare window and rendering context
 		hInstance = _hInstance;
 		hPrevInstance = _hPrevInstance;
 		lpCmdLine = _lpCmdLine;
@@ -24,6 +25,15 @@ namespace GLHL{
 		for(UINT8 i = 0; i < _nWnd ; i ++){
 			windows[i].initWindow("window", 640, 480, 16, false);
 		}
+
+		// Prepare GPU interface
+		driverGPU = new DriverGPU();
+		assert(driverGPU->initDriver());
+	}
+	//---------------------------------------------------------------------------------
+	ActivityWin32::~ActivityWin32(){
+		delete driverGPU;
+		delete[] windows;
 	}
 
 	//---------------------------------------------------------------------------------
@@ -32,13 +42,6 @@ namespace GLHL{
 		BOOL done = FALSE;		// Variable to exit loop.
 
 		driverGPU->initShaders();
-
-		GLHL::DriverGPU driverGPU;
-		// LOAD DriverGPU 666 sitio mejor?
-		if(!driverGPU.initDriver()) // 666 TODO: aqui no funciona cargar drivers, no se ha iniciado algo???
-			return FALSE;
-
-		driverGPU.initShaders();
 
 		while(!done){
 			if(PeekMessage(&msg, NULL, 0,0, PM_REMOVE)){ // Comprobamos si hay algun mensaje esperando en la cola
@@ -49,7 +52,7 @@ namespace GLHL{
 					DispatchMessage(&msg); // Reenviamos el mensaje, lo despachamos
 				}
 			}
-			driverGPU.drawOnBuffer(640, 480, hDC);
+			driverGPU->drawOnBuffer(640, 480, hDC);
 			//glClear(GL_COLOR_BUFFER_BIT);
 			SwapBuffers(hDC);
 		}
