@@ -167,7 +167,6 @@ namespace GLHL{
 
 		GLuint vertexShader;
 		GLuint fragmentShader;
-		GLuint programObject;
 		GLint isLinked;
 
 		// Load vertex and fragment shader
@@ -175,46 +174,44 @@ namespace GLHL{
 		fragmentShader = DriverGPU::loadShader(GL_FRAGMENT_SHADER, fShaderStr);
 
 		// Create a program object to attach the shaders
-		programObject = DriverGPU::glCreateProgram();
+		program = DriverGPU::glCreateProgram();
 
-		if(!programObject) // Check error
+		if(!program) // Check error
 			return FALSE;
 
 		// Attachs the shaders
-		DriverGPU::glAttachShader(programObject, vertexShader);
-		DriverGPU::glAttachShader(programObject, fragmentShader);
+		DriverGPU::glAttachShader(program, vertexShader);
+		DriverGPU::glAttachShader(program, fragmentShader);
 
 		// Bind vPosition to attribute 0 --> 666 TODO: only because this tutorial, do it generic...
-		DriverGPU::glBindAttribLocation(programObject, 0, "vPosition");
+		DriverGPU::glBindAttribLocation(program, 0, "vPosition");
 
 		// Link the program
-		DriverGPU::glLinkProgram(programObject);
+		DriverGPU::glLinkProgram(program);
 
 		// Check link status
-		DriverGPU::glGetProgramiv(programObject, GL_LINK_STATUS, &isLinked);
+		DriverGPU::glGetProgramiv(program, GL_LINK_STATUS, &isLinked);
 
 		if(!isLinked){
 			GLint infoLen = 0;
 
-			DriverGPU::glGetProgramiv(programObject, GL_INFO_LOG_LENGTH, &infoLen);
+			DriverGPU::glGetProgramiv(program, GL_INFO_LOG_LENGTH, &infoLen);
 			if(infoLen > 1){
 				char* infoLog = new char[infoLen];
 
-				DriverGPU::glGetProgramInfoLog(programObject, infoLen, NULL, infoLog);
+				DriverGPU::glGetProgramInfoLog(program, infoLen, NULL, infoLog);
 				// infoLog got the error message and can be displayed. 666 TODO: generic display system.
 				assert(FALSE);
 
 				delete infoLog;
 			}
 
-			DriverGPU::glDeleteProgram(programObject);
+			DriverGPU::glDeleteProgram(program);
 			return FALSE;
 
 		}
 
 		// 666 TODO: Habria que guardar ahora el programa en alguna variable de entrada, añadir variable de entrada etc...
-
-		program = programObject;
 
 		return TRUE;
 
