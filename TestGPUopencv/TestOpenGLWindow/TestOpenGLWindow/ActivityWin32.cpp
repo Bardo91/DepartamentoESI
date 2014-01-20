@@ -12,28 +12,24 @@
 
 namespace GLHL{
 	//---------------------------------------------------------------------------------
-	ActivityWin32::ActivityWin32(UINT8 _nWnd, HINSTANCE _hInstance, HINSTANCE _hPrevInstance, LPSTR _lpCmdLine, int _nCmdShow){
+	ActivityWin32::ActivityWin32(HINSTANCE _hInstance, HINSTANCE _hPrevInstance, LPSTR _lpCmdLine, int _nCmdShow){
 		// Prepare window and rendering context
 		hInstance = _hInstance;
 		hPrevInstance = _hPrevInstance;
 		lpCmdLine = _lpCmdLine;
 		nCmdShow = _nCmdShow;
 		
-		nWnd = _nWnd;
-		windows = new WndWin32[nWnd];
+		window = new WndWin32;
 
-		for(UINT8 i = 0; i < _nWnd ; i ++){
-			windows[i].initWindow("window", 640, 480, 16, false);
-		}
+		window->initWindow("window", 640, 480, 16, false);
 
 		// Prepare GPU interface
 		driverGPU = new DriverGPU();
-		assert(driverGPU->initDriver());
 	}
 	//---------------------------------------------------------------------------------
 	ActivityWin32::~ActivityWin32(){
 		delete driverGPU;
-		delete[] windows;
+		delete[] window;
 	}
 
 	//---------------------------------------------------------------------------------
@@ -52,9 +48,10 @@ namespace GLHL{
 					DispatchMessage(&msg); // Reenviamos el mensaje, lo despachamos
 				}
 			}
-			driverGPU->drawOnBuffer(640, 480, hDC);
+
+			driverGPU->drawOnBuffer(640, 480, static_cast<WndWin32*>(window)->getHDC());
 			//glClear(GL_COLOR_BUFFER_BIT);
-			SwapBuffers(hDC);
+			SwapBuffers(static_cast<WndWin32*>(window)->getHDC());
 		}
 
 		return TRUE;

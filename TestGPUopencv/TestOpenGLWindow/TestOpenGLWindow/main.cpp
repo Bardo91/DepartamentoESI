@@ -18,7 +18,7 @@ int WINAPI WinMain(HINSTANCE _hInstance,			// Instance
 				   LPSTR _lpCmdLine,				// Command line parameters
 				   int _nCmdShow){				// Windows show state
 	
-	ActivityWin32 activity(1, _hInstance, _hPrevInstance, _lpCmdLine, _nCmdShow);
+	ActivityWin32 activity(_hInstance, _hPrevInstance, _lpCmdLine, _nCmdShow);
 	
 	activity.mainProgram();
 

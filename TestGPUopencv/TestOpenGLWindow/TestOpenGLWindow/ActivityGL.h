@@ -16,17 +16,16 @@
 namespace GLHL{
 	class ActivityGL{
 	public:
-		ActivityGL();				// Basic constructor.
 		~ActivityGL();				// Basic deconstructor.
 
-		virtual bool mainProgram(){	// Main program that will be executed.
-			assert(FALSE);
-			return false;
-		}
+		virtual bool mainProgram() = 0;		// Main program that will be executed.
+		
+	protected:
+		ActivityGL();				// Basic constructor.
 
 	protected:
 		DriverGPU* driverGPU;
-		WindowGL* windows; // Pointers to windows of the current windows.
+		WindowGL* window; // Pointers to windows of the current windows.
 		GLuint nWnd;
 	}; // class ActivityGL.
 } // namespace GLHL.

@@ -32,6 +32,10 @@ namespace GLHL{
 
 		glVertexAttribPointer = nullptr;
 		glEnableVertexAttribArray = nullptr;
+
+		initDriver();
+
+		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 	}
 	//---------------------------------------------------------------------------
 	GLboolean DriverGPU::initDriver(){
@@ -156,7 +160,6 @@ namespace GLHL{
 			 "} \n";
 
 		GLchar fShaderStr[] = 
-			 "precision mediump float; \n"
 			 "void main() \n"
 			 "{ \n"
 			 " gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0); \n"
@@ -210,8 +213,6 @@ namespace GLHL{
 		}
 
 		// 666 TODO: Habria que guardar ahora el programa en alguna variable de entrada, añadir variable de entrada etc...
-
-		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 
 		program = programObject;
 

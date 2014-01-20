@@ -1,4 +1,4 @@
-//////////////////////////////////////////////////////////////////////////
+	//////////////////////////////////////////////////////////////////////////
 //																		//
 //		OpenGL Helper Libraries for CPU Processing  (GLHL)				//
 //			Author: Pablo Ramón Soria									//
@@ -35,13 +35,16 @@ namespace GLHL{
 		}
 
 		// Dibuja en la ventana. Esta función cambia el buffer de la imagen de la ventana que ya ha sido rellenado por el driver de la GPU
-		virtual GLvoid onDraw(){ 
+		virtual GLboolean onDraw(){ 
 			assert(FALSE);
+			return FALSE;
 		}
 
 	protected:		// Private members
 		// Función para redimensionar el tamaño de la ventana e inicializar al ventana. Esta será llamada cada vez que haya un cambio en el tamaño de la ventana, o se pase de fullscreen a screen, etc... (Por esta razón, sera inline)
 		GLvoid resizeViewport(GLsizei _width, GLsizei _height);
+
+		GLboolean initGL();
 
 		// Función para destruir la ventana adecuadamente. This functions depend on the OS
 		virtual GLvoid selfDestroy(){ 

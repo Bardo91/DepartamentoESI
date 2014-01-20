@@ -35,8 +35,6 @@ namespace GLHL{
 	class DriverGPU{	// Only one GPU driver is created
 	public:			
 		DriverGPU();				// Class constructor.
-	public:
-		GLboolean initDriver();
 
 	public: // Public interface to OpenGL Extended libraries
 		// --> Shaders
@@ -64,6 +62,8 @@ namespace GLHL{
 		GLboolean initShaders();
 
 	private:
+		GLboolean initDriver();
+
 		GLuint loadShader(GLenum _type, const char* _shaderSrc);
 
 	private:	// Shaders declaration.

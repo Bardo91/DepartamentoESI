@@ -43,12 +43,14 @@ namespace GLHL {
 
 		return DefWindowProc(_hWnd, _uMsg, _wParam, _lParam);
 	}
+
 	//---------------------------------------------------------------------------------
 	WndWin32::WndWin32(){
 		hRC = NULL;	
 		hDC = NULL;	
 		hWnd = NULL;
 	}
+
 	//---------------------------------------------------------------------------------
 	GLboolean WndWin32::initWindow(char* _title, int _width, int _height, int _bits, bool _fullscreenFlag){
 		GLuint PixelFormat;				// Holds the results after searching for a Match.
@@ -156,7 +158,9 @@ namespace GLHL {
 		SetForegroundWindow(hWnd);
 		SetFocus(hWnd);
 		resizeViewport(_width, _height);
-			
+		
+		initGL();
+
 		return true;
 	}
 
@@ -190,5 +194,6 @@ namespace GLHL {
 			hInstance=NULL;								// Set hInstance To NULL
 		}
 	}
+
 	//-------------------------------------------------------------------------------------------------
 }// namespace GLHL

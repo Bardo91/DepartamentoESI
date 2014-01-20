@@ -19,7 +19,11 @@ namespace GLHL{
 	class WndWin32: public WindowGL{
 	public:				// Public interface.
 		WndWin32();
+		
 		GLboolean initWindow(char* _title, int _width, int _height, int _bits, bool _fullscreenFlag);
+
+	public:
+		HDC getHDC() const;
 
 	private:			// Private members
 		GLvoid selfDestroy();
@@ -32,5 +36,10 @@ namespace GLHL{
 		HINSTANCE hInstance;		// Instancia de la ventana del programa.
 
 	};
+
+	inline HDC WndWin32::getHDC() const{
+		return hDC;
+	}
+
 } // namespace GLHL.
 #endif // _GLHL_WNDWIN32_H_

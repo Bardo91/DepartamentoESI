@@ -15,7 +15,7 @@ namespace GLHL{
 	//---------------------------------------------------------------------------------
 	ActivityGL::ActivityGL(){
 		driverGPU = nullptr;
-		windows = nullptr;
+		window = nullptr;
 		nWnd = 0;
 			
 	}
