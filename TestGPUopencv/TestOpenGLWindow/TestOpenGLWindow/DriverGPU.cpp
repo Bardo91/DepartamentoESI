@@ -10,6 +10,7 @@
 #include "DriverGPU.h"
 
 #include <cassert>
+#include <iostream>
 
 namespace GLHL{
 	//---------------------------------------------------------------------------
@@ -235,5 +236,48 @@ namespace GLHL{
 		glDrawArrays(GL_TRIANGLES, 0, 3);
 	}
 
+	//---------------------------------------------------------------------------
+	// 666 TODO: ELIMINAR, mejor usar tipos comprimidos. Solo didactico
+	GLuint loadBMP_custom(const char * _imagePath){
+		// Datos del cabecero del BMP
+		unsigned char header[54];
+		unsigned int dataPos;		// Posicion donde empiezan los datos
+		unsigned int width, height;
+		unsigned int imageSize;		// width*height*3 <-- Canales RGB
+		unsigned char * data;	// Puntero al dato actual
+
+		// Open the file. using iostream library
+		FILE* file = fopen(_imagePath, "rb");
+
+		if(fread(header, 1, 54, file) != 54){
+			// 666 TODO: imprimir error, archivo BMP no correcto
+			return FALSE;
+		}
+		if(header[0] != 'B' ||header[1] != 'M'){
+			// 666 TODO: imprimir error
+			return FALSE;
+		}
+		// Read data from header.
+		dataPos = *(int*)&(header[0x0A]);
+		imageSize = *(int*)&(header[0x22]);
+		width = *(int*)&(header[0x12]);
+		height = *(int*)&(header[0x16]);
+
+		if(imageSize == 0)	imageSize = width*height*3;
+		if(dataPos == 0)	dataPos = 54;
+		
+		// Create a buffer
+		data = new unsigned char [imageSize];
+
+		// Read the data from file into buffer.
+		fread(data, 1, imageSize, file);
+
+		// Close file, 'cause it's on memory
+		fclose(file);
+
+
+	}
+
+	//---------------------------------------------------------------------------
 	//---------------------------------------------------------------------------
 } //namespace GLHL

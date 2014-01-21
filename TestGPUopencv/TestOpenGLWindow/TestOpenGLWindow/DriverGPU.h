@@ -58,10 +58,10 @@ namespace GLHL{
 		PFNGLENABLEVERTEXATTRIBARRAYPROC glEnableVertexAttribArray;
 	
 
-	public:		// Public interface to shaders
+	public:		// Public interface about shaders
 		GLboolean initShaders();
 
-	private:
+	private:	// Private members about shaders
 		GLboolean initDriver();
 
 		GLuint loadShader(GLenum _type, const char* _shaderSrc);
