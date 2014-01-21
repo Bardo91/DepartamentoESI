@@ -19,7 +19,7 @@
 
 #include <vector>
 
-namespace vision{ // 666 TODO: add algorithms and algorithm manager to  InfoCollect class and set it up to be used in Threadalgorithm
+namespace vision{
 	enum eAlgorithms {eStereoVisionEKF, eSingleCameraGroundEKF};
 
 	class AlgorithmManager{

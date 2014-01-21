@@ -49,6 +49,8 @@ public: // Functions to adquire mainwindow widgets information.
 	std::string getCameraInfoPath();
 	std::string getCameraPositionPath();
 	bool getIsFixedCameras();
+	int getViconPosDev1();
+	int getViconPosDev2();
 
 	// Functions related to Tracking filters
 	int getTrackingAlgorithm();

@@ -11,6 +11,7 @@
 
 #include "ComputerVisionLibraries/Positioning/Camera.h"
 #include "ComputerVisionLibraries/Timing/time.h"
+#include "iofunctions/input/Vicon.h"
 
 #include <opencv/cv.h>
 #include <string>
@@ -30,13 +31,13 @@ namespace vision{
 		int configureCams(std::string& _filePath); // both cams are supposed to have same properties.
 
 		int preparePositioner(std::string& _posFilePath, bool _isFixed);
-		int preparePositioner(/*vicon stream*/);
+		int preparePositionerFromVicon(int idObj1, int _idObj2);
 
 		void closeStream();
 
 		int updatePosAndTime();
 
-		void getCameraPosAndTime(position::Camera& _cam1, position::Camera& _cam2, TReal& _time) const;
+		void getCameraPosAndTime(position::Camera& _cam1, position::Camera& _cam2, double& _time) const;
 		position::Camera getCamera(int _cam);
 	private:
 		void getNextLine(std::vector<std::string>& _splittedString);
@@ -51,9 +52,11 @@ namespace vision{
 
 		position::Camera *cam1, *cam2;
 		STime *timer;
-		TReal refTime; // Reference of time when the application started
-		TReal currentTime;
+		double refTime; // Reference of time when the application started
+		double currentTime;
 
+		iofunctions::Vicon* vicon;
+		int idObj1, idObj2;
 		std::ifstream posFile;
 
 	}; // class PositionManager

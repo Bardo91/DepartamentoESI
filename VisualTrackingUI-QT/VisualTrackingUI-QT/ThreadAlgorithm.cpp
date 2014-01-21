@@ -52,7 +52,7 @@ void threadAlgoritm(InfoPointers *infoPointers){
 	//------------------------------------//
 	position::Camera cam1 = positionManager->getCamera(1), cam2 = positionManager->getCamera(2);
 
-	TReal currentTime = 0;
+	double currentTime = 0;
 
 	//------------------------------------//
 	// Prepare Timer.
@@ -61,18 +61,15 @@ void threadAlgoritm(InfoPointers *infoPointers){
 	STime *gTimer = STime::get();
 
 	// Ref temp.
-	TReal refTime0;
-	TReal t1, t2;
-	TReal lastTime, incT;
-	// Update timer.
-	gTimer->update();
+	double refTime0;
+	double t1, t2;
+	double lastTime, incT;
 
 	// Get time for reference
 	refTime0 = gTimer->frameTime();
 
 	//------------------------------------//
 	while(cv::waitKey(1) && infoPointers->looping){
-		gTimer->update(); // -------------
 		t1 = gTimer->frameTime(); //-------------
 
 		imageManager->updateFrames();
@@ -82,7 +79,7 @@ void threadAlgoritm(InfoPointers *infoPointers){
 		frame2.copyTo(ori2);
 
 
-		// 666 TODO: Va más rápido sin el MB pero es más sensible al ruido, por lo que hay que mejorar el matching
+		// 666 TODO: Va más rápido sin el MedianBlur pero es más sensible al ruido, por lo que hay que mejorar el matching
 		//medianBlur(frame1, frame1, 5);
 		//medianBlur(frame1, frame1, 5);
 		//if(imageManager->areTwoCameras()){
@@ -107,8 +104,6 @@ void threadAlgoritm(InfoPointers *infoPointers){
 
 		cout << trackedObj[4] << endl;
 
-
-		gTimer->update(); //-----------
 		t2 = gTimer->frameTime(); //-----------
 		double diff = t2-t1; //-----------
 		cout << "FINISHED IN " << diff << endl; //-----------
