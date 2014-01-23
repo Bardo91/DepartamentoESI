@@ -22,6 +22,7 @@
     <ClInclude Include="LibsUS\ComputerVisionLibraries\TrackingAlgorithm\RobustStereoMatching.h" />
     <ClInclude Include="LibsUS\ComputerVisionLibraries\TrackingAlgorithm\StereoVisionEKF.h" />
     <ClInclude Include="LibsUS\ParamsEKF.h" />
+    <ClInclude Include="LibsUS\PositionManager.h" />
     <ClInclude Include="LibsUS\SimpleObject.h" />
     <ClInclude Include="LibsUS\types.h" />
   </ItemGroup>
@@ -36,6 +37,7 @@
     <ClCompile Include="LibsUS\ComputerVisionLibraries\Timing\time.cpp" />
     <ClCompile Include="LibsUS\ComputerVisionLibraries\TrackingAlgorithm\RobustStereoMatching.cpp" />
     <ClCompile Include="LibsUS\ComputerVisionLibraries\TrackingAlgorithm\StereoVisionEKF.cpp" />
+    <ClCompile Include="LibsUS\PositionManager.cpp" />
     <ClCompile Include="LibsUS\SimpleObject.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>

@@ -57,6 +57,9 @@
     <ClInclude Include="LibsUS\ComputerVisionLibraries\TrackingAlgorithm\StereoVisionEKF.h">
       <Filter>LibsUS</Filter>
     </ClInclude>
+    <ClInclude Include="LibsUS\PositionManager.h">
+      <Filter>LibsUS</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="LibsUS\SimpleObject.cpp">
@@ -94,6 +97,9 @@
     </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LibsUS\PositionManager.cpp">
+      <Filter>LibsUS</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
