@@ -97,12 +97,14 @@ int main(int _argc, char** _argv){
 	posManager.configureCams(mainArgs.camInfo);
 	posManager.preparePositioner(mainArgs.viconFile, FALSE);
 
-	// Instances of the cameras
-	Camera cam1, cam2;
-
 	// Extended Kalman Filter adapted to stereo vision.
-	StereoVisionEKF ekf(matQ, matR, x0, cam1, cam2);
+	StereoVisionEKF ekf(matQ, matR, x0, posManager.getCamera(1), posManager.getCamera(2));
 
+	// Out file.
+	ofstream outFile;
+	outFile.open("./outputFile.txt");
+
+	// Related to time variables
 	STime::init();						// Initialize the global timer.
 	STime *gTimer = STime::get();		// This function get a singleton of the static class STime. It will provide the global time to the process.
 
@@ -134,10 +136,11 @@ int main(int _argc, char** _argv){
 		if(matching1.isUpdated(4) && matching2.isUpdated(4)){
 			// Update Cameras.
 			posManager.updatePosAndTime();
-			posManager.getCameraPosAndTime(cam1, cam2, ekfT);
+			ekfT = posManager.getTime();
 
 			// Update EKF		666 TODO: get cameras position and orientation, and get time from file
-			ekf.updateCameraPos(cam1.getPosition(), cam2.getPosition(), cam1.getOrientation(), cam2.getOrientation());
+			ekf.updateCameraPos(	posManager.getCamera(1).getPosition(), posManager.getCamera(2).getPosition(), 
+									posManager.getCamera(1).getOrientation(), posManager.getCamera(2).getOrientation());
 			ekf.updateIncT(ekfT - ekfLastT);
 			ekfLastT = ekfT;
 
@@ -152,10 +155,28 @@ int main(int _argc, char** _argv){
 				circle(ori1,match1.centroid, 30, Scalar(0, 255, 0), 2);
 				circle(ori2,match2.centroid, 30, Scalar(0, 255, 0), 2);
 			#endif
+
+			Mat x;
+			ekf.getStateVector(x);
+
+			// Outputting*
+			outFile <<	ekfT					<< "\t" << "\t" <<
+			((double*) x.data)[0]				<< "\t" << "\t" <<
+			((double*) x.data)[1]				<< "\t" << "\t" <<
+			((double*) x.data)[2]				<< "\t" << "\t" <<
+			match1.centroid.x					<< "\t" << "\t" <<
+			match1.centroid.y					<< "\t" << "\t" <<
+			match2.centroid.x					<< "\t" << "\t" <<
+			match2.centroid.y					<< "\t" << "\t";
+		
 		}
 
 		t2 = gTimer->frameTime();	// Get final time
 		double diff = t2 - t1;
+
+		// Last column of file. Compute time.
+		outFile << diff << endl;
+
 		#ifdef _DEBUG
 			cout << "The process takes: " << diff << "ms" << endl;
 			Mat x;
@@ -164,7 +185,6 @@ int main(int _argc, char** _argv){
 		#endif
 
 		#ifdef _DEBUG
-			
 			vconcat(frame1,frame2,frame1);
 			vconcat(ori1,ori2,ori1);
 			imshow(wndNameMod,frame1);
@@ -176,7 +196,6 @@ int main(int _argc, char** _argv){
 	}
 
 	posManager.closeStream();		// Close txt file.
-	
 }
 
 //---------------------------------------------------------------------------------------

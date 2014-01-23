@@ -137,6 +137,10 @@ namespace vision{
 	}
 
 	//------------------------------------------------------------------------
+	double PositionManager::getTime(){
+		return currentTime;
+	}
+	//------------------------------------------------------------------------
 	Camera PositionManager::getCamera(int _cam){
 		if(_cam == 1)
 			return *cam1;
