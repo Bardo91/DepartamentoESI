@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="LibsUS">
+      <UniqueIdentifier>{3e2ba1da-ff8a-4d99-bdb4-231d9c7f2b81}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="LibsUS\ParamsEKF.h">
+      <Filter>LibsUS</Filter>
+    </ClInclude>
+    <ClInclude Include="LibsUS\SimpleObject.h">
+      <Filter>LibsUS</Filter>
+    </ClInclude>
+    <ClInclude Include="LibsUS\types.h">
+      <Filter>LibsUS</Filter>
+    </ClInclude>
+    <ClInclude Include="LibsUS\ComputerVisionLibraries\DataAcquisition\ImageAcquisitor.h">
+      <Filter>LibsUS</Filter>
+    </ClInclude>
+    <ClInclude Include="LibsUS\ComputerVisionLibraries\ImageSegmentation\ColocClusterImageSegmentation.h">
+      <Filter>LibsUS</Filter>
+    </ClInclude>
+    <ClInclude Include="LibsUS\ComputerVisionLibraries\ImageSegmentation\ColorClusterSpace.h">
+      <Filter>LibsUS</Filter>
+    </ClInclude>
+    <ClInclude Include="LibsUS\ComputerVisionLibraries\ImageSegmentation\ColorSpaceHSV8.h">
+      <Filter>LibsUS</Filter>
+    </ClInclude>
+    <ClInclude Include="LibsUS\ComputerVisionLibraries\ImageSegmentation\SegmentedObject.h">
+      <Filter>LibsUS</Filter>
+    </ClInclude>
+    <ClInclude Include="LibsUS\ComputerVisionLibraries\Positioning\Camera.h">
+      <Filter>LibsUS</Filter>
+    </ClInclude>
+    <ClInclude Include="LibsUS\ComputerVisionLibraries\Positioning\ObjectGeo.h">
+      <Filter>LibsUS</Filter>
+    </ClInclude>
+    <ClInclude Include="LibsUS\ComputerVisionLibraries\Timing\time.h">
+      <Filter>LibsUS</Filter>
+    </ClInclude>
+    <ClInclude Include="LibsUS\ComputerVisionLibraries\TrackingAlgorithm\RobustStereoMatching.h">
+      <Filter>LibsUS</Filter>
+    </ClInclude>
+    <ClInclude Include="LibsUS\ComputerVisionLibraries\TrackingAlgorithm\StereoVisionEKF.h">
+      <Filter>LibsUS</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="LibsUS\SimpleObject.cpp">
+      <Filter>LibsUS</Filter>
+    </ClCompile>
+    <ClCompile Include="LibsUS\ComputerVisionLibraries\DataAcquisition\ImageAcquisitor.cpp">
+      <Filter>LibsUS</Filter>
+    </ClCompile>
+    <ClCompile Include="LibsUS\ComputerVisionLibraries\ImageSegmentation\ColorClusterImageSegmentation.cpp">
+      <Filter>LibsUS</Filter>
+    </ClCompile>
+    <ClCompile Include="LibsUS\ComputerVisionLibraries\ImageSegmentation\ColorClusterSpace.cpp">
+      <Filter>LibsUS</Filter>
+    </ClCompile>
+    <ClCompile Include="LibsUS\ComputerVisionLibraries\ImageSegmentation\ColorSpaceHSV8.cpp">
+      <Filter>LibsUS</Filter>
+    </ClCompile>
+    <ClCompile Include="LibsUS\ComputerVisionLibraries\ImageSegmentation\SegmentedObject.cpp">
+      <Filter>LibsUS</Filter>
+    </ClCompile>
+    <ClCompile Include="LibsUS\ComputerVisionLibraries\Positioning\Camera.cpp">
+      <Filter>LibsUS</Filter>
+    </ClCompile>
+    <ClCompile Include="LibsUS\ComputerVisionLibraries\Positioning\ObjectGeo.cpp">
+      <Filter>LibsUS</Filter>
+    </ClCompile>
+    <ClCompile Include="LibsUS\ComputerVisionLibraries\Timing\time.cpp">
+      <Filter>LibsUS</Filter>
+    </ClCompile>
+    <ClCompile Include="LibsUS\ComputerVisionLibraries\TrackingAlgorithm\RobustStereoMatching.cpp">
+      <Filter>LibsUS</Filter>
+    </ClCompile>
+    <ClCompile Include="LibsUS\ComputerVisionLibraries\TrackingAlgorithm\StereoVisionEKF.cpp">
+      <Filter>LibsUS</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

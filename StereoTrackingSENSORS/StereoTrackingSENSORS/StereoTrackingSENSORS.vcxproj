@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="LibsUS\ComputerVisionLibraries\DataAcquisition\ImageAcquisitor.h" />
+    <ClInclude Include="LibsUS\ComputerVisionLibraries\ImageSegmentation\ColocClusterImageSegmentation.h" />
+    <ClInclude Include="LibsUS\ComputerVisionLibraries\ImageSegmentation\ColorClusterSpace.h" />
+    <ClInclude Include="LibsUS\ComputerVisionLibraries\ImageSegmentation\ColorSpaceHSV8.h" />
+    <ClInclude Include="LibsUS\ComputerVisionLibraries\ImageSegmentation\SegmentedObject.h" />
+    <ClInclude Include="LibsUS\ComputerVisionLibraries\Positioning\Camera.h" />
+    <ClInclude Include="LibsUS\ComputerVisionLibraries\Positioning\ObjectGeo.h" />
+    <ClInclude Include="LibsUS\ComputerVisionLibraries\Timing\time.h" />
+    <ClInclude Include="LibsUS\ComputerVisionLibraries\TrackingAlgorithm\RobustStereoMatching.h" />
+    <ClInclude Include="LibsUS\ComputerVisionLibraries\TrackingAlgorithm\StereoVisionEKF.h" />
+    <ClInclude Include="LibsUS\ParamsEKF.h" />
+    <ClInclude Include="LibsUS\SimpleObject.h" />
+    <ClInclude Include="LibsUS\types.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="LibsUS\ComputerVisionLibraries\DataAcquisition\ImageAcquisitor.cpp" />
+    <ClCompile Include="LibsUS\ComputerVisionLibraries\ImageSegmentation\ColorClusterImageSegmentation.cpp" />
+    <ClCompile Include="LibsUS\ComputerVisionLibraries\ImageSegmentation\ColorClusterSpace.cpp" />
+    <ClCompile Include="LibsUS\ComputerVisionLibraries\ImageSegmentation\ColorSpaceHSV8.cpp" />
+    <ClCompile Include="LibsUS\ComputerVisionLibraries\ImageSegmentation\SegmentedObject.cpp" />
+    <ClCompile Include="LibsUS\ComputerVisionLibraries\Positioning\Camera.cpp" />
+    <ClCompile Include="LibsUS\ComputerVisionLibraries\Positioning\ObjectGeo.cpp" />
+    <ClCompile Include="LibsUS\ComputerVisionLibraries\Timing\time.cpp" />
+    <ClCompile Include="LibsUS\ComputerVisionLibraries\TrackingAlgorithm\RobustStereoMatching.cpp" />
+    <ClCompile Include="LibsUS\ComputerVisionLibraries\TrackingAlgorithm\StereoVisionEKF.cpp" />
+    <ClCompile Include="LibsUS\SimpleObject.cpp" />
+    <ClCompile Include="main.cpp" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{F3471A10-1DFB-4179-9A16-F064CECAB3B0}</ProjectGuid>
+    <RootNamespace>StereoTrackingSENSORS</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v110</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v110</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IncludePath>C:\Programming\DepartamentoESI\StereoTrackingSENSORS\StereoTrackingSENSORS\LibsUS;C:\opencv\opencv\build\include;$(IncludePath)</IncludePath>
+    <ReferencePath>$(ReferencePath)</ReferencePath>
+    <LibraryPath>C:\opencv\opencv\build\x86\vc11\lib;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <IncludePath>C:\Programming\DepartamentoESI\StereoTrackingSENSORS\StereoTrackingSENSORS\LibsUS;C:\opencv\opencv\build\include;$(IncludePath)</IncludePath>
+    <ReferencePath>$(ReferencePath)</ReferencePath>
+    <LibraryPath>C:\opencv\opencv\build\x86\vc11\lib;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <TreatWarningAsError>true</TreatWarningAsError>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>opencv_calib3d246d.lib;opencv_contrib246d.lib;opencv_core246d.lib;opencv_features2d246d.lib;opencv_flann246d.lib;opencv_gpu246d.lib;opencv_highgui246d.lib;opencv_imgproc246d.lib;opencv_legacy246d.lib;opencv_ml246d.lib;opencv_objdetect246d.lib;opencv_video246d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <TreatWarningAsError>true</TreatWarningAsError>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>opencv_calib3d246.lib;opencv_contrib246.lib;opencv_core246.lib;opencv_features2d246.lib;opencv_flann246.lib;opencv_gpu246.lib;opencv_highgui246.lib;opencv_imgproc246.lib;opencv_legacy246.lib;opencv_ml246.lib;opencv_objdetect246.lib;opencv_video246.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

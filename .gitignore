@@ -617,3 +617,18 @@
 /VisualTrackingUI-QT/VisualTrackingUI-QT/Debug
 
 /VisualTrackingUI-QT/*.vsp
+
+/StereoTrackingSENSORS/Debug
+
+/StereoTrackingSENSORS/Release
+
+/StereoTrackingSENSORS/StereoTrackingSENSORS/Debug
+/StereoTrackingSENSORS/StereoTrackingSENSORS/Release
+
+/StereoTrackingSENSORS/*.vsp
+
+/StereoTrackingSENSORS/StereoTrackingSENSORS.opensdf
+/StereoTrackingSENSORS/StereoTrackingSENSORS.psess
+/StereoTrackingSENSORS/StereoTrackingSENSORS.sdf
+/StereoTrackingSENSORS/StereoTrackingSENSORS.v11.suo
+/StereoTrackingSENSORS/StereoTrackingSENSORS/StereoTrackingSENSORS.vcxproj.user
