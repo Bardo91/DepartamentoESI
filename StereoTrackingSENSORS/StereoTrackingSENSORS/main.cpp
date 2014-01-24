@@ -127,6 +127,9 @@ int main(int _argc, char** _argv){
 			frame2.copyTo(ori2);
 		#endif
 
+		medianBlur(frame1,frame1, 5);
+		medianBlur(frame2,frame2, 5);
+
 		// Segmentate images
 		ColorClusterImageSegmentation(frame1, frame2, *CS, mainArgs.sizeThreshold, objs1, objs2);
 
