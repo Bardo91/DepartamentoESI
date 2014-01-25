@@ -128,7 +128,7 @@ int ImageAcquisitor::updateFrame() { // 666 TODO: get 40% of process. Other thre
 
 		assert(frame.cols != 0);
 
-		if (frame.cols != height)
+		if (frame.cols != width)
 			resize(frame, frame, Size(width, height));
 
 		currentFrame++;
