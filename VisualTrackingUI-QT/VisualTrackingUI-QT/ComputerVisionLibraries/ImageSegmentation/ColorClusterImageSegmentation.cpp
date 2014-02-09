@@ -10,6 +10,7 @@
 #include "ColorSpaceHSV8.h"
 #include "SegmentedObject.h"
 
+#include <stdio.h> // 666 TODO: erase
 
 #include <opencv/highgui.h>
 
@@ -19,7 +20,7 @@ using namespace vision::segmentation;
 namespace vision {
 	namespace segmentation{
 	//-----------------------------------------------------------------------
-	//---------------- 1 Cameras
+	//---------------- 1 Camera algorithm
 
 		int ColorClusterImageSegmentation(cv::Mat& _frame, ColorClusterSpace& _CS, unsigned int _threshold, std::vector<SimpleObject>& _objects){
 			imageBGR2HSV(_frame);
@@ -62,7 +63,7 @@ namespace vision {
 							aux.je = j;
 							aux.size = j - js;
 							aux.color = colorRLE;
-							aux.parent = NULL;
+							aux.hasParent = FALSE;
 							aux.iObj = -1;
 
 							temp.push_back(aux);
@@ -73,7 +74,7 @@ namespace vision {
 							aux.je = j;
 							aux.size = j - js;
 							aux.color = colorRLE;
-							aux.parent = NULL;
+							aux.hasParent = FALSE;
 							aux.iObj = -1;
 
 							temp.push_back(aux);
@@ -107,24 +108,31 @@ namespace vision {
 									&& aRLE[i - 1][jp].je >= aRLE[i][j].js
 									&& aRLE[i - 1][jp].js <= aRLE[i][j].je) {
 
-								if (aRLE[i][j].parent == NULL) { // Solve overlap problem checking parent
-									if (aRLE[i - 1][jp].parent != NULL) { // Another parent
-										aRLE[i][j].parent = aRLE[i - 1][jp].parent;
+								if (aRLE[i][j].hasParent == FALSE) { // Solve overlap problem checking parent
+									if (aRLE[i - 1][jp].hasParent) { // Another parent
+										aRLE[i][j].parentI = aRLE[i - 1][jp].parentI;
+										aRLE[i][j].parentJ = aRLE[i - 1][jp].parentJ;
+										aRLE[i][j].hasParent = TRUE;
 									} else {
 										// Is first parent
-										aRLE[i][j].parent = &(aRLE[i - 1][jp]);
+										aRLE[i][j].parentI = aRLE.begin() + (i - 1);
+										aRLE[i][j].parentJ = aRLE[i - 1].begin() + jp;
+										aRLE[i][j].hasParent = TRUE;
 									}
 								} else { //In case of overlap
-									if (aRLE[i - 1][jp].parent != NULL) { // New family
-										if (aRLE[i - 1][jp].parent
-												!= aRLE[i][j].parent) {
-											aRLE[i - 1][jp].parent->parent =
-													aRLE[i][j].parent;
+									if (aRLE[i - 1][jp].hasParent) { // New family
+										if ((aRLE[i - 1][jp].parentI != aRLE[i][j].parentI) && (aRLE[i - 1][jp].parentJ != aRLE[i][j].parentJ)) {
+											(*aRLE[i - 1][jp].parentJ).parentI = aRLE[i][j].parentI;
+											(*aRLE[i - 1][jp].parentJ).parentJ = aRLE[i][j].parentJ;
+											(*aRLE[i - 1][jp].parentJ).hasParent = TRUE;
 										}
 
 									} else {
 										// Orphan
-										aRLE[i - 1][jp].parent = aRLE[i][j].parent;
+										aRLE[i - 1][jp].parentI = aRLE[i][j].parentI;
+										aRLE[i - 1][jp].parentJ = aRLE[i][j].parentJ;
+										aRLE[i - 1][jp].hasParent = TRUE;
+										
 									}
 								}
 							}
@@ -146,19 +154,20 @@ namespace vision {
 			//Re-assign parents due to overlap
 			for (unsigned int i = 0; i < aRLE.size(); i++) {
 				for (unsigned int j = 0; j < aRLE[i].size(); j++) {
-					if (aRLE[i][j].parent != NULL) {
-						LineObjRLE auxRLE = *aRLE[i][j].parent;
+					if (aRLE[i][j].hasParent != FALSE) {
+						LineObjRLE auxRLE = *aRLE[i][j].parentJ;
 
 						int loopAvoider = 0; // Need to be checked if image size is larger than 320x240. If possible check the origin of loops
-						while (auxRLE.parent != NULL && loopAvoider < 30) {
-							aRLE[i][j].parent = auxRLE.parent;
-							auxRLE = *auxRLE.parent;
+						while (auxRLE.hasParent != FALSE && loopAvoider < 30) {
+							aRLE[i][j].parentI = auxRLE.parentI;
+							aRLE[i][j].parentJ = auxRLE.parentJ;
+							auxRLE = *auxRLE.parentJ;
 							loopAvoider++;
 						}
 
-						if (aRLE[i][j].parent->iObj == -1) {
-							aRLE[i][j].parent->iObj = objs.size();
-							SegmentedObject obj(*aRLE[i][j].parent);
+						if (aRLE[i][j].parentJ->iObj == -1) {
+							aRLE[i][j].parentJ->iObj = objs.size();
+							SegmentedObject obj(*aRLE[i][j].parentJ);
 							objs.push_back(obj);
 						}
 					}
@@ -166,8 +175,8 @@ namespace vision {
 			}
 			for (unsigned int i = 0; i < aRLE.size(); i++) {
 				for (unsigned int j = 0; j < aRLE[i].size(); j++) {
-					if (aRLE[i][j].parent != NULL) {
-						objs[aRLE[i][j].parent->iObj].addLineObjRLE(aRLE[i][j]);
+					if (aRLE[i][j].hasParent != FALSE) {
+						objs[aRLE[i][j].parentJ->iObj].addLineObjRLE(aRLE[i][j]);
 					}
 				}
 			}
@@ -177,14 +186,15 @@ namespace vision {
 					_objects.push_back(SimpleObject(objs[i].getUpperLeft(), objs[i].getDownRight(), objs[i].getSize(), objs[i].getColor()));
 			}
 
-
-			imageHSV2BGR(_frame);// 666 TODO: delete if visualization isn't needed (get 5%)
+			#ifdef _DEBUG
+				imageHSV2BGR(_frame);// 666 TODO: delete if visualization isn't needed (get 5%)
+			#endif
 
 			return 0;
 		} // int ColorClusterImageSegmentation(...) 1 camera
 
 	//-----------------------------------------------------------------------
-	//---------------- 2 Cameras
+	//---------------- 2 Cameras algorithm
 
 
 		int ColorClusterImageSegmentation(Mat& _frame1, Mat& _frame2, ColorClusterSpace& _CS, const unsigned int _threshold,
@@ -193,18 +203,18 @@ namespace vision {
 
 			imageBGR2HSV(_frame1);
 			imageBGR2HSV(_frame2);
-
+			
 			// 666 TODO: use statics variables to save time (allocating, etc...)
 			vector<vector<struct LineObjRLE> > aRLE1;
 			vector<vector<struct LineObjRLE> > aRLE2;
 			vector<SegmentedObject> objs1;
 			vector<SegmentedObject> objs2;
 
-			aRLE1.reserve(50000);
-			aRLE2.reserve(50000);
+			//aRLE1.reserve(50000);
+			//aRLE2.reserve(50000);
 
-			objs1.reserve(5000);
-			objs2.reserve(5000);
+			//objs1.reserve(5000);
+			//objs2.reserve(5000);
 			
 
 			int n = _frame1.channels(); // Count the number of image's channels to use the pointer
@@ -238,7 +248,7 @@ namespace vision {
 							aux.je = j;
 							aux.size = j - js1;
 							aux.color = colorRLE1;
-							aux.parent = NULL;
+							aux.hasParent = FALSE;
 							aux.iObj = -1;
 
 							temp1.push_back(aux);
@@ -249,7 +259,7 @@ namespace vision {
 							aux.je = j;
 							aux.size = j - js1;
 							aux.color = colorRLE1;
-							aux.parent = NULL;
+							aux.hasParent = FALSE;
 							aux.iObj = -1;
 
 							temp1.push_back(aux);
@@ -289,7 +299,7 @@ namespace vision {
 							aux.je = j;
 							aux.size = j - js2;
 							aux.color = colorRLE2;
-							aux.parent = NULL;
+							aux.hasParent = FALSE;
 							aux.iObj = -1;
 							temp2.push_back(aux);
 						} else if (color2 != colorRLE2) {
@@ -299,7 +309,7 @@ namespace vision {
 							aux.je = j;
 							aux.size = j - js2;
 							aux.color = colorRLE2;
-							aux.parent = NULL;
+							aux.hasParent = FALSE;
 							aux.iObj = -1;
 
 							temp2.push_back(aux);
@@ -334,24 +344,31 @@ namespace vision {
 									&& aRLE1[i - 1][jp].je >= aRLE1[i][j].js
 									&& aRLE1[i - 1][jp].js <= aRLE1[i][j].je) {
 
-								if (aRLE1[i][j].parent == NULL) { // Solve overlap problem checking parent
-									if (aRLE1[i - 1][jp].parent != NULL) { // Another parent
-										aRLE1[i][j].parent = aRLE1[i - 1][jp].parent;
+								if (aRLE1[i][j].hasParent == FALSE) { // Solve overlap problem checking parent
+									if (aRLE1[i - 1][jp].hasParent) { // Another parent
+										aRLE1[i][j].parentI = aRLE1[i - 1][jp].parentI;
+										aRLE1[i][j].parentJ = aRLE1[i - 1][jp].parentJ;
+										aRLE1[i][j].hasParent = TRUE;
 									} else {
 										// Is first parent
-										aRLE1[i][j].parent = &(aRLE1[i - 1][jp]);
+										aRLE1[i][j].parentI = aRLE1.begin() + (i - 1);
+										aRLE1[i][j].parentJ = aRLE1[i - 1].begin() + jp;
+										aRLE1[i][j].hasParent = TRUE;
 									}
 								} else { //In case of overlap
-									if (aRLE1[i - 1][jp].parent != NULL) { // New family
-										if (aRLE1[i - 1][jp].parent
-												!= aRLE1[i][j].parent) {
-											aRLE1[i - 1][jp].parent->parent =
-													aRLE1[i][j].parent;
+									if (aRLE1[i - 1][jp].hasParent) { // New family
+										if ((aRLE1[i - 1][jp].parentI != aRLE1[i][j].parentI) /*&& (aRLE1[i - 1][jp].parentJ != aRLE1[i][j].parentJ)*/) {
+											(*aRLE1[i - 1][jp].parentJ).parentI = aRLE1[i][j].parentI;
+											(*aRLE1[i - 1][jp].parentJ).parentJ = aRLE1[i][j].parentJ;
+											(*aRLE1[i - 1][jp].parentJ).hasParent = TRUE;
 										}
 
 									} else {
 										// Orphan
-										aRLE1[i - 1][jp].parent = aRLE1[i][j].parent;
+										aRLE1[i - 1][jp].parentI = aRLE1[i][j].parentI;
+										aRLE1[i - 1][jp].parentJ = aRLE1[i][j].parentJ;
+										aRLE1[i - 1][jp].hasParent = TRUE;
+										
 									}
 								}
 							}
@@ -376,24 +393,31 @@ namespace vision {
 									&& aRLE2[i - 1][jp].je >= aRLE2[i][j].js
 									&& aRLE2[i - 1][jp].js <= aRLE2[i][j].je) {
 
-								if (aRLE2[i][j].parent == NULL) { // Solve overlap problem checking parent
-									if (aRLE2[i - 1][jp].parent != NULL) { // Another parent
-										aRLE2[i][j].parent = aRLE2[i - 1][jp].parent;
+								if (aRLE2[i][j].hasParent == FALSE) { // Solve overlap problem checking parent
+									if (aRLE2[i - 1][jp].hasParent) { // Another parent
+										aRLE2[i][j].parentI = aRLE2[i - 1][jp].parentI;
+										aRLE2[i][j].parentJ = aRLE2[i - 1][jp].parentJ;
+										aRLE2[i][j].hasParent = TRUE;
 									} else {
 										// Is first parent
-										aRLE2[i][j].parent = &(aRLE2[i - 1][jp]);
+										aRLE2[i][j].parentI = aRLE2.begin() + (i - 1);
+										aRLE2[i][j].parentJ = aRLE2[i - 1].begin() + jp;
+										aRLE2[i][j].hasParent = TRUE;
 									}
 								} else { //In case of overlap
-									if (aRLE2[i - 1][jp].parent != NULL) { // New family
-										if (aRLE2[i - 1][jp].parent
-												!= aRLE2[i][j].parent) {
-											aRLE2[i - 1][jp].parent->parent =
-													aRLE2[i][j].parent;
+									if (aRLE2[i - 1][jp].hasParent) { // New family
+										if ((aRLE2[i - 1][jp].parentI != aRLE2[i][j].parentI)/* && (aRLE2[i - 1][jp].parentJ != aRLE2[i][j].parentJ)*/) {
+											(*aRLE2[i - 1][jp].parentJ).parentI = aRLE2[i][j].parentI;
+											(*aRLE2[i - 1][jp].parentJ).parentJ = aRLE2[i][j].parentJ;
+											(*aRLE2[i - 1][jp].parentJ).hasParent = TRUE;
 										}
 
 									} else {
 										// Orphan
-										aRLE2[i - 1][jp].parent = aRLE2[i][j].parent;
+										aRLE2[i - 1][jp].parentI = aRLE2[i][j].parentI;
+										aRLE2[i - 1][jp].parentJ = aRLE2[i][j].parentJ;
+										aRLE2[i - 1][jp].hasParent = TRUE;
+										
 									}
 								}
 							}
@@ -415,19 +439,20 @@ namespace vision {
 			//Re-assign parents due to overlap
 			for (unsigned int i = 0; i < aRLE1.size(); i++) {
 				for (unsigned int j = 0; j < aRLE1[i].size(); j++) {
-					if (aRLE1[i][j].parent != NULL) {
-						LineObjRLE auxRLE = *aRLE1[i][j].parent;
+					if (aRLE1[i][j].hasParent != FALSE) {
+						LineObjRLE auxRLE = *aRLE1[i][j].parentJ;
 
 						int loopAvoider = 0; // Need to be checked if image size is larger than 320x240. If possible check the origin of loops
-						while (auxRLE.parent != NULL && loopAvoider < 30) {
-							aRLE1[i][j].parent = auxRLE.parent;
-							auxRLE = *auxRLE.parent;
+						while (auxRLE.hasParent != FALSE && loopAvoider < 30) {
+							aRLE1[i][j].parentI = auxRLE.parentI;
+							aRLE1[i][j].parentJ = auxRLE.parentJ;
+							auxRLE = *auxRLE.parentJ;
 							loopAvoider++;
 						}
 
-						if (aRLE1[i][j].parent->iObj == -1) {
-							aRLE1[i][j].parent->iObj = objs1.size();
-							SegmentedObject obj(*aRLE1[i][j].parent);
+						if (aRLE1[i][j].parentJ->iObj == -1) {
+							aRLE1[i][j].parentJ->iObj = objs1.size();
+							SegmentedObject obj(*aRLE1[i][j].parentJ);
 							objs1.push_back(obj);
 						}
 					}
@@ -435,27 +460,28 @@ namespace vision {
 			}
 			for (unsigned int i = 0; i < aRLE1.size(); i++) {
 				for (unsigned int j = 0; j < aRLE1[i].size(); j++) {
-					if (aRLE1[i][j].parent != NULL) {
-						objs1[aRLE1[i][j].parent->iObj].addLineObjRLE(aRLE1[i][j]);
+					if (aRLE1[i][j].hasParent != FALSE) {
+						objs1[aRLE1[i][j].parentJ->iObj].addLineObjRLE(aRLE1[i][j]);
 					}
 				}
 			}
 			// Second Camera ---------------------------------------------------------------
 			for (unsigned int i = 0; i < aRLE2.size(); i++) {
 				for (unsigned int j = 0; j < aRLE2[i].size(); j++) {
-					if (aRLE2[i][j].parent != NULL) {
-						LineObjRLE auxRLE = *aRLE2[i][j].parent;
+					if (aRLE2[i][j].hasParent != FALSE) {
+						LineObjRLE auxRLE = *aRLE2[i][j].parentJ;
 
 						int loopAvoider = 0; // Need to be checked if image size is larger than 320x240. If possible check the origin of loops
-						while (auxRLE.parent != NULL && loopAvoider < 30) {
-							aRLE2[i][j].parent = auxRLE.parent;
-							auxRLE = *auxRLE.parent;
+						while (auxRLE.hasParent != FALSE && loopAvoider < 30) {
+							aRLE2[i][j].parentI = auxRLE.parentI;
+							aRLE2[i][j].parentJ = auxRLE.parentJ;
+							auxRLE = *auxRLE.parentJ;
 							loopAvoider++;
 						}
 
-						if (aRLE2[i][j].parent->iObj == -1) {
-							aRLE2[i][j].parent->iObj = objs2.size();
-							SegmentedObject obj(*aRLE2[i][j].parent);
+						if (aRLE2[i][j].parentJ->iObj == -1) {
+							aRLE2[i][j].parentJ->iObj = objs2.size();
+							SegmentedObject obj(*aRLE2[i][j].parentJ);
 							objs2.push_back(obj);
 						}
 					}
@@ -463,8 +489,8 @@ namespace vision {
 			}
 			for (unsigned int i = 0; i < aRLE2.size(); i++) {
 				for (unsigned int j = 0; j < aRLE2[i].size(); j++) {
-					if (aRLE2[i][j].parent != NULL) {
-						objs2[aRLE2[i][j].parent->iObj].addLineObjRLE(aRLE2[i][j]);
+					if (aRLE2[i][j].hasParent != FALSE) {
+						objs2[aRLE2[i][j].parentJ->iObj].addLineObjRLE(aRLE2[i][j]);
 					}
 				}
 			}
@@ -478,9 +504,10 @@ namespace vision {
 					_objects2.push_back(SimpleObject(objs2[i].getUpperLeft(), objs2[i].getDownRight(), objs2[i].getSize(), objs2[i].getColor()));
 			}
 
-
-			imageHSV2BGR(_frame1); // 666 TODO: delete if visualization isn't needed (get 5%)
-			imageHSV2BGR(_frame2);
+			#ifdef _DEBUG
+				imageHSV2BGR(_frame1); // 666 TODO: delete if visualization isn't needed (get 5%)
+				imageHSV2BGR(_frame2);
+			#endif
 
 			return 0;
 		} // int ColorClusterImageSegmentation(...)

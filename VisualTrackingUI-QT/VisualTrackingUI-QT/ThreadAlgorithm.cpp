@@ -116,7 +116,9 @@ void threadAlgoritm(InfoPointers *infoPointers){
 		algorithmManager->getObservationObjects(zk1, zk2);
 
 		for(int i = 0 ; i < 8; i++){
-			rectangle(ori1, zk1[i].downRight, zk1[i].upperLeft, Scalar(0,0,0), 1);
+			for(int j = 0; j < objects1.size(); j ++){
+				rectangle(ori1, objects1[j].downRight, objects1[j].upperLeft, Scalar(0,0,0), 1);
+			}
 		}
 		if(frame2.rows != 0){
 			for(int i = 0 ; i < 8; i++){
