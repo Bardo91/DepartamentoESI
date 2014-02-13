@@ -53,9 +53,10 @@ namespace BIL{
 						js = _js;
 						je = _je;
 						size = je - js;
-						color = color;
+						color = _color;
 						hasParent = false;
 						pi = pj = 0;
+						iObjs = -1;
 			};
 
 			unsigned short int i;		// Row of the object.
@@ -68,6 +69,8 @@ namespace BIL{
 			bool hasParent;				// Flag if the RLE was parented.
 			unsigned short int pi;		// Index of the parent in the vector.
 			unsigned short int pj;		// Index of the parent in the vector.
+
+			short int iObjs;
 
 		};
 
