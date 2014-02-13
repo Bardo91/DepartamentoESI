@@ -9,7 +9,7 @@
 #define _VISUAL_TRACKING_UI_SEGMENTATEIMAGE_H_
 
 #include "ColorClusterSpace.h"
-#include <Types/SimpleObject.h>
+#include <../../Programming/DepartamentoESI/VisualTrackingUI-QT/VisualTrackingUI-QT/Types/SimpleObject.h>
 
 #include <opencv/cv.h>
 #include <string>
