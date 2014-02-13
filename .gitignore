@@ -633,3 +633,6 @@
 /StereoTrackingSENSORS/*.sdf
 
 /StereoTrackingSENSORS/*.vsp
+/openBIL/*.sdf
+/openBIL/*.suo
+/openBIL/openBIL/Debug
