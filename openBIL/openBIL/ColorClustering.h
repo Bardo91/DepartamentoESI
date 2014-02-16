@@ -1,5 +1,5 @@
 /////////////////////////////////////////////////////////////////////////////////////////
-//		OpenBil
+//		OpenBIL
 //			Author: Pablo Ramon Soria
 //			Date:	2014-02-13
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -101,8 +101,8 @@ namespace BIL{
 		};
 
 		//-----------------------------------------------------------------------------
-		// This algorithm takes an image and segmentate it with
-		void ColorClustering(float * _image, int _width, int _height, int _threshold, std::vector<ImageObject> _objects, std::function<int ()> _function);	
+		// The template is the type of image pointer, and function is the segmentate pixel format
+		template<typename T> void ColorClustering(T _image, int _width, int _height, int _threshold, std::vector<ImageObject> _objects, std::function<int ()> _function);	
 
 		//-----------------------------------------------------------------------------
 
