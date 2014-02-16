@@ -11,7 +11,7 @@ using namespace std;
 
 namespace BIL{
 	namespace algorithms{
-		template<typename T> void ColorClustering(T * _image, int _width, int _height, int _sizeThreshold, std::vector<ImageObject> &_objects, LAMBDAFUNCTIONSEGMENTATION){
+		template<typename T> void ColorClustering(T * _image, int _width, int _height, int _sizeThreshold, std::vector<ImageObject> &_objects, std::function<int ()> _function){
 			vector<vector<LineRLE>> aRLE;		// Matrix with every RLE encoded objects
 			vector<SegmentedObject> objects;	// Auxiliary object that store Segmented objects while they are been growing.
 

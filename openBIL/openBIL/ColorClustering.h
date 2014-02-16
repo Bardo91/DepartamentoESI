@@ -9,6 +9,7 @@
 #define _OPENBIL_ALGORITHMS_COLORCLUSTERING_H_
 
 #include <vector>
+#include <functional>
 
 namespace BIL{
 	namespace algorithms{
@@ -101,7 +102,7 @@ namespace BIL{
 
 		//-----------------------------------------------------------------------------
 		// This algorithm takes an image and segmentate it with
-		void ColorClustering(float * _image, int _width, int _height, int _threshold, std::vector<ImageObject> _objects, LAMBDAFUNCTIONSEGMENTATION);	
+		void ColorClustering(float * _image, int _width, int _height, int _threshold, std::vector<ImageObject> _objects, std::function<int ()> _function);	
 
 		//-----------------------------------------------------------------------------
 
