@@ -18,15 +18,24 @@
     <ClInclude Include="ColorClustering.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ColorClusterSpace.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ColorSpaceHSV8.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ColorClustering.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="SegmentedObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ColorClusterSpace.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ColorSpaceHSV8.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

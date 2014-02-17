@@ -638,3 +638,4 @@
 /openBIL/openBIL/Debug
 /openBIL/*.opensdf
 /openBIL/Debug/*.pdb
+/openBIL/Debug

@@ -74,9 +74,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="ColorClustering.h" />
+    <ClInclude Include="ColorClusterSpace.h" />
+    <ClInclude Include="ColorSpaceHSV8.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ColorClustering.cpp" />
+    <ClCompile Include="ColorClusterSpace.cpp" />
+    <ClCompile Include="ColorSpaceHSV8.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="SegmentedObject.cpp" />
   </ItemGroup>
