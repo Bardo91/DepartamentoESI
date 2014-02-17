@@ -102,7 +102,12 @@ namespace BIL{
 
 		//-----------------------------------------------------------------------------
 		// The template is the type of image pointer, and function is the segmentate pixel format
-		template<typename T> void ColorClustering(T _image, int _width, int _height, int _threshold, std::vector<ImageObject> _objects, std::function<int ()> _function);	
+		template<typename T> void ColorClustering(	T *_image, 
+													int _width,
+													int _height, 
+													int _threshold, 
+													std::vector<ImageObject> _objects,
+													std::function<int (T _a, T _b, T _c)> _function);	
 
 		//-----------------------------------------------------------------------------
 

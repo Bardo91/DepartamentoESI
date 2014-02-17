@@ -11,7 +11,12 @@ using namespace std;
 
 namespace BIL{
 	namespace algorithms{
-		template<typename T> void ColorClustering(T * _image, int _width, int _height, int _sizeThreshold, std::vector<ImageObject> &_objects, std::function<int ()> _function){
+		template<typename T> void ColorClustering(	T *_image, 
+													int _width,
+													int _height, 
+													int _threshold, 
+													std::vector<ImageObject> _objects,
+													std::function<int (T _a, T _b, T _c)> _function){
 			vector<vector<LineRLE>> aRLE;		// Matrix with every RLE encoded objects
 			vector<SegmentedObject> objects;	// Auxiliary object that store Segmented objects while they are been growing.
 
@@ -28,7 +33,7 @@ namespace BIL{
 					
 
 					// This function segmentate the pixel and return the color of those.
-					color = FUNCION_DE_SEGMENTACION(_image[i + 3*j + 0],
+					color = _function(_image[i + 3*j + 0],
 													_image[i + 3*j + 1],
 													_image[i + 3*j + 2]);
 
