@@ -38,8 +38,8 @@ namespace BIL{
 		public:
 			ImageObject(Point _upperLeft, Point _downRight, int _size, int _color){
 				centroid = Point((_upperLeft.x + _downRight.x)/2, (_upperLeft.y + _downRight.y)/2);
-				width = _upperLeft.x - _upperLeft.x;
-				height = _upperLeft.y - _upperLeft.y;
+				width = _downRight.x - _upperLeft.x;
+				height = _downRight.y - _upperLeft.y;
 				size = _size;
 				color = _color;
 			};
@@ -117,7 +117,7 @@ namespace BIL{
 													int _width,
 													int _height, 
 													unsigned int _sizeThreshold, 
-													std::vector<ImageObject> _objects,
+													std::vector<ImageObject> &_objects,
 													std::function<int (T *_a, T *_b, T *_c)> _function){
 
 			std::vector<std::vector<LineRLE>> aRLE;		// Matrix with every RLE encoded objects
@@ -135,22 +135,20 @@ namespace BIL{
 										_image + i * _width * 3 + 3*j + 1,
 										_image + i * _width * 3 + 3*j + 2);
 
-					if(color != -1){
-						if(j == 0){			// If it's the first pixel of the row, set the current RLE color to the current pixel's color and initialize the js counter of columns.
+					if (j == 0) {
+						colorRLE = color;
+						js = 0;
+					} else {			// If not
+						if (j == _width - 1){	// If it's the last pixel of the row finallize the last RLE line of this row.
+							LineRLE lineRLE(i, js, j, colorRLE);
+							temp.push_back(lineRLE);
+
+						} else if (color != colorRLE){	// If the color of the current pixel is not the same that the current lineRLE's color then create the previous lineRLE and start a new.
+							LineRLE lineRLE(i, js, j, colorRLE);
+							temp.push_back(lineRLE);
 							colorRLE = color;
-							js = 0;
-						} else {			// If not
-							if (color != colorRLE){	// If the color of the current pixel is not the same that the current lineRLE's color then create the previous lineRLE and start a new.
-								LineRLE lineRLE(i, js, j, colorRLE);
-								temp.push_back(lineRLE);
-								colorRLE = color;
-								js = j;
+							js = j;
 
-							} else if (j == _height - 1){	// If it's the last pixel of the row finallize the last RLE line of this row.
-								LineRLE lineRLE(i, js, j, colorRLE);
-								temp.push_back(lineRLE);
-
-							} 
 						}
 					}
 				}
@@ -158,15 +156,17 @@ namespace BIL{
 				// End of first horizontal loop for RLE encoding and segmentation.
 
 				// Now start the harder step, that takes the lineRLE objects of the current and previous row and connect them in order to collect every piece of the complete object
+
 				if(i){	//First line cannot have parents
 					unsigned int pcRLE = 0, ppRLE = 0; 		// Index of the current lineRLE on the i row of aRLE
 					unsigned int jc = aRLE[i][pcRLE].size, jp = aRLE[i-1][ppRLE].size;	// Index of current row's column and previous row's column.
 					
 					bool condition = true;
 					while(condition){	// Connecting RLEs
-						if(	aRLE[i-1][ppRLE].color == aRLE[i][pcRLE].color &&	// If lineRLEs have same color and have some column in common...
-							aRLE[i-1][ppRLE].je >= aRLE[i][pcRLE].js &&
-							aRLE[i-1][ppRLE].js <= aRLE[i][pcRLE].je){
+						if (!(aRLE[i - 1][ppRLE].color == -1 || aRLE[i][pcRLE].color == -1)) {
+							if(	aRLE[i-1][ppRLE].color == aRLE[i][pcRLE].color &&	// If lineRLEs have same color and have some column in common...
+									aRLE[i-1][ppRLE].je >= aRLE[i][pcRLE].js &&
+									aRLE[i-1][ppRLE].js <= aRLE[i][pcRLE].je){
 								if(!aRLE[i][pcRLE].hasParent){			// If current lineRLE has no parent
 									if(aRLE[i-1][ppRLE].hasParent){		// Use previous parent
 										aRLE[i][pcRLE].pi = aRLE[i-1][ppRLE].pi;
@@ -195,9 +195,12 @@ namespace BIL{
 
 									}
 								}
+							}
 						}	// Connecting RLEs
-						if(pcRLE >= aRLE[i].size() - 1 ||ppRLE >= aRLE[i-1].size() -1)
+						if(pcRLE >= aRLE[i].size() - 1 ||ppRLE >= aRLE[i-1].size() -1){
 							condition = false;
+							continue;
+						}
 						if(jp >= jc){
 							pcRLE++;
 							jc += aRLE[i][pcRLE].size;
