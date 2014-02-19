@@ -13,17 +13,17 @@
 #include <math.h>
 #include <string>
 
-namespace vision {
-	namespace segmentation {
-		const c3i colorsHSV8[8] = {
-		/*Black*/	c3i(0, 0, 0),
-		/*White*/	c3i( 0, 0, 255 ),
-		/*Blue*/	c3i( 120, 255, 255 ),
-		/*Purple*/	c3i( 150, 255, 255 ),
-		/*Red*/		c3i( 0, 255, 255 ),
-		/*Orange*/	c3i( 15, 255, 255 ),
-		/*Yellow*/	c3i( 30, 255, 255 ),
-		/*Green*/	c3i( 60, 255, 255 ) };
+namespace BIL {
+	namespace algorithms {
+		const c3u colorsHSV8[8] = {
+		/*Black*/	c3u(0, 0, 0),
+		/*White*/	c3u( 0, 0, 255 ),
+		/*Blue*/	c3u( 120, 255, 255 ),
+		/*Purple*/	c3u( 150, 255, 255 ),
+		/*Red*/		c3u( 0, 255, 255 ),
+		/*Orange*/	c3u( 15, 255, 255 ),
+		/*Yellow*/	c3u( 30, 255, 255 ),
+		/*Green*/	c3u( 60, 255, 255 ) };
 
 
 		

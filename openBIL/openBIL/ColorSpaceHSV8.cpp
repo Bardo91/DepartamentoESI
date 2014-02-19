@@ -10,8 +10,8 @@
 
 #include "ColorSpaceHSV8.h"
 
-namespace vision {
-	namespace segmentation {
+namespace BIL {
+	namespace algorithms {
 		unsigned char bin2dec(std::string bin) {
 			const char *cstr = bin.c_str();
 			int len, dec = 0, i, exp;

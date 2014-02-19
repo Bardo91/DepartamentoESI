@@ -20,7 +20,9 @@ int main(void){
 
 	std::vector<BIL::algorithms::ImageObject> objects;
 
-	vision::segmentation::ColorClusterSpace *cs = vision::segmentation::CreateHSVCS_8c(255U,255U,vision::segmentation::bin2dec("00010000"));
+	BIL::algorithms::ColorClusterSpace *cs = BIL::algorithms::CreateHSVCS_8c(255U,255U,BIL::algorithms::bin2dec("00010000"));
+
+	cv::cvtColor(img, img, CV_BGR2HSV);
 
 	BIL::algorithms::ColorClustering<uchar>(	img.data,		// Image pointer
 												img.cols,		// Width

@@ -158,8 +158,6 @@ namespace BIL{
 				// End of first horizontal loop for RLE encoding and segmentation.
 
 				// Now start the harder step, that takes the lineRLE objects of the current and previous row and connect them in order to collect every piece of the complete object
-				
-				/*********************************************************************
 				if(i){	//First line cannot have parents
 					unsigned int pcRLE = 0, ppRLE = 0; 		// Index of the current lineRLE on the i row of aRLE
 					unsigned int jc = aRLE[i][pcRLE].size, jp = aRLE[i-1][ppRLE].size;	// Index of current row's column and previous row's column.
@@ -210,8 +208,6 @@ namespace BIL{
 					}	// while(1).
 
 				}	// If not first row.
-				**********************************************/
-
 			}	// Vertical loop for each row
 			
 			// Re-assing overlaped parents

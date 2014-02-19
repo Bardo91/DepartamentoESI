@@ -12,15 +12,15 @@
 
 #include <cmath>
 
-namespace vision {
-	namespace segmentation {
+namespace BIL {
+	namespace algorithms {
 		ColorClusterSpace::ColorClusterSpace(int n, uint8_t *AClass, uint8_t *BClass,
-				uint8_t *CClass, const c3i *colors) {
+				uint8_t *CClass, const c3u *colors) {
 
 			this->AClass = new uint8_t[n];
 			this->BClass = new uint8_t[n];
 			this->CClass = new uint8_t[n];
-			clusters = new c3i[8];
+			clusters = new c3u[8];
 			size = n;
 
 			for (int i = 0; i < n; i++) {
@@ -39,5 +39,5 @@ namespace vision {
 			delete[] clusters;
 
 		}
-	} // namespace segmentation
+	} // namespace algorithms
 } // namespace vision

@@ -1,13 +1,10 @@
-/*
- * ColorClusterSpace.h
- *
- *  Created on: Oct 22, 2013
- *      Author: Pablo Ramón Soria
- *
- *      In this header are defined the classes and functions used on ImageClusterSegmentation
- *		algorithm.
- *
- */
+///////////////////////////////////////////////////////////////////////////////
+//
+//
+//
+///////////////////////////////////////////////////////////////////////////////
+
+#include "Colors.h"
 
 #include <math.h>
 #include <stdint.h>
@@ -18,38 +15,23 @@
 
 #define LOG2 0.3010299957
 
-namespace vision {
-	namespace segmentation {
-		typedef unsigned int uint;
-
-		template<typename T> struct color3_ {
-			color3 (){
-				a = b = c = T(0);
-			};
-			color3int(T _a, T _b, T _c){
-				a = _a; b = _b; c = _c;
-			};
-
-			T a, b, c;
-		};
-
-		typedef color3_<unsigned char> c3u;
-
+namespace BIL{
+	namespace algorithms {
 		class ColorClusterSpace {
 		public:
 			int size;
-			c3i *clusters;  // <<--------------- 666 TODO: change types
-			ColorClusterSpace(int, uint8_t *, uint8_t *, uint8_t *, const c3i *);
+			c3u *clusters;
+			ColorClusterSpace(int, unsigned char *, unsigned char *, unsigned char *, const c3u *);
 			~ColorClusterSpace();
 
 		private:
-			uint8_t *AClass;
-			uint8_t *BClass;
-			uint8_t *CClass;
+			unsigned char *AClass;
+			unsigned char *BClass;
+			unsigned char *CClass;
 
 		public:
-			int operator()(uint8_t *_a, uint8_t *_b, uint8_t *_c){
-				c3i col(*_a, *_b, *_c);
+			int operator()(unsigned char *_a, unsigned char *_b, unsigned char *_c){
+				c3u col(*_a, *_b, *_c);
 
 				int color =  whichColor(col);	
 				if(color != -1){
@@ -65,12 +47,13 @@ namespace vision {
 				return color;
 			};
 
-			int whichColor(c3i&); // Return between 0 and 255
+			int whichColor(c3u&); // Return between 0 and 255
 
 		};
 
 
-		inline int ColorClusterSpace::whichColor(c3i& color) { // If Opencv gives YCrCb values between 0 and 255
+		inline int ColorClusterSpace::whichColor(c3u& color) { // If Opencv gives YCrCb values between 0 and 255
+
 			int i = (color.a * (size - 1) / 180); // 666 TODO: improve (get 5%)
 			int j = color.b*(size - 1) >> 7;
 			j = (j>>1) + (j&1);
@@ -95,6 +78,6 @@ namespace vision {
 
 
 
-	} // namespace segmentation.
-} // namespace vision.
+	} // namespace algorithms.
+} // namespace BIL.
 #endif // _OPENBIL_COLORCLUSTERSPACE_H_

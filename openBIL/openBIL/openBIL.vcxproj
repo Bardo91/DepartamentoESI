@@ -54,7 +54,7 @@
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>opencv_core246d.lib;opencv_highgui246d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opencv_core246d.lib;opencv_highgui246d.lib;opencv_imgproc246d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -75,10 +75,12 @@
   <ItemGroup>
     <ClInclude Include="ColorClustering.h" />
     <ClInclude Include="ColorClusterSpace.h" />
+    <ClInclude Include="Colors.h" />
     <ClInclude Include="ColorSpaceHSV8.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ColorClusterSpace.cpp" />
+    <ClCompile Include="colors.cpp" />
     <ClCompile Include="ColorSpaceHSV8.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="SegmentedObject.cpp" />
