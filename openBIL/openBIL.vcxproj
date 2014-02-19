@@ -10,6 +10,22 @@
       <Platform>Win32</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="source\algorithms\segmentation\ColorClustering.cpp" />
+    <ClCompile Include="source\algorithms\segmentation\SegmentedRLEObject.cpp" />
+    <ClCompile Include="source\core\types\ColorClusterSpace.cpp" />
+    <ClCompile Include="source\core\types\colors.cpp" />
+    <ClCompile Include="source\core\types\ColorSpaceHSV8.cpp" />
+    <ClCompile Include="source\main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="source\algorithms\segmentation\ColorClustering.h" />
+    <ClInclude Include="source\algorithms\segmentation\SegmentedRLEObject.h" />
+    <ClInclude Include="source\core\types\BasicTypes.h" />
+    <ClInclude Include="source\core\types\ColorClusterSpace.h" />
+    <ClInclude Include="source\core\types\Colors.h" />
+    <ClInclude Include="source\core\types\ColorSpaceHSV8.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{3C03AE01-0616-4AAF-B25C-760146ACED3A}</ProjectGuid>
     <RootNamespace>openBIL</RootNamespace>
@@ -72,19 +88,6 @@
       <AdditionalDependencies>opencv_calib3d246d.lib;opencv_contrib246d.lib;opencv_core246d.lib;opencv_features2d246d.lib;opencv_flann246d.lib;opencv_gpu246d.lib;opencv_highgui246d.lib;opencv_imgproc246d.lib;opencv_legacy246d.lib;opencv_ml246d.lib;opencv_objdetect246d.lib;opencv_video246d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClInclude Include="ColorClustering.h" />
-    <ClInclude Include="ColorClusterSpace.h" />
-    <ClInclude Include="Colors.h" />
-    <ClInclude Include="ColorSpaceHSV8.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="ColorClusterSpace.cpp" />
-    <ClCompile Include="colors.cpp" />
-    <ClCompile Include="ColorSpaceHSV8.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="SegmentedObject.cpp" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

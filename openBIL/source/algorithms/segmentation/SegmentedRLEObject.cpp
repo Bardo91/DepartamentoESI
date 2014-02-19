@@ -5,7 +5,8 @@
  *      Author: pablo
  */
 
-#include "ColorClustering.h"
+#include "../../core/types/basicTypes.h"
+#include "SegmentedRLEObject.h"
 
 #include <algorithm>    // std::sort
 #include <vector>
@@ -13,7 +14,7 @@
 
 namespace BIL {
 	namespace algorithms {
-		SegmentedObject::SegmentedObject(LineRLE ini) {
+		SegmentedRLEObject::SegmentedRLEObject(LineRLE ini) {
 			upperLeft.x = 9999;
 			downRight.x = 0;
 			upperLeft.y = 9999;
@@ -24,7 +25,7 @@ namespace BIL {
 
 		}
 
-		void SegmentedObject::addLineObjRLE(LineRLE aux) {
+		void SegmentedRLEObject::addLineObjRLE(LineRLE aux) {
 			obj.push_back(aux);
 
 			if (upperLeft.y > aux.i)
@@ -38,7 +39,7 @@ namespace BIL {
 			size += aux.size + 1;
 		}
 
-		void SegmentedObject::addRLEFamily(SegmentedObject& family) {
+		void SegmentedRLEObject::addRLEFamily(SegmentedRLEObject& family) {
 			for (int k = 0; k < family.getLines(); k++) {
 				LineRLE aux = family.getRLEObj(k);
 				obj.push_back(aux);
@@ -54,35 +55,35 @@ namespace BIL {
 			}
 		}
 
-		int SegmentedObject::getLines() const {
+		int SegmentedRLEObject::getLines() const {
 			return obj.size();
 		}
 
-		LineRLE SegmentedObject::getRLEObj(int k) const {
+		LineRLE SegmentedRLEObject::getRLEObj(int k) const {
 			return obj[k];
 		}
 
-		Point SegmentedObject::getUpperLeft() const {
+		Point SegmentedRLEObject::getUpperLeft() const {
 			return upperLeft;
 		}
 
-		Point SegmentedObject::getDownRight() const {
+		Point SegmentedRLEObject::getDownRight() const {
 			return downRight;
 		}
 
-		unsigned int SegmentedObject::getColor() const {
+		unsigned int SegmentedRLEObject::getColor() const {
 			return color;
 		}
 
-		unsigned int SegmentedObject::getSize() const {
+		unsigned int SegmentedRLEObject::getSize() const {
 			return size;
 		}
 
-		unsigned int SegmentedObject::getBBSize() const {
+		unsigned int SegmentedRLEObject::getBBSize() const {
 			return (downRight.x - upperLeft.x) * (downRight.y - upperLeft.y);
 		}
 
-		Point SegmentedObject::getCentroid() const {
+		Point SegmentedRLEObject::getCentroid() const {
 			return Point((upperLeft.x + downRight.x)/2, (upperLeft.y + downRight.y)/2);
 		}
 
@@ -90,7 +91,7 @@ namespace BIL {
 			return a.i < b.i || (a.i == b.i && a.je < b.js) ? true : false;
 		}
 
-		void SegmentedObject::sortObj() {
+		void SegmentedRLEObject::sortObj() {
 			std::sort(obj.begin(), obj.end(), sortFunction);
 		}
 	} // namespace segmentation

@@ -11,106 +11,13 @@
 #include <vector>
 #include <functional>
 
-#include "ColorSpaceHSV8.h"
+#include "..\..\core\types\BasicTypes.h"
+#include "..\..\core\types\ColorSpaceHSV8.h"
+#include "SegmentedRLEObject.h"
+
 
 namespace BIL{
 	namespace algorithms{
-		//-----------------------------------------------------------------------------
-		struct color3f{
-			color3f(){a = 0.0f; b = 0.0f; c = 0.0f;};
-			color3f(float _a, float _b, float _c){a = _a; b = _b; c = _c;};
-
-			float a,b,c;
-		};
-
-		//-----------------------------------------------------------------------------
-		struct Point{
-			// Constructors.
-			Point(){ x = 0; y = 0;};
-			Point(int _x, int _y){ x = _x; y = _y;};
-
-			// Properties.
-			unsigned int x, y;		// Coordinates of the point in the image.
-		};
-
-		//-----------------------------------------------------------------------------
-		class ImageObject{		// Summarized object.
-		public:
-			ImageObject(Point _upperLeft, Point _downRight, int _size, int _color){
-				centroid = Point((_upperLeft.x + _downRight.x)/2, (_upperLeft.y + _downRight.y)/2);
-				width = _downRight.x - _upperLeft.x;
-				height = _downRight.y - _upperLeft.y;
-				size = _size;
-				color = _color;
-			};
-			
-			Point getCentroid() const {return centroid;};
-			int getWidth() const {return width;};
-			int getHeight() const {return height;};
-			int getColor() const {return color;};
-		private:
-			Point centroid;
-			int width, height;
-			int color;
-			int size;
-		};
-
-		//-----------------------------------------------------------------------------
-		struct LineRLE{		// RLE encoding object.
-			LineRLE(unsigned int _i,
-					unsigned int _js,
-					unsigned int _je,
-					int _color){
-						i = _i;
-						js = _js;
-						je = _je;
-						size = je - js;
-						color = _color;
-						hasParent = false;
-						pi = pj = 0;
-						iObj = -1;
-			};
-
-			unsigned int i;			// Row of the object.
-			unsigned int js;		// Started column of the object.
-			unsigned int je;		// Ended column of the object.
-			unsigned int size;		// Size of the object (= je - js + 1) its computed one time in order to reduce the algorithm operations.
-
-			int color;	// Color of the object.s
-
-			bool hasParent;				// Flag if the RLE was parented.
-			unsigned int pi;			// Index of the parent in the vector.
-			unsigned int pj;			// Index of the parent in the vector.
-
-			int iObj;
-
-		};
-
-		class SegmentedObject {
-			std::vector<LineRLE> obj;
-
-			Point upperLeft, downRight; // Border pixels
-			int color;
-			unsigned int size;
-
-		public:
-			SegmentedObject(LineRLE ini);
-
-			void addLineObjRLE(LineRLE);
-			void addRLEFamily(SegmentedObject&);
-
-			int getLines() const;
-			LineRLE getRLEObj(int) const;
-			Point getUpperLeft() const;
-			Point getDownRight() const;
-			unsigned int getColor() const;
-			unsigned int getSize() const;
-			unsigned int getBBSize() const;
-			Point getCentroid() const;
-
-			void sortObj();
-		};
-
 		//-----------------------------------------------------------------------------
 		// The template is the type of image pointer, and function is the segmentate pixel format
 		template<typename T> void ColorClustering(	T *_image, 
@@ -121,7 +28,7 @@ namespace BIL{
 													std::function<int (T *_a, T *_b, T *_c)> _function){
 
 			std::vector<std::vector<LineRLE>> aRLE;		// Matrix with every RLE encoded objects
-			std::vector<SegmentedObject> objects;	// Auxiliary object that store Segmented objects while they are been growing.
+			std::vector<SegmentedRLEObject> objects;	// Auxiliary object that store Segmented objects while they are been growing.
 
 			int color, colorRLE = -1;
 			int js = 0;
@@ -230,7 +137,7 @@ namespace BIL{
 						}
 						if (aRLE[aRLE[i][j].pi][aRLE[i][j].pj].iObj == -1) {
 							aRLE[aRLE[i][j].pi][aRLE[i][j].pj].iObj = objects.size();
-							SegmentedObject obj(aRLE[aRLE[i][j].pi][aRLE[i][j].pj]);
+							SegmentedRLEObject obj(aRLE[aRLE[i][j].pi][aRLE[i][j].pj]);
 							objects.push_back(obj);
 						}
 					}
