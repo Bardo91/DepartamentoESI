@@ -639,3 +639,6 @@
 /openBIL/*.opensdf
 /openBIL/Debug/*.pdb
 /openBIL/Debug
+/BOVIL/prj/vs12/Debug
+/BOVIL/prj/vs12/*.sdf
+/BOVIL/prj/vs12/*.suo

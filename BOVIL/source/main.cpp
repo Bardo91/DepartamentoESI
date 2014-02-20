@@ -14,7 +14,7 @@ int main(void){
 
 	cv::Mat img, ori;
 
-	img = cv::imread("test.jpg", CV_LOAD_IMAGE_COLOR);
+	img = cv::imread("../../test.jpg", CV_LOAD_IMAGE_COLOR);
 
 	img.copyTo(ori);
 
