@@ -633,3 +633,10 @@
 /StereoTrackingSENSORS/*.sdf
 
 /StereoTrackingSENSORS/*.vsp
+/BOVIL/prj/vs12/*.sdf
+/BOVIL/prj/vs12/*.suo
+/BOVIL/prj/vs12/Debug
+/ROS/Test_Publicher_Subscriber/Project1/Debug
+/ROS/Test_Publicher_Subscriber/Project1/*.opensdf
+/ROS/Test_Publicher_Subscriber/Project1/*.sdf
+/ROS/Test_Publicher_Subscriber/Project1/*.suo
