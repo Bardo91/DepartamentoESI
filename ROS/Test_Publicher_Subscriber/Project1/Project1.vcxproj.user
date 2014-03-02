@@ -3,14 +3,11 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LocalDebuggerEnvironment>PATH=C:\opt\rosdeps\hydro\x86\lib;C:\opt\rosdeps\hydro\x86\bin;C:\opt\ros\hydro\x86\lib;C:\opt\ros\hydro\x86\bin;$(Path);$(LocalDebuggerEnvironment)</LocalDebuggerEnvironment>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+    <LocalDebuggerCommandArguments>__name:=talker __master:=http://JANE-vaio:11311</LocalDebuggerCommandArguments>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <LocalDebuggerEnvironment>PATH=C:\opt\rosdeps\hydro\x86\lib;
-C:\opt\rosdeps\hydro\x86\bin;
-C:\opt\ros\hydro\x86\lib;
-C:\opt\ros\hydro\x86\bin;
-$(Path);
-$(LocalDebuggerEnvironment)</LocalDebuggerEnvironment>
+    <LocalDebuggerEnvironment>PATH=C:\opt\rosdeps\hydro\x86\lib;C:\opt\rosdeps\hydro\x86\bin;C:\opt\ros\hydro\x86\lib;C:\opt\ros\hydro\x86\bin;$(Path);$(LocalDebuggerEnvironment)</LocalDebuggerEnvironment>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+    <LocalDebuggerCommandArguments>__name:=talker __master:=http://JANE-vaio:11311</LocalDebuggerCommandArguments>
   </PropertyGroup>
 </Project>
