@@ -12,16 +12,22 @@ int main(int argc, char **argv)
 
 	std::string name = "talker";
 
+
 	ros::init(argc, argv, name);
 
+
+	std::cout << "Creando handler del nodo" << std::endl;
 	ros::NodeHandle n;
 	
+
+	std::cout << "Creando publicador" << std::endl;
 	ros::Publisher chatter_pub = n.advertise<std_msgs::String>("chatter", 1000);
 	
 	
 	
 	ros::Rate loop_rate(10);
 	
+	std::cout << "Entrando en el bucle" << std::endl;
 	int count = 0;
 	while (ros::ok())
 	{
