@@ -118,9 +118,21 @@ namespace vision{
 			}
 			break;
 			}
-		case vision::eSingleCameraGroundEKF: // 666 TODO: allocate memory rightly
-			break;
+		case vision::eSingleCameraGroundEKF:{ // 666 TODO: allocate memory rightly
+			matching1->updateObjects(_objects1);
 
+			SimpleObject *objectsZK1 = matching1->getObjects();
+
+			for(int i = 0; i < 8; i ++){
+				if(matching1->isUpdated(i)){
+					Mat zk = (Mat_<double>(4,1) << objectsZK1[i].centroid.x, objectsZK1[i].centroid.y);
+
+					singleEKF->updateIncT( _incT);
+					singleEKF->stepEKF(zk);
+				}
+			}
+			break;
+			}
 		default:
 			assert(false);
 			return -1;

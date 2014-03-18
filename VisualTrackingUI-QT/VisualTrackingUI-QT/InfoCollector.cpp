@@ -57,7 +57,7 @@ namespace vision{
 		infoPointers.segmentationManager = new SegmentationManager();
 		infoPointers.positionManager = new PositionManager();
 		infoPointers.algorithmManager = new AlgorithmManager();
-		// 666 TODO: whatalio!
+
 		errors += setUpImageManager(); 
 		errors += setUpSegmentationManager();
 		errors += setUpPositionManager(mainWindow->getCameraInfoPath(), mainWindow->getCameraPositionPath(), mainWindow->getIsFixedCameras());
@@ -80,7 +80,7 @@ namespace vision{
 	//------------------------------------------------------------------------
 	int InfoCollector::setUpImageManager(){
 		infoPointers.imageManager->closeDevices(); //Release every device to avoid errors if device IDs are crossed.
-		int method = mainWindow->getImgAcqMethod(); // 777 TODO: implement width and heigth.
+		int method = mainWindow->getImgAcqMethod(); 
 		int width = mainWindow->getWidth();
 		int height = mainWindow->getHeight();
 		int nDev = mainWindow->getNumberDevices();
@@ -156,10 +156,14 @@ namespace vision{
 			errors += infoPointers.positionManager->preparePositioner(_positionPath, _isFixed); // Change filename
 
 			break;
-		case 1:
-			// 666 TODO: vicon data method
+		case 1:{
+			errors += infoPointers.positionManager->configureCams(_cameraInfoPath);
+			int idObj1 = mainWindow->getViconPosDev1();
+			int idObj2 = mainWindow->getViconPosDev2();
 
-			break;
+			errors += infoPointers.positionManager->preparePositionerFromVicon(idObj1, idObj2);
+
+			break;}
 		default:
 			QMessageBox::information(mainWindow, "Error", "Cant open Camera Info-files");
 			return -1;
@@ -174,19 +178,17 @@ namespace vision{
 		int errors = 0;
 		
 		vision::position::Camera cam1, cam2;
-		TReal fakeT;
+		double fakeT;
 
 		switch (algortihm)
 		{
 		case 0: // Single Camera ground tracking
-			// 666 TODO: Implement algorithm
 			cam1 = infoPointers.positionManager->getCamera(1);
 			errors += infoPointers.algorithmManager->setUpAlgorithm(vision::eAlgorithms::eSingleCameraGroundEKF,cam1, cam2);
 			
 
 			break;
 		case 1: // Stereo Camera 3D tracking
-			// 666 TODO: Implement algorithm
 			cam1 = infoPointers.positionManager->getCamera(1);
 			cam2 = infoPointers.positionManager->getCamera(2);
 			infoPointers.positionManager->getCameraPosAndTime(cam1, cam2, fakeT);

@@ -113,7 +113,7 @@ bool ImageAcquisitor::canCapture() {
 }
 
 //------------------------------------------------------------------------------
-int ImageAcquisitor::updateFrame() {
+int ImageAcquisitor::updateFrame() { // 666 TODO: get 40% of process. Other thread... etc...
 	if (inputMethod) {
 		const int sizeFormat = imageNameFormat.size() + 4;
 		char *buffer;// +4 suposing that number of input images or less than 99.999

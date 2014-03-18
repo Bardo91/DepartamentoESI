@@ -19,11 +19,13 @@ namespace vision{
 	PositionManager::PositionManager(){
 		cam1 = new position::Camera();
 		cam2 = new position::Camera();
+		vicon = new iofunctions::Vicon();
 	}
 
 	//------------------------------------------------------------------------
 	PositionManager::~PositionManager(){
-		delete cam1, cam2;
+		vicon->disconnect();
+		delete cam1, cam2, vicon;
 		posFile.close();
 		STime::end();
 	}
@@ -44,7 +46,6 @@ namespace vision{
 		if(!STime::isInitialized())
 			STime::init();
 		timer = STime::get();
-		timer->update();
 		refTime = timer->frameTime();
 
 		return timer == nullptr ? -1 : 0;
@@ -65,11 +66,16 @@ namespace vision{
 		return 0;
 	}
 	//------------------------------------------------------------------------
-	int PositionManager::preparePositioner(/*Vicon Connection*/){
-		// 666 TODO:
+	int PositionManager::preparePositionerFromVicon(int _idObj1, int _idObj2){
 		posMethod = 1;
+
+		vicon->connect();
+		idObj1 = _idObj1;
+		idObj2 = _idObj2;
+
 		return 0;
 	}
+
 	//------------------------------------------------------------------------
 	void PositionManager::closeStream(){
 		if(posMethod){
@@ -125,35 +131,50 @@ namespace vision{
 	}
 	//------------------------------------------------------------------------
 	void PositionManager::updateTime(){
-		timer->update();
 		currentTime = timer->frameTime();
 
 	}
 
 	//------------------------------------------------------------------------
 	int PositionManager::updatePosAndTime(){
-		vector<string> splittedString;
+		// 666 TODO: Cambiar, no es elegante...
+		if(posMethod == 1){
+			Mat p1,p2,o1,o2;
+			// First get info from vicon stream and then save information in order to synchronize as fast as possible.
+			currentTime = vicon->getTime();
+			vicon->getPosition(idObj1, p1);
+			vicon->getPosition(idObj2, p2);
+			vicon->getOrientation(idObj1, o1);
+			vicon->getOrientation(idObj2, o2);
+			
+			cam1->setPosition(p1);			
+			cam2->setPosition(p2);			
+			cam1->setOrientation(o1);			
+			cam2->setOrientation(o2);
+			
+		}else{
+			vector<string> splittedString;
 		
-		if(isFirstPos){ // 666 TODO: Cambiar, no es elegante...
-			getNextLine(splittedString);
-		}
-
-		if(isFixed){
-			updateTime();
-			if(isFirstPos){
-				updatePos(splittedString);
-				isFirstPos = false;
+			if(isFirstPos){ 
+				getNextLine(splittedString);
 			}
-		} else{
-			updateTime(splittedString);
-			updatePos(splittedString);
-		}
 
+			if(isFixed){
+				updateTime();
+				if(isFirstPos){
+					updatePos(splittedString);
+					isFirstPos = false;
+				}
+			} else{
+				updateTime(splittedString);
+				updatePos(splittedString);
+			}
+		}
 		return 0;
 	}
 
 	//------------------------------------------------------------------------
-	void PositionManager::getCameraPosAndTime(position::Camera& _cam1, position::Camera& _cam2, TReal& _time) const{
+	void PositionManager::getCameraPosAndTime(position::Camera& _cam1, position::Camera& _cam2, double& _time) const{
 		_cam1.setPosition(cam1->getPosition());
 		_cam1.setOrientation(cam1->getOrientation());
 		_cam2.setPosition(cam2->getPosition());

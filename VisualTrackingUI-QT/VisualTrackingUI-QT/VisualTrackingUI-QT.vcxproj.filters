@@ -77,9 +77,6 @@
     <ClCompile Include="GeneratedFiles\Release\moc_mainwindow.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\qrc_mainwindow.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
     <ClCompile Include="ComputerVisionLibraries\DataAcquisition\ImageAcquisitor.cpp">
       <Filter>ComputerVisionLibraries\DataAcquisition</Filter>
     </ClCompile>
@@ -137,6 +134,12 @@
     <ClCompile Include="ComputerVisionLibraries\TrackingAlgorithm\RobustStereoMatching.cpp">
       <Filter>ComputerVisionLibraries\TrackingAlgorithm</Filter>
     </ClCompile>
+    <ClCompile Include="iofunctions\input\Vicon.cpp">
+      <Filter>iofunctions\input</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\qrc_mainwindow.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="mainwindow.h">
@@ -192,9 +195,6 @@
     <ClInclude Include="ComputerVisionLibraries\Timing\time.h">
       <Filter>ComputerVisionLibraries\Timing</Filter>
     </ClInclude>
-    <ClInclude Include="ComputerVisionLibraries\Timing\timeSrc.h">
-      <Filter>ComputerVisionLibraries\Timing</Filter>
-    </ClInclude>
     <ClInclude Include="PositionManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -219,8 +219,11 @@
     <ClInclude Include="ParamsEKF.h">
       <Filter>ComputerVisionLibraries\TrackingAlgorithm</Filter>
     </ClInclude>
-    <ClInclude Include="outFile.h">
+    <ClInclude Include="iofunctions\output\outFile.h">
       <Filter>iofunctions\output</Filter>
+    </ClInclude>
+    <ClInclude Include="iofunctions\input\Vicon.h">
+      <Filter>iofunctions\input</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

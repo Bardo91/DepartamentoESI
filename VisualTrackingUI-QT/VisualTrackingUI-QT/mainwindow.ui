@@ -649,6 +649,16 @@
             </layout>
            </item>
            <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_5">
+             <item>
+              <widget class="QSpinBox" name="dev1ViconSpinBox"/>
+             </item>
+             <item>
+              <widget class="QSpinBox" name="dev2ViconSpinBox"/>
+             </item>
+            </layout>
+           </item>
+           <item>
             <widget class="QPlainTextEdit" name="posAcqMethodEditText">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Expanding" vsizetype="Preferred">

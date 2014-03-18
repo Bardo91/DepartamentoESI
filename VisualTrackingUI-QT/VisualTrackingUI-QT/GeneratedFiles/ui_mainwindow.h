@@ -82,6 +82,9 @@ public:
     QHBoxLayout *horizontalLayout_2;
     QComboBox *posAcqMethodSelector;
     QCheckBox *fixCamCheckBox;
+    QHBoxLayout *horizontalLayout_5;
+    QSpinBox *dev1ViconSpinBox;
+    QSpinBox *dev2ViconSpinBox;
     QPlainTextEdit *posAcqMethodEditText;
     QFrame *line_3;
     QVBoxLayout *segMethodLayout;
@@ -431,6 +434,22 @@ public:
 
 
         posAcqMethodLayout->addLayout(horizontalLayout_2);
+
+        horizontalLayout_5 = new QHBoxLayout();
+        horizontalLayout_5->setSpacing(6);
+        horizontalLayout_5->setObjectName(QStringLiteral("horizontalLayout_5"));
+        dev1ViconSpinBox = new QSpinBox(layoutWidget);
+        dev1ViconSpinBox->setObjectName(QStringLiteral("dev1ViconSpinBox"));
+
+        horizontalLayout_5->addWidget(dev1ViconSpinBox);
+
+        dev2ViconSpinBox = new QSpinBox(layoutWidget);
+        dev2ViconSpinBox->setObjectName(QStringLiteral("dev2ViconSpinBox"));
+
+        horizontalLayout_5->addWidget(dev2ViconSpinBox);
+
+
+        posAcqMethodLayout->addLayout(horizontalLayout_5);
 
         posAcqMethodEditText = new QPlainTextEdit(layoutWidget);
         posAcqMethodEditText->setObjectName(QStringLiteral("posAcqMethodEditText"));
