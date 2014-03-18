@@ -641,3 +641,13 @@
 /ROS/Test_Publicher_Subscriber/Project1/*.sdf
 /BOVIL/prj/vs12/*.suo
 /BOVIL/prj/vs12/*.sdf
+/VisualTrackingUI-QT/*.sdf
+/VisualTrackingUI-QT/*.suo
+/ColorClusterSegmentationStereoTracking/CCSSTracking/*.sdf
+/ColorClusterSegmentationStereoTracking/CCSSTracking/*.suo
+/SingleCameraGroundTracking/*.suo
+/SingleCameraGroundTracking/*.sdf
+/TestGPUopencv/TestGPUopencv/*.suo
+/TestGPUopencv/TestGPUopencv/*.sdf
+/VisualTrackingUI-GTK/*.sdf
+/VisualTrackingUI-GTK/*.suo
