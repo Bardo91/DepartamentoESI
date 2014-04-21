@@ -651,3 +651,5 @@
 /TestGPUopencv/TestGPUopencv/*.sdf
 /VisualTrackingUI-GTK/*.sdf
 /VisualTrackingUI-GTK/*.suo
+/VisualTrackingUI-QT/VisualTrackingUI-QT/Release
+/VisualTrackingUI-QT/Win32/Debug

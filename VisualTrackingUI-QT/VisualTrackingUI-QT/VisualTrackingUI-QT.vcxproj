@@ -38,13 +38,13 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
-    <IncludePath>C:\Programming\DepartamentoESI\VisualTrackingUI-QT\VisualTrackingUI-QT;C:\opencv\opencv\build\include;E:\qt\qt511\5.1.1\msvc2012\include;C:\Program Files %28x86%29\Vicon\DataStream SDK\Win32\CPP;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Program Files %28x86%29\Vicon\DataStream SDK\Win32\CPP\Microsoft.VC90.CRT;C:\opencv\opencv\build\x86\vc11\bin;C:\opencv\opencv\build\x86\vc11\lib;C:\Program Files (x86)\Vicon\DataStream SDK\Win32\CPP;E:\qt\qt511\5.1.1\msvc2012\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>E:\opencv\opencv\build\include;E:\qt\qt511\5.1.1\msvc2012\include;C:\Program Files %28x86%29\Vicon\DataStream SDK\Win32\CPP;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Program Files %28x86%29\Vicon\DataStream SDK\Win32\CPP\Microsoft.VC90.CRT;E:\opencv\opencv\build\x86\vc12\lib;C:\Program Files (x86)\Vicon\DataStream SDK\Win32\CPP;E:\qt\qt511\5.1.1\msvc2012\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
-    <IncludePath>C:\Programming\DepartamentoESI\VisualTrackingUI-QT\VisualTrackingUI-QT;C:\opencv\opencv\build\include;E:\qt\qt511\5.1.1\msvc2012\include;C:\Program Files %28x86%29\Vicon\DataStream SDK\Win32\CPP;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Program Files %28x86%29\Vicon\DataStream SDK\Win32\CPP\Microsoft.VC90.CRT;C:\opencv\opencv\build\x86\vc11\bin;C:\opencv\opencv\build\x86\vc11\lib;C:\Program Files (x86)\Vicon\DataStream SDK\Win32\CPP;E:\qt\qt511\5.1.1\msvc2012\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>E:\opencv\opencv\build\include;E:\qt\qt511\5.1.1\msvc2012\include;C:\Program Files %28x86%29\Vicon\DataStream SDK\Win32\CPP;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Program Files %28x86%29\Vicon\DataStream SDK\Win32\CPP\Microsoft.VC90.CRT;E:\opencv\opencv\build\x86\vc12\lib;C:\Program Files (x86)\Vicon\DataStream SDK\Win32\CPP;E:\qt\qt511\5.1.1\msvc2012\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -60,7 +60,7 @@
       <OutputFile>$(OutDir)\$(ProjectName).exe</OutputFile>
       <AdditionalLibraryDirectories>$(QTDIR)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>qtmaind.lib;Qt5Cored.lib;Qt5Guid.lib;Qt5Widgetsd.lib;opencv_calib3d246d.lib;opencv_contrib246d.lib;opencv_core246d.lib;opencv_features2d246d.lib;opencv_flann246d.lib;opencv_gpu246d.lib;opencv_highgui246d.lib;opencv_imgproc246d.lib;opencv_legacy246d.lib;opencv_ml246d.lib;opencv_objdetect246d.lib;opencv_video246d.lib;ViconDataStreamSDK_CPP.lib</AdditionalDependencies>
+      <AdditionalDependencies>qtmaind.lib;Qt5Cored.lib;Qt5Guid.lib;Qt5Widgetsd.lib;opencv_core248d.lib;opencv_highgui248d.lib;opencv_imgproc248d.lib;ViconDataStreamSDK_CPP.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -76,7 +76,7 @@
       <OutputFile>$(OutDir)\$(ProjectName).exe</OutputFile>
       <AdditionalLibraryDirectories>$(QTDIR)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>false</GenerateDebugInformation>
-      <AdditionalDependencies>qtmaind.lib;Qt5Cored.lib;Qt5Guid.lib;Qt5Widgetsd.lib;opencv_calib3d246d.lib;opencv_contrib246d.lib;opencv_core246d.lib;opencv_features2d246d.lib;opencv_flann246d.lib;opencv_gpu246d.lib;opencv_highgui246d.lib;opencv_imgproc246d.lib;opencv_legacy246d.lib;opencv_ml246d.lib;opencv_objdetect246d.lib;opencv_video246d.lib;ViconDataStreamSDK_CPP.lib</AdditionalDependencies>
+      <AdditionalDependencies>qtmaind.lib;Qt5Cored.lib;Qt5Guid.lib;Qt5Widgetsd.lib;opencv_core248.lib;opencv_highgui248.lib;opencv_imgproc248.lib;ViconDataStreamSDK_CPP.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
